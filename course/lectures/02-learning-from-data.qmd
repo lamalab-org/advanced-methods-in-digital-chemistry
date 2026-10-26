@@ -16,6 +16,8 @@ We prepare a series of concentrations and measure absorbance. Under suitable con
 
 We will work through those decisions using a small generated dataset. Write concentration as $c$, in mmol L$^{-1}$, and dimensionless absorbance as $A$. Our line has a slope $m$ and an intercept $b$, so we allow both its steepness and its offset to change. These adjustable numbers are the model's **[parameters](../glossary.qmd#parameter)**.
 
+For this first model, we treat the prepared concentrations as known inputs and describe discrepancies on the absorbance side. Uncertainty in preparing the solutions would give us another modelling decision to make.
+
 ::: {.concept}
 **Observations and a model**
 
@@ -35,6 +37,8 @@ Generated calibration observations.
 
 Once we have chosen $m$ and $b$, the line turns any concentration into a predicted absorbance. Learning will give us a way to choose those two numbers from the observations. Notice the decision we have already made: we are asking the data to help us choose a line. We could have offered them a different family of curves.
 
+In a laboratory, we often use a calibration in the other direction: measure absorbance and infer an unknown concentration. Here we first learn the forward relationship, from concentration to absorbance. Using the fitted line in reverse is a further inference, with uncertainty in both the measurement and the fitted calibration.
+
 Before fitting, decide the intended use. Are we predicting another measurement in this concentration range, using a different instrument, or predicting at a higher concentration? That decision determines what an informative evaluation would look like.
 
 ::: {.concept}
@@ -42,7 +46,7 @@ Before fitting, decide the intended use. Are we predicting another measurement i
 
 | Question | In the calibration example |
 |---|---|
-| **Representation:** which rules can the model express? | A line assumes a particular relationship between concentration and absorbance. |
+| **Model family:** which functions can the model express? | We supply concentration as the input and choose a family of straight lines. |
 | **Optimisation:** how do we fit a rule? | Adjust slope and intercept using the observed discrepancies. |
 | **Generalisation:** how does it perform on new cases? | Check measurements relevant to the intended use. |
 :::
@@ -59,10 +63,10 @@ The line misses some measurements by predicting too much absorbance and others b
 $$
 e_i=\hat A_i-A_i,\qquad
 \widehat R_{\mathrm{train}}(m,b)
-=\frac{1}{n}\sum_{i\in\mathrm{train}}(mc_i+b-A_i)^2.
+=\frac{1}{n_{\mathrm{train}}}\sum_{i\in\mathrm{train}}(mc_i+b-A_i)^2.
 $$
 
-For the table above:
+We average over the $n_{\mathrm{train}}$ observations used for fitting. For the three observations above:
 
 $$
 e=(-0.01,\;0.03,\;-0.03),\qquad
@@ -104,57 +108,14 @@ We used the same predictions and managed to declare two different winners. The c
 
 The **training loss** guides parameter fitting. An **evaluation metric** summarises performance on specified observations. The **scientific purpose** tells us why that performance matters. These can be related without being identical. A useful calibration may also need a stated operating range, manageable measurement costs, and an acceptable risk of a large error. We will return to these choices when [comparing models on benchmarks](../reading.qmd#benchmark-purpose).
 
-## What do we really want to minimise? {#empirical-error-and-population-risk}
-
-Suppose we have finished fitting our calibration line. We put its slope and intercept aside and measure a fresh set of solutions. We can now calculate an error on observations that played no part in fitting or choosing the line. That is useful evidence. But we have still measured a finite collection of solutions. Calling it a test set does not make it the whole of our future laboratory work.
-
-::: {.concept}
-**Two empirical errors and a population quantity**
-
-$$
-\widehat R_{\mathrm{train}}(\theta)
-=\frac{1}{n_{\mathrm{train}}}\sum_{i=1}^{n_{\mathrm{train}}}
-L(f_\theta(x_i^{\mathrm{train}}),y_i^{\mathrm{train}})
-$$
-
-$$
-\widehat R_{\mathrm{test}}(\theta)
-=\frac{1}{n_{\mathrm{test}}}\sum_{i=1}^{n_{\mathrm{test}}}
-L(f_\theta(x_i^{\mathrm{test}}),y_i^{\mathrm{test}})
-$$
-
-$$
-R_{\mathrm{use}}(\theta)
-=\mathbb E_{(x,y)\sim P_{\mathrm{use}}}
-\left[L(f_\theta(x),y)\right].
-$$
-
-The first two quantities average losses over recorded observations. Both are **[empirical errors](../glossary.qmd#empirical-error)**. The third is the **[population risk](../glossary.qmd#population-risk)** for the intended use. The hats mark estimates; the test-set estimate keeps its hat.
-:::
-
-The expectation $\mathbb E$ describes an average over cases drawn from the intended distribution $P_{\mathrm{use}}$. We usually cannot calculate it exactly. For a fixed model, the test average is an unbiased estimate of this risk if the test observations are sampled independently from $P_{\mathrm{use}}$, independently of model development, and the expected loss is finite. “Unbiased” concerns the average over repeated test samples; a particular test score can lie above or below the population risk. [Hardt and Recht: sample versus population and empirical risk](https://mlstory.org/supervised.html#sample-versus-population)
-
-### The same line, two test samples
-
-Keep the line fixed. Suppose two independently collected groups of three solutions give these residuals, in dimensionless absorbance units:
-
-| Test sample | Residuals: prediction minus observation | Mean squared error |
-|---|---|---|
-| A | $0.01,\;-0.01,\;0.02$ | $0.0002$ |
-| B | $0.02,\;-0.02,\;0.03$ | $0.0005667$ (rounded) |
-
-The model has not changed between rows. The observations have. We can calculate each sample's score precisely while remaining uncertain about the error on future solutions. A smaller test error for one model than another is likewise an observed comparison whose uncertainty matters.
-
-There is a second question. Suppose both groups were measured on our instrument, but the model will be used in another laboratory. Collecting more solutions on our instrument can make the estimate more precise for that setting while leaving the new laboratory unrepresented. **Sampling uncertainty** and a **[change in distribution](../glossary.qmd#distribution-shift)** are different problems. More test rows do not automatically resolve both, especially when rows share molecules, batches, or instruments.
-
-**Discuss:** What changed between A and B? What would we need to know about the sampling before using either score to describe performance in another laboratory?
-
 ## How do the parameters change?
 
-Changing the intercept shifts every prediction by the same amount. Changing the slope changes the predictions in proportion to concentration. A fitting procedure chooses these changes to reduce the training objective.
+Changing the intercept shifts every prediction by the same amount. Keep the slope at 0.8 and try intercepts of 0.10, 0.15, and 0.20 on our three observations. The corresponding mean squared errors are approximately 0.003467, 0.000633, and 0.002800. Moving upwards from 0.10 helped, but continuing to 0.20 went too far. We have already fitted a little: propose a change, calculate its consequences, and compare.
+
+A derivative gives us another way to choose a direction. Start with the intercept alone. In the expression below, $n$ is the number of training observations and the sums run over those observations.
 
 ::: {.concept}
-**One optimisation step**
+**An optional mathematical route: one optimisation step**
 
 $$
 \frac{\partial\widehat R}{\partial m}
@@ -170,7 +131,9 @@ $$
 $\eta$ is a step size, also called the **learning rate**. The [gradient](../glossary.qmd#optimisation) describes how the training objective changes when the parameters change.
 :::
 
-For the intercept, $e_i=mc_i+b-A_i$ changes by one unit for each unit change in $b$, so $\partial e_i^2/\partial b=2e_i$. Averaging these derivatives gives the expression above. For the slope, the additional factor is $c_i$. A sufficiently small step against the gradient reduces the objective locally. Gradient steps are one way to fit a model; linear least squares also has direct numerical methods. The same idea of following a gradient will recur in neural-network training.
+For the intercept, $e_i=mc_i+b-A_i$ changes by one unit for each unit change in $b$, so $\partial e_i^2/\partial b=2e_i$. Averaging these derivatives gives the expression above. At $b=0.15$, the derivative is about $-0.006667$. With a step size of 0.5, updating only the intercept gives $b\approx0.153333$ and MSE $\approx0.000622$. The loss decreased, with the slope held fixed.
+
+For the slope derivative, the additional factor is $c_i$. A sufficiently small step against a nonzero gradient reduces this smooth objective locally. Gradient steps are one way to fit a model; linear least squares also has direct numerical methods. The same idea will recur in neural-network training. For now, the numerical comparison above already establishes the distinction between the chosen model family and the fitted parameters.
 
 Keep **optimisation** and **generalisation** separate. Finding parameters with low training loss solves the fitting problem. Whether those parameters give useful predictions elsewhere is an additional question.
 
@@ -220,7 +183,52 @@ Suppose our inputs include molar mass and a count of particular atoms. We might 
 
 When a transformation learns from data, fit it on the training observations and apply the same fitted transformation to validation observations. A **pipeline** connects these steps to the model so that they can be fitted and applied together. [Cross-validation](../glossary.qmd#cross-validation) repeats fitting and validation with different portions of the data. It does not automatically prevent [data leakage](../glossary.qmd#leakage), where evaluation information enters model development, or make related observations independent. [scikit-learn's examples of common pitfalls](https://scikit-learn.org/stable/common_pitfalls.html)
 
-### What does an interpretable slope establish?
+## What do we really want to minimise? {#empirical-error-and-population-risk}
+
+Suppose we have finished fitting our calibration line. We put its slope and intercept aside and measure a fresh set of solutions. We can now calculate an error on observations that played no part in fitting or choosing the line. That is useful evidence. But we have still measured a finite collection of solutions. Calling it a test set does not make it the whole of our future laboratory work.
+
+::: {.concept}
+**Two empirical errors and a population quantity**
+
+$$
+\widehat R_{\mathrm{train}}(\theta)
+=\frac{1}{n_{\mathrm{train}}}\sum_{i=1}^{n_{\mathrm{train}}}
+L(f_\theta(x_i^{\mathrm{train}}),y_i^{\mathrm{train}})
+$$
+
+$$
+\widehat R_{\mathrm{test}}(\theta)
+=\frac{1}{n_{\mathrm{test}}}\sum_{i=1}^{n_{\mathrm{test}}}
+L(f_\theta(x_i^{\mathrm{test}}),y_i^{\mathrm{test}})
+$$
+
+$$
+R_{\mathrm{use}}(\theta)
+=\mathbb E_{(x,y)\sim P_{\mathrm{use}}}
+\left[L(f_\theta(x),y)\right].
+$$
+
+The first two quantities average losses over recorded observations. Both are **[empirical errors](../glossary.qmd#empirical-error)**. The third is the **[population risk](../glossary.qmd#population-risk)** for the intended use. Each hat marks an empirical quantity calculated from a sample; the test-set estimate keeps its hat.
+:::
+
+Here $L$ is the loss for one prediction: for squared error, $L(\hat y,y)=(\hat y-y)^2$. The expectation $\mathbb E$ describes an average over cases drawn from the intended distribution $P_{\mathrm{use}}$. It asks us to imagine repeating the intended use, rather than averaging only the observations already on the page. We usually cannot calculate that average exactly. For a fixed model, the test average is an unbiased estimate of this risk if the test observations are sampled independently from $P_{\mathrm{use}}$, independently of model development, and the expected loss is finite. “Unbiased” concerns the average over repeated test samples; a particular test score can lie above or below the population risk. [Hardt and Recht: sample versus population and empirical risk](https://mlstory.org/supervised.html#sample-versus-population)
+
+### The same line, two test samples
+
+Keep the line fixed. Suppose two independently collected groups of three solutions give these residuals, in dimensionless absorbance units:
+
+| Test sample | Residuals: prediction minus observation | Mean squared error |
+|---|---|---|
+| A | $0.01,\;-0.01,\;0.02$ | $0.0002$ |
+| B | $0.02,\;-0.02,\;0.03$ | $0.0005667$ (rounded) |
+
+The model has not changed between rows. The observations have. We can calculate each sample's score precisely while remaining uncertain about the error on future solutions. A smaller test error for one model than another is likewise an observed comparison whose uncertainty matters.
+
+There is a second question. Suppose both groups were measured on our instrument, but the model will be used in another laboratory. Collecting more solutions on our instrument can make the estimate more precise for that setting while leaving the new laboratory unrepresented. **Sampling uncertainty** and a **[change in distribution](../glossary.qmd#distribution-shift)** are different problems. More test rows do not automatically resolve both, especially when rows share molecules, batches, or instruments.
+
+**Discuss:** What changed between A and B? What would we need to know about the sampling before using either score to describe performance in another laboratory?
+
+## What does an interpretable slope establish?
 
 In $\hat A=mc+b$, changing the concentration input by $\Delta c$ changes the predicted absorbance by $m\Delta c$. We can follow the calculation completely. Now suppose we want to interpret $m$ as the response of the chemical system when we change its concentration. We have moved from changing a number in an equation to changing a solution in the laboratory. We need to know which measurement conditions were controlled and whether the linear relationship remains appropriate in that regime. The fitted slope carries none of that experimental history on its own.
 
