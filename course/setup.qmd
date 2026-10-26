@@ -164,7 +164,7 @@ Restarting the kernel clears that memory. It leaves the notebook file and instal
 
 With our local setup, both JupyterLab's server and the Python kernel run on your computer; the browser is their interface. On Windows, the server and kernel run inside Ubuntu in WSL, while the browser can remain a Windows application. The kernel uses the Linux project's files and packages. On a hosted notebook service, it runs on a remote machine. The location of the kernel determines which environment executes the code.
 
-**Explore further:** [The Missing Semester of Your CS Education](https://missing.csail.mit.edu/) is a useful companion for learning these tools. Our [short reading route](reading.qmd#computing-tools) selects the introductory shell sections. Windows users can follow the Unix-shell examples in Ubuntu through WSL. The full exercise set remains optional.
+[The Missing Semester of Your CS Education](https://missing.csail.mit.edu/) explains many of the tools that programming courses tend to take for granted. Its [introduction to the shell](https://missing.csail.mit.edu/2026/course-shell/) develops the commands we have just used. Windows users can try its Unix-shell examples in Ubuntu through WSL. I recommend it if you would like to understand more of what happens around your Python code.
 
 ## Set up Python
 

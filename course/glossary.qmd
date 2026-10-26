@@ -186,7 +186,7 @@ We use **artificial intelligence (AI)** for the broad ambition of building syste
 
 ### Neural network {#neural-network}
 
-A model built from connected computational units, often arranged in layers. Each unit transforms inputs; adjustable weights influence how information passes through the network. Training changes those weights for a chosen objective. The network is a mathematical construction, not a literal reconstruction of a brain. The [Prince reading route](reading.qmd#understanding-deep-learning) develops the calculations.
+A model built from connected computational units, often arranged in layers. Each unit transforms inputs; adjustable weights influence how information passes through the network. Training changes those weights for a chosen objective. The network is a mathematical construction, not a literal reconstruction of a brain. Prince's [*Understanding Deep Learning*](reading.qmd#understanding-deep-learning) develops the calculations.
 
 ### Kernel ridge regression (KRR) {#kernel-ridge}
 

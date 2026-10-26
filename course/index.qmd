@@ -14,32 +14,30 @@ To make the modelling choices easier to discuss, we will use three contrasts: **
 
 This course follows our opening question through what might seem like a collection of buzzwords: statistical learning, molecular representations, deep learning, molecular simulation, generative models, and experimental design. We will make these terms concrete by building models, inspecting their failures, and asking what their results support scientifically.
 
-## How to use a lecture page
+## How we will work {#how-to-use-a-lecture-page}
 
-::: {.callout-note title="Starting point"}
 These notes are for master's students in chemistry. We develop the Python and machine-learning ideas alongside the chemical problems, starting with small examples. The first meeting introduces the course questions, helps you set up the tools, and includes a discussion of the timetable.
-:::
 
-Each lecture develops a small number of ideas in a sequence you can follow during class or read afterwards. Highlighted passages collect central concepts, equations, and examples. The surrounding text explains their meaning and assumptions. Try the questions before reading the suggested answers.
+We will spend time with small examples: a molecular drawing, a few measurements, a line that does not quite fit. They give us something to work out together, on the board or on paper, before we ask a program to do the calculation. These notes develop the same arguments in more detail, so you can return to them afterwards.
 
-Later meetings combine short preparation with substantial work in class. Preparation should make it possible to start the activity, rather than require students to master the topic alone. Python support will be introduced alongside the chemical task that needs it. Large language models are available as assistants throughout the course, and become an object of study later.
+Later, more of that work will happen in Python notebooks. Some preparation will help us start the practicals, but we will learn how the methods work together in class. We will also use large language models for help with code and explanations. That gives us another model to question: did its suggestion help, and how do we know?
 
 The [glossary](glossary.qmd) explains technical terms with examples from chemistry and our computing tools. Linked terms in the notes take you directly to the relevant entry.
 
-I particularly recommend Hardt and Recht's *Patterns, Predictions, and Actions*, Kate Crawford's *Atlas of AI*, Carissa Véliz's *Prophecy*, and Simon J. D. Prince's *Understanding Deep Learning*. The [suggested readings](reading.qmd) offer optional routes for exploring the course questions, including a [technical route through Prince](reading.qmd#understanding-deep-learning), a [chapter guide to Crawford](reading.qmd#atlas-of-ai), and a [discussion of prediction and power with Véliz](reading.qmd#prophecy).
+Several books have shaped how I think about these questions. I particularly recommend Hardt and Recht's *Patterns, Predictions, and Actions*, Kate Crawford's *Atlas of AI*, Carissa Véliz's *Prophecy*, and Simon J. D. Prince's *Understanding Deep Learning*. I have collected them with the papers discussed in class under [suggested reading](reading.qmd). The reading is optional.
 
-## Start here
+## The course material {#start-here}
 
 - [AI-assistant and Python setup](setup.qmd): Jan and Blablador first, Ubuntu on WSL 2 for Windows users, then computing basics, uv, and JupyterLab, with a downloadable introductory kit.
 - [What do we mean by AI for science?](lectures/01-ai-and-science.qmd): AI as an ambition, concrete methods, a selective history, and scientific evidence.
 - [What does it mean to learn from data?](lectures/02-learning-from-data.qmd): a calibration experiment, loss, fitting, generalisation, and a first interactive exercise.
 - [What can a model tell us about gas uptake?](lectures/03-mof-uptake.qmd): an adapted MolSim practical with MOF descriptors, baselines, and empirical error estimates.
 - [Glossary](glossary.qmd): descriptors, features, parameters, kernels, and other terms used in the notes.
-- [Reading guide](reading.qmd): selected passages, their purpose, background needed, and primary sources behind the lectures.
+- [Suggested reading](reading.qmd): books I recommend and the sources behind the examples.
 
-## Some examples, through different lenses {#examples-through-lenses}
+## Different ways of doing chemistry {#examples-through-lenses}
 
-“AI in chemistry” can mean proposing a molecular structure, choosing an experiment, or checking the steps of a theoretical derivation. These involve quite different ways of working with knowledge. The examples below are a non-exhaustive starting point for exploring that variety.
+“AI in chemistry” can mean proposing a molecular structure, choosing an experiment, or checking the steps of a theoretical derivation. These involve quite different ways of working with knowledge. A few examples make the breadth of the term apparent.
 
 First, a few examples of what researchers have actually done. The tabs below return to them through the three contrasts. Some distinctions matter more for one example than another; a proof checker, for instance, need not attach a probability to the derivation it checks.
 
@@ -119,8 +117,8 @@ Even if we keep numerical values, we still have to decide what counts as a large
 
 This is what I mean by further choices within a lens. We have stayed with the same broad approach, yet changed what is retained, what counts as an answer, and what is rewarded during learning. These decisions deserve to be argued for as carefully as the choice of method.
 
-**Try another lens:** Follow one of the research examples above through two of the contrasts. What does each let you ask, and what remains undecided? Then change one modelling choice and explain what would become possible or be lost. The [reading guide](reading.qmd#application-examples) links the original studies and suggests where to begin.
+Consider one of the research examples through two of these lenses. What becomes visible through each? What do we still need to know? The [original studies](reading.qmd#application-examples) describe the choices their authors made.
 
-## Our first hands-on example
+## Beginning with a straight line {#our-first-hands-on-example}
 
 We begin with a calibration curve and a small set of generated observations. Even fitting a straight line gives us decisions to make: which information to use, which errors to care about, and where we expect the result to work. We can examine those decisions with a little algebra before writing much code.

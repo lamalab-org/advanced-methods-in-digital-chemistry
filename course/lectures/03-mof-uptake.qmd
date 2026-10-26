@@ -2,9 +2,7 @@
 title: "What can a model tell us about gas uptake?"
 ---
 
-::: {.callout-note title="Learning goals"}
-Turn a chemical question into inputs, a target, and an evaluation. Compare a baseline with fitted models. Explain why scaling changes a distance-based model, why validation and test data have different jobs, and why the final test score remains an empirical estimate.
-:::
+With the calibration curve, one number described the input: concentration. A porous material gives us many more possibilities. Before we can learn anything from a collection of structures, we have to decide how to describe them and what we want to predict.
 
 ## A porous material and a prediction
 
@@ -28,7 +26,7 @@ The [data notes](../data/mof-uptake/README.md) give the exact column names, unit
 
 **Discuss:** Which two frameworks might look similar through these descriptors while differing in a way that matters for adsorption?
 
-## First ask whether the inputs help
+## A prediction without descriptors {#first-ask-whether-the-inputs-help}
 
 Before fitting a relationship, predict the same uptake for every material. Our **baseline** uses the median training uptake. It ignores the descriptors entirely. If a more elaborate model cannot improve on that reference, the extra machinery has not yet earned its place.
 
@@ -54,7 +52,7 @@ $$
 
 The squared distance $\lVert x-z\rVert^2$ adds the squared differences between corresponding entries. The setting $\gamma$ controls how quickly similarity falls with distance. A prediction combines similarities to the training materials in a weighted sum. The weights are learned from their uptake values; they can be positive or negative. The regularisation setting $\alpha$ controls the strength of the constraint on the fitted function. We will compare an unscaled and a scaled version with the same settings. A scaled linear ridge model provides another useful comparison. [scikit-learn's KRR introduction](https://scikit-learn.org/stable/modules/kernel_ridge.html)
 
-## Which observations may influence the choice?
+## Choosing a model with validation data {#which-observations-may-influence-the-choice}
 
 Our compact table contains 1,500 rows selected from the workshop data without selecting on uptake. The notebook assigns 900 rows to training, 300 to validation, and 300 to the final test. We inspect training observations, fit the candidate models, and compare their validation errors. We then freeze the choice and calculate its test error.
 
@@ -66,7 +64,7 @@ The plot below shows the chosen model's **validation** predictions in the suppli
 
 ![Validation predictions and residuals from the supplied MOF practical. Both axes on the left refer to computed uptake, in mmol/g.](../assets/mof-validation.png)
 
-## A test score still has a hat
+## The uncertainty in a test error {#a-test-score-still-has-a-hat}
 
 The chosen model gives one error for each of the 300 reserved test rows. Averaging them gives an empirical test MAE. The calculation can be exact for those rows while the expected error on future cases remains uncertain.
 
@@ -95,24 +93,22 @@ Open `notebooks/03-mof-uptake.ipynb`. The saved outputs and figures above also l
 
 If you change the model after reading test results, the exercise becomes further exploration. A new final assessment would need fresh evaluation data.
 
-### An optional question about the model
+### Which descriptors does the model use? {#an-optional-question-about-the-model}
 
 The notebook can shuffle one descriptor among validation rows and measure how much the fitted model's error changes. This **[permutation importance](../glossary.qmd#permutation-importance)** concerns the model's reliance on information disrupted by the shuffle. A shuffle can break relationships between density, surface area, and pore volume; it need not describe physically possible materials. How would that differ from changing a linker and measuring adsorption? [scikit-learn's interpretation guide](https://scikit-learn.org/stable/modules/permutation_importance.html)
 
-### Using an LLM
+### Checking the assistant's code {#using-an-llm}
 
 Ask for a small MAE function. Predict its output for residuals $-2,0,+1$, then run that check and an exact-prediction case. Explain which operation prevents positive and negative errors from cancelling. The notebook includes the checks, so this exercise also works without chatbot access.
 
-## Exit question
+## What can we conclude? {#exit-question}
 
 Complete three sentences: which model you chose and why; what its empirical test score estimates; and what further evidence you would need before using it for an experimental adsorption decision.
 
 ## Suggested reading
 
-**A starting point:** revisit Hardt and Recht's [*Sample versus population*](https://mlstory.org/supervised.html#sample-versus-population). What population would make the workshop's random split relevant?
+Hardt and Recht's [**Sample versus population**](https://mlstory.org/supervised.html#sample-versus-population) remains relevant here: our test rows are a sample, and we have to decide which future cases they can represent.
 
-**For the chemistry:** Moosavi et al. (2020), [*Understanding the diversity of the metal-organic framework ecosystem*](https://doi.org/10.1038/s41467-020-17755-8). Start with the abstract and its question about whether a new structure contributes new information. The [PubMed record](https://pubmed.ncbi.nlm.nih.gov/32792486/) provides the abstract and an open full-text route.
+Moosavi et al. (2020), [*Understanding the diversity of the metal-organic framework ecosystem*](https://doi.org/10.1038/s41467-020-17755-8), examines what makes a new structure informative. The [PubMed record](https://pubmed.ncbi.nlm.nih.gov/32792486/) provides the abstract and links open full text. **Case Study 1: The impact of data leakage**, in the Appendix of Jablonka, Rosen, Krishnapriyan, and Smit (2023), [*An Ecosystem for Digital Reticular Chemistry*](https://doi.org/10.1021/acscentsci.2c01177), connects related structures to evaluation. An [open copy and further references on chemical data](../reading.qmd#molsim) are linked in the suggested reading.
 
-**For the evaluation:** Jablonka, Rosen, Krishnapriyan, and Smit (2023), [*An Ecosystem for Digital Reticular Chemistry*](https://doi.org/10.1021/acscentsci.2c01177). Begin with **Case Study 1: The impact of data leakage** in the Appendix. The [reading guide](../reading.qmd#molsim) links an open copy and a related discussion of what makes chemical data reusable.
-
-**For the original exercise:** the [MolSim 2024 notebook](https://github.com/kjappelbaum/ml_molsim/blob/0ebed176b972c9ba9ddf7b6e3a4d04eaf3f32409/molsim_ml.ipynb) goes further into chemical descriptors, hyperparameter searches, and model inspection. Our practical supplies a smaller working path through that material. The [data notes](../data/mof-uptake/README.md) record the source revision and subset construction.
+The [original MolSim 2024 notebook](https://github.com/kjappelbaum/ml_molsim/blob/0ebed176b972c9ba9ddf7b6e3a4d04eaf3f32409/molsim_ml.ipynb) contains further exercises on descriptors, hyperparameter searches, and model inspection. The [data notes](../data/mof-uptake/README.md) explain how its data were adapted for this practical.
