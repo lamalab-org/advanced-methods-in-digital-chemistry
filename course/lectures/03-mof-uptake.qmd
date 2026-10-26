@@ -42,9 +42,9 @@ For residuals $-2,0,+1$ mmol/g, the MAE is $1$ mmol/g. The median minimises the 
 
 ## Why would changing units change a prediction?
 
-One model in the practical compares materials through distances between their feature vectors. Suppose two rows differ by 0.1 in density and by 100 in surface area. Squaring those numerical differences gives 0.01 and 10,000. The numerical scale of surface area can dominate the distance, even before we have asked which property matters chemically.
+One model in the practical compares materials through distances between their feature vectors. Suppose two rows differ by 0.1 g/cm³ in density and by 100 m²/g in specific surface area. If we take the numerical values as coordinates, their squared differences contribute 0.01 and 10,000. Expressing the same surface area in m²/kg multiplies that coordinate difference by 1,000. The materials have not changed, but their numerical distance has. Before using distance as a measure of similarity, we need to decide what a step along each coordinate should mean.
 
-**Standard scaling** subtracts each feature's training mean and divides by its training standard deviation. It changes what a unit of distance means. The transformation is itself fitted, so we estimate those means and standard deviations from training data and apply the same transformation to validation and test data. A [pipeline](../glossary.qmd#preprocessing) keeps the transformation and model together.
+**Standard scaling** subtracts each feature's training mean and divides by its training standard deviation. The resulting coordinates are dimensionless. This makes the distance insensitive to a consistent change of units, but it still gives each feature a particular weight: one training standard deviation. That is a modelling convention, not evidence that the features are equally informative. The transformation is itself fitted, so we estimate those means and standard deviations from training data and apply the same transformation to validation and test data. A [pipeline](../glossary.qmd#preprocessing) keeps the transformation and model together.
 
 The original practical uses **[kernel ridge regression](../glossary.qmd#kernel-ridge)**. Our Gaussian kernel gives a similarity to two scaled feature vectors $x$ and $z$:
 
@@ -52,7 +52,7 @@ $$
 k(x,z)=\exp\left(-\gamma\lVert x-z\rVert^2\right).
 $$
 
-The squared distance $\lVert x-z\rVert^2$ adds the squared differences between corresponding entries. The setting $\gamma$ controls how quickly similarity falls with distance. The model fits coefficients combining such similarities, with a regularisation setting $\alpha$. We will compare an unscaled and a scaled version with the same settings. A scaled linear ridge model provides another useful comparison. [scikit-learn's KRR introduction](https://scikit-learn.org/stable/modules/kernel_ridge.html)
+The squared distance $\lVert x-z\rVert^2$ adds the squared differences between corresponding entries. The setting $\gamma$ controls how quickly similarity falls with distance. A prediction combines similarities to the training materials in a weighted sum. The weights are learned from their uptake values; they can be positive or negative. The regularisation setting $\alpha$ controls the strength of the constraint on the fitted function. We will compare an unscaled and a scaled version with the same settings. A scaled linear ridge model provides another useful comparison. [scikit-learn's KRR introduction](https://scikit-learn.org/stable/modules/kernel_ridge.html)
 
 ## Which observations may influence the choice?
 
@@ -85,12 +85,12 @@ uv sync --locked --group mof
 uv run --locked --group mof jupyter lab --no-browser
 ```
 
-Open `notebooks/03-mof-uptake.ipynb`. The saved outputs and figures above also let you discuss the results if your environment is not ready.
+Open `notebooks/03-mof-uptake.ipynb`. The saved outputs and figures above also let you discuss the results if your environment is not ready. They include the test results of the supplied run, whose model was selected using validation data. Once you have viewed those results, changes to your own model are exploratory; those same rows cannot provide a fresh, untouched assessment of the revised procedure.
 
 1. Read one training row. State the target, its conditions, and one omission in the representation.
 2. Predict whether scaling will help KRR. Run the comparison and explain what changed.
-3. Before final evaluation, change one setting or feature and use validation results to choose what to retain. Record the choice.
-4. Run the reserved test evaluation. State the metric, units, number of test rows, split procedure, and intended scope.
+3. Change one setting or feature and use validation results to choose what to retain. Record the choice and whether you have already inspected the saved test results.
+4. Trace the supplied run from its validation-based choice to its reserved test evaluation. State the metric, units, number of test rows, split procedure, and intended scope. If you make a new choice after seeing the test results, report it as exploration.
 5. Keep the model fixed during resampling. Explain what the spread shows and what uncertainty it leaves out.
 
 If you change the model after reading test results, the exercise becomes further exploration. A new final assessment would need fresh evaluation data.

@@ -80,28 +80,6 @@ Whether a familiar regression is described as AI or machine learning changes lit
 
 For example, “AI understands solubility” leaves much unspecified. A more precise claim is that a particular model predicts measured aqueous solubility, under stated conditions, for molecules outside the series used to develop it, with a stated error relative to a [baseline](../glossary.qmd#baseline), a reference method used for comparison. We can examine the data, choose a relevant evaluation, and debate whether the conclusion follows. Someone has chosen the property, conditions, comparison, and acceptable error. Those choices deserve as much attention as the name of the algorithm.
 
-## Choosing a lens {#choosing-a-lens}
-
-Suppose we want to study solubility. We could look for patterns that help predict another measurement, or ask what would happen if we changed the solvent. We could express uncertainty using a probability model updated by observations, or examine how an estimation procedure behaves over repeated experiments. We could write down explicit chemical rules, or learn representations from examples. Saying that we will use AI has settled none of these questions.
-
-I find it useful to think of these choices as lenses. Each brings some aspects into focus and leaves others in the background. Three contrasts will accompany us through the course:
-
-| Contrast | What are we choosing? |
-|---|---|
-| **Correlative versus causal** | Are we using associations to predict, or identifying what would happen under an intervention? What evidence would justify the step from one to the other? |
-| **Bayesian versus frequentist** | How do we represent uncertainty and justify an inference? Do we update a probability distribution using a prior and observations, or assess a procedure through its behaviour under repeated sampling? |
-| **Connectionist versus symbolic** | How do we represent and use knowledge: through learned, distributed representations in a network, through explicit symbols and rules, or through a combination? |
-
-These contrasts concern different decisions. A neural network can be used in a Bayesian model. A symbolic model can express causal assumptions. A causal model can make predictions. We need to look at the role of each component rather than place an entire system in one box. The [examples on the course homepage](../index.qmd#examples-through-lenses) let us practise that comparison.
-
-We will begin with the correlative/causal and connectionist/symbolic distinctions. The probability lens will become more concrete when we need to interpret uncertainty and choose experiments; the [suggested reading](../reading.qmd#probability-lenses) offers an introduction. Both statistical traditions require assumptions and human choices.
-
-Within each lens, further choices follow. Suppose our experiment requires a dissolved concentration of 1 mmol/L. Measurements of 2 and 20 mmol/L can both become the label “soluble enough.” If a later experiment requires 5 mmol/L, that label has discarded the distinction we now need. The [worked example on the homepage](../index.qmd#choices-within-a-lens) compares keeping the values, keeping only labels, and keeping only an ordering. It then asks whether two tenfold errors should receive the same penalty. We can stay within correlative modelling and still make quite different decisions about what to retain and reward.
-
-This also helps distinguish improving a method from changing the question it can answer. Fitting an observational association more accurately does not, by itself, identify an intervention effect. We will see why in the reaction example. Explaining a model's calculation and explaining a chemical mechanism raise further questions about what a result establishes.
-
-We will return to three questions: **Does the lens fit the question? Do the choices within it serve our purpose? Does the evidence support the conclusion?** These questions apply just as much to our own models as to a result we encounter in a paper or product announcement.
-
 ## Different methods can pursue the same goal
 
 Take the task of identifying a molecule from a spectrum. We could begin by writing down chemical constraints: the molecular formula, possible bonds, and fragmentation rules. A program could then search for structures compatible with those constraints. Much of the useful knowledge would enter through the rules we gave it.
@@ -125,7 +103,27 @@ We could combine the approaches, using a learned model to guide a search through
 
 The traditions overlap. Statistics also studies inference and experimental design, and a search procedure can use probabilities learned from data. We will encounter these combinations repeatedly. Calling a system a neural network tells us something about one part of it; we still have to understand how that part fits into the scientific work.
 
-“Symbolic” and “connectionist” describe different emphases. A symbolic system still needs choices about representation and inference. A neural network still relies on choices about architecture, data, and objectives. Neither begins without assumptions.
+## Choosing a lens {#choosing-a-lens}
+
+Suppose we want to study solubility. We could look for patterns that help predict another measurement, or ask what would happen if we changed the solvent. We could express uncertainty using a probability model updated by observations, or examine how an estimation procedure behaves over repeated experiments. We could write down explicit chemical rules, or learn representations from examples. Saying that we will use AI has settled none of these questions.
+
+I find it useful to think of these choices as lenses. Each brings some aspects into focus and leaves others in the background. Three contrasts will accompany us through the course:
+
+| Contrast | What are we choosing? |
+|---|---|
+| **Correlative versus causal** | Are we using associations to predict, or identifying what would happen under an intervention? What evidence would justify the step from one to the other? |
+| **Bayesian versus frequentist** | How do we represent uncertainty and justify an inference? Do we update a probability distribution using a prior and observations, or assess a procedure through its behaviour under repeated sampling? |
+| **Connectionist versus symbolic** | How do we represent and use knowledge: through learned, distributed representations in a network, through explicit symbols and rules, or through a combination? |
+
+These contrasts concern different decisions. A neural network can be used in a Bayesian model. A symbolic model can express causal assumptions. A causal model can make predictions. We need to look at the role of each component rather than place an entire system in one box. The [examples on the course homepage](../index.qmd#examples-through-lenses) let us practise that comparison.
+
+We will begin with the correlative/causal and connectionist/symbolic distinctions. The probability lens will become more concrete when we need to interpret uncertainty and choose experiments; the [suggested reading](../reading.qmd#probability-lenses) offers an introduction. Both statistical traditions require assumptions and human choices.
+
+Within each lens, further choices follow. Suppose our experiment requires a dissolved concentration of 1 mmol/L. Measurements of 2 and 20 mmol/L can both become the label “soluble enough.” If a later experiment requires 5 mmol/L, that label has discarded the distinction we now need. The [worked example on the homepage](../index.qmd#choices-within-a-lens) compares keeping the values, keeping only labels, and keeping only an ordering. It then asks whether two tenfold errors should receive the same penalty. We can stay within correlative modelling and still make quite different decisions about what to retain and reward.
+
+This also helps distinguish improving a method from changing the question it can answer. Fitting an observational association more accurately does not, by itself, identify an intervention effect. We will see why in the reaction example. Explaining a model's calculation and explaining a chemical mechanism raise further questions about what a result establishes.
+
+We will return to three questions: **Does the lens fit the question? Do the choices within it serve our purpose? Does the evidence support the conclusion?** These questions apply just as much to our own models as to a result we encounter in a paper or product announcement.
 
 ## A selective history: six stops and a coda
 
@@ -156,7 +154,7 @@ $$
 \hat y=\mathbf{1}[w_1x_1+w_2x_2+b>0]
 $$
 
-Inputs: $x_1,x_2$. Adjustable parameters: $w_1,w_2,b$. Output: a class prediction $\hat y$.
+Inputs: $x_1,x_2$. Adjustable parameters: $w_1,w_2,b$. The symbol $\mathbf{1}[\cdot]$ returns 1 when the condition inside the brackets is true and 0 otherwise. The output $\hat y$ is therefore one of two class labels.
 
 Learning changes the parameters using examples. The chosen model family limits the rules that can be represented.
 :::
@@ -203,36 +201,7 @@ For a chemist, the result opens an appealing possibility: perhaps useful molecul
 
 Two later markers connect this history to the course. Vaswani and colleagues introduced the [Transformer](../glossary.qmd#network-operations) in 2017 for sequence modelling. Jumper and colleagues reported AlphaFold's protein-structure prediction results in 2021, following CASP14 in 2020. These are useful examples of learned representations and of scientific evaluation with a defined target. [Transformer paper](https://arxiv.org/abs/1706.03762); [AlphaFold paper](https://www.nature.com/articles/s41586-021-03819-2)
 
-A structure prediction is evidence about a structure under the evaluated conditions; questions about dynamics, function, or an intervention require additional work. The ambition of AI for science becomes assessable through such specific claims.
-
-## What makes these systems possible?
-
-Calling AI an ambition also invites a question: whose ambition, and who provides the means to pursue it? Kate Crawford's *Atlas of AI* examines the material and political conditions of AI, including resource extraction, labour, data, and institutional power. I particularly recommend it for exploring these questions further. [Crawford (2021), *Atlas of AI*](https://yalebooks.yale.edu/book/9780300264630/atlas-of-ai/)
-
-Consider the chatbot or molecular predictor from the opening examples. Its output depends on more than a fitted function. To investigate the system, we can ask:
-
-- What equipment and energy support its training and use?
-- Who produced the measurements, prepared the data, and checks the output?
-- Who defined the target and decided which observations belong in the dataset?
-- Who controls access, and who benefits or bears costs when the system is used?
-
-**Discuss:** Choose one example and trace a dependency beyond the algorithm. What evidence would let you investigate it? Mark what you do not yet know. We will return to these questions when working with chemical datasets and hosted language models; the [reading route](../reading.qmd#atlas-of-ai) connects them to specific chapters.
-
-### When science helps sell a model {#science-and-model-claims}
-
-Scientific results also have an audience outside research. A company selling access to a model can point to its performance on scientific questions as a reason to use it. The result becomes part of both a research argument and a product's appeal. That makes it worth examining the distance between what was tested and what a reader might take it to mean.
-
-Consider GPQA, a benchmark introduced by David Rein and colleagues in 2023. It contains expert-written multiple-choice questions in biology, physics, and chemistry. Its Diamond version is a selected subset of 198 questions. The authors developed the benchmark to study difficult question answering and the problem of supervising systems whose answers may be hard for people to check. [Rein et al., *GPQA: A Graduate-Level Google-Proof Q&A Benchmark*](https://arxiv.org/html/2311.12022v1)
-
-Anthropic's August 2025 announcement of Claude Opus 4.1 reports results on GPQA Diamond alongside other benchmarks, describes paid access, and recommends upgrading. Its reporting notes also specify the use of extended thinking for this benchmark. Here we can see a scientific evaluation enter a commercial presentation of a model. [Claude Opus 4.1 announcement](https://www.anthropic.com/news/claude-opus-4-1)
-
-Answering difficult chemistry questions is an interesting capability. Now suppose we want help choosing an experiment in our laboratory. A score on those questions gives us one piece of evidence, but the proposed use adds equipment, constraints, uncertain measurements, and decisions that the question set does not test. We need to examine those too. The shift from answering questions to doing research can happen remarkably quickly in a reader's mind.
-
-**Discuss:** What did the benchmark ask the model to do? What would we need to test before trusting it with the experimental decision? Name one choice in that new evaluation that could change our conclusion.
-
-A good result can be scientifically valuable and commercially useful at the same time. Our task is to trace the claim back to its evidence: the task, the conditions, the comparison, and the decision the result is meant to support. This is how we will approach both claims of novelty and the promises surrounding them. The [suggested reading](../reading.qmd#science-and-commercial-claims) puts the benchmark and announcement side by side.
-
-We can ask the same questions of our own work. In [ChemBench, Mirza et al. (2025)](https://doi.org/10.1038/s41557-025-01815-x), we compared models and chemists on a curated collection of chemical questions. The question set and comparison procedure determine what the result says. Which parts of a chemist's work would need a different evaluation?
+Agreement between predicted and reference structures supports a particular predictive claim. It also gives us a way into the next question: how does predicting an outcome differ from understanding what would change it?
 
 ## What changes when the task is science?
 
@@ -291,9 +260,38 @@ The statements concern prediction, model explanation, a causal effect, and a mec
 
 </details>
 
+## What makes these systems possible?
+
+Calling AI an ambition also invites a question: whose ambition, and who provides the means to pursue it? Kate Crawford's *Atlas of AI* examines the material and political conditions of AI, including resource extraction, labour, data, and institutional power. I particularly recommend it for exploring these questions further. [Crawford (2021), *Atlas of AI*](https://yalebooks.yale.edu/book/9780300264630/atlas-of-ai/)
+
+Consider the chatbot or molecular predictor from the opening examples. Its output depends on more than a fitted function. To investigate the system, we can ask:
+
+- What equipment and energy support its training and use?
+- Who produced the measurements, prepared the data, and checks the output?
+- Who defined the target and decided which observations belong in the dataset?
+- Who controls access, and who benefits or bears costs when the system is used?
+
+**Discuss:** Choose one example and trace a dependency beyond the algorithm. What evidence would let you investigate it? Mark what you do not yet know. We will return to these questions when working with chemical datasets and hosted language models; the [reading route](../reading.qmd#atlas-of-ai) connects them to specific chapters.
+
+### When science helps sell a model {#science-and-model-claims}
+
+Scientific results also have an audience outside research. A company selling access to a model can point to its performance on scientific questions as a reason to use it. The result becomes part of both a research argument and a product's appeal. That makes it worth examining the distance between what was tested and what a reader might take it to mean.
+
+Consider GPQA, a benchmark introduced by David Rein and colleagues in 2023. It contains expert-written multiple-choice questions in biology, physics, and chemistry. Its Diamond version is a selected subset of 198 questions. The authors developed the benchmark to study difficult question answering and the problem of supervising systems whose answers may be hard for people to check. [Rein et al., *GPQA: A Graduate-Level Google-Proof Q&A Benchmark*](https://arxiv.org/html/2311.12022v1)
+
+Anthropic's August 2025 announcement of Claude Opus 4.1 reports results on GPQA Diamond alongside other benchmarks, describes paid access, and recommends upgrading. Its reporting notes also specify the use of extended thinking for this benchmark. Here we can see a scientific evaluation enter a commercial presentation of a model. [Claude Opus 4.1 announcement](https://www.anthropic.com/news/claude-opus-4-1)
+
+Answering difficult chemistry questions is an interesting capability. Now suppose we want help choosing an experiment in our laboratory. A score on those questions gives us one piece of evidence, but the proposed use adds equipment, constraints, uncertain measurements, and decisions that the question set does not test. We need to examine those too. The shift from answering questions to doing research can happen remarkably quickly in a reader's mind.
+
+**Discuss:** What did the benchmark ask the model to do? What would we need to test before trusting it with the experimental decision? Name one choice in that new evaluation that could change our conclusion.
+
+A good result can be scientifically valuable and commercially useful at the same time. Our task is to trace the claim back to its evidence: the task, the conditions, the comparison, and the decision the result is meant to support. This is how we will approach both claims of novelty and the promises surrounding them. The [suggested reading](../reading.qmd#science-and-commercial-claims) puts the benchmark and announcement side by side.
+
+We can ask the same questions of our own work. In [ChemBench, Mirza et al. (2025)](https://doi.org/10.1038/s41557-025-01815-x), we compared models and chemists on a curated collection of chemical questions. The question set and comparison procedure determine what the result says. Which parts of a chemist's work would need a different evaluation?
+
 ## The statistical question hiding in the history
 
-Both structure elucidation and learned prediction raise a common question: why should observations support conclusions about cases we have not observed?
+Both structure elucidation and learned prediction ask us to reason beyond the observations immediately in front of us. For the learning problems we will build, we can make the prediction question precise: which information goes into the model, and which unobserved quantity should come out?
 
 ::: {.concept}
 **The bridge to statistical learning**

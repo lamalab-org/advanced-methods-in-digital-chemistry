@@ -77,6 +77,11 @@ def notebook():
     and model-inspection idea. This smaller version runs from beginning to end.
     Change one choice, predict its effect, and explain the result.
 
+    The distributed notebook includes saved test results. The supplied run
+    chose its model using validation data. Once you have inspected its test
+    results, changes to your model are exploratory; the same test rows cannot
+    provide a fresh, untouched assessment of the revised procedure.
+
     The targets are **computed** pure CO₂ uptakes at 298 K and 1.6 MPa (16 bar),
     in mmol/g. We are approximating simulation results. The 1,500-row subset
     and source-row identifiers are supplied locally; no account or live data
