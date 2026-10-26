@@ -26,7 +26,7 @@ Later, more of that work will happen in Python notebooks. Some preparation will 
 
 The [glossary](glossary.qmd) explains technical terms with examples from chemistry and our computing tools. Linked terms in the notes take you directly to the relevant entry.
 
-Several books have shaped how I think about these questions. I particularly recommend Hardt and Recht's *Patterns, Predictions, and Actions*, Kate Crawford's *Atlas of AI*, Carissa Véliz's *Prophecy*, and Simon J. D. Prince's *Understanding Deep Learning*. I have collected them with the papers discussed in class under [suggested reading](reading.qmd). The reading is optional.
+Several books have shaped how I think about these questions. I particularly recommend Hardt and Recht's *Patterns, Predictions, and Actions*, Kate Crawford's *Atlas of AI*, Carissa Véliz's *Prophecy*, and Simon J. D. Prince's *Understanding Deep Learning*. For an introduction to machine learning, I also recommend [our review on porous materials and Mehta and colleagues' introduction for physicists](reading.qmd#introductory-reviews). These and the papers discussed in class are collected under [suggested reading](reading.qmd). The reading is optional.
 
 ## The course material {#start-here}
 
