@@ -1,0 +1,118 @@
+---
+title: "What can a model tell us about gas uptake?"
+---
+
+::: {.callout-note title="Learning goals"}
+Turn a chemical question into inputs, a target, and an evaluation. Compare a baseline with fitted models. Explain why scaling changes a distance-based model, why validation and test data have different jobs, and why the final test score remains an empirical estimate.
+:::
+
+## A porous material and a prediction
+
+Suppose we have a collection of porous materials and would like to decide which deserve a more expensive calculation. A metal–organic framework, or **MOF**, connects metal-containing nodes with organic linkers. Different choices of nodes and linkers give different pore geometries and chemical environments. How much carbon dioxide might a particular framework take up?
+
+We can ask a more manageable version of that question. Our table contains uptake values computed by molecular simulation, along with descriptions of the structures. We will try to predict the computed uptake of another entry in that collection. The target concerns pure CO₂ at 298 K and 1.6 MPa, or 16 bar, in mmol per gram of framework. These conditions are part of the target, even though they do not vary between rows. The exercise adapts the [MolSim practical](https://github.com/kjappelbaum/ml_molsim/tree/0ebed176b972c9ba9ddf7b6e3a4d04eaf3f32409).
+
+It is tempting to shorten the question to “find a good material for carbon capture.” But that would add questions about mixtures, water, stability, regeneration, synthesis, and the process in which the material will be used. A prediction at one set of conditions can help with that work. It does not specify the whole decision.
+
+## What do we keep from a structure?
+
+Imagine replacing a framework drawing with two numbers: its density and its pore volume per gram. We have retained information that might be useful for gas uptake, while discarding the identities and arrangement of many atoms. These numbers are [descriptors](../glossary.qmd#descriptor). In the practical, eight geometric descriptors become the model's [features](../glossary.qmd#feature).
+
+| Information we supply | Example | What remains open |
+|---|---|---|
+| Pore dimensions | A diameter describing a sphere that can pass through the pore network | Which chemical groups line that pore? |
+| Surface area and pore volume | Surface area per gram; pore volume per gram | How strongly does CO₂ interact with the surface? |
+| Density | Framework mass per volume | Are two frameworks with similar density chemically similar? |
+
+The [data notes](../data/mof-uptake/README.md) give the exact column names, units, and source. The target is a simulation result. A model that reproduces it accurately approximates that calculation; comparison with experimental uptake is a further step.
+
+**Discuss:** Which two frameworks might look similar through these descriptors while differing in a way that matters for adsorption?
+
+## First ask whether the inputs help
+
+Before fitting a relationship, predict the same uptake for every material. Our **baseline** uses the median training uptake. It ignores the descriptors entirely. If a more elaborate model cannot improve on that reference, the extra machinery has not yet earned its place.
+
+We compare models using mean absolute error:
+
+$$
+\operatorname{MAE}=\frac{1}{n}\sum_{i=1}^n |\hat y_i-y_i|.
+$$
+
+For residuals $-2,0,+1$ mmol/g, the MAE is $1$ mmol/g. The median minimises the sum of absolute deviations for a constant prediction. Choosing squared error would instead lead us to the mean. We have already made a modelling choice before selecting a learning algorithm.
+
+## Why would changing units change a prediction?
+
+One model in the practical compares materials through distances between their feature vectors. Suppose two rows differ by 0.1 in density and by 100 in surface area. Squaring those numerical differences gives 0.01 and 10,000. The numerical scale of surface area can dominate the distance, even before we have asked which property matters chemically.
+
+**Standard scaling** subtracts each feature's training mean and divides by its training standard deviation. It changes what a unit of distance means. The transformation is itself fitted, so we estimate those means and standard deviations from training data and apply the same transformation to validation and test data. A [pipeline](../glossary.qmd#preprocessing) keeps the transformation and model together.
+
+The original practical uses **[kernel ridge regression](../glossary.qmd#kernel-ridge)**. Our Gaussian kernel gives a similarity to two scaled feature vectors $x$ and $z$:
+
+$$
+k(x,z)=\exp\left(-\gamma\lVert x-z\rVert^2\right).
+$$
+
+The squared distance $\lVert x-z\rVert^2$ adds the squared differences between corresponding entries. The setting $\gamma$ controls how quickly similarity falls with distance. The model fits coefficients combining such similarities, with a regularisation setting $\alpha$. We will compare an unscaled and a scaled version with the same settings. A scaled linear ridge model provides another useful comparison. [scikit-learn's KRR introduction](https://scikit-learn.org/stable/modules/kernel_ridge.html)
+
+## Which observations may influence the choice?
+
+Our compact table contains 1,500 rows selected from the workshop data without selecting on uptake. The notebook assigns 900 rows to training, 300 to validation, and 300 to the final test. We inspect training observations, fit the candidate models, and compare their validation errors. We then freeze the choice and calculate its test error.
+
+A different identifier does not necessarily mean a chemically independent framework. Two MOFs may share building blocks. This random row split supports a limited question about other entries in this collection; testing a new framework family would require a suitable definition of families and a split that respects it.
+
+The data-leakage case study in [Jablonka et al. (2023), *An Ecosystem for Digital Reticular Chemistry*](https://doi.org/10.1021/acscentsci.2c01177), examines why data preparation and evaluation belong together. It gives us a research example against which to question our own split.
+
+The plot below shows the chosen model's **validation** predictions in the supplied run. In the left panel, the diagonal marks agreement with the reference simulations. The right panel makes the residuals visible. These observations helped us choose the model, so they cannot also supply its untouched final assessment.
+
+![Validation predictions and residuals from the supplied MOF practical. Both axes on the left refer to computed uptake, in mmol/g.](../assets/mof-validation.png)
+
+## A test score still has a hat
+
+The chosen model gives one error for each of the 300 reserved test rows. Averaging them gives an empirical test MAE. The calculation can be exact for those rows while the expected error on future cases remains uncertain.
+
+Keep the fitted model fixed and draw samples, with replacement, from the recorded test errors. This [bootstrap](../glossary.qmd#bootstrap) creates a distribution of average errors under a particular sampling assumption. The notebook compares averages of 30 sampled rows with averages of 300. The larger averages fluctuate less in this illustration.
+
+![Distributions of resampled mean absolute errors for a fixed fitted model. The dashed line marks its observed test MAE; no model is refitted during resampling.](../assets/mof-bootstrap.png)
+
+The calculation treats rows as independent sampling units. It adds no new frameworks, simulations, or experiments. Related frameworks can make that assumption inadequate, and repeating rows from this collection does not tell us how a model will perform under another simulation protocol. This is the distinction between [sampling uncertainty and a change in distribution](02-learning-from-data.qmd#empirical-error-and-population-risk) in a chemical setting.
+
+## Practical
+
+Download and extract the complete [MOF practical kit](../downloads/mof-practical.zip). It contains the [notebook](../notebooks/03-mof-uptake.ipynb), data, source notice, and locked environment. From its folder, use Ubuntu on WSL for Windows, or your macOS/Linux terminal:
+
+```bash
+uv sync --locked --group mof
+uv run --locked --group mof jupyter lab --no-browser
+```
+
+Open `notebooks/03-mof-uptake.ipynb`. The saved outputs and figures above also let you discuss the results if your environment is not ready.
+
+1. Read one training row. State the target, its conditions, and one omission in the representation.
+2. Predict whether scaling will help KRR. Run the comparison and explain what changed.
+3. Before final evaluation, change one setting or feature and use validation results to choose what to retain. Record the choice.
+4. Run the reserved test evaluation. State the metric, units, number of test rows, split procedure, and intended scope.
+5. Keep the model fixed during resampling. Explain what the spread shows and what uncertainty it leaves out.
+
+If you change the model after reading test results, the exercise becomes further exploration. A new final assessment would need fresh evaluation data.
+
+### An optional question about the model
+
+The notebook can shuffle one descriptor among validation rows and measure how much the fitted model's error changes. This **[permutation importance](../glossary.qmd#permutation-importance)** concerns the model's reliance on information disrupted by the shuffle. A shuffle can break relationships between density, surface area, and pore volume; it need not describe physically possible materials. How would that differ from changing a linker and measuring adsorption? [scikit-learn's interpretation guide](https://scikit-learn.org/stable/modules/permutation_importance.html)
+
+### Using an LLM
+
+Ask for a small MAE function. Predict its output for residuals $-2,0,+1$, then run that check and an exact-prediction case. Explain which operation prevents positive and negative errors from cancelling. The notebook includes the checks, so this exercise also works without chatbot access.
+
+## Exit question
+
+Complete three sentences: which model you chose and why; what its empirical test score estimates; and what further evidence you would need before using it for an experimental adsorption decision.
+
+## Suggested reading
+
+**A starting point:** revisit Hardt and Recht's [*Sample versus population*](https://mlstory.org/supervised.html#sample-versus-population). What population would make the workshop's random split relevant?
+
+**For the chemistry:** Moosavi et al. (2020), [*Understanding the diversity of the metal-organic framework ecosystem*](https://doi.org/10.1038/s41467-020-17755-8). Start with the abstract and its question about whether a new structure contributes new information. The [PubMed record](https://pubmed.ncbi.nlm.nih.gov/32792486/) provides the abstract and an open full-text route.
+
+**For the evaluation:** Jablonka, Rosen, Krishnapriyan, and Smit (2023), [*An Ecosystem for Digital Reticular Chemistry*](https://doi.org/10.1021/acscentsci.2c01177). Begin with **Case Study 1: The impact of data leakage** in the Appendix. The [reading guide](../reading.qmd#molsim) links an open copy and a related discussion of what makes chemical data reusable.
+
+**For the original exercise:** the [MolSim 2024 notebook](https://github.com/kjappelbaum/ml_molsim/blob/0ebed176b972c9ba9ddf7b6e3a4d04eaf3f32409/molsim_ml.ipynb) goes further into chemical descriptors, hyperparameter searches, and model inspection. Our practical supplies a smaller working path through that material. The [data notes](../data/mof-uptake/README.md) record the source revision and subset construction.

@@ -1,0 +1,19 @@
+# Only the public course and its publishing configuration belong in this repo.
+/*
+!/.gitignore
+!/README.md
+!/.github/
+!/course/
+
+.DS_Store
+.working/
+course/_book/
+course/_instructor/
+course/.quarto/
+course/instructor/.quarto/
+course/.jupyter_cache/
+**/.ipynb_checkpoints/
+__pycache__/
+.env
+.env.*
+.venv/

@@ -1,0 +1,7 @@
+/.quarto/
+**/*.quarto_ipynb
+
+# Teaching notes and source templates remain local.
+/instructor/
+/templates/
+/scripts/build_teaching_figures.py

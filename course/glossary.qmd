@@ -1,0 +1,303 @@
+---
+title: "Glossary"
+---
+
+Use this page when a word gets in the way of the argument. You do not need to learn the vocabulary in advance. The examples explain how we use the terms in this course; the lecture notes develop the reasoning behind them.
+
+Some useful places to start: [descriptors](#descriptor), [features](#feature), [parameters](#parameter), [training and validation data](#data-splits), [kernels](#kernel), and [API keys](#api-key). The book's search also finds individual terms.
+
+## Molecules and data
+
+### Metal–organic framework (MOF) and gas uptake {#mof}
+
+A **MOF** connects metal-containing nodes with organic linkers into an extended structure. In our practical, **gas uptake** is the amount of CO₂ adsorbed per gram of framework under specified conditions. The supplied targets were computed by **grand canonical Monte Carlo (GCMC)**, a simulation method that samples configurations with varying particle number at specified temperature, volume, and chemical potential. See the [MOF example](lectures/03-mof-uptake.qmd).
+
+### Representation {#representation}
+
+A way of describing something so that a model can work with it. We might represent a molecule by a list of numbers, an atom-and-bond graph, or atomic coordinates. Each choice preserves some information and leaves other information out. The representation must suit the question.
+
+### Molecular descriptor {#descriptor}
+
+A numerical description of some aspect of a molecule. Examples include its molar mass, number of rings, or number of hydrogen-bond donors. We can calculate these from a molecular structure and use them as model inputs. Two different molecules can have the same values for the descriptors we selected.
+
+For example, replacing a molecular drawing with “molar mass and number of hydrogen-bond donors” gives us two descriptors. It also discards much of the information in the drawing. [RDKit's guide](https://www.rdkit.org/docs/GettingStartedInPython.html) shows how descriptors can be calculated in Python.
+
+### Feature {#feature}
+
+An individual piece of information supplied to a model. In the calibration example, concentration is a feature. In a solubility model, molar mass and solvent identity might be features. A molecular descriptor can be a feature, but features can also describe experimental conditions or be learned from data.
+
+### Target and label {#target}
+
+The quantity a supervised model is asked to predict. Absorbance is the target when concentration is the input in our calibration example. A target can be a number or a category. **Label** often means a category such as “active,” but is also used more broadly for supplied target values.
+
+### Observation, sample, and dataset {#dataset}
+
+In ML, an **observation** or **sample** often means one recorded example; a **dataset** is a collection of them. One row might describe a molecule measured at a particular temperature, so several rows can concern the same molecule. In statistics, “sample” can also mean a whole collection of observations.
+
+### Vector {#vector}
+
+An ordered list of numbers. A feature vector might contain a molecule's molar mass, ring count, and donor count, in that order. Its length is its **dimension**. The order and meaning of the entries must be consistent between examples.
+
+### Molecular fingerprint {#fingerprint}
+
+A numerical encoding of molecular structural patterns, often a vector of bits or counts. An entry may indicate the presence of a pattern or count its occurrences. A fingerprint is a representation, not a guaranteed unique identifier; different structures can share an encoding. [RDKit's fingerprint examples](https://www.rdkit.org/docs/GettingStartedInPython.html)
+
+### Molecular graph {#molecular-graph}
+
+A representation with atoms as **nodes** and bonds as **edges**. Extra information can be attached to either, such as an atom's element or a bond's type. A connectivity graph does not automatically include three-dimensional positions, solvent, or temperature.
+
+### Molecular scaffold {#scaffold}
+
+A molecule's core structural framework, under a stated definition. Related compounds may share a scaffold while differing in substituents. Testing on a new scaffold asks a different question from testing another close relative of a training molecule. The rule used to define a scaffold should be specified.
+
+### Embedding and latent space {#embedding}
+
+An **embedding** represents an object, such as a molecule, by a vector, often learned from data. A **latent space** is a space of internal variables through which a model describes its inputs. Distances in such a space reflect its construction and training; nearby vectors need not mean chemically similar molecules for every purpose.
+
+### Density functional theory (DFT) {#dft}
+
+An electronic-structure approach formulated in terms of electron density. In the ANI-1 example, DFT calculations supply reference energies for learning. Agreement with those calculations and agreement with experiment are different comparisons; the reference calculations have their own approximations. See the [ANI-1 reading](reading.qmd#application-examples).
+
+### Potential energy surface and force field {#potential}
+
+A **potential energy surface** assigns an energy to an atomic configuration. A **force field** supplies a model for energies and forces used in molecular calculations or simulations. A learned potential approximates these relationships from reference data. Its usefulness depends on the configurations and conditions for which it is accurate.
+
+## Learning a model
+
+### Model {#model}
+
+A selected mathematical or computational description used for a purpose. In our calibration example, $\hat A=mc+b$ is a model relating concentration to predicted absorbance. A model can come from physical reasoning, explicit rules, fitting data, or a combination.
+
+### Parameter {#parameter}
+
+An adjustable quantity inside a model. The slope $m$ and intercept $b$ are the parameters of our line. Fitting selects their values. In a neural network, many of the adjustable quantities are called **weights** and **biases**.
+
+### Hyperparameter {#hyperparameter}
+
+A setting that controls the model family or fitting procedure, rather than a value fitted as part of that procedure. The polynomial degree is a hyperparameter; its fitted coefficients are parameters. A learning rate is another example. Hyperparameters may themselves be selected using validation data.
+
+### Training and fitting {#training}
+
+Using observations to adjust a model's parameters. In our example, fitting chooses a slope and intercept using measured concentration–absorbance pairs. The words **training** and **fitting** refer to the same activity here.
+
+### Inference {#inference}
+
+This word has two common uses. In model deployment, **inference** means running a fitted model to obtain an output. In statistics, it means drawing conclusions about unknown quantities from data and assumptions. Running a trained model does not, by itself, establish a scientific conclusion.
+
+### Supervised learning {#supervised-learning}
+
+Learning from examples that include both inputs and target values. Our concentration–absorbance pairs provide both. “Supervised” describes the information in the training examples; it does not mean a person watches every calculation. [Hardt and Recht: supervised learning](https://mlstory.org/supervised.html)
+
+### Regression {#regression}
+
+Predicting a numerical target, such as absorbance or solubility. Linear regression uses a linear model; other regression models can describe nonlinear relationships. The word describes the prediction task, not a claim about its causes.
+
+### Classification {#classification}
+
+Predicting a category, such as whether a compound exceeds a specified activity threshold. A classifier may produce scores or probabilities before a rule assigns a category. Choosing the categories and the decision threshold is part of defining the task.
+
+### Ranking {#ranking}
+
+Ordering candidates for a purpose, such as deciding which molecules to test first. A useful ordering does not require accurate absolute property values. Ranking, classification, and regression can therefore lead to different formulations of the same chemical problem.
+
+### Loss and objective {#loss}
+
+A **loss** assigns a cost to a prediction error. An **objective** is the quantity a fitting or optimisation procedure tries to minimise or maximise. Our training objective averages squared prediction errors. Other objectives can include penalties or several competing aims. See the [worked calculation](lectures/02-learning-from-data.qmd#turning-a-discrepancy-into-an-objective).
+
+### Residual, MSE, MAE, and RMSE {#error-measures}
+
+A **residual** is a signed discrepancy. We use prediction minus observation; some sources reverse that convention. **Mean squared error (MSE)** averages squared residuals. **Mean absolute error (MAE)** averages their magnitudes. **Root mean squared error (RMSE)** is the square root of MSE and has the target's units. Squaring gives large errors more weight.
+
+### Metric {#metric}
+
+A quantity used to summarise performance. We might evaluate a model with MAE even if it was fitted using squared error. A metric answers a particular measurement question; calling one model “better” also requires an intended use and a relevant comparison.
+
+### Optimisation, gradient, and learning rate {#optimisation}
+
+**Optimisation** searches for choices that improve an objective. A **gradient** collects derivatives describing how an objective changes with its parameters. Gradient descent takes steps in the opposite direction. The **learning rate** controls the step size. Our [one-step calculation](lectures/02-learning-from-data.qmd#how-do-the-parameters-change) makes this concrete.
+
+### Regularisation {#regularisation}
+
+A way of restricting or discouraging certain fitted solutions, for example by penalising large coefficients. It expresses a preference about acceptable models. **Unregularised least squares** minimises squared error without an added regularisation penalty; the choice of model family still imposes restrictions.
+
+## Evaluating a result
+
+### Baseline {#baseline}
+
+A reference method against which we compare a proposed model. In the calibration exercise, one baseline always predicts the mean of the training targets. It helps us ask whether a more elaborate model adds useful predictive information. For another task, an existing physical model might be the relevant baseline.
+
+### Training, validation, and test data {#data-splits}
+
+**Training data** are used to fit parameters. **Validation data** guide choices such as polynomial degree. **Test data** are reserved for evaluating the chosen procedure. **Held-out** means excluded from a particular fitting step; it does not by itself tell us whether the observations are validation or final test data. The role depends on how we use them.
+
+### Empirical error and test error {#empirical-error}
+
+An **empirical error** is calculated from a finite set of observations. Training error and test error are both empirical quantities. For a fixed calibration line, another test sample can give another score. Test error estimates performance beyond those observations only under assumptions about how they were sampled and how they relate to the intended use. See the [two-sample example](lectures/02-learning-from-data.qmd#empirical-error-and-population-risk).
+
+### Population risk and sampling uncertainty {#population-risk}
+
+**Population risk** is the expected loss for a model under a specified distribution of cases. **Sampling uncertainty** arises because we estimate it from a finite sample: a different sample can give a different estimate. Calculating a test score exactly does not remove that uncertainty. The intended population and the sampling assumptions belong with the reported estimate.
+
+### Distribution shift {#distribution-shift}
+
+A change in the distribution of inputs, targets, or their relationship between settings. A calibration evaluated on one instrument may be used on another; a molecular model may encounter different scaffolds. A larger test set from the original setting can improve precision there while leaving performance in the new setting unresolved.
+
+### Generalisation {#generalisation}
+
+Performance on new cases beyond the observations used to develop the model. “New” must be specified: another measurement of the same compound, a different scaffold, or another laboratory can be quite different challenges. Our evaluation should resemble the intended use.
+
+### Overfitting {#overfitting}
+
+Fitting details of the available observations that do not help prediction on new cases. A flexible curve can follow noise as well as a useful relationship. Lower training error alone does not show that the extra flexibility helped. See the [polynomial example](lectures/02-learning-from-data.qmd#why-a-more-flexible-curve-can-mislead).
+
+### Interpolation and extrapolation {#extrapolation}
+
+**Interpolation** concerns predictions within a region represented by the data; **extrapolation** extends beyond it. Predicting absorbance at a higher concentration than any training measurement is an extrapolation. With many molecular features, deciding what counts as “inside” the sampled region becomes less straightforward.
+
+### Preprocessing, scaler, imputer, and pipeline {#preprocessing}
+
+**Preprocessing** transforms data before modelling. A **scaler** changes numerical scales; an **imputer** fills missing entries using a specified rule. A **pipeline** connects these transformations to a model. When a transformation learns from data, fit it using the training data for that evaluation step. [scikit-learn: pipelines and composite estimators](https://scikit-learn.org/stable/modules/compose.html)
+
+### Cross-validation {#cross-validation}
+
+Repeatedly fitting and evaluating using different training and validation portions of the available data. The splitting rule matters: measurements of the same molecule or closely related compounds can remain dependent across a careless split. Cross-validation does not automatically make an evaluation representative of a future task.
+
+### Data leakage {#leakage}
+
+Information enters model development that would not be available for the intended prediction or evaluation. For example, using all targets to choose descriptors before splitting the data lets evaluation information influence the model. Leakage can make performance appear better than it will be in use. [scikit-learn's leakage examples](https://scikit-learn.org/stable/common_pitfalls.html)
+
+### Bootstrap {#bootstrap}
+
+Repeatedly resampling observed data with replacement and recalculating a statistic. Our MOF notebook resamples fixed-model test errors and averages them. This illustrates sampling variation under a row-wise independence assumption; it creates no new measurements and does not include uncertainty from refitting or changing the chemical setting. See the [practical](lectures/03-mof-uptake.qmd#a-test-score-still-has-a-hat).
+
+### Benchmark {#benchmark}
+
+A defined task and evaluation procedure used for comparison, often with a shared dataset and metric. A benchmark result is evidence about performance under that procedure. We still have to ask how closely it resembles the chemical work we want to do.
+
+### Calibration: two uses {#calibration}
+
+In our experimental example, **calibration** relates known concentrations to measured absorbance. In probabilistic modelling, **calibration** concerns whether stated probabilities agree with observed frequencies in relevant groups of cases. These uses share a word but ask different questions.
+
+## Methods, lenses, and scientific claims
+
+### AI, machine learning, and deep learning {#ai-ml-dl}
+
+We use **artificial intelligence (AI)** for the broad ambition of building systems with capabilities associated with intelligence. **Machine learning (ML)** develops models using data or experience. **Deep learning** uses multiple layers of learned representations. These terms specify progressively narrower ideas, but a complete system can combine learning with explicit rules and search.
+
+### Neural network {#neural-network}
+
+A model built from connected computational units, often arranged in layers. Each unit transforms inputs; adjustable weights influence how information passes through the network. Training changes those weights for a chosen objective. The network is a mathematical construction, not a literal reconstruction of a brain. The [Prince reading route](reading.qmd#understanding-deep-learning) develops the calculations.
+
+### Kernel ridge regression (KRR) {#kernel-ridge}
+
+A regression method that combines similarities to training examples with fitted coefficients and regularisation. A **kernel** specifies the similarity calculation. The Gaussian kernel in our MOF practical uses distances between feature vectors; its setting $\gamma$ controls how quickly similarity decreases with distance, while $\alpha$ controls regularisation. This use of “kernel” differs from the Jupyter process that executes code. [scikit-learn's introduction](https://scikit-learn.org/stable/modules/kernel_ridge.html)
+
+### Convolution and attention {#network-operations}
+
+**Convolution** applies a shared filter across parts of an input, such as neighbouring pixels in an image. **Attention** combines representations with weights that depend on their relevance to one another. A **Transformer** is a network architecture built around attention. These are operations and architectures, rather than separate scientific tasks. See the [historical examples](lectures/01-ai-and-science.qmd#a-selective-history-six-stops-and-a-coda).
+
+### Symbolic and connectionist {#symbolic-connectionist}
+
+**Symbolic** approaches work with explicit symbols, rules, and operations. **Connectionist** approaches use networks with distributed representations. They can be combined: a neural model may suggest a synthesis step while a search procedure explores possible routes. See the [course's lenses](lectures/01-ai-and-science.qmd#choosing-a-lens).
+
+### Correlative and causal {#correlative-causal}
+
+**Correlative modelling** uses associations in observations, often for prediction. **Causal modelling** asks what would happen under an intervention, using evidence and assumptions that justify that interpretation. A relationship useful for predicting recorded reaction yields may not tell us what changing the temperature would do. [Hardt and Recht: causality](https://mlstory.org/causal.html)
+
+### Model explainability and feature attribution {#explainability}
+
+**Model explainability** concerns how a model produces or uses its outputs. **Feature attribution** assigns contributions to inputs under a particular explanation method. An attribution to temperature describes the fitted model; it does not by itself establish the effect of turning up a heater. See the [reaction example](lectures/01-ai-and-science.qmd#explaining-the-model-and-explaining-the-chemistry).
+
+### Mechanism {#mechanism}
+
+An account of the chemical process that produces an outcome, for example a sequence of reaction steps. Several mechanisms can be compatible with the same final yield. Distinguishing them may require kinetic, spectroscopic, or isotope evidence beyond a prediction or a measured intervention effect.
+
+### Permutation importance {#permutation-importance}
+
+A model-inspection procedure that shuffles a feature among observations and measures the change in a fitted model's score. It asks how much the model relies on information disrupted by that shuffle. Correlated features and implausible shuffled inputs affect its interpretation. Shuffling a pore-volume column is different from changing a real material's pores. See the [MOF exercise](lectures/03-mof-uptake.qmd#an-optional-question-about-the-model).
+
+### Bayesian and frequentist {#bayesian-frequentist}
+
+**Bayesian inference** uses probability distributions to describe uncertainty and updates them using observations. **Frequentist inference** assesses procedures through their behaviour under repeated sampling. Both depend on modelling choices. These statistical approaches concern a different distinction from whether a model is neural or symbolic. See the [probability reading](reading.qmd#probability-lenses).
+
+### Prior, likelihood, and posterior {#prior-posterior}
+
+A **prior** describes uncertainty before incorporating the observations in a particular analysis. The **likelihood** expresses how compatible those observations are with different parameter values under a model. A **posterior** updates the prior using that likelihood. The likelihood is not itself a probability distribution over the parameters. [Stanford: Bayesian analysis, section 20.1](https://web.stanford.edu/class/stats200/Lecture20.pdf)
+
+### Confidence and credible intervals {#uncertainty-intervals}
+
+A **confidence interval** comes from a procedure designed to cover a fixed unknown quantity at a stated rate over repeated sampling. A **credible interval** contains a stated amount of posterior probability under a Bayesian model. Both express uncertainty, with different interpretations and assumptions. The [probability reading](reading.qmd#probability-lenses) compares these statements.
+
+### Generative model, encoder, and decoder {#generative-model}
+
+A **generative model** can produce new examples according to a learned description, such as candidate molecules. An **encoder** maps an input into an internal representation; a **decoder** maps a representation into an output. These components appear in some generative models. A generated molecule still needs checks for the intended chemical use.
+
+### Surrogate model and Bayesian optimisation {#surrogate}
+
+A **surrogate** is a model used as a cheaper substitute for an expensive experiment or calculation. **Bayesian optimisation** uses a probabilistic surrogate and a rule for selecting the next evaluation. It balances what looks promising with what could be learned. See the [experimental-design reading](reading.qmd).
+
+### Large language model (LLM) and text token {#llm}
+
+An **LLM** is a model trained on large amounts of text to model and generate language. It processes **tokens**: pieces of encoded input that may correspond to words, word fragments, or punctuation. A text token is different from the access token used to connect Jan to Blablador.
+
+## Computing and the course tools
+
+### Terminal, shell, and command {#terminal-shell}
+
+A **terminal** is the window for entering commands and viewing output. A **shell** interprets those commands and launches programs. We use Bash in Ubuntu on WSL for Windows, and a local shell on macOS/Linux. A command such as `ls` asks the shell to run a particular operation. [Try the computing basics](setup.qmd#computing-basics).
+
+### Prompt {#prompt}
+
+In a terminal, the **prompt** is the text indicating that the shell is ready for input. In a chat, a **prompt** is input given to the language model. These are different uses of the same word; prompt symbols such as `$` should not be copied as part of our shell commands.
+
+### Directory, path, and working directory {#path}
+
+A **directory** is a folder. A **path** specifies a location. The **working directory** is where a process starts when interpreting relative paths. `pwd` shows it, `ls` lists its contents, and `cd` changes it in the shell. `~` refers to your home directory in that environment.
+
+### Python interpreter {#python}
+
+The program that executes Python code. Different environments can have different interpreters and installed packages. `sys.executable` shows which interpreter a notebook kernel is using. For Windows students, our course interpreter runs inside Ubuntu on WSL.
+
+### Package, dependency, and lockfile {#package}
+
+A **package** supplies reusable code. A **dependency** is software a project needs. Our `pyproject.toml` declares dependencies; `uv.lock`, the **lockfile**, records the resolved versions. These files describe the environment, while the installed packages live in `.venv`. [uv: working on projects](https://docs.astral.sh/uv/guides/projects/)
+
+### Virtual environment and uv {#virtual-environment}
+
+A **virtual environment** gives a Python project its own interpreter configuration and installed packages. **uv** manages these for us and runs commands in the project's environment. It is different from WSL, which supplies the Linux environment on Windows. [Python's virtual-environment introduction](https://docs.python.org/3.12/tutorial/venv.html#introduction)
+
+### Notebook, cell, and JupyterLab {#notebook}
+
+A **notebook** is a document containing text, code, and saved outputs. A **cell** is one block of that content. **JupyterLab** is the browser interface we use to edit notebooks and request execution of their code. The execution happens in a kernel.
+
+### Kernel {#kernel}
+
+In Jupyter, a **kernel** is the running process that executes code and remembers variables between cells. Restarting it clears those variables; it does not delete the notebook or installed packages. In other contexts, “kernel” can mean an operating system's core or a function used in certain ML methods. [Jupyter's kernel documentation](https://jupyter-client.readthedocs.io/en/stable/kernels.html)
+
+### WSL and Ubuntu {#wsl}
+
+**Windows Subsystem for Linux (WSL)** runs a Linux environment on Windows. **Ubuntu** is the Linux distribution we use within WSL 2. Our Python project lives there; Jan and the browser can remain Windows applications. See the [Windows setup](setup.qmd#windows-wsl).
+
+### API, endpoint, and provider {#api}
+
+An **application programming interface (API)** specifies how software components communicate. A web **endpoint** is an address to which a program sends a request; a **base URL** is a shared starting address for a service's endpoints. A **provider** supplies the service. Jan sends API requests to Blablador and displays the reply. See the [connection settings](setup.qmd#connect-jan-to-blablador).
+
+### API key and access token {#api-key}
+
+A credential used to authenticate access to a service. In our setup, the Blablador token goes in Jan's API-key field. It belongs in that credential field, not in a chat prompt, notebook, or shared error report. This meaning of “token” is separate from a language model's text tokens.
+
+### Server, browser, and localhost {#server}
+
+A **server** is a program that responds to requests. A **browser** can display its interface. **localhost** is a name for the local computer from a program's point of view. In our WSL setup, the Windows browser can also reach Jupyter's local Linux server through that address. [Opening JupyterLab](setup.qmd#create-and-check-the-environment).
+
+### Model identifier and alias {#model-alias}
+
+A **model identifier** names a model offered by a service. An **alias** is a name that the service maps to a model; that mapping can change. Blablador's `alias-code`, for example, provides a convenient selection without promising that the underlying model will stay the same. See the [setup notes](setup.qmd#connect-jan-to-blablador).
+
+### Debugging and traceback {#debugging}
+
+**Debugging** means investigating why a program behaves differently from what was intended. A **traceback** shows the sequence of code calls leading to a Python exception. It supplies evidence about the failure, rather than a complete diagnosis. See the [one-check-at-a-time exercise](setup.qmd#assistant-for-debugging).
+
+### GPU {#gpu}
+
+A **graphics processing unit** is a processor designed to carry out many suitable operations in parallel. GPUs are widely used to train neural networks. Our introductory notebooks run on a CPU, the computer's general-purpose processor; the hosted chatbot runs on the provider's infrastructure.

@@ -1,0 +1,225 @@
+---
+title: "Suggested reading"
+---
+
+These readings are suggestions for following a question further, finding another explanation, or examining the evidence behind an example. Choose what interests you or helps with the work you are doing. The lectures and practicals introduce the ideas we need together; completing these readings is optional. The passages, questions, and time budgets below offer possible ways in.
+
+## Books to return to {#core-books}
+
+These books provide complementary starting points: Hardt–Recht for learning, prediction, and action; Crawford for material and political questions; Véliz for the history and power of prediction; and Prince for the workings of neural networks. The routes below select passages as the corresponding questions arise.
+
+| Resource | Use it for | Starting point and background |
+|---|---|---|
+| Moritz Hardt and Benjamin Recht (2022), [*Patterns, Predictions, and Actions: Foundations of Machine Learning*](https://mlstory.org/), Princeton University Press | The conceptual foundation: prediction, learning, data, and action | Start with the bounded passages below. Later arguments use probability, calculus, and linear algebra. The authors provide a free web edition; its wording and pagination differ from the print book. |
+| Kate Crawford (2021), [*Atlas of AI: Power, Politics, and the Planetary Costs of Artificial Intelligence*](https://yalebooks.yale.edu/book/9780300264630/atlas-of-ai/), Yale University Press | A particularly recommended perspective on the material resources, labour, data practices, and power relations involved in AI | The Introduction is a good entry point, followed by whichever part of the [reading route](#atlas-of-ai) interests you. No programming background is required. Full text requires a library copy, institutional access, or purchase; the publisher page is not an open edition. The paperback appeared in 2022. |
+| Carissa Véliz (2026), [*Prophecy: Prediction, Power, and the Fight for the Future, from Ancient Oracles to AI*](https://www.penguinrandomhouse.com/books/759692/prophecy-by-carissa-veliz/9780385550970/), Doubleday; UK edition, Swift Press | A recommended perspective on how predictions acquire authority and influence decisions | Start with the opening pages and the [chemistry question below](#prophecy). No programming background is required. The publisher offers a sample; the full book requires library access or purchase. |
+| Simon J. D. Prince (2023), [*Understanding Deep Learning*](https://udlbook.github.io/udlbook/), MIT Press | A central technical reference for neural networks, fitting, evaluation, and advanced architectures | Use the [selected-section route](#understanding-deep-learning). The author provides a free edition and accompanying Python notebooks. Work through scalar examples first; later sections require calculus, linear algebra, and probability. |
+
+## Practical references
+
+| Resource | Use it for | Starting point and background |
+|---|---|---|
+| Philippe Schwaller's group, [*Practical Programming for Chemistry*](https://schwallergroup.github.io/practical-programming-in-chemistry/) | Python help when a notebook operation is unfamiliar | Begin with [Jupyter notebooks](https://schwallergroup.github.io/practical-programming-in-chemistry/tutorials/lecture_02/01_jupyter_notebooks.html) or **Variables and Types** in [Python basics](https://schwallergroup.github.io/practical-programming-in-chemistry/tutorials/lecture_02/02_python_basics.html). Free web tutorials for beginners; use our course setup instructions for installation. |
+| Anish Athalye, Jon Gjengset, and Jose Javier Gonzalez Ortiz, [*The Missing Semester of Your CS Education*](https://missing.csail.mit.edu/), MIT IAP, 2026 edition | Understanding the shell and the tools around programming | Use the [short route below](#computing-tools) alongside our setup guide. Free notes and recordings. The course covers considerably more than we need for the first session. |
+| Andrew D. White, [*Deep Learning for Molecules & Materials*](https://dmol.pub/), online book | Connecting mathematical models to molecular examples and code | Start with [Regression & Model Assessment](https://dmol.pub/ml/regression.html) after lecture 2. Later chapters assume Python and relevant mathematical background. Free web text; consult it alongside the course notebooks. |
+
+## Computing tools: a short Missing Semester route {#computing-tools}
+
+**Suggested starting point — 10–15 minutes.** If the tools around Python are unfamiliar, try **What is the shell?**, **Why should you care about it?**, and **Navigating in the shell** in the 2026 [**Course Overview + Introduction to the Shell**](https://missing.csail.mit.edu/2026/course-shell/). The next section, **What is available in the shell?**, goes further. You could try the ideas by explaining terminal versus shell and using `pwd`, `ls`, and `cd` to locate the extracted course folder. Our [computing basics](setup.qmd#computing-basics) also explain the vocabulary used in the installation steps.
+
+The selected reading introduces the concepts; its full exercise set assumes a Unix shell. For this course, Windows users work in **Ubuntu's Bash shell through WSL 2**, following our [Windows setup](setup.qmd#windows-wsl). macOS and Linux users use their own terminals. The full exercises, Vim, and advanced shell scripting remain optional.
+
+**When the next question arises:** the opening of [**Development Environment and Tools**](https://missing.csail.mit.edu/2026/development-environment/) explains editors and integrated development environments. Read it when considering an editor beyond JupyterLab. For the meaning of a Python virtual environment, use section **12.1, Introduction**, in the [Python 3.12 tutorial](https://docs.python.org/3.12/tutorial/venv.html#introduction); follow our uv instructions to create the environment.
+
+## Lecture 1: ambitions, predictions, and scientific understanding {#lecture-1}
+
+**Suggested starting point — 10–15 minutes.** Hardt and Recht, Chapter 1, [**Prediction and action**](https://mlstory.org/introduction.html#prediction-and-action), connects the broad ambition of AI to a concrete use. A question to keep in mind: in a chemistry example that interests you, what is predicted, what action follows, and what could change because of that action?
+
+**Further perspectives — 15–20 minutes for a first look at one paper.** These readings address different questions. The abstract and Figure 1 with its caption provide possible entry points; full articles may require institutional access.
+
+- **Hanchen Wang et al. (2023), [“Scientific discovery in the age of artificial intelligence”](https://www.nature.com/articles/s41586-023-06221-2), *Nature* 620, 47–60.** A review of applications across scientific work. Use it to find one task, its inputs, and the evidence that would establish useful performance. Follow a cited original study before treating a review's example as evidence for a stronger claim.
+- **Lisa Messeri and M. J. Crockett (2024), [“Artificial intelligence and illusions of understanding in scientific research”](https://www.nature.com/articles/s41586-024-07146-0), *Nature* 627, 49–58.** A perspective on how adopting AI may affect what researchers believe they understand and which questions they pursue. Identify one proposed risk and design an observation that could test whether it occurs in a chemical workflow. This is a conceptual argument, not a measured error rate for every AI tool.
+
+**A question to explore:** Which claim do you find most interesting, what supports it, and what remains uncertain?
+
+**A materials perspective — 10–15 minutes.** Seyed Mohamad Moosavi, Kevin Maik Jablonka, and Berend Smit (2020), [*The Role of Machine Learning in the Understanding and Design of Materials*](https://doi.org/10.1021/jacs.0c09105), *JACS* 142, 20273–20287. Start with the Introduction. This perspective connects materials-design questions to the role of ML. Which part of a proposed application calls for prediction, and what would count as understanding? The publisher provides open access.
+
+## Bayesian and frequentist lenses {#probability-lenses}
+
+**An optional first look — 10 minutes.** Stanford's *STATS 200: Introduction to Statistical Inference* (Autumn 2016), [Lecture 20, **Bayesian analysis**](https://web.stanford.edu/class/stats200/Lecture20.pdf), opens by contrasting a fixed unknown parameter with a probability model for that parameter. Read the opening paragraph and the explanation of prior and posterior distributions in section 20.1. The PDF is freely available; the derivation and coin example can wait until probability notation is familiar.
+
+For the frequentist interpretation of a confidence interval, try the opening definition in [Lecture 18, **Confidence intervals**](https://web.stanford.edu/class/stats200/Lecture18.pdf). What is repeated in its probability statement? Compare that question with uncertainty about a parameter conditional on a prior, model, and observed data. Both approaches require assumptions; a neural-network architecture alone determines neither interpretation.
+
+In chemistry, we will return to this distinction when discussing uncertainty in predictions and selecting the next experiment. For now, a useful question is simply: what does this reported probability concern, and how was it obtained?
+
+## Scientific evidence and commercial claims {#science-and-commercial-claims}
+
+**An optional comparison — 10–15 minutes.** Read the abstract of David Rein et al. (2023), [*GPQA: A Graduate-Level Google-Proof Q&A Benchmark*](https://arxiv.org/abs/2311.12022), then the benchmark table and **Benchmark reporting** notes in Anthropic's [*Claude Opus 4.1* announcement](https://www.anthropic.com/news/claude-opus-4-1), dated 5 August 2025. The first is an open research preprint introducing a scientific question-answering benchmark; the second is a company's product announcement reporting results that include GPQA Diamond. Both are freely accessible. No programming is needed for this comparison.
+
+What capability was tested, under which conditions, and what would you still want to know before using the model for a chemical research task? Write a claim the evaluation supports, then propose a check for your intended use. The [lecture example](lectures/01-ai-and-science.qmd#science-and-model-claims) develops this question. Reading the sources side by side lets us examine how scientific evaluation and product promotion meet; neither the score nor the company's involvement settles the question of suitability for our work.
+
+**A chemical benchmark — 10–15 minutes.** Adrian Mirza et al. (2025), [*A framework for evaluating the chemical knowledge and reasoning abilities of large language models against the expertise of chemists*](https://doi.org/10.1038/s41557-025-01815-x), *Nature Chemistry* 17, 1027–1034. The open-access ChemBench paper compares model and human answers on a curated collection of chemical questions. Begin with the abstract: which comparison supports its main claim, and what does the same abstract say about failures and confidence? Treat the published models and evaluation protocol as a dated study, rather than a current ranking or an assessment of all laboratory work.
+
+For a longer historical perspective on the authority given to predictions, try Véliz's [*Prophecy*](#prophecy). What changes when people act on a prediction?
+
+## A recommended perspective: Atlas of AI {#atlas-of-ai}
+
+Crawford examines AI through the infrastructures and institutions that make it possible. I particularly recommend her book as a companion to our technical questions about what a model does and what its results establish. The chemistry prompts below offer ways to connect her argument to our work.
+
+**A good entry point is the Introduction (pp. 1–21).** As you read, you might follow one claim, the example or evidence Crawford uses to support it, and the question it raises for a chemical research workflow.
+
+**From there, follow whichever question interests you.** The chapters below offer different directions. Page ranges follow the [publisher's JSTOR contents](https://www.jstor.org/stable/j.ctv1ghv45t); use chapter titles in editions with different pagination.
+
+| Chapter | Question to investigate in our chemistry workflow |
+|---|---|
+| **1, Earth**, pp. 23–51 | What hardware and energy does the workflow depend on? What would we have to measure to compare its resource use with a useful alternative, including any laboratory work it might avoid? |
+| **2, Labor**, pp. 53–87 | Who measures, curates, labels, checks, and maintains the data and tools? Where is that work credited or omitted? |
+| **3, Data**, pp. 89–121 | How did a measurement become an available training example? Whose experiments are represented, and what can we establish about permission, provenance, and missing results? |
+| **4, Classification**, pp. 123–149 | Who decided what counts as “successful,” “stable,” or “toxic”? Which experimental conditions and thresholds disappear when we turn a measurement into a class label? |
+
+**Conclusion: Power**, pp. 211–227, offers another perspective on a research project: who can access, alter, or withdraw a dataset or model service, and how does that affect which research questions a laboratory can pursue?
+
+**A question to explore:** What dependency does this perspective make visible in your own workflow, and would you change anything as a result? Distinguish Crawford's argument, evidence about the particular system, and your own judgement.
+
+## A recommended perspective: Prophecy {#prophecy}
+
+Carissa Véliz's [*Prophecy* (2026)](https://www.penguinrandomhouse.com/books/759692/prophecy-by-carissa-veliz/9780385550970/) places contemporary predictive technologies within a much longer history of prediction and power. She asks how predictions gain authority and shape the choices available to people. This connects to a question we can bring back to chemistry: what happens after a prediction leaves the model?
+
+Suppose a laboratory uses predicted stability to choose which materials to synthesise. The ranking helps determine which candidates receive time and resources. The resulting measurements may then enter the next training dataset. A candidate that was never tested remains unknown, even if the model gave it a low score. Who sets the selection rule, and how could we find out what that rule causes us to miss?
+
+**An optional way in — 10–15 minutes.** Begin with the opening pages, using the publisher's sample or a library copy. Follow one of Véliz's examples: who makes the prediction, who acts on it, and who can challenge the decision? Then consider where the analogy with our laboratory example holds and where it breaks down. The laboratory example is a question for our course; we need evidence about that workflow to answer it.
+
+Hardt and Recht's [**Prediction and action**](https://mlstory.org/introduction.html#prediction-and-action) offers a useful companion. Predictive accuracy, the consequences of acting on a prediction, and the authority to make that decision are questions we can examine separately.
+
+## Prediction, model explanation, and causality {#claims-and-evidence}
+
+If you would like to revisit the reaction example from another angle, these readings offer three possible routes. The questions recur during data analysis and experimental design.
+
+| Reading | Suggested focus | Why it helps |
+|---|---|---|
+| Hardt and Recht (2022), [Chapter 9, **Causality**](https://mlstory.org/causal.html) | Start with the opening comparison of observation and action, before **The limitations of observation**. Then read **Interventions and causal effects** when the notation is introduced in class. State the difference between observing a reaction at a temperature and assigning that temperature. | Connects the chemical example to a formal causal question. Free web text; the opening discussion is accessible before the mathematical sections. |
+| Eleanor Dillon, Jacob LaRiviere, Scott Lundberg, Jonathan Roth, and Vasilis Syrgkanis, [**Be careful when interpreting predictive models in search of causal insights**](https://shap.readthedocs.io/en/latest/example_notebooks/overviews/Be%20careful%20when%20interpreting%20predictive%20models%20in%20search%20of%20causal%20insights.html), SHAP documentation | Read the opening paragraphs and inspect the first feature-importance plots. Identify what the plots describe and what additional claim would be required to recommend an intervention. | A worked example of the gap between explaining predictions and estimating effects. Free tutorial; read the prepared output without installing SHAP. |
+| Galit Shmueli (2010), [**To Explain or to Predict?**](https://doi.org/10.1214/10-STS330), *Statistical Science* 25, 289–310; [free electronic reprint](https://arxiv.org/abs/1101.0891) | Read the introduction and opening definitions. How does choosing a predictive or explanatory goal change the modelling task? | A deeper conceptual reference. Here **explanatory modelling** concerns causal explanation, which differs from explaining a fitted model's output. The reprint was posted in 2011 and has different pagination from the 2010 article. |
+
+**Something to try:** Write four versions of one chemical question: a prediction, an explanation of a model output, an effect of a specified intervention, and a proposed mechanism. What observation or assumption would each answer need?
+
+## Lecture 2: learning from a finite dataset {#lecture-2}
+
+**Suggested starting point — 15–20 minutes.** Hardt and Recht, Chapter 3, [**Sample versus population**](https://mlstory.org/supervised.html#sample-versus-population), followed by the opening **Supervised learning** section, before the perceptron algorithm. How do population and sample translate into a calibration experiment? Why does test error remain an empirical estimate even when the test observations were kept entirely separate from model development?
+
+**Practical follow-up — 10–15 minutes.** The scikit-learn developers, [**Common pitfalls and recommended practices**](https://scikit-learn.org/stable/common_pitfalls.html), especially **Inconsistent preprocessing** and **Data leakage**. Read the incorrect/correct examples. Explain which observations may determine a preprocessing transformation. Reading the code is sufficient here; scikit-learn is introduced with the later modelling practical.
+
+**Go deeper.** Hardt and Recht, Chapter 6, [**Generalization gap** and **Effects of model complexity**](https://mlstory.org/generalization.html). Compare its discussion with the polynomial activity. What does that one demonstration establish, and which broader conclusions would require more evidence? The subsequent theory is optional.
+
+**A chemistry reference to consult as needed.** Kevin Maik Jablonka, Daniele Ongari, Seyed Mohamad Moosavi, and Berend Smit (2020), [*Big-Data Science in Porous Materials: Materials Genomics and Machine Learning*](https://doi.org/10.1021/acs.chemrev.0c00004), *Chemical Reviews* 120, 8066–8129; [open full text](https://pmc.ncbi.nlm.nih.gov/articles/PMC7453404/). Use the Introduction to orient yourself, then the opening of section 7 on model evaluation and comparison. Choose one evaluation recommendation and explain how it changes our calibration or MOF workflow. This is a substantial reference review; a 10–15-minute first visit is enough.
+
+## Lecture 3: a route through the MolSim material {#molsim}
+
+**For the practical:** the [adapted MOF chapter](lectures/03-mof-uptake.qmd) includes a complete notebook, data notes, and a downloadable kit. The [original MolSim 2024 notebook](https://github.com/kjappelbaum/ml_molsim/blob/0ebed176b972c9ba9ddf7b6e3a4d04eaf3f32409/molsim_ml.ipynb) offers further exercises on chemical descriptors, hyperparameters, and model inspection. It is an exercise scaffold with unfinished code; use the supplied course kit for the runnable class activity.
+
+**A suggested chemical perspective — 10–15 minutes:** Moosavi et al. (2020), [*Understanding the diversity of the metal-organic framework ecosystem*](https://doi.org/10.1038/s41467-020-17755-8), *Nature Communications* 11, 4068. Begin with the abstract, available through [PubMed](https://pubmed.ncbi.nlm.nih.gov/32792486/), which also links open full text. What makes a new structure informative, and how might a database's coverage shape a model comparison?
+
+**An optional implementation reference:** scikit-learn's [permutation-importance guide](https://scikit-learn.org/stable/modules/permutation_importance.html) explains the shuffled-feature comparison. Which relationship does the shuffle break, and does the resulting input still describe a plausible MOF?
+
+**A closer look at evaluation — 10–15 minutes.** Kevin Maik Jablonka, Andrew S. Rosen, Aditi S. Krishnapriyan, and Berend Smit (2023), [*An Ecosystem for Digital Reticular Chemistry*](https://doi.org/10.1021/acscentsci.2c01177), *ACS Central Science* 9, 563–581; [open author-hosted PDF](https://www.epfl.ch/labs/lsmo/wp-content/uploads/2023/08/acscentsci.2c01177.pdf). Begin with **Appendix: Case Studies, Case Study 1: The impact of data leakage**. Why can distinct rows still make a prediction task too easy? Use that question to examine the scope of our random row split. The paper also provides the broader context for mofdscribe.
+
+**Where the table comes from — an optional perspective.** Jablonka, Luc Patiny, and Smit (2022), [*Making the collective knowledge of chemistry open and machine actionable*](https://doi.org/10.1038/s41557-022-00910-7), *Nature Chemistry* 14, 365–376. Start with the [freely available abstract](https://pubmed.ncbi.nlm.nih.gov/35379967/); full text may require library access. Which units, conditions, identifiers, and provenance would make one uptake value reusable by another person or program?
+
+## Understanding Deep Learning: from a small network to chemical models {#understanding-deep-learning}
+
+Use Prince when you want to follow a model's computation step by step. The [author's site](https://udlbook.github.io/udlbook/) provides the free edition and resources; section numbers below follow the [MIT Press contents](https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/15055/prince_toc_.pdf). Select the row that supports the current activity. These are reference options across the course, not a whole-book assignment.
+
+| Course question | Starting sections | A task to try |
+|---|---|---|
+| How does our calibration become a learning problem? | 2.1–2.2 | Identify inputs, targets, parameters, and the quantity being minimised in the calibration example. |
+| What does a neural network compute? | 3.1, then 4.1–4.2 | Calculate one output of a small supplied network by hand. Sketch how changing one weight changes the function, then compose two stages. |
+| How are its parameters fitted? | 6.1; revisit 7.2–7.3 after the chain-rule discussion | Take one gradient step in a scalar example and check its direction. Compare a derivative with a finite difference away from a non-differentiable point. |
+| How do we judge a fitted model? | 8.1–8.3 and 8.5; then 9.1 | Annotate training and validation errors from our chemical task. State which data informed model selection and which observations remain available for evaluation. |
+| How can connectivity enter a prediction? | 13.1–13.4 | Represent a small molecule as a graph and trace one update. Identify which quantities should change when atom indices are reordered. |
+| How does a transformer combine information? | 12.1–12.2 | Follow a tiny supplied attention calculation and identify the vectors being combined. Keep the numerical operation separate from claims about chemical understanding. |
+| What makes a generated candidate useful? | 14.2–14.3; later choose Chapter 17 or 18 for the model used in class | Propose separate checks for validity, diversity, and the desired chemical property. Work through one generative family with the course example. |
+
+**Background as needed:** Appendix B supports functions and matrix notation; Appendix C supports probability. Bring an unfamiliar symbol or an incomplete calculation to class. A diagram and a scalar example are useful entry points before a general derivation.
+
+The [author's notebooks](https://github.com/udlbook/udlbook/tree/main/Notebooks) offer additional exercises. Follow the course notebook for the assigned activity; the external notebooks are reference material and have not been tested in our course environment.
+
+## A chemical example of evaluation trouble {#chemical-evaluation}
+
+**Izhar Wallach and Abraham Heifets (2018), [“Most Ligand-Based Classification Benchmarks Reward Memorization Rather than Generalization”](https://doi.org/10.1021/acs.jcim.7b00403), *Journal of Chemical Information and Modeling* 58, 916–932.** A [free author preprint](https://arxiv.org/abs/1706.06619v2) is available; it is a separate version from the journal article.
+
+Use this after the first discussion of chemical train/validation splits. Begin with the abstract and introduction. The study examines redundancy in ligand-based benchmarks; it gives a concrete reason to question what a high score says about new chemistry. Ask which similarities between training and evaluation molecules matter for your intended application. Its results do not make any one split universally correct.
+
+## What does a benchmark reward? {#benchmark-purpose}
+
+These readings extend the error-metric comparison and the chemical benchmark case. One abstract and its opening argument can give you a starting point for thinking about what our model comparison rewards.
+
+- **Mostafa Dehghani et al. (2021), [*The Benchmark Lottery*](https://arxiv.org/abs/2107.07002).** This freely available preprint examines how benchmark choices can alter the apparent ordering of methods. Identify one comparison you would want to repeat before calling a chemical model “better.” Its examples span several ML domains; relevance to our chemistry task must be argued.
+- **Kawin Ethayarajh and Dan Jurafsky (2020), [*Utility is in the Eye of the User: A Critique of NLP Leaderboards*](https://aclanthology.org/2020.emnlp-main.393/), EMNLP, 4846–4853.** An openly available opinion paper using a formal analysis of utility to distinguish leaderboard incentives from practical needs. List two things a laboratory might value that an accuracy ranking omits, then say how you would assess them. The original argument concerns NLP leaderboards.
+
+**A question to explore:** How do the fitting loss, evaluation metric, and scientific purpose differ? What important property might the chosen score leave out?
+
+## Studies behind the application examples {#application-examples}
+
+The [homepage examples](index.qmd#examples-through-lenses) are a non-exhaustive set of cases to compare through several lenses. Choose one study when it helps with a question; these are not nine additional reading assignments. Begin with the suggested passage and distinguish what the authors built from what they evaluated.
+
+| Example and primary reference | A useful starting point |
+|---|---|
+| **DENDRAL:** Alan M. Duffield et al. (1969), [*Applications of artificial intelligence for chemical inference. II. Interpretation of low-resolution mass spectra of ketones*](https://doi.org/10.1021/ja01039a026), *JACS* 91, 2977–2981 | Inspect one structure proposal alongside its spectral evidence. Full text may require library access; the [historical sources](#historical-sources) also identify the broader DENDRAL account. |
+| **Formal reasoning:** Maxwell P. Bobbin et al. (2024), [*Formalizing chemical physics using the Lean theorem prover*](https://doi.org/10.1039/D3DD00077J), *Digital Discovery* 3, 264–280 | Start with the Langmuir example and separate physical premises from mathematical steps. Open access; [author-hosted article](https://atomslab.github.io/static/pdf/publications/bobbin_2023.pdf) and [proof documentation](https://atomslab.github.io/LeanChemicalTheories/) are available. First published online in 2023; the journal volume is dated 2024. No Lean installation is needed for this reading. |
+| **Learned energies:** Justin S. Smith, Olexandr Isayev, and Adrian E. Roitberg (2017), [*ANI-1: an extensible neural network potential with DFT accuracy at force field computational cost*](https://doi.org/10.1039/C6SC05720A), *Chemical Science* 8, 3192–3203 | Read the abstract and representation diagram. Identify the elements and reference energies defining the original model's scope. Open access. |
+| **Synthesis planning:** Marwin H. S. Segler, Mike Preuss, and Mark P. Waller (2018), [*Planning chemical syntheses with deep neural networks and symbolic AI*](https://doi.org/10.1038/nature25978), *Nature* 555, 604–610 | Start with the abstract and search description. Locate the learned components and the search procedure. Full text may require library access. |
+| **Screening:** Jonathan M. Stokes et al. (2020), [*A Deep Learning Approach to Antibiotic Discovery*](https://doi.org/10.1016/j.cell.2020.01.021), *Cell* 180, 688–702 | Begin with Figure 1 and distinguish predictions from experimental follow-up. A [free author-hosted article](https://people.csail.mit.edu/tommi/papers/Stokes_etal_Cell2020.pdf) is available. |
+| **Generation:** Rafael Gómez-Bombarelli et al. (2018), [*Automatic Chemical Design Using a Data-Driven Continuous Representation of Molecules*](https://doi.org/10.1021/acscentsci.7b00572), *ACS Central Science* 4, 268–276 | Follow the encoder, search space, and decoder in the workflow. State which objective is being optimised. Open access, including an [author-hosted copy](https://www.cs.princeton.edu/~rpa/pubs/bombarelli2018automatic.pdf). |
+| **Experiment selection and robotics:** Benjamin Burger et al. (2020), [*A mobile robotic chemist*](https://doi.org/10.1038/s41586-020-2442-2), *Nature* 583, 237–241 | Start with the abstract and workflow figure. Separate choosing an experiment from physically executing it. Full text may require library access. |
+| **Protein structures:** John Jumper et al. (2021), [*Highly accurate protein structure prediction with AlphaFold*](https://doi.org/10.1038/s41586-021-03819-2), *Nature* 596, 583–589 | Use the abstract and CASP evaluation as directed in the [historical reading route](#historical-sources). |
+| **LLMs with tools:** Andres M. Bran et al. (2024), [*Augmenting large language models with chemistry tools*](https://doi.org/10.1038/s42256-024-00832-8), *Nature Machine Intelligence* 6, 525–535 | Trace the tool calls and independent checks in one example. The [later-topic route](#later-topics) records access and version information. |
+
+## Later topics: a place to start {#later-topics}
+
+Choose a reading when the corresponding topic arises. These are reference options, not additional preparation for the introductory session.
+
+| Topic | Reading and suggested focus | Depth and access |
+|---|---|---|
+| Molecular graphs | White, [**Graph Neural Networks**](https://dmol.pub/dl/gnn.html). Identify node, edge, and graph quantities; sketch what information can pass between neighbouring atoms. | Guided technical chapter; free web text. |
+| Predicting molecular energies | White, [**Predicting DFT Energies with GNNs**](https://dmol.pub/applied/QM9.html). Identify the target and evaluation data before inspecting the model. | Applied chapter after the graph introduction; free web text. Energy prediction alone does not validate molecular dynamics. |
+| Learned potentials | Oliver T. Unke et al. (2021), [**Machine Learning Force Fields**](https://doi.org/10.1021/acs.chemrev.0c01111), *Chemical Reviews* 121, 10142–10186. Begin with the introduction; list the checks needed before using a fitted potential in a trajectory. | Detailed review for later consultation; open-access journal article and [author preprint](https://arxiv.org/abs/2010.07067). |
+| Generative models | White, [**Variational Autoencoder**](https://dmol.pub/dl/VAE.html). First identify the encoder, latent variables, and decoder; then ask how to evaluate generated candidates. | Technical extension after neural networks; free web text. |
+| Choosing experiments | Benjamin J. Shields et al. (2021), [**Bayesian reaction optimization as a tool for chemical synthesis**](https://www.nature.com/articles/s41586-021-03213-y), *Nature* 590, 89–96. Start with the abstract and Figure 1; identify the objective, experimental budget, and comparison procedure. | Chemical research example; full text may require institutional access. |
+| LLMs with tools | Andres M. Bran et al. (2024), [**Augmenting large language models with chemistry tools**](https://www.nature.com/articles/s42256-024-00832-8), *Nature Machine Intelligence* 6, 525–535. Trace one task: what does the language model do, what do the external tools do, and who checks the result? | Research case study for the LLM session; open-access journal article and [free 2023 preprint](https://arxiv.org/abs/2304.05376), with a different title and version from the published article. |
+
+## Further examples from our research {#research-examples}
+
+These studies connect later course questions to work from our collaborations. Pick the example that helps with the question at hand; each has a different task and kind of evidence.
+
+### Choosing among competing objectives {#multiobjective-learning}
+
+Kevin Maik Jablonka, Giriprasad Melpatti Jothiappan, Shefang Wang, Berend Smit, and Brian Yoo (2021), [*Bias free multiobjective active learning for materials design and discovery*](https://doi.org/10.1038/s41467-021-22437-0), *Nature Communications* 12, 2312; [open university copy](https://escholarship.org/uc/item/9mr3w2s3). Start with the abstract and the opening discussion of competing objectives. Draw two properties for which improving one can worsen the other. Which candidates remain worth considering, and which human choices are still needed? This connects slots 7 and 8; the algorithmic details are optional.
+
+### A language model as a property predictor {#predictive-language-models}
+
+Kevin Maik Jablonka, Philippe Schwaller, Andres Ortega-Guerrero, and Berend Smit (2024), [*Leveraging large language models for predictive chemistry*](https://doi.org/10.1038/s42256-023-00788-1), *Nature Machine Intelligence* 6, 161–169. Begin with the abstract and **Classification** section. Identify the labelled examples, adaptation procedure, baseline, and evaluation. What differs from simply asking a chatbot a chemical question? Use the reported tasks and model versions to bound the conclusion. The publisher provides open access.
+
+### Information supplied and information used {#representation-and-model}
+
+Nawaf Alampara, Santiago Miret, and Kevin Maik Jablonka (2026), [*Less can be more for predicting properties with large language models*](https://doi.org/10.1038/s43588-026-01045-2), *Nature Computational Science*, published 12 October 2026. Begin with Figure 1 and the **Representation** subsection. The study separates information about categories from information about coordinates. What does a representation contain, and what evidence shows that a tested model uses it? This is a useful return to modelling choices in slots 5 and 9. Open access; interpret the result within the tested models and tasks.
+
+### Turning a paper into a usable table {#chemical-data-extraction}
+
+Mara Schilling-Wilhelmi et al. (2025), [*From text to insight: large language models for chemical data extraction*](https://doi.org/10.1039/D4CS00913D), *Chemical Society Reviews* 54, 1125–1150. Try the **Key learning points** and the opening of section 3, **Structured data extraction workflow**. Follow one property from its source passage into a table: what preserves the units, conditions, and evidence for the value? The [open companion book](https://matextract.pub/) provides worked examples for later practical development. Reading is enough for now; the companion code has not been tested in our course environment. The review is open access and first appeared online in December 2024; 2025 is its volume year.
+
+## Historical sources behind lecture 1 {#historical-sources}
+
+These are sources for particular claims in the history. Use the suggested focus to inspect an original argument; reading every paper is optional.
+
+| Source | Useful focus |
+|---|---|
+| Alan M. Turing (1950), [**Computing Machinery and Intelligence**](https://www.cs.toronto.edu/~frank/csc2501/Readings/R1_Turing/Turing-1950.pdf), *Mind* 59, 433–460 | Sections 1–2: how the question is turned into an observable test. Section 7 is a later extension on learning machines. Freely accessible university-hosted copy. |
+| John McCarthy, Marvin Minsky, Nathaniel Rochester, and Claude Shannon (1955), [**A Proposal for the Dartmouth Summer Research Project on Artificial Intelligence**](https://www-formal.stanford.edu/jmc/history/dartmouth/dartmouth.html) | Opening proposal and the list of research directions. Distinguish the 1955 proposal from the 1956 meeting. Free author-hosted text. |
+| Frank Rosenblatt (1958), [**The Perceptron: A Probabilistic Model for Information Storage and Organization in the Brain**](https://web.stanford.edu/class/psych209a/ReadingsByDate/01_30/Rosenblatt58Perceptron.pdf), *Psychological Review* 65, 386–408; DOI `10.1037/h0042519` | Opening pages 386–388: the questions and assumptions motivating the model. The simple threshold equation in our notes is a teaching abstraction. Freely accessible university-hosted copy. |
+| Bruce G. Buchanan, Georgia L. Sutherland, and Edward A. Feigenbaum (1969), **Heuristic DENDRAL: A Program for Generating Explanatory Hypotheses in Organic Chemistry**, in *Machine Intelligence 4*, 209–254 | A historical chemical example of constrained hypothesis generation. The [Stanford collection record](https://cs.stanford.edu/people/eaf/wordpress/publications/) identifies the chapter and report HPP-68-3; this is a bibliographic record, not a direct full-text link. |
+| David E. Rumelhart, Geoffrey E. Hinton, and Ronald J. Williams (1986), [**Learning representations by back-propagating errors**](https://www.nature.com/articles/323533a0), *Nature* 323, 533–536 | Abstract and network description: what is learned in intermediate layers? Revisit the mathematics after the neural-network lesson. Full text may require institutional access. |
+| Alex Krizhevsky, Ilya Sutskever, and Geoffrey E. Hinton (2012), [**ImageNet Classification with Deep Convolutional Neural Networks**](https://proceedings.neurips.cc/paper/2012/hash/c399862d3b9d6b76c8436e924a68c45b-Abstract.html), *Advances in Neural Information Processing Systems* 25 | Abstract and experimental setting: distinguish the benchmark task from general claims about intelligence. Proceedings page includes the paper. |
+| Ashish Vaswani et al. (2017), [**Attention Is All You Need**](https://arxiv.org/abs/1706.03762) | Abstract and architecture overview as later background for transformers; the equations are not introductory preparation. Free preprint. |
+| John Jumper et al. (2021), [**Highly accurate protein structure prediction with AlphaFold**](https://www.nature.com/articles/s41586-021-03819-2), *Nature* 596, 583–589; [free full text in PMC](https://pmc.ncbi.nlm.nih.gov/articles/PMC8371605/) | Abstract and CASP evaluation: identify the predicted object and what was assessed. Use that scope when discussing other biological claims. |
+
+John McCarthy's freely available [**What is Artificial Intelligence?**](https://www-formal.stanford.edu/jmc/whatisai/node1.html) is an additional primary source for the breadth of the ambition. Read the opening questions and compare its terminology with the concrete task descriptions used in this course.

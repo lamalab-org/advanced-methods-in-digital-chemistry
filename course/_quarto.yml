@@ -1,0 +1,49 @@
+project:
+  type: book
+  output-dir: _book
+  render:
+    - index.qmd
+    - setup.qmd
+    - glossary.qmd
+    - reading.qmd
+    - lectures/*.qmd
+  resources:
+    - activities/**
+    - notebooks/**
+    - downloads/**
+    - data/**
+    - "!instructor/"
+    - "!_instructor/"
+    - "!.venv/"
+    - "!.venv/**"
+
+book:
+  title: "Advanced Methods in Digital Chemistry"
+  subtitle: "Scientific questions, learning from data, and chemical discovery"
+  author: "Kevin Maik Jablonka"
+  site-url: https://lamalab-org.github.io/advanced-methods-in-digital-chemistry/
+  repo-url: https://github.com/lamalab-org/advanced-methods-in-digital-chemistry
+  chapters:
+    - index.qmd
+    - setup.qmd
+    - lectures/01-ai-and-science.qmd
+    - lectures/02-learning-from-data.qmd
+    - lectures/03-mof-uptake.qmd
+  appendices:
+    - glossary.qmd
+    - reading.qmd
+
+format:
+  html:
+    theme: cosmo
+    css: assets/course.css
+    toc: true
+    toc-depth: 2
+    number-sections: false
+    code-copy: true
+    link-external-newwindow: true
+    html-math-method: mathjax
+    lang: en
+
+execute:
+  error: false

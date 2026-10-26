@@ -1,0 +1,274 @@
+---
+title: "What does it mean to learn from data?"
+---
+
+::: {.callout-note title="Learning goals"}
+Write down inputs, targets, and a model for a calibration experiment. Calculate a prediction and an error by hand. Explain why training error is insufficient and why test error remains an empirical estimate. Use validation observations to compare model choices, and explain what an extrapolation plot cannot establish.
+:::
+
+## Before class
+
+Complete the [setup notebook](../notebooks/00-getting-started.ipynb), or bring the first cell that did not work. Spend at most 25 minutes on preparation. Try calculating the three predictions in the opening example below before using Python or an LLM.
+
+## A familiar experiment
+
+We prepare a series of concentrations and measure absorbance. Under suitable conditions in a dilute solution, we expect a roughly linear relationship. Drawing a line seems a reasonable place to start. But where should it go, and how will we decide whether one line is better than another?
+
+We will work through those decisions using a small generated dataset. Write concentration as $c$, in mmol L$^{-1}$, and dimensionless absorbance as $A$. Our line has a slope $m$ and an intercept $b$, so we allow both its steepness and its offset to change. These adjustable numbers are the model's **[parameters](../glossary.qmd#parameter)**.
+
+::: {.concept}
+**Observations and a model**
+
+$$
+\mathcal D=\{(c_i,A_i)\}_{i=1}^{n},\qquad
+\hat A_i=f_\theta(c_i)=mc_i+b,\qquad\theta=(m,b).
+$$
+
+| $c$ / mmol L$^{-1}$ | Observed $A$ | Prediction with $m=0.8$ L mmol$^{-1}$, $b=0.15$ |
+|---|---|---|
+| 0.00 | 0.16 | 0.15 |
+| 0.50 | 0.52 | 0.55 |
+| 1.00 | 0.98 | 0.95 |
+
+Generated calibration observations.
+:::
+
+Once we have chosen $m$ and $b$, the line turns any concentration into a predicted absorbance. Learning will give us a way to choose those two numbers from the observations. Notice the decision we have already made: we are asking the data to help us choose a line. We could have offered them a different family of curves.
+
+Before fitting, decide the intended use. Are we predicting another measurement in this concentration range, using a different instrument, or predicting at a higher concentration? That decision determines what an informative evaluation would look like.
+
+::: {.concept}
+**Three questions about learning**
+
+| Question | In the calibration example |
+|---|---|
+| **Representation:** which rules can the model express? | A line assumes a particular relationship between concentration and absorbance. |
+| **Optimisation:** how do we fit a rule? | Adjust slope and intercept using the observed discrepancies. |
+| **Generalisation:** how does it perform on new cases? | Check measurements relevant to the intended use. |
+:::
+
+These questions interact: changing the model family changes both fitting and prediction. We will return to them for [molecular descriptors](../glossary.qmd#descriptor) and neural networks. [Hardt and Recht, *Supervised learning*](https://mlstory.org/supervised.html)
+
+## Turning a discrepancy into an objective
+
+The line misses some measurements by predicting too much absorbance and others by predicting too little. We could move it, but we first need to decide what would count as an improvement. Reducing one discrepancy may enlarge another. The observations give us discrepancies; we still have to choose how to combine them.
+
+::: {.concept}
+**Residuals and squared error**
+
+$$
+e_i=\hat A_i-A_i,\qquad
+\widehat R_{\mathrm{train}}(m,b)
+=\frac{1}{n}\sum_{i\in\mathrm{train}}(mc_i+b-A_i)^2.
+$$
+
+For the table above:
+
+$$
+e=(-0.01,\;0.03,\;-0.03),\qquad
+\mathrm{MSE}=\frac{0.0001+0.0009+0.0009}{3}
+\approx 0.000633.
+$$
+:::
+
+Squaring makes positive and negative residuals contribute positively and gives larger residuals more weight. [Mean absolute error](../glossary.qmd#error-measures), which averages their magnitudes, is another choice. We should choose an objective and [evaluation metric](../glossary.qmd#metric) with the scientific purpose in mind. We also need a [baseline](../glossary.qmd#baseline): for example, a model that always predicts the mean training absorbance. The measurement scale and the cost of a mistake help us judge whether an error is acceptable.
+
+**Discuss:** Why would averaging the signed residuals be a poor measure of predictive accuracy?
+
+<details>
+<summary>Suggested answer</summary>
+
+Positive and negative mistakes cancel. Predictions can be badly wrong in opposite directions while the average signed residual is near zero. Signed residuals remain useful for diagnosing systematic bias, but they do not measure the overall magnitude of errors.
+
+</details>
+
+### Which model is better?
+
+Suppose two fitted models give the following absolute errors on five validation measurements, in dimensionless absorbance units.
+
+| Model | Absolute errors |
+|---|---|
+| A | 0, 0, 0, 0, 0.050 |
+| B | 0.015, 0.015, 0.015, 0.015, 0.015 |
+
+Model A is exact on four measurements and misses the fifth. Model B misses every measurement by a smaller amount. Before calculating a score, decide which pattern you would prefer for a stated use of the calibration.
+
+<details>
+<summary>Compare the two scores</summary>
+
+Mean absolute error favours A: $0.010$ versus $0.015$. Root mean squared error favours B: $\sqrt{0.050^2/5}\approx0.0224$ versus $0.015$. RMSE and MSE give the same ranking here; the square root returns the score to the scale of the measured quantity.
+
+We used the same predictions and managed to declare two different winners. The choice of score decided how much the single large error mattered. Before calling either model better, we have to decide which mistakes we care about in the intended experiment.
+
+</details>
+
+The **training loss** guides parameter fitting. An **evaluation metric** summarises performance on specified observations. The **scientific purpose** tells us why that performance matters. These can be related without being identical. A useful calibration may also need a stated operating range, manageable measurement costs, and an acceptable risk of a large error. We will return to these choices when [comparing models on benchmarks](../reading.qmd#benchmark-purpose).
+
+## What do we really want to minimise? {#empirical-error-and-population-risk}
+
+Suppose we have finished fitting our calibration line. We put its slope and intercept aside and measure a fresh set of solutions. We can now calculate an error on observations that played no part in fitting or choosing the line. That is useful evidence. But we have still measured a finite collection of solutions. Calling it a test set does not make it the whole of our future laboratory work.
+
+::: {.concept}
+**Two empirical errors and a population quantity**
+
+$$
+\widehat R_{\mathrm{train}}(\theta)
+=\frac{1}{n_{\mathrm{train}}}\sum_{i=1}^{n_{\mathrm{train}}}
+L(f_\theta(x_i^{\mathrm{train}}),y_i^{\mathrm{train}})
+$$
+
+$$
+\widehat R_{\mathrm{test}}(\theta)
+=\frac{1}{n_{\mathrm{test}}}\sum_{i=1}^{n_{\mathrm{test}}}
+L(f_\theta(x_i^{\mathrm{test}}),y_i^{\mathrm{test}})
+$$
+
+$$
+R_{\mathrm{use}}(\theta)
+=\mathbb E_{(x,y)\sim P_{\mathrm{use}}}
+\left[L(f_\theta(x),y)\right].
+$$
+
+The first two quantities average losses over recorded observations. Both are **[empirical errors](../glossary.qmd#empirical-error)**. The third is the **[population risk](../glossary.qmd#population-risk)** for the intended use. The hats mark estimates; the test-set estimate keeps its hat.
+:::
+
+The expectation $\mathbb E$ describes an average over cases drawn from the intended distribution $P_{\mathrm{use}}$. We usually cannot calculate it exactly. For a fixed model, the test average is an unbiased estimate of this risk if the test observations are sampled independently from $P_{\mathrm{use}}$, independently of model development, and the expected loss is finite. “Unbiased” concerns the average over repeated test samples; a particular test score can lie above or below the population risk. [Hardt and Recht: sample versus population and empirical risk](https://mlstory.org/supervised.html#sample-versus-population)
+
+### The same line, two test samples
+
+Keep the line fixed. Suppose two independently collected groups of three solutions give these residuals, in dimensionless absorbance units:
+
+| Test sample | Residuals: prediction minus observation | Mean squared error |
+|---|---|---|
+| A | $0.01,\;-0.01,\;0.02$ | $0.0002$ |
+| B | $0.02,\;-0.02,\;0.03$ | $0.0005667$ (rounded) |
+
+The model has not changed between rows. The observations have. We can calculate each sample's score precisely while remaining uncertain about the error on future solutions. A smaller test error for one model than another is likewise an observed comparison whose uncertainty matters.
+
+There is a second question. Suppose both groups were measured on our instrument, but the model will be used in another laboratory. Collecting more solutions on our instrument can make the estimate more precise for that setting while leaving the new laboratory unrepresented. **Sampling uncertainty** and a **[change in distribution](../glossary.qmd#distribution-shift)** are different problems. More test rows do not automatically resolve both, especially when rows share molecules, batches, or instruments.
+
+**Discuss:** What changed between A and B? What would we need to know about the sampling before using either score to describe performance in another laboratory?
+
+## How do the parameters change?
+
+Changing the intercept shifts every prediction by the same amount. Changing the slope changes the predictions in proportion to concentration. A fitting procedure chooses these changes to reduce the training objective.
+
+::: {.concept}
+**One optimisation step**
+
+$$
+\frac{\partial\widehat R}{\partial m}
+=\frac{2}{n}\sum_i c_i(mc_i+b-A_i),\qquad
+\frac{\partial\widehat R}{\partial b}
+=\frac{2}{n}\sum_i(mc_i+b-A_i).
+$$
+
+$$
+\theta_{t+1}=\theta_t-\eta\nabla_\theta\widehat R(\theta_t).
+$$
+
+$\eta$ is a step size, also called the **learning rate**. The [gradient](../glossary.qmd#optimisation) describes how the training objective changes when the parameters change.
+:::
+
+For the intercept, $e_i=mc_i+b-A_i$ changes by one unit for each unit change in $b$, so $\partial e_i^2/\partial b=2e_i$. Averaging these derivatives gives the expression above. For the slope, the additional factor is $c_i$. A sufficiently small step against the gradient reduces the objective locally. Gradient steps are one way to fit a model; linear least squares also has direct numerical methods. The same idea of following a gradient will recur in neural-network training.
+
+Keep **optimisation** and **generalisation** separate. Finding parameters with low training loss solves the fitting problem. Whether those parameters give useful predictions elsewhere is an additional question.
+
+## Why a more flexible curve can mislead
+
+A polynomial model adds terms:
+
+$$
+f_\theta(c)=b+w_1c+w_2c^2+\cdots+w_dc^d.
+$$
+
+The coefficients $b,w_1,\ldots,w_d$ are fitted parameters. The degree $d$ determines which family of curves we fit; it is a **[hyperparameter](../glossary.qmd#hyperparameter)**. We can use validation observations to help choose it.
+
+For [unregularised least squares](../glossary.qmd#regularisation) on the same data, increasing the polynomial degree enlarges a nested model family. The best possible training error cannot increase, up to numerical effects. Performance on new measurements has no such guarantee. The curve may fit measurement noise or behave unpredictably where there are few observations.
+
+The extra flexibility lets the curve follow more of what happened in these particular measurements. Some of that detail may be noise. We call it **overfitting** when fitting such detail improves the fit to the training observations at the expense of prediction on new ones. In our polynomial example, we can watch that happen by changing the degree and comparing two sets of observations.
+
+### Predict, then explore
+
+1. Start with degree 1. Predict what will happen to training error as degree increases.
+2. Change the degree and inspect the curve. Explain one surprising change.
+3. Reveal the validation observations. Use them to compare model choices.
+4. Show the region outside the observed range. Describe what is known and what is only assumed there.
+
+```{=html}
+<iframe class="activity" src="../activities/calibration.html" title="Interactive synthetic calibration: model complexity and validation"></iframe>
+```
+
+[Open the activity on its own](../activities/calibration.html). It runs in the browser without Python and uses generated observations. Beyond their range, the equation continues to draw a curve. The absence of points there is worth keeping in view: what could we check it against?
+
+The extra points are **[validation observations](../glossary.qmd#data-splits)**, because we use them to guide model choices while exploring. They are not a final test set. A final assessment needs an independently reserved evaluation after the modelling choices are settled. Its error will still be an empirical estimate, with uncertainty and a scope set by the evaluation data.
+
+## A first trustworthy workflow
+
+::: {.concept}
+**Separate the decisions**
+
+1. Specify the target, units, and intended use.
+2. Reserve evaluation data using a split appropriate to that use.
+3. Fit [preprocessing](../glossary.qmd#preprocessing) and model parameters using training data.
+4. Use validation data for model choices, including hyperparameters.
+5. Estimate the chosen procedure's error using the reserved test data.
+6. Report the metric, sample size, sampling and split procedure, and uncertainty appropriate to that design. Inspect errors and explain which future cases the estimate can describe.
+:::
+
+Suppose our inputs include molar mass and a count of particular atoms. We might first rescale their values to comparable numerical ranges. A **scaler** performs that transformation. If some entries are missing, an **imputer** fills them using a specified rule. These are examples of preprocessing: transformations applied before the model receives its inputs.
+
+When a transformation learns from data, fit it on the training observations and apply the same fitted transformation to validation observations. A **pipeline** connects these steps to the model so that they can be fitted and applied together. [Cross-validation](../glossary.qmd#cross-validation) repeats fitting and validation with different portions of the data. It does not automatically prevent [data leakage](../glossary.qmd#leakage), where evaluation information enters model development, or make related observations independent. [scikit-learn's examples of common pitfalls](https://scikit-learn.org/stable/common_pitfalls.html)
+
+### What does an interpretable slope establish?
+
+In $\hat A=mc+b$, changing the concentration input by $\Delta c$ changes the predicted absorbance by $m\Delta c$. We can follow the calculation completely. Now suppose we want to interpret $m$ as the response of the chemical system when we change its concentration. We have moved from changing a number in an equation to changing a solution in the laboratory. We need to know which measurement conditions were controlled and whether the linear relationship remains appropriate in that regime. The fitted slope carries none of that experimental history on its own.
+
+**Discuss:** If concentration and instrument settings varied together in the recorded measurements, which part of the fitted slope could be attributed to concentration? What comparison would help distinguish the possibilities? Connect your answer to the [different kinds of claims in lecture 1](01-ai-and-science.qmd#what-changes-when-the-task-is-science).
+
+In the next meeting, we will ask what constitutes a sample in a molecular dataset and how closely related molecules change the meaning of a split. [Jablonka et al. (2023), *An Ecosystem for Digital Reticular Chemistry*](https://doi.org/10.1021/acscentsci.2c01177), provides a chemical case study of data leakage that makes this question concrete.
+
+## Python practical
+
+Open the [calibration notebook](../notebooks/02-calibration-lab.ipynb). It reproduces the activity with a small amount of NumPy and Matplotlib code. The prepared output is available even if package setup is still being resolved.
+
+- Run the notebook from the beginning and identify the cells that create data, fit parameters, and evaluate predictions.
+- Change only the polynomial degree first. Predict the effect before executing.
+- Compare the fitted model with a constant baseline estimated from the training data.
+- Change the measurement-noise setting and rerun every cell. Explain why this is a simulation experiment rather than a new experimental finding.
+- Write three sentences: what you changed, what you observed, and which assumption would matter in a real calibration experiment.
+
+## LLM exercise: debug a metric
+
+Suppose someone proposes this function for measuring prediction error:
+
+```python
+def error_score(prediction, observation):
+    return ((prediction - observation).mean()) ** 2
+```
+
+Before asking an LLM, use residuals $+1$ and $-1$ to predict the returned value. Ask the assistant to explain the problem and propose a minimal correction. Then run the counterexample yourself. A good explanation is useful, but the calculation provides an independent check.
+
+**Record:** the request, the proposed change, your check, and a sentence explaining why the corrected operation measures a different quantity. A supplied version of the same task appears in the notebook, so no LLM account is needed to participate.
+
+## Exit questions
+
+1. Which quantities were learned in the linear calibration model?
+2. Why can the degree-9 model have lower training error and worse validation performance?
+3. Why are the points used to choose the degree called validation data?
+4. We keep the model fixed and collect a new test sample. Why might the test error change? Which quantity are both test scores trying to estimate?
+5. What additional measurements would support a predictive claim about higher concentrations? What else would be needed to interpret the fitted slope as a physical response to changing concentration?
+
+## Suggested reading and references {#reading-and-references}
+
+These are optional ways to revisit the ideas or get help with the practical.
+
+**A starting point, 15–20 minutes:** Hardt and Recht (2022), [**Sample versus population**](https://mlstory.org/supervised.html#sample-versus-population) and the opening **Supervised learning** section of Chapter 3, before the perceptron algorithm. How do sample and population relate to a calibration experiment? Why is an untouched test set still only a sample, and what does its error estimate?
+
+**Help with the practical:** **Inconsistent preprocessing** and **Data leakage** in scikit-learn's [**Common pitfalls and recommended practices**](https://scikit-learn.org/stable/common_pitfalls.html) offer incorrect/correct examples. If you follow one, ask which observations may determine a fitted transformation. The code can be read without installing another package for this session.
+
+**For a deeper question:** Hardt and Recht, Chapter 6, [**Generalization gap** and **Effects of model complexity**](https://mlstory.org/generalization.html), helps place our polynomial example in context. Which claims about larger models are supported by this one demonstration?
+
+The [reading guide](../reading.qmd#lecture-2) records the scope and access of these optional follow-ups. Its [chemical benchmark case study](../reading.qmd#chemical-evaluation) provides a bridge to the next meeting.
+
+**For a chemistry-focused reference:** Jablonka, Ongari, Moosavi, and Smit (2020), [*Big-Data Science in Porous Materials: Materials Genomics and Machine Learning*](https://doi.org/10.1021/acs.chemrev.0c00004). The opening of section 7 connects evaluation and model comparison to chemical modelling; the [reading route](../reading.qmd#lecture-2) links open full text. Use it as a reference when a particular workflow question arises.
