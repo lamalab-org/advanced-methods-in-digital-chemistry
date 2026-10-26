@@ -336,6 +336,8 @@ Ask an LLM to suggest another explanation for the observations and an experiment
 
 ## Suggested reading {#reading-and-references}
 
+For an introduction to the machine-learning methods we will encounter, I recommend our review [*Big-Data Science in Porous Materials*](../reading.qmd#introductory-reviews) (Jablonka, Ongari, Moosavi, and Smit, 2020) and Mehta et al.'s [*A high-bias, low-variance introduction to Machine Learning for physicists*](https://arxiv.org/abs/1803.08823) (2019). The first develops the ideas through materials chemistry; the second makes connections to statistical physics. Both give us material to return to as we begin building models.
+
 Hardt and Recht's [**Prediction and action**](https://mlstory.org/introduction.html#prediction-and-action), in *Patterns, Predictions, and Actions* (2022), develops a question that runs through this lecture: what changes when we act on a prediction? For the distinction between observation, model explanation, and intervention, I have collected [further references](../reading.qmd#claims-and-evidence), including their chapter on causality.
 
 Kate Crawford's [*Atlas of AI*](../reading.qmd#atlas-of-ai) examines the labour, resources, and institutions behind the systems we use. Carissa Véliz's [*Prophecy*](../reading.qmd#prophecy) considers the history and authority of prediction. Both matter to the perspective taken here: AI is made and used by people, and its consequences depend on their decisions.

@@ -2,7 +2,15 @@
 title: "Suggested reading"
 ---
 
-Several books have shaped how I think about the questions in this course. I have collected them here, together with papers behind the examples and references that may help when a calculation or a piece of code is unfamiliar. All of this reading is suggested. We will develop the ideas we need together in class.
+Several books and reviews have shaped how I think about the questions in this course. I have collected them here, together with papers behind the examples and references that may help when a calculation or a piece of code is unfamiliar. All of this reading is suggested. We will develop the ideas we need together in class.
+
+## Two introductions to machine learning {#introductory-reviews}
+
+For an introduction to machine learning in chemistry, I still recommend our review: Kevin Maik Jablonka, Daniele Ongari, Seyed Mohamad Moosavi, and Berend Smit (2020), [*Big-Data Science in Porous Materials: Materials Genomics and Machine Learning*](https://pubs.acs.org/doi/10.1021/acs.chemrev.0c00004), *Chemical Reviews* 120, 8066–8129. Porous materials give us concrete examples, but many of the questions arise elsewhere in chemistry. Which observations should a model learn from? How do we describe a material to a computer? How do we evaluate what it has learned? The first part develops these ideas; the second examines applications, including gas storage and separation, stability, and synthesis. The review is open access, with another [full-text copy at PubMed Central](https://pmc.ncbi.nlm.nih.gov/articles/PMC7453404/).
+
+I also recommend Pankaj Mehta et al. (2019), [*A high-bias, low-variance introduction to Machine Learning for physicists*](https://doi.org/10.1016/j.physrep.2019.03.001), *Physics Reports* 810, 1–124. Why can a model fit the observations we give it and still predict new ones poorly? The review develops the statistical ideas behind that question before moving to more elaborate methods, drawing connections to statistical physics along the way. Its [free arXiv version](https://arxiv.org/abs/1803.08823) first appeared in 2018 and was revised in 2019. The mathematics becomes more demanding as the discussion develops; we will work through the foundations together. The accompanying Python notebooks provide further examples, although they have not been tested in our course environment.
+
+Both are substantial reviews to return to as questions arise. There is no need to finish either before the first class.
 
 ## Books I recommend {#core-books}
 
@@ -82,7 +90,7 @@ Hardt and Recht's [**Sample versus population**](https://mlstory.org/supervised.
 
 The scikit-learn developers' [**Common pitfalls and recommended practices**](https://scikit-learn.org/stable/common_pitfalls.html) makes two practical problems concrete: **Inconsistent preprocessing** and **Data leakage**. Its paired code examples show how information can enter model development through a transformation applied before fitting the model itself.
 
-Kevin Maik Jablonka, Daniele Ongari, Seyed Mohamad Moosavi, and Berend Smit (2020), [*Big-Data Science in Porous Materials: Materials Genomics and Machine Learning*](https://doi.org/10.1021/acs.chemrev.0c00004), *Chemical Reviews* 120, 8066–8129, discusses these issues in materials chemistry. Section 7 covers model evaluation and comparison. The review is substantial, but the relevant section can be consulted on its own; [open full text](https://pmc.ncbi.nlm.nih.gov/articles/PMC7453404/) is available.
+The [two introductory reviews](#introductory-reviews) also develop these questions. Mehta et al. explain how fitting the available observations can fail to produce useful predictions for new ones. Section 7 of Jablonka, Ongari, Moosavi, and Smit's *Big-Data Science in Porous Materials* discusses model evaluation and comparison in materials chemistry.
 
 ## Learning from a collection of materials {#molsim}
 
