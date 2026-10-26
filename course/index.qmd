@@ -2,7 +2,7 @@
 
 How can we use computational models to learn something reliable about chemistry?
 
-We begin with a familiar act of modelling: choosing what to retain and what to leave out. A molecular drawing, a calibration curve, and a neural network each represent selected aspects of a system. There is no final map of chemistry that serves every purpose. More detail may help with one question and obscure another. Our task is to notice the omissions and decide whether we can live with them for the question at hand.
+We begin with a familiar act of modelling: choosing what to retain and what to leave out. A molecular drawing and a calibration curve each represent selected aspects of a system. There is no final map of chemistry that serves every purpose. More detail may help with one question and obscure another. Our task is to notice the omissions and decide whether we can live with them for the question at hand.
 
 Those choices are made by people. My starting point is that AI is a deeply human endeavour. People decide which questions are worth asking, what a system should learn, and what will count as a good answer. They produce the measurements, build the tools, and decide what to do with the results. When some of that work is automated, the choices have not gone away. Alongside learning to build and evaluate models, we will therefore examine the resources, labour, data choices, and institutional dependencies of our research tools.
 
@@ -10,7 +10,9 @@ We approach AI as an ambition: building systems with capabilities we associate w
 
 Many of the ambitions behind today's systems have a long history. DENDRAL was already tackling chemical structure elucidation in the 1960s; we will meet it alongside more recent applications below. We will also examine how scientific results enter commercial claims about models. A result can advance research and help sell a product at the same time. To distinguish an achievement from the promise surrounding it, we need to follow the claim back to what was actually tested. The [opening lecture](lectures/01-ai-and-science.qmd#science-and-model-claims) works through one such example.
 
-To make the modelling choices easier to discuss, we will use three contrasts: **correlative versus causal, Bayesian versus frequentist, and connectionist versus symbolic**. Are we finding patterns for prediction or asking what happens when we intervene? What do we mean by probability? How is knowledge represented and used? These questions concern different choices, and a system can combine approaches. Even after choosing an approach, we still have to decide what the model should learn. Calling a molecule “soluble,” for example, hides a decision about how much solubility is enough. Throughout the course, we will ask whether the lenses fit the problem and whether we have gathered the evidence our conclusion needs.
+Suppose we have a table of reaction conditions and yields. We could use it to predict the yield of another reaction. We could also ask what would happen if we changed its temperature. Those questions sound similar, but they need different evidence. We will meet other choices too: how to express uncertainty when we have only a few measurements, and whether to supply chemical rules or learn relationships from examples. I think of these approaches as lenses. Each brings something into focus and leaves something else in the background. We will develop the distinctions through examples and ask which lens suits the question.
+
+Even then, further choices remain. Calling a molecule “soluble,” for example, hides a decision about how much solubility is enough. We need to examine those decisions as carefully as the choice of method.
 
 This course follows our opening question through what might seem like a collection of buzzwords: statistical learning, molecular representations, deep learning, molecular simulation, generative models, and experimental design. We will make these terms concrete by building models, inspecting their failures, and asking what their results support scientifically.
 
@@ -30,8 +32,8 @@ Several books have shaped how I think about these questions. I particularly reco
 
 - [AI-assistant and Python setup](setup.qmd): Jan and Blablador first, Ubuntu on WSL 2 for Windows users, then computing basics, uv, and JupyterLab, with a downloadable introductory kit.
 - [What do we mean by AI for science?](lectures/01-ai-and-science.qmd): AI as an ambition, concrete methods, a selective history, and scientific evidence.
-- [What does it mean to learn from data?](lectures/02-learning-from-data.qmd): a calibration experiment, loss, fitting, generalisation, and a first interactive exercise.
-- [What can a model tell us about gas uptake?](lectures/03-mof-uptake.qmd): an adapted MolSim practical with MOF descriptors, baselines, and empirical error estimates.
+- [What does it mean to learn from data?](lectures/02-learning-from-data.qmd): a calibration experiment, choosing how to measure an error, fitting curves, and predicting new measurements.
+- [What can a model tell us about gas uptake?](lectures/03-mof-uptake.qmd): describing porous materials to a computer, comparing predictions, and examining the uncertainty in an error estimate.
 - [Glossary](glossary.qmd): descriptors, features, parameters, kernels, and other terms used in the notes.
 - [Suggested reading](reading.qmd): books I recommend and the sources behind the examples.
 
@@ -39,7 +41,7 @@ Several books have shaped how I think about these questions. I particularly reco
 
 “AI in chemistry” can mean proposing a molecular structure, choosing an experiment, or checking the steps of a theoretical derivation. These involve quite different ways of working with knowledge. A few examples make the breadth of the term apparent.
 
-First, a few examples of what researchers have actually done. The tabs below return to them through the three contrasts. Some distinctions matter more for one example than another; a proof checker, for instance, need not attach a probability to the derivation it checks.
+First, a few examples of what researchers have actually done. The tabs below ask three questions of them: are we predicting an outcome or studying the effect of a change, how do we describe uncertainty, and how does knowledge enter the system? Each tab develops its distinction before introducing the names. Some questions matter more for one example than another; checking a mathematical derivation, for instance, need not involve a probability.
 
 | Example | What was the scientific task? |
 |---|---|
@@ -55,9 +57,11 @@ First, a few examples of what researchers have actually done. The tabs below ret
 
 ::: {.panel-tabset}
 
-### Correlative / causal
+### Predicting and intervening
 
-Suppose a model finds a reliable association between molecular structure and an experimental outcome. We can use it to predict another outcome. To ask what would happen if we changed something in the experiment, we need to consider how that change relates to the observations. This is the distinction between correlative prediction and causal modelling. Explaining the fitted model's calculation leaves the intervention question open.
+Suppose the difficult reactions in a laboratory are usually heated more strongly, yet still give lower yields. A model might learn that higher recorded temperatures go along with lower yields. That pattern could help predict another result from the same laboratory. It does not tell us whether turning down the heater would improve the reaction: the chemists chose those temperatures for a reason.
+
+Using an association to predict is **correlative modelling**. Asking what would happen under a deliberate change, an **intervention**, is a **causal** question. To answer it, we need evidence or justified assumptions that separate the effect of heating from the reasons it was chosen. Explaining the fitted model's calculation leaves that question open.
 
 | Example | What becomes visible through this distinction? |
 |---|---|
@@ -69,21 +73,27 @@ Suppose a model finds a reliable association between molecular structure and an 
 
 The [reaction example](lectures/01-ai-and-science.qmd#what-changes-when-the-task-is-science) develops the distinction slowly. A causal model can also make predictions; the question here is what supports an intervention claim.
 
-### Bayesian / frequentist
+### What does a probability describe?
 
-Suppose we attach a probability to a result. What does that number describe? Bayesian inference represents uncertainty through a probability model, including a prior, and updates it with observations. Frequentist inference studies the behaviour of procedures under repeated sampling. Both require modelling assumptions. The [probability reading](reading.qmd#probability-lenses) gives a short introduction.
+Suppose a synthesis succeeds in seven of ten attempts under the same protocol. Seven out of ten describes what happened. How uncertain are we about its success rate in further attempts?
+
+One approach assigns probabilities to possible values of that unknown success rate. We specify which values seem plausible before these observations and update those probabilities using the results and a model of how the attempts produce them. This is **Bayesian inference**; the initial probability distribution is called a **prior**.
+
+Another approach treats the success rate as fixed but unknown and asks how our estimation method would behave if we repeated the ten-attempt study many times. How much would its estimates vary? How often would an interval produced by the method contain the unknown rate? This is **frequentist inference**. Both approaches need assumptions about the experiments, including whether the attempts are comparable. The [Stanford notes on Bayesian analysis](https://web.stanford.edu/class/stats200/Lecture20.pdf) and [confidence intervals](https://web.stanford.edu/class/stats200/Lecture18.pdf) develop the distinction; they are also listed in the [suggested reading](reading.qmd#probability-lenses).
 
 | Example | What would we ask about probability and uncertainty? |
 |---|---|
-| A mobile robotic chemist | The study uses a Bayesian search algorithm. What assumptions shape its uncertainty and its next experimental choice? We could separately ask how often the whole procedure succeeds over repeated runs. The inferential approach and the evaluation question need not belong to one exclusive camp. |
-| ANI-1 and AlphaFold2 | Calling a model a neural network does not tell us whether its uncertainty is treated in a Bayesian or frequentist way. For any reported confidence or error measure, we need to inspect how it was constructed and what it is intended to mean. |
+| A mobile robotic chemist | The study uses predictions and uncertainty to help choose the next experiment. What assumptions shape that uncertainty? How often would the whole procedure succeed over repeated runs? We can ask both questions about the same system. |
+| ANI-1 and AlphaFold2 | Knowing that a model learns from examples does not tell us how it describes uncertainty. For any reported confidence or error measure, we need to inspect how it was constructed and what it is intended to mean. |
 | Lean in chemical physics | Checking a derivation is a logical task. A probability interpretation becomes relevant if we also model uncertainty in measurements or premises; it is not supplied by the proof checker itself. |
 
 We will return to this lens when uncertainty becomes useful for deciding what to measure next. For now, “the model is confident” is an invitation to ask how that confidence was defined.
 
-### Connectionist / symbolic
+### Rules and learned patterns
 
-How does useful knowledge enter the system? A symbolic approach works with explicit representations, rules, and operations. A connectionist approach learns distributed representations in networks of interacting units. We can also combine them, as several of these examples do.
+Suppose we want to identify a molecule from a spectrum. We could give a program chemical rules and ask it to rule out structures that violate them. Here the knowledge enters through statements we have written down: a **symbolic** approach.
+
+We could also give a model many spectra with known structures and let it learn relationships useful for identifying another molecule. One way to do this uses a **neural network**, a collection of connected calculations with adjustable numerical weights. Learning changes those weights. This is a **connectionist** approach. Learning from examples also includes methods that do not use neural networks. We can combine learned patterns with explicit rules, as several of the studies below do.
 
 | Example | Where does the useful knowledge or capability come from? |
 |---|---|
@@ -93,7 +103,7 @@ How does useful knowledge enter the system? A symbolic approach works with expli
 | Retrosynthesis | Neural networks guide a tree search over possible reaction steps. Learned preferences and symbolic search work together. |
 | Antibacterial screening | A neural model learns from molecular structures and measured growth inhibition; researchers select and test candidates. |
 | Molecular generation | An [encoder and decoder](glossary.qmd#generative-model) learn a continuous molecular representation; optimisation searches that space for candidates with desired scores. |
-| A mobile robotic chemist | Bayesian optimisation selects experiments; robotic equipment executes them. Automation alone tells us little about whether a system uses neural representations or explicit rules. We need to inspect its components. |
+| A mobile robotic chemist | A model uses previous results and uncertainty to help choose the next experiment; robotic equipment executes it. Automating the physical work leaves open how the model represents knowledge. |
 | AlphaFold2 | Neural networks combine learned structural patterns with sequence, evolutionary, and structural information. |
 | ChemCrow | An LLM selects and calls specialised tools, then uses their outputs to continue the task. The tools supply additional capabilities and information. |
 

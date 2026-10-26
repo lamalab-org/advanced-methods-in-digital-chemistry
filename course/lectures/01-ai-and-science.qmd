@@ -31,7 +31,7 @@ Chemists make this kind of decision whenever they draw a molecule. We keep atoms
 
 Suppose we measure the molecule in two solvents and obtain two different values. A predictor that receives only the molecular drawing sees the same input twice. How is it supposed to know which experiment we mean? We have to supply the conditions, restrict the question to a particular setting, or accept that the prediction combines cases we have chosen to treat as equivalent.
 
-The omission has become a decision about the scientific question. We made that decision before choosing a [neural network](../glossary.qmd#neural-network) or fitting a single [parameter](../glossary.qmd#parameter).
+The omission has become a decision about the scientific question. We made that decision before choosing a learning method or adjusting a single number in it.
 
 This is one reason I see AI as a deeply human endeavour. Someone has decided which question matters, which observations to collect, and which differences the model can ignore. Someone will also decide whether its answer is good enough to use. Those choices shape the mathematics we will do in this course.
 
@@ -47,7 +47,7 @@ Of course, we do not always make these decisions consciously. Sometimes someone 
 
 Suppose we describe each molecule by its molar mass and the number of hydrogen-bond donors. These numbers are **[molecular descriptors](../glossary.qmd#descriptor)**: numerical descriptions of selected aspects of a molecule. Two different structures can have the same values for both. We have made another choice about which differences to preserve.
 
-This question will return when we choose descriptors, construct [molecular graphs](../glossary.qmd#molecular-graph), and reduce a collection of prediction errors to one score. At each step, we decide which differences the model or measurement should preserve.
+This question will return when we choose descriptors, describe molecules as atoms connected by bonds ([molecular graphs](../glossary.qmd#molecular-graph)), and reduce a collection of prediction errors to one score. At each step, we decide which differences the model or measurement should preserve.
 
 There is another step between preserving information and making use of it. A representation can contain atomic coordinates without a particular model learning the relationships between them. We will return to that question through [Alampara, Miret, and Jablonka's study of text representations of materials](../reading.qmd#representation-and-model).
 
@@ -84,7 +84,9 @@ Take the task of identifying a molecule from a spectrum. We could begin by writi
 
 We could also collect spectra whose structures are already known and use them to fit a model. Now some of the relationship between spectrum and structure would enter through examples. We would still have decisions to make about which spectra to collect, how to represent them, and what the model should learn. Learning moves some of the work; it does not make those decisions disappear.
 
-We could combine the approaches, using a learned model to guide a search through chemically allowed candidates. The same scientific task has led us to several ways of organising knowledge. The following names help us talk about those choices.
+We could combine the approaches, using a learned model to guide a search through chemically allowed candidates. The same scientific task has led us to several ways of organising knowledge.
+
+Working with explicit symbols and rules is called a **symbolic** approach. Developing models from data or experience is **machine learning**. One family of learning methods uses **[neural networks](../glossary.qmd#neural-network)**: connected calculations with adjustable numerical weights. Training changes those weights so that the network's outputs better match the chosen objective. These are **connectionist** methods. **Deep learning** uses multiple layers of such calculations to learn successive representations of the inputs. The names describe how the system works more specifically than the word AI does.
 
 ::: {.concept}
 **Approaches and their sources of knowledge**
@@ -97,27 +99,27 @@ We could combine the approaches, using a learned model to guide a search through
 | Combined system | Couple learned components to rules, search, or tools | Score proposed synthesis steps with a model and search for routes |
 :::
 
-**Machine learning** develops models using data or experience. **Connectionist approaches** use networks of interacting units. **Deep learning** is a family of machine-learning methods using multiple layers of learned representations. These terms describe methods more specifically than AI does. Learning from data is one route towards the broader ambition; explicit reasoning and search provide other routes.
+Learning from data is one way of pursuing the broader ambition; explicit reasoning and search offer others.
 
 The traditions overlap. Statistics also studies inference and experimental design, and a search procedure can use probabilities learned from data. We will encounter these combinations repeatedly. Calling a system a neural network tells us something about one part of it; we still have to understand how that part fits into the scientific work.
 
 ## Choosing a lens {#choosing-a-lens}
 
-Suppose we want to study solubility. We could look for patterns that help predict another measurement, or ask what would happen if we changed the solvent. We could express uncertainty using a probability model updated by observations, or examine how an estimation procedure behaves over repeated experiments. We could write down explicit chemical rules, or learn representations from examples. Saying that we will use AI has settled none of these questions.
+Suppose we want to study solubility. We could look for patterns that help predict another measurement, or ask what would happen if we changed the solvent. We would also need to decide how much confidence to place in an answer based on only a few measurements. And, as in the spectrum example, we could supply explicit chemical rules or learn relationships from examples. Saying that we will use AI has settled none of these questions.
 
-I find it useful to think of these choices as lenses. Each brings some aspects into focus and leaves others in the background. Three contrasts will accompany us through the course:
+I find it useful to think of these choices as lenses. Each brings some aspects into focus and leaves others in the background. For now, we can express the choices as questions:
 
-| Contrast | What are we choosing? |
+| Question | Why does the choice matter? |
 |---|---|
-| **Correlative versus causal** | Are we using associations to predict, or identifying what would happen under an intervention? What evidence would justify the step from one to the other? |
-| **Bayesian versus frequentist** | How do we represent uncertainty and justify an inference? Do we update a probability distribution using a prior and observations, or assess a procedure through its behaviour under repeated sampling? |
-| **Connectionist versus symbolic** | How do we represent and use knowledge: through learned, distributed representations in a network, through explicit symbols and rules, or through a combination? |
+| Are we predicting a measurement or asking what would happen if we changed the experiment? | A pattern in recorded results can help with prediction without telling us what caused it. |
+| What do we mean when we say an answer is likely? | We have to say what is uncertain and which assumptions support the probability we report. |
+| Do we supply rules or learn relationships from examples? | The useful knowledge enters in different ways, with different opportunities for omissions and mistakes. |
 
-These contrasts concern different decisions. A neural network can be used in a Bayesian model. A symbolic model can express causal assumptions. A causal model can make predictions. We need to look at the role of each component rather than place an entire system in one box. The [examples on the course homepage](../index.qmd#examples-through-lenses) let us practise that comparison.
+These questions concern different decisions. A program can combine rules with learned relationships, and either kind of system can be used to make predictions. We need to look at the role of each component rather than place an entire system in one box. The [examples on the course homepage](../index.qmd#examples-through-lenses) develop these distinctions through chemical applications.
 
-We will begin with the correlative/causal and connectionist/symbolic distinctions. The probability lens will become more concrete when we need to interpret uncertainty and choose experiments; the [suggested reading](../reading.qmd#probability-lenses) offers an introduction. Both statistical traditions require assumptions and human choices.
+The reaction example later in this lecture will develop the difference between predicting and deliberately changing an experiment. The history gives us examples of rules and learning. We will work through the probability question when we study uncertainty and choose experiments; the [homepage example](../index.qmd#examples-through-lenses) gives a first explanation using repeated synthesis attempts.
 
-Within each lens, further choices follow. Suppose our experiment requires a dissolved concentration of 1 mmol/L. Measurements of 2 and 20 mmol/L can both become the label “soluble enough.” If a later experiment requires 5 mmol/L, that label has discarded the distinction we now need. The [worked example on the homepage](../index.qmd#choices-within-a-lens) compares keeping the values, keeping only labels, and keeping only an ordering. It then asks whether two tenfold errors should receive the same penalty. We can stay within correlative modelling and still make quite different decisions about what to retain and reward.
+Within each lens, further choices follow. Suppose our experiment requires a dissolved concentration of 1 mmol/L. Measurements of 2 and 20 mmol/L can both become the label “soluble enough.” If a later experiment requires 5 mmol/L, that label has discarded the distinction we now need. The [worked example on the homepage](../index.qmd#choices-within-a-lens) compares keeping the values, keeping only labels, and keeping only an ordering. It then asks whether two tenfold errors should receive the same penalty. We can keep the same aim of predicting from observed patterns and still make quite different decisions about what to retain and reward.
 
 This also helps distinguish improving a method from changing the question it can answer. Fitting an observational association more accurately does not, by itself, identify an intervention effect. We will see why in the reaction example. Explaining a model's calculation and explaining a chemical mechanism raise further questions about what a result establishes.
 
