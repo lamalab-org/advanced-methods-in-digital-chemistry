@@ -2,31 +2,31 @@
 
 How can we use computational models to learn something reliable about chemistry?
 
-My starting point is that AI is a deeply human endeavour. People decide which questions are worth asking, what a system should learn, and what will count as a good answer. They produce the measurements, build the tools, and decide what to do with the results. When some of that work is automated, the choices have not gone away.
+We begin with a familiar act of modelling: choosing what to retain and what to leave out. A molecular drawing, a calibration curve, and a neural network each represent selected aspects of a system. There is no final map of chemistry that serves every purpose. More detail may help with one question and obscure another. Our task is to notice the omissions and decide whether we can live with them for the question at hand.
 
-This course follows that question through what might seem like a collection of buzzwords: statistical learning, molecular representations, deep learning, molecular simulation, generative models, and experimental design. We will make these terms concrete by building models, inspecting their failures, and asking what their results support scientifically. Large language models are available as assistants throughout the course, and become an object of study later.
+Those choices are made by people. My starting point is that AI is a deeply human endeavour. People decide which questions are worth asking, what a system should learn, and what will count as a good answer. They produce the measurements, build the tools, and decide what to do with the results. When some of that work is automated, the choices have not gone away. Alongside learning to build and evaluate models, we will therefore examine the resources, labour, data choices, and institutional dependencies of our research tools.
+
+We approach AI as an ambition: building systems with capabilities we associate with intelligence. That ambition is too broad to specify a technical question. Throughout the course, we ask which task a system performs, how it works, under which conditions it will be used, and what evidence supports its claims.
+
+Many of the ambitions behind today's systems have a long history. DENDRAL was already tackling chemical structure elucidation in the 1960s; we will meet it alongside more recent applications below. We will also examine how scientific results enter commercial claims about models. A result can advance research and help sell a product at the same time. To distinguish an achievement from the promise surrounding it, we need to follow the claim back to what was actually tested. The [opening lecture](lectures/01-ai-and-science.qmd#science-and-model-claims) works through one such example.
+
+To make the modelling choices easier to discuss, we will use three contrasts: **correlative versus causal, Bayesian versus frequentist, and connectionist versus symbolic**. Are we finding patterns for prediction or asking what happens when we intervene? What do we mean by probability? How is knowledge represented and used? These questions concern different choices, and a system can combine approaches. Even after choosing an approach, we still have to decide what the model should learn. Calling a molecule “soluble,” for example, hides a decision about how much solubility is enough. Throughout the course, we will ask whether the lenses fit the problem and whether we have gathered the evidence our conclusion needs.
+
+This course follows our opening question through what might seem like a collection of buzzwords: statistical learning, molecular representations, deep learning, molecular simulation, generative models, and experimental design. We will make these terms concrete by building models, inspecting their failures, and asking what their results support scientifically.
+
+## How to use a lecture page
 
 ::: {.callout-note title="Starting point"}
 These notes are for master's students in chemistry. We develop the Python and machine-learning ideas alongside the chemical problems, starting with small examples. The first meeting introduces the course questions, helps you set up the tools, and includes a discussion of the timetable.
 :::
 
-We begin with a familiar act of modelling: choosing what to retain and what to leave out. A molecular drawing, a calibration curve, and a neural network each represent selected aspects of a system. There is no final map of chemistry that serves every purpose. More detail may help with one question and obscure another. Our task is to notice the omissions and decide whether we can live with them for the question at hand.
-
-We approach AI as an ambition: building systems with capabilities we associate with intelligence. That ambition is too broad to specify a technical question. Throughout the course, we ask which task a system performs, how it works, under which conditions it will be used, and what evidence supports its claims.
-
-We will look at these systems through three contrasts: **correlative versus causal, Bayesian versus frequentist, and connectionist versus symbolic**. Are we finding patterns for prediction or asking what happens when we intervene? What do we mean by probability? How is knowledge represented and used? These questions concern different choices, and a system can combine approaches. Even after choosing an approach, we still have to decide what the model should learn. Calling a molecule “soluble,” for example, hides a decision about how much solubility is enough. Throughout the course, we will ask whether the lenses fit the problem and whether we have gathered the evidence our conclusion needs.
-
-Many of the ambitions behind today's systems have a long history. DENDRAL was already tackling chemical structure elucidation in the 1960s; we will meet it alongside more recent applications below. We will also examine how scientific results enter commercial claims about models. A result can advance research and help sell a product at the same time. To distinguish an achievement from the promise surrounding it, we need to follow the claim back to what was actually tested. The [opening lecture](lectures/01-ai-and-science.qmd#science-and-model-claims) works through one such example.
-
-I particularly recommend Hardt and Recht's *Patterns, Predictions, and Actions*, Kate Crawford's *Atlas of AI*, and Simon J. D. Prince's *Understanding Deep Learning*. Alongside learning to build and evaluate models, we will examine the resources, labour, data choices, and institutional dependencies of our research tools. The [suggested readings](reading.qmd) offer optional routes for exploring these questions, including a [technical route through Prince](reading.qmd#understanding-deep-learning) and a [chapter guide to Crawford](reading.qmd#atlas-of-ai).
-
-## How to use a lecture page
-
 Each lecture develops a small number of ideas in a sequence you can follow during class or read afterwards. Highlighted passages collect central concepts, equations, and examples. The surrounding text explains their meaning and assumptions. Try the questions before reading the suggested answers.
+
+Later meetings combine short preparation with substantial work in class. Preparation should make it possible to start the activity, rather than require students to master the topic alone. Python support will be introduced alongside the chemical task that needs it. Large language models are available as assistants throughout the course, and become an object of study later.
 
 The [glossary](glossary.qmd) explains technical terms with examples from chemistry and our computing tools. Linked terms in the notes take you directly to the relevant entry.
 
-Later meetings combine short preparation with substantial work in class. Preparation should make it possible to start the activity, rather than require students to master the topic alone. Python support will be introduced alongside the chemical task that needs it.
+I particularly recommend Hardt and Recht's *Patterns, Predictions, and Actions*, Kate Crawford's *Atlas of AI*, Carissa Véliz's *Prophecy*, and Simon J. D. Prince's *Understanding Deep Learning*. The [suggested readings](reading.qmd) offer optional routes for exploring the course questions, including a [technical route through Prince](reading.qmd#understanding-deep-learning), a [chapter guide to Crawford](reading.qmd#atlas-of-ai), and a [discussion of prediction and power with Véliz](reading.qmd#prophecy).
 
 ## Start here
 
