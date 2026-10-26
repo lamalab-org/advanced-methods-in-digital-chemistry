@@ -2,15 +2,13 @@
 title: "What does it mean to learn from data?"
 ---
 
-::: {.callout-note title="Learning goals"}
-Write down inputs, targets, and a model for a calibration experiment. Calculate a prediction and an error by hand. Explain why training error is insufficient and why test error remains an empirical estimate. Use validation observations to compare model choices, and explain what an extrapolation plot cannot establish.
-:::
+Fitting a calibration curve is already an example of learning from data. We choose a family of functions, use measurements to fit one of them, and hope that it will be useful for another measurement. Each of these steps involves a decision. A straight line is enough to make those decisions visible.
 
 ## Before class
 
 Complete the [setup notebook](../notebooks/00-getting-started.ipynb), or bring the first cell that did not work. Spend at most 25 minutes on preparation. Try calculating the three predictions in the opening example below before using Python or an LLM.
 
-## A familiar experiment
+## Fitting a calibration curve {#a-familiar-experiment}
 
 We prepare a series of concentrations and measure absorbance. Under suitable conditions in a dilute solution, we expect a roughly linear relationship. Drawing a line seems a reasonable place to start. But where should it go, and how will we decide whether one line is better than another?
 
@@ -53,7 +51,7 @@ Before fitting, decide the intended use. Are we predicting another measurement i
 
 These questions interact: changing the model family changes both fitting and prediction. We will return to them for [molecular descriptors](../glossary.qmd#descriptor) and neural networks. [Hardt and Recht, *Supervised learning*](https://mlstory.org/supervised.html)
 
-## Turning a discrepancy into an objective
+## Deciding what counts as an error {#turning-a-discrepancy-into-an-objective}
 
 The line misses some measurements by predicting too much absorbance and others by predicting too little. We could move it, but we first need to decide what would count as an improvement. Reducing one discrepancy may enlarge another. The observations give us discrepancies; we still have to choose how to combine them.
 
@@ -115,7 +113,7 @@ Changing the intercept shifts every prediction by the same amount. Keep the slop
 A derivative gives us another way to choose a direction. Start with the intercept alone. In the expression below, $n$ is the number of training observations and the sums run over those observations.
 
 ::: {.concept}
-**An optional mathematical route: one optimisation step**
+**One gradient step (optional)**
 
 $$
 \frac{\partial\widehat R}{\partial m}
@@ -151,7 +149,7 @@ For [unregularised least squares](../glossary.qmd#regularisation) on the same da
 
 The extra flexibility lets the curve follow more of what happened in these particular measurements. Some of that detail may be noise. We call it **overfitting** when fitting such detail improves the fit to the training observations at the expense of prediction on new ones. In our polynomial example, we can watch that happen by changing the degree and comparing two sets of observations.
 
-### Predict, then explore
+### Changing the polynomial degree {#predict-then-explore}
 
 1. Start with degree 1. Predict what will happen to training error as degree increases.
 2. Change the degree and inspect the curve. Explain one surprising change.
@@ -166,7 +164,7 @@ The extra flexibility lets the curve follow more of what happened in these parti
 
 The extra points are **[validation observations](../glossary.qmd#data-splits)**, because we use them to guide model choices while exploring. They are not a final test set. A final assessment needs an independently reserved evaluation after the modelling choices are settled. Its error will still be an empirical estimate, with uncertainty and a scope set by the evaluation data.
 
-## A first trustworthy workflow
+## Deciding which data may be used {#a-first-trustworthy-workflow}
 
 ::: {.concept}
 **Separate the decisions**
@@ -183,7 +181,7 @@ Suppose our inputs include molar mass and a count of particular atoms. We might 
 
 When a transformation learns from data, fit it on the training observations and apply the same fitted transformation to validation observations. A **pipeline** connects these steps to the model so that they can be fitted and applied together. [Cross-validation](../glossary.qmd#cross-validation) repeats fitting and validation with different portions of the data. It does not automatically prevent [data leakage](../glossary.qmd#leakage), where evaluation information enters model development, or make related observations independent. [scikit-learn's examples of common pitfalls](https://scikit-learn.org/stable/common_pitfalls.html)
 
-## What do we really want to minimise? {#empirical-error-and-population-risk}
+## Test error is an estimate {#empirical-error-and-population-risk}
 
 Suppose we have finished fitting our calibration line. We put its slope and intercept aside and measure a fresh set of solutions. We can now calculate an error on observations that played no part in fitting or choosing the line. That is useful evidence. But we have still measured a finite collection of solutions. Calling it a test set does not make it the whole of our future laboratory work.
 
@@ -228,7 +226,7 @@ There is a second question. Suppose both groups were measured on our instrument,
 
 **Discuss:** What changed between A and B? What would we need to know about the sampling before using either score to describe performance in another laboratory?
 
-## What does an interpretable slope establish?
+## Interpreting the slope {#what-does-an-interpretable-slope-establish}
 
 In $\hat A=mc+b$, changing the concentration input by $\Delta c$ changes the predicted absorbance by $m\Delta c$. We can follow the calculation completely. Now suppose we want to interpret $m$ as the response of the chemical system when we change its concentration. We have moved from changing a number in an equation to changing a solution in the laboratory. We need to know which measurement conditions were controlled and whether the linear relationship remains appropriate in that regime. The fitted slope carries none of that experimental history on its own.
 
@@ -246,7 +244,7 @@ Open the [calibration notebook](../notebooks/02-calibration-lab.ipynb). It repro
 - Change the measurement-noise setting and rerun every cell. Explain why this is a simulation experiment rather than a new experimental finding.
 - Write three sentences: what you changed, what you observed, and which assumption would matter in a real calibration experiment.
 
-## LLM exercise: debug a metric
+## Checking the calculation {#llm-exercise-debug-a-metric}
 
 Suppose someone proposes this function for measuring prediction error:
 
@@ -259,7 +257,7 @@ Before asking an LLM, use residuals $+1$ and $-1$ to predict the returned value.
 
 **Record:** the request, the proposed change, your check, and a sentence explaining why the corrected operation measures a different quantity. A supplied version of the same task appears in the notebook, so no LLM account is needed to participate.
 
-## Exit questions
+## Questions to consider {#exit-questions}
 
 1. Which quantities were learned in the linear calibration model?
 2. Why can the degree-9 model have lower training error and worse validation performance?
@@ -267,16 +265,10 @@ Before asking an LLM, use residuals $+1$ and $-1$ to predict the returned value.
 4. We keep the model fixed and collect a new test sample. Why might the test error change? Which quantity are both test scores trying to estimate?
 5. What additional measurements would support a predictive claim about higher concentrations? What else would be needed to interpret the fitted slope as a physical response to changing concentration?
 
-## Suggested reading and references {#reading-and-references}
+## Suggested reading {#reading-and-references}
 
-These are optional ways to revisit the ideas or get help with the practical.
+Hardt and Recht's [**Sample versus population**](https://mlstory.org/supervised.html#sample-versus-population), in Chapter 3 of *Patterns, Predictions, and Actions* (2022), develops the distinction behind our two test samples. The following **Supervised learning** section formalises the fitting problem. Chapter 6's discussion of the [generalisation gap and model complexity](https://mlstory.org/generalization.html) places the polynomial example in a broader context.
 
-**A starting point, 15–20 minutes:** Hardt and Recht (2022), [**Sample versus population**](https://mlstory.org/supervised.html#sample-versus-population) and the opening **Supervised learning** section of Chapter 3, before the perceptron algorithm. How do sample and population relate to a calibration experiment? Why is an untouched test set still only a sample, and what does its error estimate?
+For the code, scikit-learn's [**Common pitfalls and recommended practices**](https://scikit-learn.org/stable/common_pitfalls.html) explains inconsistent preprocessing and data leakage through paired examples. They show how a seemingly minor preparation step can let evaluation data influence the model.
 
-**Help with the practical:** **Inconsistent preprocessing** and **Data leakage** in scikit-learn's [**Common pitfalls and recommended practices**](https://scikit-learn.org/stable/common_pitfalls.html) offer incorrect/correct examples. If you follow one, ask which observations may determine a fitted transformation. The code can be read without installing another package for this session.
-
-**For a deeper question:** Hardt and Recht, Chapter 6, [**Generalization gap** and **Effects of model complexity**](https://mlstory.org/generalization.html), helps place our polynomial example in context. Which claims about larger models are supported by this one demonstration?
-
-The [reading guide](../reading.qmd#lecture-2) records the scope and access of these optional follow-ups. Its [chemical benchmark case study](../reading.qmd#chemical-evaluation) provides a bridge to the next meeting.
-
-**For a chemistry-focused reference:** Jablonka, Ongari, Moosavi, and Smit (2020), [*Big-Data Science in Porous Materials: Materials Genomics and Machine Learning*](https://doi.org/10.1021/acs.chemrev.0c00004). The opening of section 7 connects evaluation and model comparison to chemical modelling; the [reading route](../reading.qmd#lecture-2) links open full text. Use it as a reference when a particular workflow question arises.
+Section 7 of Jablonka, Ongari, Moosavi, and Smit (2020), [*Big-Data Science in Porous Materials: Materials Genomics and Machine Learning*](https://doi.org/10.1021/acs.chemrev.0c00004), discusses evaluation in chemistry. An [open copy](../reading.qmd#lecture-2) is linked in the suggested reading, alongside a [study of molecular benchmarks](../reading.qmd#chemical-evaluation) that asks what a high score says about unfamiliar chemistry.

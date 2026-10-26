@@ -2,9 +2,7 @@
 title: "What do we mean by AI for science?"
 ---
 
-::: {.callout-note title="Learning goals"}
-Identify what a model retains and omits, and justify those choices for its purpose. Explain why the label AI is insufficient to describe a technical system. Turn a broad ambition into a specific task and a criterion for success. Compare explicit knowledge with learned representations. Distinguish prediction, model explainability, causal effects, and chemical mechanisms, and identify evidence appropriate to each claim.
-:::
+A calculator, a chess program, and a chatbot all do something that once required a person. We are much more likely to call some of them intelligent than others. Before discussing what AI might do for chemistry, it is worth asking what we mean by that word.
 
 ## Which of these would you call AI?
 
@@ -19,7 +17,7 @@ Identify what a model retains and omits, and justify those choices for its purpo
 
 **Discuss:** Which examples would you call AI? What criterion are you using? Compare your choices with someone who classified an example differently. What additional information, if any, would change your answer?
 
-## Modelling means choosing what to leave out {#modelling-as-omission}
+## Modelling requires ignorance {#modelling-as-omission}
 
 Before we settle which of these programs deserve the label, let us look at something they have in common with a much older tool: a map.
 
@@ -53,7 +51,7 @@ This question will return when we choose descriptors, construct [molecular graph
 
 There is another step between preserving information and making use of it. A representation can contain atomic coordinates without a particular model learning the relationships between them. We will return to that question through [Alampara, Miret, and Jablonka's study of text representations of materials](../reading.qmd#representation-and-model).
 
-## AI names an ambition
+## The problem with the word AI {#ai-names-an-ambition}
 
 I once offered a seminar on critical aspects of AI. I had deliberately put “AI” in the title to attract participants. After a few meetings, I had to tell them that the word was now banned from the seminar.
 
@@ -80,7 +78,7 @@ Whether a familiar regression is described as AI or machine learning changes lit
 
 For example, “AI understands solubility” leaves much unspecified. A more precise claim is that a particular model predicts measured aqueous solubility, under stated conditions, for molecules outside the series used to develop it, with a stated error relative to a [baseline](../glossary.qmd#baseline), a reference method used for comparison. We can examine the data, choose a relevant evaluation, and debate whether the conclusion follows. Someone has chosen the property, conditions, comparison, and acceptable error. Those choices deserve as much attention as the name of the algorithm.
 
-## Different methods can pursue the same goal
+## Rules and learned patterns {#different-methods-can-pursue-the-same-goal}
 
 Take the task of identifying a molecule from a spectrum. We could begin by writing down chemical constraints: the molecular formula, possible bonds, and fragmentation rules. A program could then search for structures compatible with those constraints. Much of the useful knowledge would enter through the rules we gave it.
 
@@ -125,7 +123,7 @@ This also helps distinguish improving a method from changing the question it can
 
 We will return to three questions: **Does the lens fit the question? Do the choices within it serve our purpose? Does the evidence support the conclusion?** These questions apply just as much to our own models as to a result we encounter in a paper or product announcement.
 
-## A selective history: six stops and a coda
+## A long history {#a-selective-history-six-stops-and-a-coda}
 
 The history shows several attempts to turn a broad ambition into concrete capabilities. Recognising patterns, reasoning from explicit knowledge, and using observations to guide action were research goals long before the current generation of models. Explicit knowledge and search developed alongside learning from examples. Statistics, optimisation, available data, and hardware shaped what these approaches could achieve.
 
@@ -139,7 +137,7 @@ Turing's *Computing Machinery and Intelligence* reframed a difficult question ab
 
 **Question:** If a program explains a reaction convincingly, what evidence is still missing?
 
-### 1955/1956: naming a broad research programme
+### 1955–1956: the Dartmouth proposal {#naming-a-broad-research-programme}
 
 John McCarthy, Marvin Minsky, Nathaniel Rochester, and Claude Shannon proposed the Dartmouth research project in 1955 for the summer of 1956. The proposal brought language, abstraction, learning, and problem solving under the name artificial intelligence. It already included multiple directions, including neural networks. The field did not begin as a single algorithm. [The original Dartmouth proposal](https://www-formal.stanford.edu/jmc/history/dartmouth/dartmouth.html)
 
@@ -161,7 +159,7 @@ Learning changes the parameters using examples. The chosen model family limits t
 
 With two inputs, the threshold gives us a straight boundary. Put four points at the corners of a square and give opposite corners the same label. Try to draw one line that separates the two classes. This pattern, called XOR, exposes a choice we made when we selected the model: a single straight boundary cannot express the rule we need. Changing the weights will move the line around. To solve this problem, we need a richer way of representing the boundary.
 
-### 1960s, with a 1969 publication: DENDRAL and chemical knowledge
+### The 1960s: DENDRAL and chemical knowledge {#s-with-a-1969-publication-dendral-and-chemical-knowledge}
 
 DENDRAL makes chemistry part of the history of AI itself. Work by Joshua Lederberg, Bruce Buchanan, Edward Feigenbaum, Georgia Sutherland, and collaborators used chemical knowledge and search to generate and evaluate structural hypotheses. The 1969 *Heuristic DENDRAL* paper concerns explanatory hypotheses in organic chemistry. [Feigenbaum collection publication record](https://cs.stanford.edu/people/eaf/wordpress/publications/)
 
@@ -191,19 +189,19 @@ The chemical problem is familiar: several isomers can share a molecular formula.
 
 David Rumelhart, Geoffrey Hinton, and Ronald Williams described learning representations by propagating errors backwards through a network. Intermediate units could acquire representations useful for the task, with parameter updates informed by their effects on the error. This influential 1986 publication is one milestone in a longer history of differentiation and network training. [Rumelhart, Hinton and Williams, 1986](https://www.nature.com/articles/323533a0)
 
-### 2012: a convincing demonstration at scale
+### 2012: learning to recognise images {#a-convincing-demonstration-at-scale}
 
 Alex Krizhevsky, Ilya Sutskever, and Geoffrey Hinton demonstrated strong image-classification performance using a deep [convolutional network](../glossary.qmd#network-operations). Such networks learn filters applied across parts of an image. Their system brought together a large labelled dataset, [GPU computation](../glossary.qmd#gpu), architecture choices, and techniques that supported training and generalisation. Its success illustrates several developments acting together. [The original ImageNet paper](https://proceedings.neurips.cc/paper/2012/hash/c399862d3b9d6b76c8436e924a68c45b-Abstract.html)
 
 For a chemist, the result opens an appealing possibility: perhaps useful molecular representations can also be learned. It also brings us back to the data. How many examples do we have? How similar are they? What would count as recognising something new in chemistry? We will need to answer those questions when we build our own models.
 
-### Coda: transformers and a scientific task
+### 2017–2021: transformers and protein structures {#coda-transformers-and-a-scientific-task}
 
 Two later markers connect this history to the course. Vaswani and colleagues introduced the [Transformer](../glossary.qmd#network-operations) in 2017 for sequence modelling. Jumper and colleagues reported AlphaFold's protein-structure prediction results in 2021, following CASP14 in 2020. These are useful examples of learned representations and of scientific evaluation with a defined target. [Transformer paper](https://arxiv.org/abs/1706.03762); [AlphaFold paper](https://www.nature.com/articles/s41586-021-03819-2)
 
 Agreement between predicted and reference structures supports a particular predictive claim. It also gives us a way into the next question: how does predicting an outcome differ from understanding what would change it?
 
-## What changes when the task is science?
+## Predicting a reaction and changing it {#what-changes-when-the-task-is-science}
 
 Suppose a laboratory has collected reaction conditions and yields over several years. We would like to use those records to build a model. The obvious task seems to be predicting yield. But what do we want to do with the prediction?
 
@@ -221,7 +219,7 @@ We can see the difficulty without a complicated neural network. Take the equatio
 
 This is the distinction between explaining the model and explaining the chemistry. **Model interpretability or explainability** concerns the model's behaviour. For a simple equation, we can inspect the calculation directly. For a more complicated model, we may use an approximation or an attribution method. We then also have to understand what that method measures. Different reference comparisons and treatments of related inputs can produce different attributions. The SHAP developers work through this problem in [*Be careful when interpreting predictive models in search of causal insights*](https://shap.readthedocs.io/en/latest/example_notebooks/overviews/Be%20careful%20when%20interpreting%20predictive%20models%20in%20search%20of%20causal%20insights.html).
 
-### A reaction example: why were these conditions chosen?
+### Why were these conditions chosen? {#a-reaction-example-why-were-these-conditions-chosen}
 
 Return to the difficult substrates. Substrate identity influenced both the chosen temperature and the yield. The recorded temperature therefore carries information about a decision made before the reaction. We need to account for that decision if we want to use the records to estimate the effect of heating.
 
@@ -260,7 +258,7 @@ The statements concern prediction, model explanation, a causal effect, and a mec
 
 </details>
 
-## What makes these systems possible?
+## The people and resources behind the model {#what-makes-these-systems-possible}
 
 Calling AI an ambition also invites a question: whose ambition, and who provides the means to pursue it? Kate Crawford's *Atlas of AI* examines the material and political conditions of AI, including resource extraction, labour, data, and institutional power. I particularly recommend it for exploring these questions further. [Crawford (2021), *Atlas of AI*](https://yalebooks.yale.edu/book/9780300264630/atlas-of-ai/)
 
@@ -271,7 +269,7 @@ Consider the chatbot or molecular predictor from the opening examples. Its outpu
 - Who defined the target and decided which observations belong in the dataset?
 - Who controls access, and who benefits or bears costs when the system is used?
 
-**Discuss:** Choose one example and trace a dependency beyond the algorithm. What evidence would let you investigate it? Mark what you do not yet know. We will return to these questions when working with chemical datasets and hosted language models; the [reading route](../reading.qmd#atlas-of-ai) connects them to specific chapters.
+Take the measurements in a chemical dataset. Someone prepared the samples, ran the instrument, decided which results to keep, and recorded the conditions. By the time we download a table, much of that work may have disappeared from view. What can we find out about it? Crawford's [chapters on labour and data](../reading.qmd#atlas-of-ai) give us reasons to ask.
 
 ### When science helps sell a model {#science-and-model-claims}
 
@@ -289,12 +287,12 @@ A good result can be scientifically valuable and commercially useful at the same
 
 We can ask the same questions of our own work. In [ChemBench, Mirza et al. (2025)](https://doi.org/10.1038/s41557-025-01815-x), we compared models and chemists on a curated collection of chemical questions. The question set and comparison procedure determine what the result says. Which parts of a chemist's work would need a different evaluation?
 
-## The statistical question hiding in the history
+## Learning from examples {#the-statistical-question-hiding-in-the-history}
 
 Both structure elucidation and learned prediction ask us to reason beyond the observations immediately in front of us. For the learning problems we will build, we can make the prediction question precise: which information goes into the model, and which unobserved quantity should come out?
 
 ::: {.concept}
-**The bridge to statistical learning**
+**Observations and predictions**
 
 $$
 \mathcal D=\{(x_i,y_i)\}_{i=1}^{n},\qquad
@@ -315,7 +313,7 @@ Even when we reserve observations for a test, we still have a finite sample. The
 
 Today we only introduce this notation. Next time we will use a calibration experiment to define an error, fit a model, and examine what happens on new measurements.
 
-## LLM activity: turning a claim into a check
+## What follows from the result? {#llm-activity-turning-a-claim-into-a-check}
 
 Suppose we have finished our analysis and are writing the conclusion:
 
@@ -327,28 +325,19 @@ Ask an LLM to suggest another explanation for the observations and an experiment
 
 **Submit:** one revised scientific claim and one observation that would make you less confident in it. The same task can be done entirely on paper.
 
-## Exit questions
+## Questions to consider {#exit-questions}
 
 1. Rewrite “AI can do chemistry” as a specific task, method, and evaluable claim.
 2. Name one factor besides network architecture that helped deep learning succeed.
 3. What would “new data” mean for a chemistry problem you care about?
 4. A model predicts well and highlights temperature as important. What have we learned about the model, and what remains unknown about the effect and mechanism of heating the reaction?
 
-## Suggested reading and references {#reading-and-references}
+## Suggested reading {#reading-and-references}
 
-If you would like to follow one of these questions further, the suggestions below offer different ways in.
+Hardt and Recht's [**Prediction and action**](https://mlstory.org/introduction.html#prediction-and-action), in *Patterns, Predictions, and Actions* (2022), develops a question that runs through this lecture: what changes when we act on a prediction? For the distinction between observation, model explanation, and intervention, I have collected [further references](../reading.qmd#claims-and-evidence), including their chapter on causality.
 
-**A starting point, 10–15 minutes:** Hardt and Recht (2022), [**Prediction and action**](https://mlstory.org/introduction.html#prediction-and-action), in *Patterns, Predictions, and Actions*. For a chemistry example that interests you, what is predicted, what action might it inform, and what evidence connects them?
+Kate Crawford's [*Atlas of AI*](../reading.qmd#atlas-of-ai) examines the labour, resources, and institutions behind the systems we use. Carissa Véliz's [*Prophecy*](../reading.qmd#prophecy) considers the history and authority of prediction. Both matter to the perspective taken here: AI is made and used by people, and its consequences depend on their decisions.
 
-**Discussion extension:** Wang et al. (2023), [**Scientific discovery in the age of artificial intelligence**](https://www.nature.com/articles/s41586-023-06221-2), maps applications across scientific work. Messeri and Crockett (2024), [**Artificial intelligence and illusions of understanding in scientific research**](https://www.nature.com/articles/s41586-024-07146-0), asks how these tools might affect scientific understanding. Begin with one abstract and Figure 1. Name a claim and the evidence needed to assess it; distinguish a review of applications from a perspective on possible consequences.
+Wang et al. (2023), [*Scientific discovery in the age of artificial intelligence*](https://www.nature.com/articles/s41586-023-06221-2), reviews scientific applications. Messeri and Crockett (2024), [*Artificial intelligence and illusions of understanding in scientific research*](https://www.nature.com/articles/s41586-024-07146-0), considers how adopting these tools might affect scientific understanding. Moosavi, Jablonka, and Smit (2020), [*The Role of Machine Learning in the Understanding and Design of Materials*](https://doi.org/10.1021/jacs.0c09105), brings these questions into materials chemistry.
 
-**A materials example:** Moosavi, Jablonka, and Smit (2020), [**The Role of Machine Learning in the Understanding and Design of Materials**](https://doi.org/10.1021/jacs.0c09105). Read the Introduction and ask where prediction enters a materials-design decision, and what further understanding the decision requires. The [reading guide](../reading.qmd#lecture-1) gives the full reference and access route.
-
-The [reading guide](../reading.qmd#lecture-1) gives access information and [full historical references with suggested passages](../reading.qmd#historical-sources). The sources linked beside the historical claims are there if you want to examine those examples in more detail.
-
-**Particularly recommended:** Kate Crawford (2021), *Atlas of AI*. The Introduction offers a way in; the [chapter guide](../reading.qmd#atlas-of-ai) suggests directions to follow according to your interests. Which of her arguments raises a question about a chemical research workflow you know?
-
-**Prediction and power:** Carissa Véliz (2026), *Prophecy*. The [reading route](../reading.qmd#prophecy) connects its historical perspective to a laboratory that uses predictions to decide which materials to test. How might those decisions shape the evidence available to the next model?
-
-For the distinctions above, use the separate [reading route on prediction, model explanation, and causality](../reading.qmd#claims-and-evidence). It starts with Hardt and Recht and offers a practical explanation example before the more technical literature.
-
+The [suggested reading](../reading.qmd#lecture-1) gives full references and access information. The [historical sources](../reading.qmd#historical-sources) are also collected there, if you would like to examine the original arguments.
