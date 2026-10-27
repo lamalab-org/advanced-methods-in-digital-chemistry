@@ -3,6 +3,7 @@ project:
   output-dir: _book
   render:
     - index.qmd
+    - outline.qmd
     - setup.qmd
     - glossary.qmd
     - reading.qmd
@@ -25,6 +26,7 @@ book:
   repo-url: https://github.com/lamalab-org/advanced-methods-in-digital-chemistry
   chapters:
     - index.qmd
+    - outline.qmd
     - setup.qmd
     - lectures/01-ai-and-science.qmd
     - lectures/02-learning-from-data.qmd
