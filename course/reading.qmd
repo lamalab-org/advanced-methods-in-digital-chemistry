@@ -26,6 +26,8 @@ Kate Crawford's [*Atlas of AI: Power, Politics, and the Planetary Costs of Artif
 
 Carissa Véliz's [*Prophecy: Prediction, Power, and the Fight for the Future, from Ancient Oracles to AI*](https://www.penguinrandomhouse.com/books/759692/prophecy-by-carissa-veliz/9780385550970/) (Doubleday, 2026; UK edition, Swift Press) places our current enthusiasm for prediction in a longer history. It raises a question that also matters in the laboratory: [what happens when people act on a prediction?](#prophecy)
 
+Dan Davies's [*The Unaccountability Machine*](https://profilebooks.com/work/the-unaccountability-machine/) (Profile Books, 2024) brings cybernetics into a discussion of organisations and responsibility. It helps us ask [who can question and change a decision](#unaccountability-machine) when it is attributed to a system.
+
 For the calculations inside neural networks, I recommend Simon J. D. Prince's [*Understanding Deep Learning*](https://udlbook.github.io/udlbook/) (MIT Press, 2023). Its diagrams, equations, and examples give us several ways to examine the same operation. The author provides a free edition and Python notebooks; I have noted the connections to our examples [below](#understanding-deep-learning).
 
 ## Writing code {#practical-references}
@@ -80,6 +82,14 @@ Our interest in predicting the future is much older than machine learning. Caris
 For our course, consider a laboratory that uses predicted stability to decide which materials to synthesise. The ranking helps determine where time and resources go. The resulting measurements may then enter the next training dataset. A candidate that was never tested remains unknown, even if the model gave it a low score. The prediction has helped shape the evidence available to its successor.
 
 This laboratory example is our own way of bringing the question back to chemistry. It also connects to Hardt and Recht's [**Prediction and action**](https://mlstory.org/introduction.html#prediction-and-action): predictive accuracy, the consequences of acting on a prediction, and the authority to make that decision each need attention.
+
+## The Unaccountability Machine {#unaccountability-machine}
+
+Dan Davies's [*The Unaccountability Machine: Why Big Systems Make Terrible Decisions—and How the World Lost Its Mind*](https://profilebooks.com/work/the-unaccountability-machine/) (Profile Books, 2024) is a useful companion to the cybernetics discussion. Through Stafford Beer's work on management cybernetics, it examines how organisations process information and make decisions. Davies describes *accountability sinks*: arrangements in which responsibility becomes difficult to locate because decisions have been delegated to procedures or systems.
+
+For this course, I would bring that question back to the laboratory. Suppose a screening model excludes a material from further experiments. Who can question that exclusion? Where would evidence that the model missed something go, and who could act on it? Explaining the calculation would answer only part of that problem.
+
+Chapters 2, **Stafford Beer**, and 5, **Cybernetics Without Diagrams**, are relevant places to explore this connection. The [US publisher lists the contents](https://press.uchicago.edu/ucp/books/book/chicago/U/bo252799883.html); that edition appeared in 2025. Profile Books offers a preview; the full book requires a library copy or purchase. Wiener's [original account](#historical-sources) provides the earlier formulation of cybernetics, while Davies follows its implications for organisational decisions.
 
 ## Prediction, explanation, and causality {#claims-and-evidence}
 
