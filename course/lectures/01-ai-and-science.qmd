@@ -125,22 +125,37 @@ Even naming the field involved a decision about which questions and methods belo
 
 Rosenblatt's 1958 paper made learning from examples central to a model of pattern recognition. A threshold unit combines inputs, compares the result with a threshold, and produces a class prediction. Its weights, the numerical factors that determine how much each input contributes, can change during learning. [Rosenblatt's original paper, university-hosted copy](https://web.stanford.edu/class/psych209a/ReadingsByDate/01_30/Rosenblatt58Perceptron.pdf)
 
+We can make this calculation quite explicit. Consider a simple perceptron with two inputs, $x_1$ and $x_2$. These might be the brightness values of two pixels in an image. First, multiply each input by a **weight** and add the results, together with an adjustable constant $b$:
+
+$$
+z=w_1x_1+w_2x_2+b.
+$$
+
+The weights $w_1$ and $w_2$ determine how each input contributes. The constant $b$, called the **bias**, shifts the threshold. We then turn the resulting number $z$ into a prediction:
+
+$$
+\hat y =
+\begin{cases}
+1, & z>0,\\
+0, & z\leq 0.
+\end{cases}
+$$
+
+The hat in $\hat y$ marks a prediction. Here, 0 and 1 name two classes; they are not probabilities. We have chosen to assign a value exactly on the threshold to class 0. With more inputs, the first step becomes $z=\sum_{j=1}^{d}w_jx_j+b$: add one weighted contribution for each of the $d$ inputs. [A modern account of the perceptron](https://www.cs.cornell.edu/courses/cs4780/2018fa/lectures/lecturenote03.html)
+
+Suppose $w_1=1$, $w_2=-1$, and $b=-0.2$. For inputs $x_1=0.8$ and $x_2=0.3$, we obtain
+
+$$
+z=1\times 0.8+(-1)\times 0.3-0.2=0.3,
+\qquad \hat y=1.
+$$
+
+What happens if we keep the parameters fixed and change $x_2$ to $0.7$? Now $z=-0.1$, so the predicted label becomes 0. This is already a complete prediction rule. Learning means adjusting the weights and bias using examples with known labels. The examples do not choose everything for us: we have already chosen the inputs and this particular form of the rule.
+
 <details>
-<summary>A threshold unit and the limits of its chosen rule</summary>
+<summary>What can one such rule represent?</summary>
 
-::: {.concept}
-**A learnable rule**
-
-$$
-\hat y=\mathbf{1}[w_1x_1+w_2x_2+b>0]
-$$
-
-Inputs: $x_1,x_2$. Adjustable parameters: $w_1,w_2,b$. The symbol $\mathbf{1}[\cdot]$ returns 1 when the condition inside the brackets is true and 0 otherwise. The output $\hat y$ is therefore one of two class labels.
-
-Learning changes the parameters using examples. The chosen model family limits the rules that can be represented.
-:::
-
-With two inputs, the threshold gives us a straight boundary. Put four points at the corners of a square and give opposite corners the same label. Try to draw one line that separates the two classes. This pattern, called XOR, exposes a choice we made when we selected the model: a single straight boundary cannot express the rule we need. Changing the weights will move the line around. To solve this problem, we need a richer way of representing the boundary.
+With two inputs and at least one nonzero weight, the equation $w_1x_1+w_2x_2+b=0$ describes a straight boundary. Put four points at the corners of a square and give opposite corners the same label. Try to draw one line that separates the two classes. This pattern, called XOR, exposes a choice we made when we selected the model: a single straight boundary cannot express the rule we need. Changing the weights will move or rotate the line. To solve this problem, we need a richer way of representing the boundary.
 
 </details>
 
