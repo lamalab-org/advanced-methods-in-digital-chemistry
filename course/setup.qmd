@@ -2,6 +2,12 @@
 title: "Your AI assistant and Python environment"
 ---
 
+## Before the first meeting
+
+If you have time before our first meeting on **28 October 2026**, look through this guide and try starting the setup. Begin with Jan and Blablador, then prepare the Python environment. On Windows, setting up Ubuntu through WSL 2 beforehand is particularly helpful because it can require a restart or administrator access.
+
+Bring your laptop and charger if you can. We will show the tools in use and reserve **about 30 minutes to set them up together**. An unfinished installation is fine. Keep any error message and the command that produced it, and bring them along. If your setup already works, use that time to explore the first notebook and check a calculation with a partner.
+
 ## The course setup
 
 We will set up **Jan connected to Blablador first**, so that we have an assistant available while installing Python and working through errors. We will then use **uv to manage Python and packages** and **JupyterLab to work in notebooks**. If Jan is difficult to install, use Blablador's web interface. If service access is unavailable, work with a partner or ask the instructor for help and continue with the Python setup.
