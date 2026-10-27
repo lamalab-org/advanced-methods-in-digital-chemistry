@@ -66,7 +66,7 @@ A **potential energy surface** assigns an energy to an atomic configuration. A *
 
 ### Model {#model}
 
-A selected mathematical or computational description used for a purpose. In our calibration example, $\hat A=mc+b$ is a model relating concentration to predicted absorbance. A model can come from physical reasoning, explicit rules, fitting data, or a combination.
+A representation used to answer a question about a system. The opening lecture uses a street map as a simple example: it preserves connections needed to choose a route. In our computational work, a **predictive model** calculates an output from supplied inputs. For example, $\hat A=mc+b$ relates concentration to predicted absorbance. The input representation specifies the information supplied; the predictive model specifies how it is used. Models can come from physical reasoning, explicit rules, fitting data, or a combination.
 
 ### Parameter {#parameter}
 

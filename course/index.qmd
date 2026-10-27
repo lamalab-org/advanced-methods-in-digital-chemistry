@@ -2,7 +2,7 @@
 
 How can we use computational models to learn something reliable about chemistry?
 
-We begin with a familiar act of modelling: choosing what to retain and what to leave out. A molecular drawing and a calibration curve each represent selected aspects of a system. There is no final map of chemistry that serves every purpose. More detail may help with one question and obscure another. Our task is to notice the omissions and decide whether we can live with them for the question at hand.
+We begin with a familiar act of modelling: choosing what to retain and what to leave out. A molecular drawing records atoms and bonds. It usually leaves out the solvent and temperature. That is useful when discussing connectivity, but it does not specify the conditions for a solubility measurement. The question determines which omissions matter. We will ask what each model represents, which conditions it assumes, and what evidence supports using it for the question at hand.
 
 Those choices are made by people. My starting point is that AI is a deeply human endeavour. People decide which questions are worth asking, what a system should learn, and what will count as a good answer. They produce the measurements, build the tools, and decide what to do with the results. When some of that work is automated, the choices have not gone away. Alongside learning to build and evaluate models, we will therefore examine the resources, labour, data choices, and institutional dependencies of our research tools.
 
