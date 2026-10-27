@@ -43,7 +43,7 @@ Prompt opened as administrator, is:
 Restart if requested, then open Ubuntu and create its Linux user account.
 Inside Ubuntu, wsl.exe --list --verbose should show VERSION 2 for Ubuntu.
 All course commands from here run in Ubuntu's Bash shell. If provisioning
-is blocked, use pair work or the supported notebook service while getting
+is blocked, use pair work or the instructor's notebook while getting
 help. macOS/Linux users continue with their existing terminal.
 
 3. Before using Python tools: a terminal is the window for commands;
@@ -115,7 +115,7 @@ Keep the original error and the change that resolved it.
 
 Save edited notebooks under a new filename. This kit contains synthetic
 teaching observations, not laboratory data. Ask the instructor about the
-browser fallback if local installation is unavailable.
+pair-work fallback if local installation is unavailable.
 
 Optional background: MIT's Missing Semester, introduction to the shell:
 https://missing.csail.mit.edu/2026/course-shell/

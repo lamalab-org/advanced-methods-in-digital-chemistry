@@ -1,6 +1,7 @@
 """Quick local check for the introductory notebook environment; no network access."""
 import importlib
 import math
+import subprocess
 import sys
 from importlib.metadata import version
 from pathlib import Path
@@ -17,6 +18,7 @@ def main():
         ("numpy", "numpy"),
         ("matplotlib", "matplotlib"),
         ("marimo", "marimo"),
+        ("ruff", "ruff"),
     ]:
         try:
             importlib.import_module(module)
@@ -41,6 +43,13 @@ def main():
         fig.canvas.draw()
         plt.close(fig)
         print("OK: fitted a calibration curve and rendered a plot in memory.")
+        formatting = subprocess.run(
+            [sys.executable, "-m", "ruff", "format", "--stdin-filename", "check.py", "-"],
+            input="prediction=0.8*0.5+0.15\n", text=True,
+            capture_output=True, check=True,
+        )
+        assert "prediction = 0.8 * 0.5 + 0.15" in formatting.stdout
+        print("OK: Ruff can format a notebook calculation when saving.")
 
     root = Path(__file__).resolve().parents[1]
     for name in ["00-getting-started.py", "02-calibration-lab.py"]:
