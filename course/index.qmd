@@ -16,18 +16,18 @@ Even then, further choices remain. Calling a molecule “soluble,” for example
 
 This course follows our opening question through what might seem like a collection of buzzwords: statistical learning, molecular representations, deep learning, molecular simulation, generative models, and experimental design. We will make these terms concrete by building models, inspecting their failures, and asking what their results support scientifically.
 
-## The course in ten meetings
+## The course sequence
 
 We first learn to fit a small model and examine the evidence for using it. We then study how models represent molecules and their behaviour. Finally, we ask how predictions can help us propose molecules, choose experiments, and organise a research task. A small project brings the calculation and its scientific interpretation together.
 
-| Meetings | Main topics |
+| Sessions | Main topics |
 |---|---|
 | **1–3: Learning from observations** | AI and scientific claims; our computing tools; fitting and evaluating models; chemical data. |
 | **4–6: Representing molecules and their behaviour** | Neural networks; molecular graphs and symmetry; learned energies, forces, and simulation. |
 | **7–9: From predictions to decisions** | Molecular generation; choosing experiments under uncertainty; language models and tools. |
 | **10: Bringing the work together** | Reproducing, explaining, and examining a small project. |
 
-The [course outline](outline.qmd) sets out the topics, the connections between meetings, and the background we will develop along the way. This is a working sequence for about ten two-hour meetings; we will discuss the timetable and possible block format in the first session.
+The [course outline](outline.qmd) sets out the topics, the connections between sessions, and the background we will develop along the way. It represents about ten two-hour teaching slots, which we can combine into fewer appointments. In the first session, we will [discuss a block week or several longer sessions](lectures/01-ai-and-science.qmd#scheduling), working around my unavailable dates and students' commitments.
 
 ## How we will work {#how-to-use-a-lecture-page}
 

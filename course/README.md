@@ -1,6 +1,6 @@
 # Course sources and practicals
 
-This directory contains the student Quarto book for **Advanced Methods in Digital Chemistry**, by Kevin Maik Jablonka. The [course outline](outline.qmd) gives the proposed ten-meeting sequence and its prerequisites. Three lecture drafts cover AI and science, learning from data, and MOF gas-uptake modelling, with notebooks and calibration and kernel activities. Additional chapters are in development.
+This directory contains the student Quarto book for **Advanced Methods in Digital Chemistry**, by Kevin Maik Jablonka. The [course outline](outline.qmd) gives the proposed ten-session sequence and its prerequisites. Three lecture drafts cover AI and science, learning from data, and MOF gas-uptake modelling, with notebooks and calibration and kernel activities. Additional chapters are in development.
 
 Read the [published course](https://lamalab-org.github.io/advanced-methods-in-digital-chemistry/) or use `quarto preview` from this directory. `quarto render` builds `_book/` without executing Python. The repository workflow uses Quarto 1.8.24. Publishing instructions are in the [repository README](../README.md).
 
