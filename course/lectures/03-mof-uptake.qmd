@@ -2,7 +2,7 @@
 title: "What can a model tell us about gas uptake?"
 ---
 
-With the calibration curve, one number described the input: concentration. A porous material gives us many more possibilities. Before we can learn anything from a collection of structures, we have to decide how to describe them and what we want to predict.
+With the calibration curve, one number described the input: concentration. A porous material gives us many more possibilities. Before we can learn anything from a collection of structures, we have to decide how to describe them and what we want to predict. We use this practical to carry the decisions from the small calibration example into a chemical dataset. By the end, you should be able to justify the supplied inputs, compare a model with a simple baseline, and state which materials and conditions its test error might describe. That is what makes the score useful when deciding whether to use a prediction.
 
 ## A porous material and a prediction
 
@@ -121,6 +121,8 @@ Keep the fitted model fixed and draw samples, with replacement, from the recorde
 The calculation treats rows as independent sampling units. It adds no new frameworks, simulations, or experiments. Related frameworks can make that assumption inadequate, and repeating rows from this collection does not tell us how a model will perform under another simulation protocol. This is the distinction between [sampling uncertainty and a change in distribution](02-learning-from-data.qmd#empirical-error-and-population-risk) in a chemical setting.
 
 ## Practical
+
+Choose a model using the training and validation data, record the choice, then inspect its test error. Keep track of why each step is there: the baseline asks whether the descriptors help, scaling exposes a choice in how similarity is calculated, and resampling shows variation in an empirical error estimate. Finish with a claim about the simulated uptake under the supplied conditions and the evidence a broader experimental claim would need.
 
 Download and extract the complete [MOF practical kit](../downloads/mof-practical.zip). It contains the [notebook](../notebooks/03-mof-uptake.py), data, source notice, and locked environment. From its folder, use Ubuntu on WSL for Windows, or your macOS/Linux terminal:
 

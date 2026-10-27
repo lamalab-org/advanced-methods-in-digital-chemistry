@@ -19,7 +19,11 @@ def _(mo):
     Adapted from Kevin Jablonka's [MolSim 2024 practical](https://github.com/kjappelbaum/ml_molsim/tree/0ebed176b972c9ba9ddf7b6e3a4d04eaf3f32409).
     We retain its MOF question, descriptors, baselines, kernel ridge regression,
     and model-inspection idea. This smaller version runs from beginning to end.
-    Change one choice, predict its effect, and explain the result.
+    Change one choice, predict its effect, and explain the result. The purpose is
+    to carry the calibration workflow into a chemical dataset: justify the
+    inputs, compare with a baseline, and state which materials and conditions
+    the test error might describe. These checks help us decide what a score
+    supports before using a prediction.
 
     The accompanying HTML preview and lecture figures include test results.
     The supplied run chose its model using validation data. This editable

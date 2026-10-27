@@ -4,7 +4,9 @@ title: "What do we mean by AI for science?"
 
 A calculator, a chess program, and a chatbot all do something that once required a person. We are much more likely to call some of them intelligent than others. Before discussing what AI might do for chemistry, it is worth asking what we mean by that word.
 
-We will begin with questions that sound almost too basic to need asking. What does it mean to model something? If two quantities vary together, what have we learned about changing one of them? What does a probability describe? A small change in the wording can change the question we are answering and the evidence we need. I would like us to notice those changes before a piece of software makes them easy to overlook.
+We will begin with questions that sound almost too basic to need asking. What does it mean to model something? If two quantities vary together, what have we learned about changing one of them? What does a probability describe? A small change in the wording can change the question we are answering and the evidence we need. I would like us to notice those changes before a piece of software makes them easy to overlook. By the end of this meeting, you should be able to take a claim about AI in chemistry, say what task it concerns, identify an important modelling choice, and suggest what evidence would support the claim. We will practise those moves on small examples before using them to judge our own calculations.
+
+These notes give a fuller account than we will work through together in the first meeting. Use them to revisit the examples afterwards.
 
 ::: {.callout-note title="Our first meeting" collapse="true"}
 
@@ -23,25 +25,23 @@ We will begin with questions that sound almost too basic to need asking. What do
 | AlphaFold predicts a protein's three-dimensional structure. | | |
 | A chatbot writes an explanation of a chemical reaction. | | |
 
+We begin with this comparison because the same word can hide different expectations. The useful outcome is a criterion you can explain and a more specific description of what a system does.
+
 **Discuss:** Which examples would you call AI? What criterion are you using? Compare your choices with someone who classified an example differently. What additional information, if any, would change your answer?
 
 ## Modelling means leaving things out {#modelling-as-omission}
 
-Before returning to the AI label, let us examine a choice we make whenever we model something: which information to retain. A street map gives us a familiar example.
+Before fitting a model, we have to decide what information it will receive. I want to establish why leaving something out can be sensible, and how to recognise an omission that prevents us from answering our question. A literal street map gives us a small example before we return to chemistry.
 
-Suppose we want to walk from the lecture building to the railway station. We need to know which streets and paths connect the two places and where we can enter the station. A map that preserves those connections can help us choose a route. It can leave out the positions of the atoms in the paving stones: those details do not help us decide which turn to take.
+Suppose we want to walk from the lecture building to the railway station. A map that shows the connected streets, paths, and station entrance can help us choose a route. It need not record the positions of the atoms in the paving stones. Now suppose it also leaves out whether a footbridge is open. If our route relies on a closed bridge, that omission matters. The task lets us explain why one missing detail is harmless and another changes the decision.
 
-Now suppose the route crosses a footbridge that is closed. If the map still shows it as passable, following the route will not get us to the station. We have omitted information that matters for this task. Both the atomic detail and the closure were left out, but the consequences are different.
+This is the relationship I want to carry over to modelling: **we select information for a stated purpose, and that selection affects what we can conclude**. The map is an illustration of that choice. It does not establish which details a chemical model may safely ignore; we have to examine the chemistry and the intended use.
 
-The point is to judge an omission against the question we want to answer. More detail is useful when it supplies information that question needs. Someone studying the pavement's material structure may need details that we could ignore when choosing our route.
+A **[model](../glossary.qmd#model)** is a representation used to answer a question about a system. A molecular drawing, for example, represents atoms and bonds. If we want to discuss their connectivity, we can often leave solvent and temperature outside the picture. Now ask for the molecule's solubility in water at 25 °C and at 50 °C. The drawing stays the same, but the requested measurement conditions have changed.
 
-In this sense, a **[model](../glossary.qmd#model)** is a representation used to answer a question about a system. The street map represents connections between places; a molecular drawing represents atoms and bonds. Each preserves some information and leaves other information out. A molecular drawing usually leaves the solvent, temperature, and pH outside the picture. That may be sufficient for discussing connectivity. Predicting solubility asks for information about the measurement conditions as well.
+Suppose our predictor receives only that drawing and returns one solubility value. Where have we told it which temperature we mean? We have not supplied that distinction. To make temperature-specific predictions, we need to include the relevant condition in the input. Alternatively, we can restrict the task to measurements at 25 °C, hold the other relevant conditions fixed, and state that scope when using the model. Adding temperature alone would not establish that all the necessary information is present.
 
-For example, suppose we want to predict the solubility of the same molecule in water at 25 °C and at 50 °C. A predictor that receives only the molecular drawing has no input telling it which temperature we mean. If we want predictions for both conditions, we need to represent that distinction. Alternatively, we can restrict the task to measurements at 25 °C, hold the other relevant conditions fixed, and state that scope when using the model.
-
-In this prediction problem, the molecular drawing is an **input representation**. The **predictive model** is the rule or learned relationship that uses the supplied information to calculate a solubility prediction. We need to examine the information we supply as well as the calculation that uses it.
-
-The connection to the street map is the choice of information: connections and access for a walking route; molecular properties and measurement conditions for a solubility prediction. We must decide which differences the representation needs to preserve when we formulate the prediction problem.
+Here the drawing is an **input representation**: the information supplied. The **predictive model** is the rule or learned relationship that uses it to calculate an answer. These are separate choices. An increasingly elaborate calculation cannot tell which of our two requested temperatures we intended from a drawing that is identical in both cases.
 
 This is one reason I see AI as a deeply human endeavour. Someone has decided which question matters, which observations to collect, and which differences the model can ignore. Someone will also decide whether its answer is good enough to use. Those choices shape the mathematics we will do in this course.
 
@@ -53,7 +53,7 @@ What are we keeping? What are we leaving out? Why is that acceptable for this pu
 
 Of course, we do not always make these decisions consciously. Sometimes someone else assembled the dataset. Sometimes a software package has already chosen a representation for us. Sometimes we simply never thought to record the solvent. The omission still shapes what the model can learn. Making it deliberate means noticing it and being able to explain why it is acceptable.
 
-**Discuss:** For a solubility prediction you might use in the laboratory, which conditions would you fix, which would you supply to the model, and which could you reasonably leave out? Give a reason for one choice.
+**Try:** State one solubility question precisely, including its measurement conditions. Decide which conditions you will hold fixed and which the model must receive as inputs. Explain how one omitted condition could change the usefulness of the answer. This is the same decision we will make when preparing a chemical dataset.
 
 Suppose we describe each molecule by its molar mass and the number of hydrogen-bond donors. These numbers are **[molecular descriptors](../glossary.qmd#descriptor)**: numerical descriptions of selected aspects of a molecule. Two different structures can have the same values for both. We have made another choice about which differences to preserve.
 
@@ -279,9 +279,11 @@ The word “therefore” is doing quite a lot of work. Follow the argument with 
 
 Ask an LLM to suggest another explanation for the observations and an experiment that could distinguish the two. Then inspect its proposal. Which part of our conclusion would the experiment test? Could we obtain the suggested result even if the proposed mechanism were wrong? The assistant can help us generate possibilities; we still have to decide what an observation would tell us.
 
-**Submit:** one revised scientific claim and one observation that would make you less confident in it. The same task can be done entirely on paper.
+**Write for the discussion:** one revised scientific claim and one observation that would make you less confident in it. The same task can be done entirely on paper.
 
 ## What does a probability describe? {#what-does-a-probability-describe}
+
+A reported probability can influence whether we spend time and material on an experiment. We therefore need to distinguish a proportion we have observed from an uncertainty statement about something we do not yet know. For this first discussion, the aim is to explain what a number refers to and which assumptions it needs. We will leave the calculations of uncertainty for later examples.
 
 Even after deciding which question to ask, we may have only a few observations with which to answer it. Suppose we repeat a synthesis ten times and call it successful when the isolated yield exceeds 60% after two hours. Seven attempts succeed. We use the same substrate and nominal protocol each time. Someone asks: “How likely is the next attempt to succeed?”
 
@@ -297,29 +299,27 @@ Both approaches can be used to predict another attempt. Both require modelling c
 
 Now suppose an assistant writes, “I am 70% confident this synthesis will work.” What does the number refer to? Is it based on repeated experiments, a stated model of uncertainty, or simply part of the generated answer? Before using it to choose an experiment, we need to know how it was obtained and what would let us check it. A percentage does not supply its own interpretation.
 
-## Choosing a lens {#choosing-a-lens}
+## Different questions about the same model {#choosing-a-lens}
 
-We have now asked several questions about chemical observations. A pattern in reaction records may help predict yield, while the effect of changing the temperature needs a different argument. Seven successes in ten attempts describe our observations, while uncertainty about another attempt requires further assumptions. And, as in the spectrum example, useful knowledge can enter through explicit rules or through learning from examples. Saying that we will use AI has settled none of these choices.
+The reaction example, the ten synthesis attempts, and the comparison of rules with learned patterns have addressed different questions. We bring them together because a description such as “a neural network for chemistry” answers only some of the questions we need to ask before using its results.
 
-I find it useful to think of these choices as lenses. Each brings some aspects into focus and leaves others in the background. For now, we can express the choices as questions:
+In my notes I use **[lens](../glossary.qmd#lens)** as a shorthand for a way of approaching a problem: the question we ask, the assumptions we make, and what we regard as an answer. The street-map example concerned which information we retain. Here we ask about the claim, the uncertainty, and the organisation of the calculation. It helps to keep three distinctions in view. They concern different aspects of a model and can be considered together.
 
-| Question | Why does the choice matter? |
-|---|---|
-| Are we predicting a measurement or asking what would happen if we changed the experiment? | A pattern in recorded results can help with prediction without telling us what caused it. |
-| What do we mean when we say an answer is likely? | We have to say what is uncertain and which assumptions support the probability we report. |
-| Do we supply rules or learn relationships from examples? | The useful knowledge enters in different ways, with different opportunities for omissions and mistakes. |
+| Question | Distinction we have encountered | What should we check? |
+|---|---|---|
+| Are we predicting another outcome from recorded patterns, or estimating the effect of changing the experiment? | Correlative modelling and causal inference | In the reaction records, why were particular substrates heated? Accurate prediction alone did not separate that decision from the effect of heating. |
+| What does a probability statement refer to? | Frequentist and Bayesian approaches to uncertainty | Are we assessing a procedure across possible datasets, or describing uncertainty about an unknown quantity given our information and assumptions? Seven successes are observations; either account of uncertainty needs further choices. |
+| How is the calculation organised? | Symbolic and connectionist approaches | Are explicit symbols and rules doing the work, or a network with learned connections? A system may combine both. Learning from examples also includes methods outside neural networks. |
 
-These questions concern different decisions. A program can combine rules with learned relationships, and either kind of system can be used to make predictions. We need to look at the role of each component rather than place an entire system in one box. The [chemical applications](../examples.qmd#examples-through-lenses) develop these distinctions through chemical applications.
+For example, suppose a neural network predicts yields from the laboratory records, and we use a Bayesian model to describe uncertainty. “Neural network” tells us how one part of the calculation is organised. “Bayesian” tells us something about the treatment of uncertainty. We still have to ask whether the records and assumptions support estimating the effect of heating. Changing one of these descriptions does not settle the others.
 
-The same experiment can be examined through more than one lens. We might use a learned predictor to select candidates, design an intervention to investigate one condition, and use a probability model to describe uncertainty about its effect. The lens is a choice about what we ask and how we justify an answer. It is not a label that settles every question about a system.
+This is why the distinctions matter in practice. If our problem is that temperature was chosen in response to substrate difficulty, fitting the recorded yields more accurately may leave the intervention question unresolved. If an uncertainty estimate rests on treating synthesis attempts as comparable, discovering that all failures came from one reagent batch gives us a reason to revisit that assumption. We need to identify the difficulty before deciding how to improve the model.
 
-Within each lens, further choices follow. Suppose our experiment requires a dissolved concentration of 1 mmol/L. Measurements of 2 and 20 mmol/L can both become the label “soluble enough.” If a later experiment requires 5 mmol/L, that label has discarded the distinction we now need. The [solubility example](../examples.qmd#choices-within-a-lens) compares keeping the values, keeping only labels, and keeping only an ordering. It then asks whether two tenfold errors should receive the same penalty. We can keep the same aim of predicting from observed patterns and still make quite different decisions about what to retain and reward.
+**Check your understanding:** Someone says, “Our model is a neural network, so it tells us what would happen if we heated the reaction.” Which part describes the method, and which part makes a claim about the experiment? What additional evidence would you ask for? The point is to recognise the step in the argument, then use the terms to describe it.
 
-This also helps distinguish improving a method from changing the question it can answer. Fitting an observational association more accurately does not, by itself, identify an intervention effect. The reaction records illustrated why: the chemists chose temperatures in response to substrate difficulty. Explaining a model's calculation and explaining a chemical mechanism raise further questions about what a result establishes.
+There are further choices within an approach. If our experiment requires a dissolved concentration of 1 mmol/L, measurements of 2 and 20 mmol/L can both become “soluble enough.” If the requirement later changes to 5 mmol/L, those labels no longer preserve the distinction we need. The [solubility example](../examples.qmd#choices-within-a-lens) follows what happens when we keep values, labels, or an ordering. It makes the idea of omission concrete in the data we prepare for learning.
 
-We will return to three questions: **Does the lens fit the question? Do the choices within it serve our purpose? Does the evidence support the conclusion?** These questions apply just as much to our own models as to a result we encounter in a paper or product announcement.
-
-This is why we will spend time on the basics even while using capable coding and language-model assistants. An assistant may help us implement a calculation or suggest an explanation. We still need to recognise which question that calculation answers. LLMs are one part of the broader field we will study; using them well includes knowing when a different method, a measurement, or a better question is needed.
+For now, you should be able to explain one of these distinctions through its example and say what mistake it helps avoid. We will use them again when choosing model inputs, interpreting an error estimate, examining an explanation, and deciding on another experiment. An LLM can help write the code for those tasks. We still have to recognise which question the calculation answers and whether that is the question we meant to ask.
 
 ### What do we expect a model to tell us? {#breiman-two-cultures}
 
@@ -327,7 +327,7 @@ Consider a calibration curve. We could assume that mean absorbance depends linea
 
 Leo Breiman's [*Statistical Modeling: The Two Cultures*](https://www2.math.uu.se/~thulin/mm/breiman.pdf) (2001) develops this contrast. His **data modelling** culture starts with a probabilistic account of how observations arise; his **algorithmic modelling** culture builds a predictor while leaving that process unspecified. Both can pursue prediction and useful information. Breiman argues for a wider range of modelling tools and greater attention to predictive performance.
 
-These cultures do not coincide with the lenses above. A statistical model of observations is not automatically a causal or mechanistic account. A predictive algorithm still embodies assumptions through its inputs, construction, and evaluation. Either can be examined using a Bayesian or frequentist approach to uncertainty. The name of the culture does not settle the scientific question.
+Breiman adds a historical comparison of modelling practices. It is useful for asking what researchers expect a model to provide; it does not replace the three distinctions above. A statistical model of observations is not automatically a causal or mechanistic account. A predictive algorithm still embodies assumptions through its inputs, construction, and evaluation. Either can be examined using a Bayesian or frequentist approach to uncertainty. The name of the culture does not settle the scientific question.
 
 For our calibration, a familiar formula needs checking against the experiment. A flexible predictor needs checking on observations relevant to its intended use. Suppose the two predict new measurements equally well: what further evidence would we need if we also wanted to explain why absorbance changes with concentration? The distinction becomes consequential when we decide what to conclude from a good fit. The [suggested reading](../reading.qmd#breiman-two-cultures) gives useful places to begin in Breiman's argument.
 
@@ -391,8 +391,8 @@ Here, too, “another measurement” needs a meaning. A new solution on the same
 ## Questions to consider {#exit-questions}
 
 1. Rewrite “AI can do chemistry” as a specific task, method, and evaluable claim.
-2. Name one omission that is acceptable for a particular modelling task and one that would prevent the model from answering it.
-3. What would “new data” mean for a chemistry problem you care about?
+2. For a solubility predictor that receives only a molecular drawing, explain what changes if we want answers at two temperatures. What would you add to the inputs or restrict in the task?
+3. Knowing that a model is a neural network, what can you say about how it works? What would you still need to know before interpreting its predictions as effects of an intervention?
 4. A model predicts well and highlights temperature as important. What have we learned about the model, and what remains unknown about the effect and mechanism of heating the reaction?
 5. Seven of ten syntheses succeeded. What does 70% describe directly, and what assumptions would you need to predict the next attempt?
 

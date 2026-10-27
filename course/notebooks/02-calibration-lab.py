@@ -18,6 +18,8 @@ def _(mo):
 
     **Synthetic data, not laboratory results.** This notebook uses the same default data as the browser activity: seed 17 and noise standard deviation 0.055. It needs NumPy and Matplotlib. No data downloads, API keys, GPU, or LLM account are required.
 
+    The purpose is to explain what changes when we fit a more flexible curve. Predict the effect of one change, inspect the result, and say which observations influenced the choice. By the end, you should be able to explain why a smaller training error need not mean better predictions for other measurements.
+
     We use validation data to explore model choices. This is not a final test-set evaluation. In a research project, reserve a separate final evaluation relevant to the intended use.
     """)
     return
@@ -206,7 +208,7 @@ def _(mse, np):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md(r"""
-    ## Submit a short interpretation
+    ## Write a short interpretation
     1. State the model choice and the evidence for it.
     2. Explain which data fitted parameters and which data influenced model selection.
     3. State one assumption needed to use the calibration elsewhere.

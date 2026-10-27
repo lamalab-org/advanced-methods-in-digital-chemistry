@@ -29,7 +29,7 @@ The [course outline](outline.qmd) sets out the topics, the connections between s
 
 These notes are for master's students in chemistry. We develop the Python and machine-learning ideas alongside the chemical problems, starting with small examples. In the first meeting, on **Wednesday, 28 October 2026, 14:00–16:00, at Helmholtzweg 4, SR 6 Physik**, I would like to hear what you most want to learn and discuss a course format that works for us. We will begin with AI, prediction, and the human choices behind models, then see our tools in use and spend about half an hour setting them up together. You can [try the setup beforehand](setup.qmd), but a working installation is not required to join the first session. The [course outline](outline.qmd#scheduling) collects the dates and formats we will discuss.
 
-We will spend time with small examples: a molecular drawing, a few measurements, a line that does not quite fit. They give us something to work out together, on the board or on paper, before we ask a program to do the calculation. These notes develop the same arguments in more detail, so you can return to them afterwards.
+We will spend time with small examples: a molecular drawing, a few measurements, a line that does not quite fit. They let us follow a decision and check its consequences ourselves, on the board or on paper, before we ask a program to do the calculation. For each example, we will state the question, explain why it matters, and finish by saying what we can now do or judge more carefully. These notes develop the same arguments in more detail, so you can return to them afterwards.
 
 For the meetings after this introduction, I would like to propose a short introduction from me, perhaps ten to fifteen minutes, followed by plenty of time for you to work through examples and your own calculations. I will work with you as questions arise, help debug code, and discuss what the results mean. If several people run into the same difficulty, we can pause for a short explanation together. We will discuss whether this format would work for you in the first meeting.
 
@@ -48,13 +48,13 @@ Several books have shaped how I think about these questions. I particularly reco
 - [What do we mean by AI for science?](lectures/01-ai-and-science.qmd): AI as an ambition, concrete methods, a selective history, and scientific evidence.
 - [What does it mean to learn from data?](lectures/02-learning-from-data.qmd): a calibration experiment, choosing how to measure an error, fitting curves, and predicting new measurements.
 - [What can a model tell us about gas uptake?](lectures/03-mof-uptake.qmd): describing porous materials to a computer, comparing predictions, and examining the uncertainty in an error estimate.
-- [Examples from chemistry](examples.qmd): chemical applications examined through the different lenses introduced in lecture 1.
+- [Examples from chemistry](examples.qmd): chemical applications used to examine what a method does and what its results establish.
 - [Glossary](glossary.qmd): descriptors, features, parameters, kernels, and other terms used in the notes.
 - [Suggested reading](reading.qmd): books I recommend and the sources behind the examples.
 
 ## Examples from chemistry {#examples-through-lenses}
 
-DENDRAL, learned molecular energies, a robotic chemist, and formal proofs checked with Lean all involve rather different ways of working with knowledge. The [collection of chemical applications](examples.qmd) examines these and other examples through the lenses introduced in the first lecture. It is a place to return to as we encounter the methods in more detail.
+DENDRAL, learned molecular energies, a robotic chemist, and formal proofs checked with Lean all involve rather different ways of working with knowledge. The [collection of chemical applications](examples.qmd) uses these and other examples to revisit the distinctions from lecture 1: predicting versus intervening, interpreting uncertainty, and organising knowledge through rules or learned connections. It is a place to return to as we encounter the methods in more detail.
 
 []{#choices-within-a-lens}
 

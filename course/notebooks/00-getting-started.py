@@ -18,7 +18,7 @@ def _(mo):
 
     The calculations use only built-in Python; marimo displays the notebook. The observations are synthetic. Read from top to bottom, then change one value and follow its effect through the dependent cells.
 
-    **Goal:** explain what a cell does and verify a small result. No LLM account is required.
+    **Goal:** explain what a cell does and verify a small result. We use numbers that can be checked by hand so that a running program and a correct calculation can be judged separately. No LLM account is required.
     """)
     return
 

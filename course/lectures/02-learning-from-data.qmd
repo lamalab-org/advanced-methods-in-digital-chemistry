@@ -2,7 +2,7 @@
 title: "What does it mean to learn from data?"
 ---
 
-Fitting a calibration curve is already an example of learning from data. We choose a family of functions, use measurements to fit one of them, and hope that it will be useful for another measurement. Each of these steps involves a decision. A straight line is enough to make those decisions visible.
+Fitting a calibration curve is already an example of learning from data. We choose a family of functions, use measurements to fit one of them, and hope that it will be useful for another measurement. Each of these steps involves a decision. A straight line is enough to make those decisions visible. By the end, you should be able to follow a prediction into an error score, distinguish fitting parameters from choosing a model, and explain why an error measured on a test sample remains an estimate. These are the checks we will need when the calculation becomes too large to follow entirely by hand.
 
 ## Before class
 
@@ -12,7 +12,7 @@ Complete the [setup notebook](../notebooks/00-getting-started.py), or bring the 
 
 We prepare a series of concentrations and measure absorbance. Under suitable conditions in a dilute solution, we expect a roughly linear relationship. Drawing a line seems a reasonable place to start. But where should it go, and how will we decide whether one line is better than another?
 
-We will work through those decisions using a small generated dataset. The concentration is our **input**; the absorbance we want to predict is our **target**. Write concentration as $c$, in mmol L$^{-1}$, and dimensionless absorbance as $A$. Our line has a slope $m$ and an intercept $b$, so we allow both its steepness and its offset to change. These adjustable numbers are the model's **[parameters](../glossary.qmd#parameter)**.
+We use three generated observations first so that we can check each prediction and error ourselves. That will give us an independent way to check the code later. The concentration is our **input**; the absorbance we want to predict is our **target**. Write concentration as $c$, in mmol L$^{-1}$, and dimensionless absorbance as $A$. Our line has a slope $m$ and an intercept $b$, so we allow both its steepness and its offset to change. These adjustable numbers are the model's **[parameters](../glossary.qmd#parameter)**.
 
 We call the observations used to choose these numbers the **training data**. For this first model, we treat the prepared concentrations as known inputs and describe discrepancies on the absorbance side. Uncertainty in preparing the solutions would give us another modelling decision to make.
 
@@ -294,6 +294,8 @@ In $\hat A=mc+b$, changing the concentration input by $\Delta c$ changes the pre
 **Discuss:** If concentration and instrument settings varied together in the recorded measurements, which part of the fitted slope could be attributed to concentration? What comparison would help distinguish the possibilities? Connect your answer to the [different kinds of claims in lecture 1](01-ai-and-science.qmd#what-changes-when-the-task-is-science).
 
 ## Python practical
+
+We now repeat the argument in code: make a prediction about one controlled change, observe its effect, and explain which data support the conclusion. A successful run should leave you able to explain why a better training fit can have a worse validation error.
 
 Open the [marimo calibration notebook](../notebooks/02-calibration-lab.py) from the supplied project:
 
