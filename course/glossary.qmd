@@ -190,7 +190,11 @@ Something measured in place of the quantity or ability we want to understand. Fo
 
 In our experimental example, **calibration** relates known concentrations to measured absorbance. In probabilistic modelling, **calibration** concerns whether stated probabilities agree with observed frequencies in relevant groups of cases. These uses share a word but ask different questions.
 
-## Methods, lenses, and scientific claims
+## Methods, uncertainty, and scientific claims
+
+### Lens {#lens}
+
+An informal term used in these notes for a way of approaching a problem: the question asked, assumptions made, and kind of answer sought. The three contrasts in lecture 1 concern the claim (correlative or causal), the interpretation of uncertainty (frequentist or Bayesian), and the organisation of a calculation (symbolic or connectionist). They are different distinctions, not three mutually exclusive types of AI. Use the [examples in lecture 1](lectures/01-ai-and-science.qmd#choosing-a-lens) to explain what each distinction changes in practice.
 
 ### AI, machine learning, and deep learning {#ai-ml-dl}
 
@@ -210,7 +214,7 @@ A regression method that combines similarities to training examples with fitted 
 
 ### Symbolic and connectionist {#symbolic-connectionist}
 
-**Symbolic** approaches work with explicit symbols, rules, and operations. **Connectionist** approaches use networks with distributed representations. They can be combined: a neural model may suggest a synthesis step while a search procedure explores possible routes. See the [course's lenses](lectures/01-ai-and-science.qmd#choosing-a-lens).
+**Symbolic** approaches work with explicit symbols, rules, and operations. **Connectionist** approaches use networks with distributed representations. They can be combined: a neural model may suggest a synthesis step while a search procedure explores possible routes. See the [three distinctions in lecture 1](lectures/01-ai-and-science.qmd#choosing-a-lens).
 
 ### Correlative and causal {#correlative-causal}
 
