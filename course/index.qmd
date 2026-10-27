@@ -45,6 +45,14 @@ The [glossary](glossary.qmd) explains technical terms with examples from chemist
 
 Several books have shaped how I think about these questions. I particularly recommend Hardt and Recht's *Patterns, Predictions, and Actions*, Kate Crawford's *Atlas of AI*, Carissa Véliz's *Prophecy*, and Simon J. D. Prince's *Understanding Deep Learning*. For an introduction to machine learning, I also recommend [our review on porous materials and Mehta and colleagues' introduction for physicists](reading.qmd#introductory-reviews). These and the papers discussed in class are collected under [suggested reading](reading.qmd). The reading is optional.
 
+## Your feedback {#feedback}
+
+This is the first time I am teaching this course here in Jena. It is also a time when many of the methods and tools we will discuss are changing quickly. I have been trying out LLMs in other courses, but I am still working out where they help students learn and where they get in the way. This course will be part of that process.
+
+I would therefore really appreciate your feedback throughout the course. Tell me what works and what does not. Perhaps an explanation assumes something we have not covered, or an assistant helps you finish a calculation without helping you understand it. Knowing where that happens gives me a chance to adjust the teaching while it can still help you.
+
+I will leave a little time at the end of our meetings for two questions: **What helped you understand something? What got in the way?** You can also tell me during class, afterwards, or in a short message. Feedback is optional and is not part of the assessment. At the next meeting, I will come back to your comments and explain what I can change or what we need to discuss further.
+
 ## The course material {#start-here}
 
 - [Course outline](outline.qmd): the ten-meeting sequence, its rationale, and the background developed along the way.

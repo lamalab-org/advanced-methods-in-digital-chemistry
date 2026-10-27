@@ -348,6 +348,12 @@ Ask an LLM to suggest another explanation for the observations and an experiment
 
 What is the main thing you would like to be able to do or understand by the end of this course? It could begin with a chemical question, something you want to calculate, or a claim you would like to be able to examine. Take a moment to formulate your own goal before comparing it with someone else's. We will use these goals to discuss the emphasis and examples in the course.
 
+## Your feedback {#feedback}
+
+This is my first time teaching this course in Jena. I have been experimenting with LLMs in other courses, and I am still working out how to use them well in teaching. The tools are changing quickly, and having an assistant produce an answer is only one part of learning how to do something ourselves.
+
+I would really appreciate hearing what works for you and what does not as we go along. At the end of our meetings, I will ask **what helped you understand something** and **what got in the way**. A specific moment or example helps me see what needs attention. You can speak to me privately or send a short message too; you do not need to wait until the end of the course. This is optional feedback, separate from the assessment. I will return to your comments at the next meeting so we can see what to change. The [course introduction](../index.qmd#feedback) explains why this matters to me.
+
 ## What will the project involve? {#assessment}
 
 The official assessment has two components: **a project with a written report**, and **a final presentation with discussion**. The [course outline](../outline.qmd#assessment) gives their names and examination numbers in Friedolin.
