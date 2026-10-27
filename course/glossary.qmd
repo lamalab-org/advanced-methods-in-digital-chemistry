@@ -296,9 +296,13 @@ A **package** supplies reusable code. A **dependency** is software a project nee
 
 A **virtual environment** gives a Python project its own interpreter configuration and installed packages. **uv** manages these for us and runs commands in the project's environment. It is different from WSL, which supplies the Linux environment on Windows. [Python's virtual-environment introduction](https://docs.python.org/3.12/tutorial/venv.html#introduction)
 
-### Notebook, cell, and JupyterLab {#notebook}
+### Notebook, cell, and marimo {#notebook}
 
-A **notebook** is a document containing text, code, and saved outputs. A **cell** is one block of that content. **JupyterLab** is the browser interface we use to edit notebooks and request execution of their code. The execution happens in a kernel.
+A **notebook** combines explanations, code, and results. A **cell** is one block of that content. **marimo** is the browser interface we use to edit and run notebooks. It stores the text and code in a `.py` file. Our separate HTML previews contain recorded results for reading.
+
+### Reactivity and dependencies {#reactivity}
+
+If one cell uses a variable defined in another, it **depends on** that cell. In marimo's automatic mode, running a changed cell also reruns its dependents. For example, a changed concentration updates the absorbance calculated from it. This is **reactivity**. A notebook-wide name must be defined in a single cell. These rules organise execution; they do not validate the scientific argument or prevent data leakage. [marimo's explanation](https://docs.marimo.io/guides/reactivity/)
 
 ### Kernel {#kernel}
 
@@ -318,7 +322,7 @@ A credential used to authenticate access to a service. In our setup, the Blablad
 
 ### Server, browser, and localhost {#server}
 
-A **server** is a program that responds to requests. A **browser** can display its interface. **localhost** is a name for the local computer from a program's point of view. In our WSL setup, the Windows browser can also reach Jupyter's local Linux server through that address. [Opening JupyterLab](setup.qmd#create-and-check-the-environment).
+A **server** is a program that responds to requests. A **browser** can display its interface. **localhost** is a name for the local computer from a program's point of view. In our WSL setup, the Windows browser can also reach marimo's local Linux server through that address. [Opening marimo](setup.qmd#create-and-check-the-environment).
 
 ### Model identifier and alias {#model-alias}
 

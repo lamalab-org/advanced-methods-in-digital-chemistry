@@ -6,7 +6,7 @@ Fitting a calibration curve is already an example of learning from data. We choo
 
 ## Before class
 
-Complete the [setup notebook](../notebooks/00-getting-started.ipynb), or bring the first cell that did not work. Spend at most 25 minutes on preparation. Try calculating the three predictions in the opening example below before using Python or an LLM.
+Complete the [setup notebook](../notebooks/00-getting-started.py), or bring the first cell that did not work. Spend at most 25 minutes on preparation. Try calculating the three predictions in the opening example below before using Python or an LLM.
 
 ## Fitting a calibration curve {#a-familiar-experiment}
 
@@ -295,12 +295,18 @@ In $\hat A=mc+b$, changing the concentration input by $\Delta c$ changes the pre
 
 ## Python practical
 
-Open the [calibration notebook](../notebooks/02-calibration-lab.ipynb). It reproduces the activity with a small amount of NumPy and Matplotlib code. The prepared output is available even if package setup is still being resolved.
+Open the [marimo calibration notebook](../notebooks/02-calibration-lab.py) from the supplied project:
+
+```bash
+uv run --locked marimo edit notebooks/02-calibration-lab.py --headless
+```
+
+It reproduces the activity with a small amount of NumPy and Matplotlib code. A degree slider connects the model choice to its fitted curve and errors. The [HTML preview](../notebooks/previews/02-calibration-lab.html) shows the code and recorded output if package setup is still being resolved; changing a calculation requires the live notebook.
 
 - Run the notebook from the beginning and identify the cells that create data, fit parameters, and evaluate predictions.
-- Change only the polynomial degree first. Predict the effect before executing.
+- Change only the polynomial degree first, using the slider. Predict the effect before moving it.
 - Compare the fitted model with a constant baseline estimated from the training data.
-- Change the measurement-noise setting and rerun every cell. Explain why this is a simulation experiment rather than a new experimental finding.
+- Change `noise` in the data-generating cell and run that cell; follow the dependent results as marimo updates them. Explain why this is a simulation experiment rather than a new experimental finding.
 - Write three sentences: what you changed, what you observed, and which assumption would matter in a real calibration experiment.
 
 ## Checking the calculation {#llm-exercise-debug-a-metric}

@@ -17,3 +17,4 @@ __pycache__/
 .env
 .env.*
 .venv/
+**/__marimo__/

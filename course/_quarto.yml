@@ -13,6 +13,8 @@ project:
   resources:
     - activities/**
     - notebooks/**
+    - "!notebooks/__marimo__/**"
+    - "!notebooks/__pycache__/**"
     - downloads/**
     - data/**
     - assets/fonts/**

@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/favicon.ico" />
+    <!-- Preload is necessary because we show these images when we disconnect from the server,
+    but at that point we cannot load these images from the server -->
+    <link rel="preload" crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/gradient-yHQUC_QB.png" as="image" />
+    <link rel="preload" crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/noise-60BoTA8O.png" as="image" />
+    <!-- Preload the fonts -->
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/Lora-VariableFont_wght-CZceb_kH.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/PTSans-Regular-Bam3NpBI.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/PTSans-Bold-C_DwAp7Z.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/FiraMono-Regular-CEsLFVD9.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/FiraMono-Medium-D5MAsWEG.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/FiraMono-Bold-C6PDArdf.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="description" content="a marimo app" />
+    <link rel="apple-touch-icon" crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/apple-touch-icon.png" />
+    <link rel="manifest" crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/manifest.json" />
+
+    <script data-marimo="true">
+      function __resizeIframe(obj) {
+        const scrollbarHeight = 20; // Max between windows, mac, and linux
+
+        function setHeight() {
+          // Guard against race condition where iframe isn't ready
+          if (!obj.contentWindow?.document?.documentElement) {
+            return;
+          }
+          const element = obj.contentWindow.document.documentElement;
+          // If there is no vertical scrollbar, we don't need to resize the iframe
+          if (element.scrollHeight === element.clientHeight) {
+            return;
+          }
+
+          // Create a new height that includes the scrollbar height if it's visible
+          const hasHorizontalScrollbar = element.scrollWidth > element.clientWidth;
+          const newHeight = element.scrollHeight + (hasHorizontalScrollbar ? scrollbarHeight : 0);
+
+          // Only update the height if it's different from the current height
+          if (obj.style.height !== `${newHeight}px`) {
+            obj.style.height = `${newHeight}px`;
+          }
+        }
+
+        // Resize the iframe to the height of the content and bottom scrollbar height
+        setHeight();
+
+        // Resize the iframe when the content changes
+        const resizeObserver = new ResizeObserver((_entries) => {
+          setHeight();
+        });
+        // Only observe if iframe content is ready
+        if (obj.contentWindow?.document?.body) {
+          resizeObserver.observe(obj.contentWindow.document.body);
+        }
+      }
+    </script>
+    <marimo-filename hidden>00-getting-started.py</marimo-filename>
+    <!-- TODO(Trevor): Legacy, required by VS Code plugin. Remove when plugin is updated (see marimo/server/_templates/template.py) -->
+    <marimo-version data-version="{{ version }}" hidden></marimo-version>
+    <marimo-user-config data-config="{{ user_config }}" hidden></marimo-user-config>
+    <marimo-server-token data-token="{{ server_token }}" hidden></marimo-server-token>
+    <!-- /TODO -->
+    <title>00-getting-started</title>
+    <script type="module" crossorigin src="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/index-s-M1OXjs.js"></script>
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/rolldown-runtime-B0Z9INg1.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/react-DVplv7_D.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/compiler-runtime-BrajqUja.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/useEvent-Dfcbgjhg.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/react-dom-_LrxgvjW.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/schemas-Dv42wLFq.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/isObject-BCaOs5rp.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/isSymbol-oX0TOjjx.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/now-Cmx0b_zA.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/debounce-aFmHgJZY.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/isArrayLikeObject-DnwgSs_Z.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/_baseMerge-CQpUq7ep.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/objects-snlMn4yk.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/useEventListener-D9cftcHj.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/invariant-Ci2dTZ72.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/config-VPSq73n8.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/utils-B4K466FK.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/session-DqoWmb7X.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/Deferred-CrTnjj37.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/config-DX8Y2WbJ.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/clsx-DB0hHKMi.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/cn-ldLVeaqm.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/jsx-runtime-B74pBk57.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/fullscreen-B9tHcfpV.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/dist-iaThVDkA.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/menu-items-BrwnTgyK.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/use-restore-focus-BxEGwIbk.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/createLucideIcon-DfJ2oMlA.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/circle-DXf-VWZG.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/button-COI-NGrx.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/check-BQNapYaf.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/I18nProvider-Cg2I_s1_.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/useNumberFormatter-D7O_26UI.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/select-DTBn5eTb.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/toast-BGzLGnvw.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/tooltip-C9TuY18o.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/paths-bkIFVj8h.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/useLifecycle-Mq4gc5kS.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/toDate-DOj9Q6uC.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/database-zap-B_PMVg8T.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/alert-dialog-BaPGzeOK.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/arrays-BqUx5USx.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/once-Haz_uxEL.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/numbers-Mk3-CcoU.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/useDebounce-B_ccBZTp.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/input-BoBxR50a.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/use-toast-Wu434mLr.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/requests-lt0JK8Jt.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/uuid-k9DpjH68.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/write-secret-modal-DzKAInL2.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/plus-C5silF6g.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/trash-2-DcgaW8fn.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/preload-helper-uBIymjUX.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/dist-Cny7_yZb.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/dist-DBMV4gqt.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/capabilities-BJvf-MD4.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/cjs-C49f7GXV.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/createReducer-DgRODTW6.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/dist-qhAY4L2r.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/marked.esm-B_3iMIUq.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/strings-B2vv-ENv.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/dist-BOfh4hMd.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/badge-crT3E0Rm.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/dist-DtH-7lot.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/dist-BmExfiwX.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/dist-1tmpVXyz.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/dist-LSsCJjA3.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/dist-DusFODSa.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/stex-Dc5bKD4z.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/useTheme-COhSHkCj.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/useAsyncData-C7aJJz0Y.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/purify.es--06brOip.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/cells-BRkCaSsh.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/coerce-CpE6kUdX.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/get-DjNf4SIX.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/_hasPath-BmRQipI0.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/hasIn-yw4sIeJR.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/_baseSet-Bpdo9AvU.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/pick-DKIID_Mo.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/state-BAJYRhmO.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/state-C3oDoyFe.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/LazyAnyLanguageCodeMirror-CKcCbG2G.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/copy-D8O_CYCG.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/micromark-factory-space-D9Dr-k4J.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/chunk-YOKDWASO-BIpRENEC.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/markdown-renderer-BG3sp2rs.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/copy-Djr5m5ac.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/copy-icon-BIiRXh_3.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/useRunCells-B2vUhREg.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/RenderHTML-BbOqmHy3.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/blob-D5nfNHOo.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/kbd-pdKBv96t.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/useInstallPackage-iX1eufdl.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/errors-DCrsa1nH.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/api-BeC_VSGv.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/share-BZW3tzEX.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/events-CbeVJ6OD.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/state-_Qai_QyX.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/pair-CaQyK6En.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/ErrorBoundary-Gl5nCA8C.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/config-BOKzA3tF.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/chevron-right-eAtVhbNZ.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/dropdown-menu-C1rnl-0o.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/html-to-image-DK9Zl1lU.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/download-DCJXy66H.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/switch-CTaiAjrz.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/tabs-BuQlZFbt.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/table-DG7Ap4H4.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/eye-off-CxVozGAC.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/refresh-cw-Qw1f8Jhy.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/tree-actions-GM5E_bUs.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/ellipsis-63DyBLHQ.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/external-link-UrX9KO36.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/spinner-DyNE-o8o.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/message-circle-C3rKm8_a.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/hat-glasses-C8RhSVii.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/package-GSoSTiIK.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/datasource-Cq6x_5ML.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/alert-DTaqCu_d.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/state-XsPO8hNi.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/cell-link-LSth_8hT.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/MarimoErrorOutput-D60XkCny.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/useDateFormatter-DA-62E-Y.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/en-US-Buu61juQ.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/isValid-q_Ad80ug.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/dates-BbFQ2oE4.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/defaultLocale-CNPGWpMu.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/precisionRound-Bq_nmf5u.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/defaultLocale-D5bOh7g6.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/vega-loader.browser-CLRkNgm7.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/tooltip-mT3CGest.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/react-icons.esm-D6tfmvq8.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/extends-CvVTau-c.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/objectWithoutPropertiesLoose-Do6ywDBO.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/useIframeCapabilities-CwTkczVN.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/error-banner-Cd69vvyX.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/utils-CaQYvazl.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/formats-yZ06h1Pl.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/table-vrvqpuKJ.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/react-resizable-panels.browser.esm-Dbe0MrFr.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/JsonOutput-D6HIIsCb.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/chart-no-axes-column-C4_v6fQW.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/square-function-_W_Lo0P4.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/spec-BfSBcO5B.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/semaphore-BjoL5P0h.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/fileToBase64-BgBraYAr.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/useBoolean-BDD6_xQQ.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/code-xml-SQaZqvcO.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/file-headphone-Dl35U6h3.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/file-BPBVl9pl.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/image-wZvTj8WY.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/file-icons-CdJgUy-I.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/globe-UdPdIbF7.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/esm-CI_o7NhW.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/useAddCell-GR7eEQrT.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/readonly-python-code-DCSMIsTX.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/data-grid-types-DgHVN_Zz.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/glide-utils-CIrAxdjv.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/column-preview-Cm2D6vyX.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/square-BPmgQFnh.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/triangle-alert-DmIqR8sY.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/prop-types-Djf4O40e.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/es-Cqst59WX.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/package-data-dv4FBHxR.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/markdown-export-DzhB1FrN.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/renderShortcut-BkVJQ_Zh.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/bundle.esm-D3tw5rqW.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/icons-CiZ_8zS-.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/useDeepCompareMemoize-DFIVN9dn.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/pathUtils-DPmlLd-r.js">
+    <link rel="modulepreload" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/floating-outline-XD9FAV-f.js">
+    <link rel="stylesheet" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/cells-0PFKL3SH.css">
+    <link rel="stylesheet" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/markdown-renderer-DjIHoF9Z.css">
+    <link rel="stylesheet" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/JsonOutput-B0GmlMnR.css">
+    <link rel="stylesheet" crossorigin href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.25.2/dist/assets/index-Bcdzex-3.css">
+  
+<script data-marimo="true">
+    Object.defineProperty(window, "__MARIMO_STATIC__", {
+        value: Object.freeze({
+            files: Object.freeze({}),
+            modelNotifications: Object.freeze([]),
+        }),
+        writable: false,
+        configurable: false,
+    });
+</script>
+
+<script data-marimo="true">
+    Object.defineProperty(window, "__MARIMO_EXPORT_CONTEXT__", {
+        value: Object.freeze({
+            trusted: true,
+            notebookCode: "import marimo\n\n__generated_with = \"0.25.2\"\napp = marimo.App(width=\"medium\")\n\n\n@app.cell\ndef _():\n    import marimo as mo\n\n    return (mo,)\n\n\n@app.cell(hide_code=True)\ndef _(mo):\n    mo.md(r\"\"\"\n    # Getting started: a chemical calculation\n\n    The calculations use only built-in Python; marimo displays the notebook. The observations are synthetic. Read from top to bottom, then change one value and follow its effect through the dependent cells.\n\n    **Goal:** explain what a cell does and verify a small result. No LLM account is required.\n    \"\"\")\n    return\n\n\n@app.cell(hide_code=True)\ndef _(mo):\n    mo.md(r\"\"\"\n    ## 1. A prediction\n    Concentration is in mmol/L. Absorbance is dimensionless. Before running the cell, calculate the expected result for concentration 0.5.\n    \"\"\")\n    return\n\n\n@app.cell\ndef _():\n    concentration = 0.5\n    slope = 0.8  # L/mmol\n    intercept = 0.15\n    return concentration, intercept, slope\n\n\n@app.cell\ndef _(concentration, intercept, slope):\n    prediction = slope * concentration + intercept\n    print(\"Predicted absorbance:\", prediction)\n    return\n\n\n@app.cell(hide_code=True)\ndef _(mo):\n    mo.md(r\"\"\"\n    Change the concentration to 1.0. Predict the result first, then run the edited cell with Shift+Enter. In automatic mode, marimo also reruns the prediction cell because it uses `concentration`. Does the table below change? It uses a separate list of concentrations. Now change `slope`: which results should change?\n\n    A notebook-wide name is defined in one cell. Edit that definition rather than assigning the same name in another cell.\n    \"\"\")\n    return\n\n\n@app.cell(hide_code=True)\ndef _(mo):\n    mo.md(r\"\"\"\n    ## 2. Several observations\n    A list stores several values. `zip` pairs corresponding entries. Here the equal-length lists have one prediction and one observation per sample.\n    \"\"\")\n    return\n\n\n@app.cell\ndef _(intercept, slope):\n    concentrations = [0.0, 0.5, 1.0]\n    observations = [0.16, 0.52, 0.98]\n    predictions = [slope * c + intercept for c in concentrations]\n    for c, observed, predicted in zip(concentrations, observations, predictions):\n        print(f\"c={c:.2f}, observed={observed:.2f}, predicted={predicted:.2f}\")\n    return observations, predictions\n\n\n@app.cell(hide_code=True)\ndef _(mo):\n    mo.md(r\"\"\"\n    ## 3. Quantify the errors\n    Calculate the first residual by hand. Which line squares each residual? Which line averages?\n    \"\"\")\n    return\n\n\n@app.cell\ndef _(observations, predictions):\n    residuals = [p - y for p, y in zip(predictions, observations)]\n    squared_errors = [e ** 2 for e in residuals]\n    mse = sum(squared_errors) / len(squared_errors)\n    print(\"Residuals:\", residuals)\n    print(\"Mean squared error:\", mse)\n    return\n\n\n@app.cell(hide_code=True)\ndef _(mo):\n    mo.md(r\"\"\"\n    ## 4. A small check on assisted code\n    The function below is deliberately flawed if we intend it to calculate mean squared error. Use predictions `[2, 0]` and observations `[1, 1]`. Calculate the result by hand before asking an LLM for help.\n    \"\"\")\n    return\n\n\n@app.cell\ndef _():\n    def flawed_score(prediction, observation):\n        residuals = [p - y for p, y in zip(prediction, observation)]\n        return (sum(residuals) / len(residuals)) ** 2\n\n    print(\"Flawed score:\", flawed_score([2, 0], [1, 1]))\n    return\n\n\n@app.cell(hide_code=True)\ndef _(mo):\n    mo.md(r\"\"\"\n    **Your task:** write a corrected version below. Then test it on an exact prediction and on the two residuals +1 and -1. The expected mean squared errors are 0 and 1 respectively. Explain why cancellation was a problem.\n    \"\"\")\n    return\n\n\n@app.function\ndef corrected_score(prediction, observation):\n    # Replace this placeholder, then call the function on your two checks.\n    return None\n\n\n@app.cell(hide_code=True)\ndef _(mo):\n    mo.md(r\"\"\"\n    ## Exit check\n    - Save your copy. Stop marimo with Ctrl+C in its terminal, then reopen the saved file with the same launch command and check that it runs.\n    - Explain one line to your partner.\n    - Record green (runs and understood), amber (runs, still unclear), or red (cannot run).\n    - If you used an LLM, record its relevant suggestion and the independent check you performed.\n\n    The next notebook introduces NumPy and Matplotlib. This first notebook does not require them.\n    \"\"\")\n    return\n\n\nif __name__ == \"__main__\":\n    app.run()\n",
+        }),
+        writable: false,
+        configurable: false,
+    });
+</script>
+</head>
+  <body>
+    <div id="root"></div>
+    <script data-marimo="true">
+      Object.defineProperty(window, "__MARIMO_MOUNT_CONFIG__", {
+        value: Object.freeze({
+            "filename": "00-getting-started.py",
+            "cwd": "",
+            "lspWorkspace": null,
+            "mode": "read",
+            "version": "0.25.2",
+            "serverToken": "static",
+            "config": {"ai": {"allow_provider_config": true, "custom_providers": {}, "enabled": true, "models": {"custom_models": [], "displayed_models": []}}, "completion": {"activate_on_typing": true, "auto_close_pairs": true, "copilot": false, "signature_hint_on_typing": false}, "diagnostics": {"sql_linter": true}, "display": {"cell_output": "below", "code_editor_font_size": 14, "code_lens": true, "dataframes": "rich", "default_table_max_columns": 50, "default_table_page_size": 10, "default_width": "medium", "reference_highlighting": true, "theme": "light"}, "formatting": {"line_length": 79}, "keymap": {"overrides": {}, "preset": "default"}, "language_servers": {"pylsp": {"enable_flake8": false, "enable_mypy": true, "enable_pydocstyle": false, "enable_pyflakes": false, "enable_pylint": false, "enable_ruff": true, "enabled": false}}, "mcp": {"mcpServers": {}, "presets": []}, "package_management": {"manager": "uv"}, "runtime": {"auto_instantiate": false, "auto_reload": "off", "default_csv_encoding": "utf-8", "default_sql_output": "auto", "on_cell_change": "autorun", "output_max_bytes": 8000000, "reactive_tests": true, "show_tracebacks": false, "std_stream_max_bytes": 1000000, "watcher_on_save": "lazy"}, "save": {"autosave": "after_delay", "autosave_delay": 1000, "format_on_save": false}, "server": {"browser": "default", "follow_symlink": false}, "snippets": {"custom_paths": [], "include_default_snippets": true}},
+            "configOverrides": {},
+            "appConfig": {"sql_output": "auto", "width": "medium"},
+            "layout": null,
+            "view": {"showAppCode": true},
+            "notebook": {"cells": [{"code": "import marimo as mo", "code_hash": "1d0db38904205bec4d6f6f6a1f6cec3e", "config": {"column": null, "disabled": false, "expand_output": false, "hide_code": false}, "id": "Hbol", "name": "_"}, {"code": "mo.md(r\"\"\"\n# Getting started: a chemical calculation\n\nThe calculations use only built-in Python; marimo displays the notebook. The observations are synthetic. Read from top to bottom, then change one value and follow its effect through the dependent cells.\n\n**Goal:** explain what a cell does and verify a small result. No LLM account is required.\n\"\"\")", "code_hash": "2765d6e5fcbb1bddc11e15e44a840d5d", "config": {"column": null, "disabled": false, "expand_output": false, "hide_code": true}, "id": "MJUe", "name": "_"}, {"code": "mo.md(r\"\"\"\n## 1. A prediction\nConcentration is in mmol/L. Absorbance is dimensionless. Before running the cell, calculate the expected result for concentration 0.5.\n\"\"\")", "code_hash": "bb981e226167b909a78f6fe1896c6eea", "config": {"column": null, "disabled": false, "expand_output": false, "hide_code": true}, "id": "vblA", "name": "_"}, {"code": "concentration = 0.5\nslope = 0.8  # L/mmol\nintercept = 0.15", "code_hash": "d4c720618291c170bda2ba1805051cab", "config": {"column": null, "disabled": false, "expand_output": false, "hide_code": false}, "id": "bkHC", "name": "_"}, {"code": "prediction = slope * concentration + intercept\nprint(\"Predicted absorbance:\", prediction)", "code_hash": "3bf393a79c4d4d9e745f545c426db0c1", "config": {"column": null, "disabled": false, "expand_output": false, "hide_code": false}, "id": "lEQa", "name": "_"}, {"code": "mo.md(r\"\"\"\nChange the concentration to 1.0. Predict the result first, then run the edited cell with Shift+Enter. In automatic mode, marimo also reruns the prediction cell because it uses `concentration`. Does the table below change? It uses a separate list of concentrations. Now change `slope`: which results should change?\n\nA notebook-wide name is defined in one cell. Edit that definition rather than assigning the same name in another cell.\n\"\"\")", "code_hash": "986cb46f684684afa3a37ad784db5e4e", "config": {"column": null, "disabled": false, "expand_output": false, "hide_code": true}, "id": "PKri", "name": "_"}, {"code": "mo.md(r\"\"\"\n## 2. Several observations\nA list stores several values. `zip` pairs corresponding entries. Here the equal-length lists have one prediction and one observation per sample.\n\"\"\")", "code_hash": "1244e3747b727c94ca21088631afcdc1", "config": {"column": null, "disabled": false, "expand_output": false, "hide_code": true}, "id": "Xref", "name": "_"}, {"code": "concentrations = [0.0, 0.5, 1.0]\nobservations = [0.16, 0.52, 0.98]\npredictions = [slope * c + intercept for c in concentrations]\nfor c, observed, predicted in zip(concentrations, observations, predictions):\n    print(f\"c={c:.2f}, observed={observed:.2f}, predicted={predicted:.2f}\")", "code_hash": "ed7fc4472a00d99d64168c66bdebe83a", "config": {"column": null, "disabled": false, "expand_output": false, "hide_code": false}, "id": "SFPL", "name": "_"}, {"code": "mo.md(r\"\"\"\n## 3. Quantify the errors\nCalculate the first residual by hand. Which line squares each residual? Which line averages?\n\"\"\")", "code_hash": "04aca7bd9d912e55c659be9a0e3ed87f", "config": {"column": null, "disabled": false, "expand_output": false, "hide_code": true}, "id": "BYtC", "name": "_"}, {"code": "residuals = [p - y for p, y in zip(predictions, observations)]\nsquared_errors = [e ** 2 for e in residuals]\nmse = sum(squared_errors) / len(squared_errors)\nprint(\"Residuals:\", residuals)\nprint(\"Mean squared error:\", mse)", "code_hash": "796fe1028c756f0665d3db2e00084fa7", "config": {"column": null, "disabled": false, "expand_output": false, "hide_code": false}, "id": "RGSE", "name": "_"}, {"code": "mo.md(r\"\"\"\n## 4. A small check on assisted code\nThe function below is deliberately flawed if we intend it to calculate mean squared error. Use predictions `[2, 0]` and observations `[1, 1]`. Calculate the result by hand before asking an LLM for help.\n\"\"\")", "code_hash": "363c113d4e3fdb6201efa718598511cd", "config": {"column": null, "disabled": false, "expand_output": false, "hide_code": true}, "id": "Kclp", "name": "_"}, {"code": "def flawed_score(prediction, observation):\n    residuals = [p - y for p, y in zip(prediction, observation)]\n    return (sum(residuals) / len(residuals)) ** 2\n\nprint(\"Flawed score:\", flawed_score([2, 0], [1, 1]))", "code_hash": "c4f3c25ce821ec31f01407bdc6860f5b", "config": {"column": null, "disabled": false, "expand_output": false, "hide_code": false}, "id": "emfo", "name": "_"}, {"code": "mo.md(r\"\"\"\n**Your task:** write a corrected version below. Then test it on an exact prediction and on the two residuals +1 and -1. The expected mean squared errors are 0 and 1 respectively. Explain why cancellation was a problem.\n\"\"\")", "code_hash": "e27737a42c61b740dd06a15479f29817", "config": {"column": null, "disabled": false, "expand_output": false, "hide_code": true}, "id": "Hstk", "name": "_"}, {"code": "def corrected_score(prediction, observation):\n    # Replace this placeholder, then call the function on your two checks.\n    return None", "code_hash": "8714e61902e14d7d5c8262de5f771735", "config": {"column": null, "disabled": false, "expand_output": false, "hide_code": false}, "id": "nWHF", "name": "_"}, {"code": "mo.md(r\"\"\"\n## Exit check\n- Save your copy. Stop marimo with Ctrl+C in its terminal, then reopen the saved file with the same launch command and check that it runs.\n- Explain one line to your partner.\n- Record green (runs and understood), amber (runs, still unclear), or red (cannot run).\n- If you used an LLM, record its relevant suggestion and the independent check you performed.\n\nThe next notebook introduces NumPy and Matplotlib. This first notebook does not require them.\n\"\"\")", "code_hash": "886cff55823bf70eaccf2405e6aa8683", "config": {"column": null, "disabled": false, "expand_output": false, "hide_code": true}, "id": "iLit", "name": "_"}], "metadata": {"marimo_version": "0.25.2"}, "version": "1"},
+            "session": {"cells": [{"code_hash": "1d0db38904205bec4d6f6f6a1f6cec3e", "console": [], "id": "Hbol", "outputs": [{"data": {"text/plain": ""}, "type": "data"}]}, {"code_hash": "2765d6e5fcbb1bddc11e15e44a840d5d", "console": [], "id": "MJUe", "outputs": [{"data": {"text/markdown": "\u003Cspan class=\"markdown prose dark:prose-invert contents\"\u003E\u003Ch1 id=\"getting-started-a-chemical-calculation\"\u003EGetting started: a chemical calculation\u003C/h1\u003E\n\u003Cspan class=\"paragraph\"\u003EThe calculations use only built-in Python; marimo displays the notebook. The observations are synthetic. Read from top to bottom, then change one value and follow its effect through the dependent cells.\u003C/span\u003E\n\u003Cspan class=\"paragraph\"\u003E\u003Cstrong\u003EGoal:\u003C/strong\u003E explain what a cell does and verify a small result. No LLM account is required.\u003C/span\u003E\u003C/span\u003E"}, "type": "data"}]}, {"code_hash": "bb981e226167b909a78f6fe1896c6eea", "console": [], "id": "vblA", "outputs": [{"data": {"text/markdown": "\u003Cspan class=\"markdown prose dark:prose-invert contents\"\u003E\u003Ch2 id=\"1-a-prediction\"\u003E1. A prediction\u003C/h2\u003E\n\u003Cspan class=\"paragraph\"\u003EConcentration is in mmol/L. Absorbance is dimensionless. Before running the cell, calculate the expected result for concentration 0.5.\u003C/span\u003E\u003C/span\u003E"}, "type": "data"}]}, {"code_hash": "d4c720618291c170bda2ba1805051cab", "console": [], "id": "bkHC", "outputs": [{"data": {"text/plain": ""}, "type": "data"}]}, {"code_hash": "3bf393a79c4d4d9e745f545c426db0c1", "console": [{"mimetype": "text/plain", "name": "stdout", "text": "Predicted absorbance: 0.55\n", "type": "stream"}], "id": "lEQa", "outputs": [{"data": {"text/plain": ""}, "type": "data"}]}, {"code_hash": "986cb46f684684afa3a37ad784db5e4e", "console": [], "id": "PKri", "outputs": [{"data": {"text/markdown": "\u003Cspan class=\"markdown prose dark:prose-invert contents\"\u003E\u003Cspan class=\"paragraph\"\u003EChange the concentration to 1.0. Predict the result first, then run the edited cell with Shift+Enter. In automatic mode, marimo also reruns the prediction cell because it uses \u003Ccode\u003Econcentration\u003C/code\u003E. Does the table below change? It uses a separate list of concentrations. Now change \u003Ccode\u003Eslope\u003C/code\u003E: which results should change?\u003C/span\u003E\n\u003Cspan class=\"paragraph\"\u003EA notebook-wide name is defined in one cell. Edit that definition rather than assigning the same name in another cell.\u003C/span\u003E\u003C/span\u003E"}, "type": "data"}]}, {"code_hash": "1244e3747b727c94ca21088631afcdc1", "console": [], "id": "Xref", "outputs": [{"data": {"text/markdown": "\u003Cspan class=\"markdown prose dark:prose-invert contents\"\u003E\u003Ch2 id=\"2-several-observations\"\u003E2. Several observations\u003C/h2\u003E\n\u003Cspan class=\"paragraph\"\u003EA list stores several values. \u003Ccode\u003Ezip\u003C/code\u003E pairs corresponding entries. Here the equal-length lists have one prediction and one observation per sample.\u003C/span\u003E\u003C/span\u003E"}, "type": "data"}]}, {"code_hash": "ed7fc4472a00d99d64168c66bdebe83a", "console": [{"mimetype": "text/plain", "name": "stdout", "text": "c=0.00, observed=0.16, predicted=0.15\nc=0.50, observed=0.52, predicted=0.55\nc=1.00, observed=0.98, predicted=0.95\n", "type": "stream"}], "id": "SFPL", "outputs": [{"data": {"text/plain": ""}, "type": "data"}]}, {"code_hash": "04aca7bd9d912e55c659be9a0e3ed87f", "console": [], "id": "BYtC", "outputs": [{"data": {"text/markdown": "\u003Cspan class=\"markdown prose dark:prose-invert contents\"\u003E\u003Ch2 id=\"3-quantify-the-errors\"\u003E3. Quantify the errors\u003C/h2\u003E\n\u003Cspan class=\"paragraph\"\u003ECalculate the first residual by hand. Which line squares each residual? Which line averages?\u003C/span\u003E\u003C/span\u003E"}, "type": "data"}]}, {"code_hash": "796fe1028c756f0665d3db2e00084fa7", "console": [{"mimetype": "text/plain", "name": "stdout", "text": "Residuals: [-0.010000000000000009, 0.030000000000000027, -0.029999999999999916]\nMean squared error: 0.0006333333333333322\n", "type": "stream"}], "id": "RGSE", "outputs": [{"data": {"text/plain": ""}, "type": "data"}]}, {"code_hash": "363c113d4e3fdb6201efa718598511cd", "console": [], "id": "Kclp", "outputs": [{"data": {"text/markdown": "\u003Cspan class=\"markdown prose dark:prose-invert contents\"\u003E\u003Ch2 id=\"4-a-small-check-on-assisted-code\"\u003E4. A small check on assisted code\u003C/h2\u003E\n\u003Cspan class=\"paragraph\"\u003EThe function below is deliberately flawed if we intend it to calculate mean squared error. Use predictions \u003Ccode\u003E[2, 0]\u003C/code\u003E and observations \u003Ccode\u003E[1, 1]\u003C/code\u003E. Calculate the result by hand before asking an LLM for help.\u003C/span\u003E\u003C/span\u003E"}, "type": "data"}]}, {"code_hash": "c4f3c25ce821ec31f01407bdc6860f5b", "console": [{"mimetype": "text/plain", "name": "stdout", "text": "Flawed score: 0.0\n", "type": "stream"}], "id": "emfo", "outputs": [{"data": {"text/plain": ""}, "type": "data"}]}, {"code_hash": "e27737a42c61b740dd06a15479f29817", "console": [], "id": "Hstk", "outputs": [{"data": {"text/markdown": "\u003Cspan class=\"markdown prose dark:prose-invert contents\"\u003E\u003Cspan class=\"paragraph\"\u003E\u003Cstrong\u003EYour task:\u003C/strong\u003E write a corrected version below. Then test it on an exact prediction and on the two residuals +1 and -1. The expected mean squared errors are 0 and 1 respectively. Explain why cancellation was a problem.\u003C/span\u003E\u003C/span\u003E"}, "type": "data"}]}, {"code_hash": "8714e61902e14d7d5c8262de5f771735", "console": [], "id": "nWHF", "outputs": [{"data": {"text/plain": ""}, "type": "data"}]}, {"code_hash": "886cff55823bf70eaccf2405e6aa8683", "console": [], "id": "iLit", "outputs": [{"data": {"text/markdown": "\u003Cspan class=\"markdown prose dark:prose-invert contents\"\u003E\u003Ch2 id=\"exit-check\"\u003EExit check\u003C/h2\u003E\n\u003Cul\u003E\n\u003Cli\u003ESave your copy. Stop marimo with Ctrl+C in its terminal, then reopen the saved file with the same launch command and check that it runs.\u003C/li\u003E\n\u003Cli\u003EExplain one line to your partner.\u003C/li\u003E\n\u003Cli\u003ERecord green (runs and understood), amber (runs, still unclear), or red (cannot run).\u003C/li\u003E\n\u003Cli\u003EIf you used an LLM, record its relevant suggestion and the independent check you performed.\u003C/li\u003E\n\u003C/ul\u003E\n\u003Cspan class=\"paragraph\"\u003EThe next notebook introduces NumPy and Matplotlib. This first notebook does not require them.\u003C/span\u003E\u003C/span\u003E"}, "type": "data"}]}], "metadata": {"marimo_version": "0.25.2", "script_metadata_hash": null}, "version": "1"},
+            "runtimeConfig": null
+        }),
+        writable: false,
+        configurable: false,
+      });
+    </script>
+  
+<marimo-code hidden="">
+    import%20marimo%0A%0A__generated_with%20%3D%20%220.25.2%22%0Aapp%20%3D%20marimo.App(width%3D%22medium%22)%0A%0A%0A%40app.cell%0Adef%20_()%3A%0A%20%20%20%20import%20marimo%20as%20mo%0A%0A%20%20%20%20return%20(mo%2C)%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20%23%20Getting%20started%3A%20a%20chemical%20calculation%0A%0A%20%20%20%20The%20calculations%20use%20only%20built-in%20Python%3B%20marimo%20displays%20the%20notebook.%20The%20observations%20are%20synthetic.%20Read%20from%20top%20to%20bottom%2C%20then%20change%20one%20value%20and%20follow%20its%20effect%20through%20the%20dependent%20cells.%0A%0A%20%20%20%20**Goal%3A**%20explain%20what%20a%20cell%20does%20and%20verify%20a%20small%20result.%20No%20LLM%20account%20is%20required.%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20%23%23%201.%20A%20prediction%0A%20%20%20%20Concentration%20is%20in%20mmol%2FL.%20Absorbance%20is%20dimensionless.%20Before%20running%20the%20cell%2C%20calculate%20the%20expected%20result%20for%20concentration%200.5.%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_()%3A%0A%20%20%20%20concentration%20%3D%200.5%0A%20%20%20%20slope%20%3D%200.8%20%20%23%20L%2Fmmol%0A%20%20%20%20intercept%20%3D%200.15%0A%20%20%20%20return%20concentration%2C%20intercept%2C%20slope%0A%0A%0A%40app.cell%0Adef%20_(concentration%2C%20intercept%2C%20slope)%3A%0A%20%20%20%20prediction%20%3D%20slope%20*%20concentration%20%2B%20intercept%0A%20%20%20%20print(%22Predicted%20absorbance%3A%22%2C%20prediction)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20Change%20the%20concentration%20to%201.0.%20Predict%20the%20result%20first%2C%20then%20run%20the%20edited%20cell%20with%20Shift%2BEnter.%20In%20automatic%20mode%2C%20marimo%20also%20reruns%20the%20prediction%20cell%20because%20it%20uses%20%60concentration%60.%20Does%20the%20table%20below%20change%3F%20It%20uses%20a%20separate%20list%20of%20concentrations.%20Now%20change%20%60slope%60%3A%20which%20results%20should%20change%3F%0A%0A%20%20%20%20A%20notebook-wide%20name%20is%20defined%20in%20one%20cell.%20Edit%20that%20definition%20rather%20than%20assigning%20the%20same%20name%20in%20another%20cell.%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20%23%23%202.%20Several%20observations%0A%20%20%20%20A%20list%20stores%20several%20values.%20%60zip%60%20pairs%20corresponding%20entries.%20Here%20the%20equal-length%20lists%20have%20one%20prediction%20and%20one%20observation%20per%20sample.%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(intercept%2C%20slope)%3A%0A%20%20%20%20concentrations%20%3D%20%5B0.0%2C%200.5%2C%201.0%5D%0A%20%20%20%20observations%20%3D%20%5B0.16%2C%200.52%2C%200.98%5D%0A%20%20%20%20predictions%20%3D%20%5Bslope%20*%20c%20%2B%20intercept%20for%20c%20in%20concentrations%5D%0A%20%20%20%20for%20c%2C%20observed%2C%20predicted%20in%20zip(concentrations%2C%20observations%2C%20predictions)%3A%0A%20%20%20%20%20%20%20%20print(f%22c%3D%7Bc%3A.2f%7D%2C%20observed%3D%7Bobserved%3A.2f%7D%2C%20predicted%3D%7Bpredicted%3A.2f%7D%22)%0A%20%20%20%20return%20observations%2C%20predictions%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20%23%23%203.%20Quantify%20the%20errors%0A%20%20%20%20Calculate%20the%20first%20residual%20by%20hand.%20Which%20line%20squares%20each%20residual%3F%20Which%20line%20averages%3F%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(observations%2C%20predictions)%3A%0A%20%20%20%20residuals%20%3D%20%5Bp%20-%20y%20for%20p%2C%20y%20in%20zip(predictions%2C%20observations)%5D%0A%20%20%20%20squared_errors%20%3D%20%5Be%20**%202%20for%20e%20in%20residuals%5D%0A%20%20%20%20mse%20%3D%20sum(squared_errors)%20%2F%20len(squared_errors)%0A%20%20%20%20print(%22Residuals%3A%22%2C%20residuals)%0A%20%20%20%20print(%22Mean%20squared%20error%3A%22%2C%20mse)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20%23%23%204.%20A%20small%20check%20on%20assisted%20code%0A%20%20%20%20The%20function%20below%20is%20deliberately%20flawed%20if%20we%20intend%20it%20to%20calculate%20mean%20squared%20error.%20Use%20predictions%20%60%5B2%2C%200%5D%60%20and%20observations%20%60%5B1%2C%201%5D%60.%20Calculate%20the%20result%20by%20hand%20before%20asking%20an%20LLM%20for%20help.%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_()%3A%0A%20%20%20%20def%20flawed_score(prediction%2C%20observation)%3A%0A%20%20%20%20%20%20%20%20residuals%20%3D%20%5Bp%20-%20y%20for%20p%2C%20y%20in%20zip(prediction%2C%20observation)%5D%0A%20%20%20%20%20%20%20%20return%20(sum(residuals)%20%2F%20len(residuals))%20**%202%0A%0A%20%20%20%20print(%22Flawed%20score%3A%22%2C%20flawed_score(%5B2%2C%200%5D%2C%20%5B1%2C%201%5D))%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20**Your%20task%3A**%20write%20a%20corrected%20version%20below.%20Then%20test%20it%20on%20an%20exact%20prediction%20and%20on%20the%20two%20residuals%20%2B1%20and%20-1.%20The%20expected%20mean%20squared%20errors%20are%200%20and%201%20respectively.%20Explain%20why%20cancellation%20was%20a%20problem.%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.function%0Adef%20corrected_score(prediction%2C%20observation)%3A%0A%20%20%20%20%23%20Replace%20this%20placeholder%2C%20then%20call%20the%20function%20on%20your%20two%20checks.%0A%20%20%20%20return%20None%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20%23%23%20Exit%20check%0A%20%20%20%20-%20Save%20your%20copy.%20Stop%20marimo%20with%20Ctrl%2BC%20in%20its%20terminal%2C%20then%20reopen%20the%20saved%20file%20with%20the%20same%20launch%20command%20and%20check%20that%20it%20runs.%0A%20%20%20%20-%20Explain%20one%20line%20to%20your%20partner.%0A%20%20%20%20-%20Record%20green%20(runs%20and%20understood)%2C%20amber%20(runs%2C%20still%20unclear)%2C%20or%20red%20(cannot%20run).%0A%20%20%20%20-%20If%20you%20used%20an%20LLM%2C%20record%20its%20relevant%20suggestion%20and%20the%20independent%20check%20you%20performed.%0A%0A%20%20%20%20The%20next%20notebook%20introduces%20NumPy%20and%20Matplotlib.%20This%20first%20notebook%20does%20not%20require%20them.%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0Aif%20__name__%20%3D%3D%20%22__main__%22%3A%0A%20%20%20%20app.run()%0A
+</marimo-code>
+
+<marimo-code-hash hidden="">d611d2b821b37240defb5fcdb885acde</marimo-code-hash>
+</body>
+</html>

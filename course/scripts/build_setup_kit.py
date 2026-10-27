@@ -5,8 +5,10 @@ from zipfile import ZIP_DEFLATED, ZipFile
 root = Path(__file__).resolve().parents[1]
 files = [
     "pyproject.toml", ".python-version", "uv.lock", "requirements.txt",
-    "scripts/check_environment.py", "notebooks/00-getting-started.ipynb",
-    "notebooks/02-calibration-lab.ipynb",
+    "scripts/check_environment.py", "notebooks/00-getting-started.py",
+    "notebooks/02-calibration-lab.py",
+    "notebooks/previews/00-getting-started.html",
+    "notebooks/previews/02-calibration-lab.html",
 ]
 readme = """Advanced Methods in Digital Chemistry: introductory setup
 
@@ -74,22 +76,27 @@ Check that ls shows pyproject.toml.
 
    uv sync --locked
    uv run --locked python scripts/check_environment.py
-   uv run --locked jupyter lab --no-browser
+   uv run --locked marimo edit notebooks/00-getting-started.py --headless
 
-Keep the terminal running. Copy Jupyter's complete printed localhost URL,
+Keep the terminal running. Copy marimo's complete printed local URL,
 including its token, into your browser. On Windows use the Windows browser;
-the server and Python kernel run in WSL. Keep that URL out of chat messages.
+the server and Python calculations run in WSL. Keep that URL out of chat messages.
 
 The virtual environment is the project's Python and installed packages in
 .venv. uv creates it; uv run selects it without a separate activation step.
 pyproject.toml declares dependencies; uv.lock records their versions.
 Run the commands above in your shell, and Python code in notebook cells.
-The kernel executes those cells and remembers variables until restarted.
-Restarting clears those variables but keeps installed packages and files.
+marimo saves notebooks as Python files. In automatic mode, running a changed
+cell also reruns the cells that depend on its variables. Define each notebook-
+wide name in one cell; edit that definition to change its value.
 
-Open notebooks/00-getting-started.ipynb. Select the course .venv Python
-kernel if prompted. Restart the kernel and run all cells. Explain the
-calibration calculation and change one input.
+The command opens notebooks/00-getting-started.py. Explain the calibration
+calculation, predict the effect of changing concentration, then run the edited
+cell with Shift+Enter. Follow the updated prediction. Save a copy, stop marimo
+with Ctrl+C in its terminal, then reopen your saved file with the same command.
+For the next practical, replace the filename with notebooks/02-calibration-lab.py.
+HTML previews in notebooks/previews/ show recorded results for reading;
+their controls do not rerun Python.
 For WSL, sys.executable should point to the Linux project's .venv/bin/python,
 and sys.platform should be linux. The Windows and Linux environments are
 separate even though they are on the same laptop.
@@ -121,5 +128,5 @@ with ZipFile(out, "w", compression=ZIP_DEFLATED) as archive:
     for name in files:
         archive.write(root / name, "digital-chemistry-intro/" + name)
     archive.writestr("digital-chemistry-intro/START-HERE.txt", readme)
-    archive.writestr("digital-chemistry-intro/.gitignore", ".venv/\n.ipynb_checkpoints/\n.env\n")
+    archive.writestr("digital-chemistry-intro/.gitignore", ".venv/\n__marimo__/\n.env\n")
 print(f"Created {out.name} ({out.stat().st_size:,} bytes)")
