@@ -2,7 +2,7 @@
 title: "Working with a coding assistant"
 ---
 
-Suppose we have written a function to calculate a prediction error. It runs, prints a number, and produces no error message. Unfortunately, it calculates the wrong quantity. We have already met this example in [the second lecture](lectures/02-learning-from-data.qmd#llm-exercise-debug-a-metric). We will now use it to try an assistant that can work directly on our files.
+Our [error function from the second lecture](lectures/02-learning-from-data.qmd#llm-exercise-debug-a-metric) runs and prints a number. Unfortunately, it calculates the wrong quantity. I would like you to try a coding assistant on this problem: can it find the mistake, and can you check its repair?
 
 In a chat, we usually copy code into a conversation and copy a suggestion back. A coding assistant with a **command-line interface**, or **CLI**, runs in the terminal. It can read a file, propose an edit, and run a command to check the result. The language model still generates proposed actions; the surrounding software carries them out with the permissions it has been given. This is one concrete use of the term [coding agent](glossary.qmd#coding-agent).
 
@@ -16,11 +16,9 @@ After this exercise, you should be able to:
 - Inspect which file changed, explain the change, and check it against an answer you calculated yourself.
 - Explain what passing the checks establishes, and why it does not prove that the program works for every input.
 
-The assistant may do the editing. You should still be able to account for the result.
-
 ## Choose a connection {#connection}
 
-We will use **Codex CLI with Blablador** as our starting example. Codex supplies the program that reads files and runs commands; Blablador supplies the remote model. Jülich documents this connection in its [Codex guide](https://sdlaml.pages.jsc.fz-juelich.de/ai/guides/blablador_codex_tutorial/). The instructions below adapt it to a terminal session. A reply in Jan tells us that we can exchange messages with a model. Reading a file, editing it, and running a check asks more of the connection. This small exercise lets us see whether those steps work before giving the assistant a larger task.
+We will use **Codex CLI with Blablador** as our starting example. Codex supplies the program that reads files and runs commands; Blablador supplies the remote model. The instructions below follow [Jülich's Codex guide](https://sdlaml.pages.jsc.fz-juelich.de/ai/guides/blablador_codex_tutorial/). A successful chat in Jan does not yet tell us whether file edits and commands work through this connection; the small exercise will let us check that.
 
 You can also use an assistant you already have, such as Codex with another provider or [Claude Code](https://code.claude.com/docs/en/quickstart). Access arrangements differ, but you do not need to buy a subscription for this exercise. If your installation or account is unavailable, work with a partner on a configured machine. We use only the small supplied example here; the [discussion of data handling](setup.qmd#assistant-data) also applies to files read by an assistant.
 

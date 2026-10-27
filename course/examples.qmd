@@ -4,11 +4,9 @@ title: "Examples from chemistry"
 
 ## Chemical applications {#examples-through-lenses}
 
-“AI in chemistry” can mean proposing a molecular structure, choosing an experiment, or checking the steps of a theoretical derivation. These involve quite different ways of working with knowledge. A few examples make the breadth of the term apparent.
+There are many ways to use AI in chemistry, and this is a deliberately incomplete collection. I find it useful to put such different examples beside one another: proposing a structure, choosing an experiment, and checking a derivation require different methods and give us different kinds of evidence.
 
-This is a non-exhaustive collection, and we will return to it as we learn the methods. A model may predict an energy, a robot may change an experiment, and a proof checker may establish what follows from some premises. Calling all three AI is possible. Treating their results as the same kind of evidence would cause trouble.
-
-**What should you be able to do with these examples?** Choose one study and explain its task, where the method gets its information, and which claim the result supports. Then name a stronger claim that would need further evidence. The distinctions from [lecture 1](lectures/01-ai-and-science.qmd#choosing-a-lens) help us ask those questions: prediction and intervention, interpretations of probability, and rules and learned patterns. We need not force every distinction onto every example. Checking a mathematical derivation, for instance, need not involve a probability.
+After working through an example, you should be able to explain its task, where the method gets its information, and which claim the result supports. Use the distinctions from [lecture 1](lectures/01-ai-and-science.qmd#choosing-a-lens) where they help. Checking a derivation, for instance, need not involve a probability.
 
 | Example | What was the scientific task? |
 |---|---|
@@ -86,5 +84,5 @@ Even if we keep numerical values, we still have to decide what counts as a large
 
 We have not changed our broad ambition of learning from observations. We have changed the question the model can answer. A label that was perfectly sensible for one experiment can be insufficient for the next. Before choosing an algorithm, we therefore need to ask what decision its output should help us make. Otherwise, we may become very good at predicting something we no longer need.
 
-Choose one research example. State its task, explain how its method uses rules or examples, and identify one claim its reported evaluation supports. If a probability or uncertainty measure is reported, say what it describes. Finally, propose one stronger claim that would require additional evidence. If a distinction is irrelevant to your chosen task, explain why; there is no need to assign every system a label in every column. The [original studies](reading.qmd#application-examples) describe the choices their authors made.
+**Try:** Choose one of the [original studies](reading.qmd#application-examples). Formulate one claim its evaluation supports and one stronger claim that would need further evidence. Explain the difference to someone else using the study's actual task and results.
 

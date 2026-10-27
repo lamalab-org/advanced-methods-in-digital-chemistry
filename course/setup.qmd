@@ -2,7 +2,7 @@
 title: "Your AI assistant and Python environment"
 ---
 
-There are quite a few names in this setup. They refer to different jobs: an assistant suggests something to try, Python performs a calculation, and a notebook lets us work on the code beside its explanation. We will install the tools together, but I would also like you to know enough about what each one does to investigate a problem when it appears.
+I would like us to get a small calculation running and understand enough of the setup to investigate a problem when it appears. We will use an assistant to help with that, and we will also check what it suggests.
 
 ## What should work when we are done? {#setup-outcomes}
 
@@ -11,8 +11,6 @@ After working through this page, you should be able to:
 - Open the supplied notebook, change a calculation, check the result, and reopen your saved work.
 - Explain where a shell command belongs, which Python environment runs the code, and which parts of our setup run on your computer or at Jülich.
 - Give an assistant enough information to investigate an error, then check its suggestion. If the assistant is unavailable, make the same checks with a partner or with me.
-
-The first sign that the setup works is a calculation you can change and explain. Installing a list of programs is only part of getting there.
 
 ## Before the first meeting
 
@@ -26,15 +24,15 @@ I will demonstrate **Jan connected to Blablador first**, so that we have an assi
 
 Python executes the calculations. uv keeps the course's dependencies together. marimo is the interface for writing and running Python. Jan displays our chat, and Blablador runs the language model at Jülich. A browser window can therefore show a calculation running on your own computer or a conversation with a remote service. The window alone does not tell us where the work happens.
 
-The [glossary](glossary.qmd#computing-and-the-course-tools) provides short definitions of the computing terms below. We will also explain them as they become useful.
+The [glossary](glossary.qmd#computing-and-the-course-tools) explains the computing terms used below.
 
-Start with the [assistant](#set-up-the-ai-assistant) and try a short debugging conversation. If you already have one, you can go straight to the [debugging example](#assistant-for-debugging). Windows users then prepare [Ubuntu in WSL 2](#windows-wsl). We will use its Linux shell for the course. Continue with the [computing basics](#computing-basics) and [Python setup](#set-up-python). Once the notebook runs, we will check an assisted calculation. A separate code editor is optional.
+Start with the [assistant](#set-up-the-ai-assistant), or go straight to the [debugging example](#assistant-for-debugging) if you already use one. Windows users then prepare [Ubuntu in WSL 2](#windows-wsl). The [computing basics](#computing-basics) explain what the commands in the [Python setup](#set-up-python) mean. A separate code editor is optional.
 
 ## Set up the AI assistant {#set-up-the-ai-assistant}
 
 ### Why Jan and Blablador? {#why-this-assistant}
 
-Jan is one example of how we can work with open models. You are welcome to use **Claude, Codex, or another assistant** for the course. You do not need to buy a subscription or replace a tool that already works for you. In each case, we will practise explaining the problem, examining the proposed answer, and checking what it does.
+Jan is one example of how we can work with open models. You are welcome to use **Claude, Codex, or another assistant**. You do not need to buy a subscription or replace a tool that already works for you.
 
 We suggest Jan with Blablador because it gives us access to [open models](glossary.qmd#open-models) through research infrastructure in Germany. [Jan is open-source software](https://www.jan.ai/); Blablador supplies the models, running at Forschungszentrum Jülich. The service is free to use, subject to access and usage limits. This gives us an option that does not depend on each student maintaining a paid subscription. [Helmholtz's service introduction](https://www.hifis.net/tips/2025/05/05/tip-llm/); [Jülich's account of the open-model service](https://strube1.pages.jsc.fz-juelich.de/2026-06-12-hdc-rs/); [current access and limits](https://sdlaml.pages.jsc.fz-juelich.de/ai/guides/blablador_api_access/)
 
