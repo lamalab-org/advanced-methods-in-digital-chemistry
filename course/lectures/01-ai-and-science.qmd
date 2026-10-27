@@ -80,6 +80,16 @@ Whether a familiar regression is described as AI or machine learning changes lit
 
 For example, “AI understands solubility” leaves much unspecified. A more precise claim is that a particular model predicts measured aqueous solubility, under stated conditions, for molecules outside the series used to develop it, with a stated error relative to a [baseline](../glossary.qmd#baseline), a reference method used for comparison. We can examine the data, choose a relevant evaluation, and debate whether the conclusion follows. Someone has chosen the property, conditions, comparison, and acceptable error. Those choices deserve as much attention as the name of the algorithm.
 
+## Prediction and prophecy {#prediction-and-prophecy}
+
+The wish to know what will happen is much older than machine learning. Carissa Véliz's [*Prophecy*](../reading.qmd#prophecy) places today's predictive technologies within that longer history. I find this a useful starting point because it makes us ask why we want a prediction, whose prediction we trust, and what we do once we have it.
+
+Suppose a model predicts which materials will be stable. We use its ranking to decide which candidates to make. The prediction has now helped decide where people spend their time and which measurements will exist. The materials we never make remain unknown. If the new measurements enter the next dataset, our earlier decisions also shape the evidence available to the next model.
+
+A numerical answer can seem authoritative. To judge what it establishes, we need to know how it was obtained, which conditions it concerns, and what observations could show that it is wrong. Calling the answer AI does not supply that evidence. Neither does writing it as an equation.
+
+This brings us back to the human choices. Someone decided that stability was the quantity worth predicting, assembled the observations, chose a model, and turned its output into a decision. We will make those steps visible as we build and use models ourselves. Prediction, the authority we give it, and the consequences of acting on it each deserve attention.
+
 ## Rules and learned patterns {#different-methods-can-pursue-the-same-goal}
 
 Take the task of identifying a molecule from a spectrum. We could begin by writing down chemical constraints: the molecular formula, possible bonds, and fragmentation rules. A program could then search for structures compatible with those constraints. Much of the useful knowledge would enter through the rules we gave it.
@@ -333,6 +343,10 @@ The word “therefore” is doing quite a lot of work. Follow the argument with 
 Ask an LLM to suggest another explanation for the observations and an experiment that could distinguish the two. Then inspect its proposal. Which part of our conclusion would the experiment test? Could we obtain the suggested result even if the proposed mechanism were wrong? The assistant can help us generate possibilities; we still have to decide what an observation would tell us.
 
 **Submit:** one revised scientific claim and one observation that would make you less confident in it. The same task can be done entirely on paper.
+
+## What would you most like to learn? {#learning-goals}
+
+What is the main thing you would like to be able to do or understand by the end of this course? It could begin with a chemical question, something you want to calculate, or a claim you would like to be able to examine. Take a moment to formulate your own goal before comparing it with someone else's. We will use these goals to discuss the emphasis and examples in the course.
 
 ## How should we schedule the course? {#scheduling}
 

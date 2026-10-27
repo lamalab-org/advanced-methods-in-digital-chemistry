@@ -31,7 +31,7 @@ The [course outline](outline.qmd) sets out the topics, the connections between s
 
 ## How we will work {#how-to-use-a-lecture-page}
 
-These notes are for master's students in chemistry. We develop the Python and machine-learning ideas alongside the chemical problems, starting with small examples. The first meeting, on **Wednesday, 28 October 2026**, introduces the course questions, helps you set up the tools, and includes a discussion of the timetable. I cannot teach on **4 or 17 November 2026**; we will discuss a block week or several longer sessions around those constraints and your availability.
+These notes are for master's students in chemistry. We develop the Python and machine-learning ideas alongside the chemical problems, starting with small examples. In the first meeting, on **Wednesday, 28 October 2026**, I would like to hear what you most want to learn and discuss a course format that works for us. We will begin with AI, prediction, and the human choices behind models, then see our tools in use and spend about half an hour setting them up together. You can [try the setup beforehand](setup.qmd), but a working installation is not required to join the first session. I cannot teach on **4 or 17 November 2026**; we will discuss a block week or several longer sessions around those constraints and your availability.
 
 We will spend time with small examples: a molecular drawing, a few measurements, a line that does not quite fit. They give us something to work out together, on the board or on paper, before we ask a program to do the calculation. These notes develop the same arguments in more detail, so you can return to them afterwards.
 
