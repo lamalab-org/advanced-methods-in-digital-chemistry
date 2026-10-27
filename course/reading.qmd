@@ -60,13 +60,13 @@ Stanford's *STATS 200: Introduction to Statistical Inference* (Autumn 2016), [Le
 
 Both approaches require assumptions. A neural-network architecture alone tells us neither how uncertainty has been represented nor what a reported probability means. We will need that distinction when uncertainty helps us choose the next experiment.
 
-## When science helps sell a model {#science-and-commercial-claims}
+## What does a benchmark score stand for? {#science-and-commercial-claims}
 
-David Rein et al. (2023), [*GPQA: A Graduate-Level Google-Proof Q&A Benchmark*](https://arxiv.org/abs/2311.12022), introduces a benchmark of scientific questions. Anthropic's [*Claude Opus 4.1* announcement](https://www.anthropic.com/news/claude-opus-4-1), dated 5 August 2025, reports performance on GPQA Diamond as part of a presentation of a commercial product. Its **Benchmark reporting** notes describe the evaluation conditions. These two freely available sources let us examine a scientific result as it enters a sales argument.
+Adrian Mirza et al. (2025), [*A framework for evaluating the chemical knowledge and reasoning abilities of large language models against the expertise of chemists*](https://doi.org/10.1038/s41557-025-01815-x), *Nature Chemistry* 17, 1027–1034, introduces ChemBench. The [open full text](https://pmc.ncbi.nlm.nih.gov/articles/PMC12226332/) describes the question corpus, evaluation, and human comparison. Figures 1–2 are useful starting points for identifying what was measured and how the questions were chosen.
 
-The [lecture](lectures/01-ai-and-science.qmd#science-and-model-claims) asks what we would still need to know before using that model to choose a chemical experiment. A question-answering score supplies evidence about a particular task. The proposed laboratory use brings other decisions and other opportunities for failure.
+Read it alongside [TakeoverBench's ChemBench page](https://takeoverbench.com/benchmarks/chem_bench), which places the benchmark under “Chemical weapons development” (accessed 27 October 2026). Its **Why this benchmark?** paragraph gives the selection rationale; its [About page](https://takeoverbench.com/about) explains the initiative's purpose. The [lecture discussion](lectures/01-ai-and-science.qmd#science-and-model-claims) asks what evidence would connect the question-answering score to that broader capability. Identifying a gap in that argument does not, on its own, establish the presence or absence of the risk.
 
-We can ask the same question of our own work. Adrian Mirza et al. (2025), [*A framework for evaluating the chemical knowledge and reasoning abilities of large language models against the expertise of chemists*](https://doi.org/10.1038/s41557-025-01815-x), *Nature Chemistry* 17, 1027–1034, compares models and people on ChemBench. The open-access paper reports both successes and failures. Its conclusions concern the models, questions, and evaluation procedure studied; the benchmark does not encompass all of a chemist's work.
+For the commercial comparison, David Rein et al. (2023), [*GPQA: A Graduate-Level Google-Proof Q&A Benchmark*](https://arxiv.org/abs/2311.12022), introduces a benchmark of scientific questions. Anthropic's [*Claude Opus 4.1* announcement](https://www.anthropic.com/news/claude-opus-4-1), dated 5 August 2025, reports GPQA Diamond performance in a product presentation. Its **Benchmark reporting** notes describe the evaluation conditions. Compare what was tested with the work for which a reader might buy access.
 
 ## Atlas of AI {#atlas-of-ai}
 

@@ -354,21 +354,33 @@ Consider the chatbot or molecular predictor from the opening examples. Its outpu
 
 Take the measurements in a chemical dataset. Someone prepared the samples, ran the instrument, decided which results to keep, and recorded the conditions. By the time we download a table, much of that work may have disappeared from view. What can we find out about it? Crawford's [chapters on labour and data](../reading.qmd#atlas-of-ai) give us reasons to ask.
 
-### When science helps sell a model {#science-and-model-claims}
+### What does a benchmark score stand for? {#science-and-model-claims}
 
-Scientific results also have an audience outside research. A company selling access to a model can point to its performance on scientific questions as a reason to use it. The result becomes part of both a research argument and a product's appeal. That makes it worth examining the distance between what was tested and what a reader might take it to mean.
+A score can acquire a much larger meaning as it travels beyond the study that produced it. Our own work gives us an example. In [ChemBench, Mirza et al. (2025)](https://doi.org/10.1038/s41557-025-01815-x), we assembled 2,788 question–answer pairs across chemistry and evaluated models' answers. A human comparison used a subset of the questions. The questions, the procedure, and the way answers are scored determine what the comparison establishes. They do not reproduce everything a chemist does.
 
-Consider GPQA, a benchmark introduced by David Rein and colleagues in 2023. It contains expert-written multiple-choice questions in biology, physics, and chemistry. Its Diamond version is a selected subset of 198 questions. The authors developed the benchmark to study difficult question answering and the problem of supervising systems whose answers may be hard for people to check. [Rein et al., *GPQA: A Graduate-Level Google-Proof Q&A Benchmark*](https://arxiv.org/html/2311.12022v1)
+Now look at [TakeoverBench's presentation of ChemBench](https://takeoverbench.com/benchmarks/chem_bench). On 27 October 2026, the page placed it under the heading **“Chemical weapons development”** and displayed **66% for Claude 3.7 Sonnet**. It also described ChemBench as evaluating chemistry knowledge and reasoning. Its stated reasons for selecting the benchmark were its chemistry relevance and regularly updated leaderboard.
 
-Anthropic's August 2025 announcement of Claude Opus 4.1 reports results on GPQA Diamond alongside other benchmarks, describes paid access, and recommends upgrading. Its reporting notes also specify the use of extended thinking for this benchmark. Here we can see a scientific evaluation enter a commercial presentation of a model. [Claude Opus 4.1 announcement](https://www.anthropic.com/news/claude-opus-4-1)
+The heading invites us to read the score as evidence about a particular dangerous capability. That is an additional interpretation. Chemical knowledge may be relevant to that capability, but what establishes the relationship between performance on these questions and performance on the activities named by the heading? An available chemistry score is a possible **[proxy](../glossary.qmd#proxy)**: something we measure in place of the quantity we actually want to know about. Its suitability for that purpose needs an argument.
 
-Answering difficult chemistry questions is an interesting capability. Now suppose we want help choosing an experiment in our laboratory. A score on those questions gives us one piece of evidence, but the proposed use adds equipment, constraints, uncertain measurements, and decisions that the question set does not test. We need to examine those too. The shift from answering questions to doing research can happen remarkably quickly in a reader's mind.
+We can separate the steps:
 
-**Discuss:** What did the benchmark ask the model to do? What would we need to test before trusting it with the experimental decision? Name one choice in that new evaluation that could change our conclusion.
+| Step | What needs to be established? |
+|---|---|
+| Answers become a benchmark score. | Which questions, model configuration, tools, and scoring procedure produced it? |
+| The score stands for a broader capability. | What evidence connects performance on these questions to that capability? Which relevant abilities are missing from the test? |
+| The capability supports a claim about consequences. | Under which conditions would it lead to the proposed outcome? |
 
-A good result can be scientifically valuable and commercially useful at the same time. Our task is to trace the claim back to its evidence: the task, the conditions, the comparison, and the decision the result is meant to support. This is how we will approach both claims of novelty and the promises surrounding them. The [suggested reading](../reading.qmd#science-and-commercial-claims) puts the benchmark and announcement side by side.
+Changing the heading has added no new observations. The displayed percentage is a reported benchmark score; it does not by itself give a probability of a harmful event or a calibrated scale of the broader capability. Even a correctly computed, reproducible score leaves these questions open. We should ask them of our own claims about ChemBench too.
 
-We can ask the same questions of our own work. In [ChemBench, Mirza et al. (2025)](https://doi.org/10.1038/s41557-025-01815-x), we compared models and chemists on a curated collection of chemical questions. The question set and comparison procedure determine what the result says. Which parts of a chemist's work would need a different evaluation?
+TakeoverBench's [About page](https://takeoverbench.com/about) identifies it as an initiative of the Existential Risk Observatory and PauseAI. This places the example in risk communication and advocacy. Its purpose helps us understand why this capability is foregrounded; it does not settle whether the inference is justified.
+
+Commercial presentations give us another setting in which a score enters a broader argument. GPQA tests answers to expert-written questions in biology, physics, and chemistry. Anthropic's August 2025 announcement of Claude Opus 4.1 reports GPQA Diamond results alongside paid access and an invitation to upgrade. Its reporting notes specify extended thinking for that evaluation. [GPQA paper](https://arxiv.org/html/2311.12022v1); [Claude Opus 4.1 announcement](https://www.anthropic.com/news/claude-opus-4-1)
+
+We can examine the same step here: what does answering those questions establish about the work for which we might buy access? Choosing an experiment in our laboratory adds constraints, measurements, and decisions that the question set does not test. The commercial setting and the advocacy setting have different purposes, but both give us a reason to keep the measured task and the larger claim in view.
+
+**Discuss:** First describe ChemBench using only what was evaluated. Then examine the TakeoverBench heading. What additional claim does that framing invite? Distinguish what the page explicitly says from what you inferred. What evidence would justify using the score for the broader claim?
+
+The [suggested reading](../reading.qmd#science-and-commercial-claims) collects the paper and these presentations. We will return to the uncertainty in finite benchmark results when discussing [test error](02-learning-from-data.qmd#empirical-error-and-population-risk). Here the first question is whether we measured something that supports the claim at all.
 
 ## From a question to a fitted model {#the-statistical-question-hiding-in-the-history}
 
