@@ -7,7 +7,7 @@ After the course, I hope that you will be ask such questions and critically exam
 
 We begin by fitting and examining small models. We then ask how models can use molecular structure and enter a simulation. Finally, we use them to propose candidates, choose measurements, and assist a research workflow. Throughout, we return to the human decisions about what to retain, what to leave out, and what evidence is sufficient.
 
-The working plan has content for **about ten two-hour teaching slots**, which we may combine into fewer calendar appointments.
+Friedolin lists **14 two-hour meetings**, of which **13 are available after excluding 4 November**. I would like to use that time for the ten topic groups below and three further meetings devoted to practical work and projects.
 
 ## What would you most like to learn? {#learning-goals}
 
@@ -17,16 +17,39 @@ What is the main thing you would like to be able to do or understand by the end 
 
 Our first session is on **Wednesday, 28 October 2026, 14:00–16:00, at Helmholtzweg 4, SR 6 Physik**. I cannot teach on **Wednesday, 4 November 2026**, or **Tuesday, 17 November 2026**. I would therefore like us to use part of this first meeting to discuss how to arrange the remaining teaching. A block week or several longer sessions might work better for us.
 
-The ten entries in the topic sequence below describe the sequence of topics and the approximate teaching allocation. They need not become ten separate calendar appointments. We can combine topics while keeping the time to work through examples, ask questions, and take breaks.
+The listed Wednesdays run from 28 October 2026 to 10 February 2027. There are no meetings on 23 or 30 December. With 4 November unavailable, we have seven meetings before Christmas and six afterwards. My other unavailable date, 17 November, is a Tuesday; it does not remove the Wednesday meeting on 18 November.
 
 | Format | What we would need to arrange |
 |---|---|
 | **A block week** | Concentrate the main teaching in one week. We need a week in which we can all attend, with breaks and supported practice within the teaching days. There will be less time between sessions to revisit unfamiliar ideas. |
 | **Several longer sessions** | Combine topics into longer meetings spread across the course period. We need several suitable dates, with enough time between them for practice and project work. |
 
-One possible arrangement is to keep this introduction and a later project meeting separate, and group the eight intervening topics into four longer meetings. Those four meetings could fall within one week or be spread out. We will compare that possibility with our actual availability before settling the timetable.
+We can combine some of the remaining meetings into longer appointments while keeping time for practical work, questions, and breaks. I would like us to have time between the first practicals and the later project discussions to try things independently. We will compare possible arrangements with our actual availability before settling the timetable.
 
 For the discussion, please check which proposed weeks or dates you can attend, any limits on starting or finishing times, and which format you would prefer. Mark uncertain availability as uncertain. You can share individual constraints privately; you do not need to explain their reasons to the class. We will confirm the dates after checking availability and the practical arrangements.
+
+### If we keep the Wednesday timetable {#weekly-plan}
+
+This is a proposal for how we could use the listed dates. The three additional practical meetings give us time to revisit difficult calculations, debug code, and develop projects. We can adjust their emphasis as we find out where more time would help.
+
+| Listed meeting | Date | Proposed work |
+|---|---|---|
+| 1 | 28 October 2026 | AI, science, our tools, and course organisation |
+| 2 | 4 November | **No teaching: I am unavailable** |
+| 3 | 11 November | Fitting a model |
+| 4 | 18 November | Making a chemical comparison |
+| 5 | 25 November | Supported practical: revisit the model comparison, try a terminal coding assistant, and discuss project questions |
+| 6 | 2 December | A small neural network |
+| 7 | 9 December | Molecular representations |
+| 8 | 16 December | Energies, forces, and simulation |
+| 9 | 6 January 2027 | Supported practical: examine a trajectory or continue a model comparison; discuss a first project result |
+| 10 | 13 January | Proposing molecules |
+| 11 | 20 January | Choosing the next measurement |
+| 12 | 27 January | Language models in a research workflow |
+| 13 | 3 February | Supported project work: check calculations, discuss conclusions, and address unresolved problems |
+| 14 | 10 February | Reproducibility and project discussion |
+
+The topic numbers below follow the order of the material; the table above counts calendar appointments. The final project discussion is an opportunity to exchange work and receive feedback. It does not set the assessed presentation date or the report deadline.
 
 ## Time to work together {#working-together}
 
@@ -73,7 +96,7 @@ We begin with a calibration curve because we can follow the whole calculation. T
 
 ::: {.course-outline}
 
-| Session | Topics | What we will work through |
+| Topic group | Topics | What we will work through |
 |---|---|---|
 | **1. AI, science, and our tools** | Modelling as deliberate omission; AI as an ambition; its history and methods; prediction, explanation, and causality; probability; the human choices behind models. | Classify examples and consider what a model leaves out. Use selected historical examples to place LLMs in a broader field, then examine how a changed question needs different evidence and what seven successes in ten attempts tell us. Set up an AI-assistant and a Python notebook. [Lecture notes](lectures/01-ai-and-science.qmd) · [Setup](setup.qmd) |
 | **2. Fitting a model** | Inputs and targets; functions and parameters; losses; fitting; model flexibility and regularisation; training, validation, and test data. | Calculate a few predictions and errors, change a calibration curve, and compare results on new observations. Establish why **test error is still an empirical estimate**. [Lecture notes](lectures/02-learning-from-data.qmd) |
@@ -83,7 +106,7 @@ We begin with a calibration curve because we can follow the whole calculation. T
 
 By this point, we should be able to take a supplied data table, identify its target and conditions, fit a simple comparison model, and explain what its reported error does and does not tell us. We need that foundation before adding more elaborate models.
 
-During these early practicals, everyone will also have an opportunity to [try a coding assistant in the terminal](cli-assistant.qmd), on their own or with a partner. We will ask it to inspect and repair a small calculation, examine the changed file, and run checks ourselves. We will place this in session 2 or 3 once the Python setup and the error calculation are familiar.
+During these early practicals, everyone will also have an opportunity to [try a coding assistant in the terminal](cli-assistant.qmd), on their own or with a partner. We will ask it to inspect and repair a small calculation, examine the changed file, and run checks ourselves. The proposed timetable leaves time for this in the supported practical after the first model comparisons, once the Python setup and the error calculation are familiar.
 
 ## Representing molecules and their behaviour {#molecular-models}
 
@@ -91,7 +114,7 @@ So far, we have supplied descriptions of the materials and chosen the functions 
 
 ::: {.course-outline}
 
-| Session | Topics | What we will work through |
+| Topic group | Topics | What we will work through |
 |---|---|---|
 | **4. A small neural network** | Weighted sums, nonlinear functions, layers, fitting, and learned intermediate representations. | Calculate a small network's output by hand, modify a supplied model, and compare it with a simpler baseline under the same evaluation. A more elaborate model still has to earn its place. |
 | **5. Molecular representations** | Molecular graphs, local environments, information passed between neighbouring atoms, and properties that should survive atom relabelling or rotation. | Follow one update on a molecular graph and inspect a supplied prediction or attribution. Distinguish explaining the model's calculation from establishing a chemical mechanism. |
@@ -107,7 +130,7 @@ A model that predicts a property does not yet tell us which molecule to make or 
 
 ::: {.course-outline}
 
-| Session | Topics | What we will work through |
+| Topic group | Topics | What we will work through |
 |---|---|---|
 | **7. Proposing molecules** | Searching an existing collection versus generating new candidates; one way to learn a distribution of molecular representations; objectives and chemical constraints. | Examine supplied candidates and compare them with a simple search. Check what validity, novelty, and a favourable predicted score actually establish, and what remains to be tested. |
 | **8. Choosing the next measurement** | Predictions and their uncertainty; updating a probability model with observations; balancing promising and uncertain choices under a budget. This leads to Bayesian optimisation. | Choose the next point before its result is revealed, then compare search procedures over repeated simulated runs. Distinguish finding a good condition from estimating the causal effect of changing it. |
@@ -118,5 +141,5 @@ A model that predicts a property does not yet tell us which molecule to make or 
 
 ## A result another chemist can examine {#bringing-the-work-together}
 
-**Session 10: reproducibility and project discussion.** We bring together the question, data, model, evaluation, and interpretation in a small piece of work. Another person should be able to run the calculation and understand the conclusion. We will exchange work, inspect one another's evidence, and explain a modelling choice and a limitation.
+**Topic 10: reproducibility and project discussion.** We bring together the question, data, model, evaluation, and interpretation in a small piece of work. Another person should be able to run the calculation and understand the conclusion. We will exchange work, inspect one another's evidence, and explain a modelling choice and a limitation.
 
