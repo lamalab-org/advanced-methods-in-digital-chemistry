@@ -17,21 +17,23 @@ A calculator, a chess program, and a chatbot all do something that once required
 
 **Discuss:** Which examples would you call AI? What criterion are you using? Compare your choices with someone who classified an example differently. What additional information, if any, would change your answer?
 
-## Modelling requires ignorance {#modelling-as-omission}
+## Modelling means leaving things out {#modelling-as-omission}
 
-Before we settle which of these programs deserve the label, let us look at something they have in common with a much older tool: a map.
+Before returning to the AI label, let us examine a choice we make whenever we model something: which information to retain. A street map gives us a familiar example.
 
-A map of a city leaves out almost everything about the city. It shows streets, perhaps buildings, perhaps the entrance to the station. It usually says little about the paving stones. We could add those. With enough space, we could also draw the cracks in each stone, and then the grains that make up the stone. Each addition gives us a more detailed description. Meanwhile, the station is becoming rather difficult to find.
+Suppose we want to walk from the lecture building to the railway station. We need to know which streets and paths connect the two places and where we can enter the station. A map that preserves those connections can help us choose a route. It can leave out the positions of the atoms in the paving stones: those details do not help us decide which turn to take.
 
-Leaving things out is part of what makes the map useful. The important decision is which things. A pedestrian, a geologist, and the person repairing the pavement may need quite different maps of the same street. We can only judge the omissions once we know what the map is for.
+Now suppose the route crosses a footbridge that is closed. If the map still shows it as passable, following the route will not get us to the station. We have omitted information that matters for this task. Both the atomic detail and the closure were left out, but the consequences are different.
 
-There is no final, all-purpose map waiting at the end of this exercise. Repairing the pavement and finding a train remain different tasks, however much detail we collect. We need to keep asking whether the map we have suits the journey we intend to make.
+The point is to judge an omission against the question we want to answer. More detail is useful when it supplies information that question needs. Someone studying the pavement's material structure may need details that we could ignore when choosing our route.
 
-Chemists make this kind of decision whenever they draw a molecule. We keep atoms and bonds. We usually leave the solvent, temperature, and pH outside the drawing. That is perfectly useful when discussing connectivity. Now suppose we hand the same drawing to a model and ask for the molecule's solubility. Suddenly, some of the information we left out matters a great deal.
+In this sense, a **[model](../glossary.qmd#model)** is a representation used to answer a question about a system. The street map represents connections between places; a molecular drawing represents atoms and bonds. Each preserves some information and leaves other information out. A molecular drawing usually leaves the solvent, temperature, and pH outside the picture. That may be sufficient for discussing connectivity. Predicting solubility asks for information about the measurement conditions as well.
 
-Suppose we measure the molecule in two solvents and obtain two different values. A predictor that receives only the molecular drawing sees the same input twice. How is it supposed to know which experiment we mean? We have to supply the conditions, restrict the question to a particular setting, or accept that the prediction combines cases we have chosen to treat as equivalent.
+For example, suppose we want to predict the solubility of the same molecule in water at 25 °C and at 50 °C. A predictor that receives only the molecular drawing has no input telling it which temperature we mean. If we want predictions for both conditions, we need to represent that distinction. Alternatively, we can restrict the task to measurements at 25 °C, hold the other relevant conditions fixed, and state that scope when using the model.
 
-The omission has become a decision about the scientific question. We made that decision before choosing a learning method or adjusting a single number in it.
+In this prediction problem, the molecular drawing is an **input representation**. The **predictive model** is the rule or learned relationship that uses the supplied information to calculate a solubility prediction. We need to examine the information we supply as well as the calculation that uses it.
+
+The connection to the street map is the choice of information: connections and access for a walking route; molecular properties and measurement conditions for a solubility prediction. We must decide which differences the representation needs to preserve when we formulate the prediction problem.
 
 This is one reason I see AI as a deeply human endeavour. Someone has decided which question matters, which observations to collect, and which differences the model can ignore. Someone will also decide whether its answer is good enough to use. Those choices shape the mathematics we will do in this course.
 
