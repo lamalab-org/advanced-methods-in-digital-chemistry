@@ -73,6 +73,8 @@ pyyaml==6.0.3
     #   pymdown-extensions
 pyzmq==27.2.0 ; sys_platform != 'emscripten'
     # via marimo
+ruff==0.17.3
+    # via digital-chemistry-course
 six==1.17.0
     # via python-dateutil
 starlette==1.10.0 ; sys_platform != 'emscripten'
