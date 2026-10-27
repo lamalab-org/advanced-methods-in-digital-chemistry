@@ -10,11 +10,11 @@ def _():
     import numpy as np
     import matplotlib.pyplot as plt
     from sklearn.pipeline import make_pipeline
-    from sklearn.preprocessing import PolynomialFeatures, StandardScaler
+    from sklearn.preprocessing import FunctionTransformer, PolynomialFeatures, StandardScaler
     from sklearn.linear_model import Ridge
     from sklearn.model_selection import KFold
 
-    return KFold, PolynomialFeatures, Ridge, StandardScaler, make_pipeline, mo, np, plt
+    return FunctionTransformer, KFold, PolynomialFeatures, Ridge, StandardScaler, make_pipeline, mo, np, plt
 
 
 @app.cell(hide_code=True)
@@ -27,30 +27,43 @@ def _(mo):
     across training datasets, and regularisation. Then trace five-fold
     cross-validation. The smallest training error will not settle the choice.
 
-    All observations are simulated. The invented mean instrument response bends
-    with concentration; it differs from the linear simulator in the first
-    calibration notebook. We know the true mean here because we wrote it.
-    No laboratory result or final test score is reported.
+    We return to **fitting a Lennard–Jones potential**, an example from my
+    [MolSim lecture, p. 37](https://www.compchem.nl/wp-content/uploads/molsim2023/L09_Machine-Learning.pdf#page=37).
+    Two particles have a separation $r$ and an interaction energy $U$.
+    Put $s=r/\sigma$ and express energy in units of $\epsilon$:
+
+    $$u(s)=U(r)/\epsilon=4(s^{-12}-s^{-6}).$$
+
+    Here $\sigma$ is the separation where the energy is zero, and $\epsilon$
+    is the depth of the well. We compute energies for $1\leq s\leq1.8$ and add
+    artificial noise. The equation itself is deterministic. We fit polynomials
+    to these noisy values; we are not fitting $\sigma$ or $\epsilon$.
+    Knowing the reference curve lets us examine errors we could not identify
+    from an ordinary dataset alone. This is a new implementation of the MolSim
+    teaching example, with generated data and no final test score.
     """)
     return
 
 
 @app.cell
-def _(PolynomialFeatures, Ridge, StandardScaler, make_pipeline):
-    def mean_response(x):
-        return 0.15 + 0.6 * x + 0.55 * x**2
+def _(FunctionTransformer, PolynomialFeatures, Ridge, StandardScaler, make_pipeline):
+    def reference_energy(s):
+        return 4 * (s**-12 - s**-6)
 
     def new_model(degree, penalty, n_train):
         # Ridge uses a sum of squared errors. alpha=n_train*penalty gives
         # mean squared error + penalty*sum(w_j**2). The intercept is unpenalised.
         # Every call creates a new scaler and model; both fit on training only.
         return make_pipeline(
+            # Fixed coordinate choice for the stated interval, not estimated
+            # from data: s in [1, 1.8] becomes z in [-1, 1].
+            FunctionTransformer(lambda s: (s - 1.4) / 0.4),
             PolynomialFeatures(degree=degree, include_bias=False),
             StandardScaler(),
             Ridge(alpha=n_train * penalty, solver="svd"),
         )
 
-    return mean_response, new_model
+    return reference_energy, new_model
 
 
 @app.cell(hide_code=True)
@@ -58,21 +71,24 @@ def _(mo):
     mo.md(r"""
     ## 1. Repeat the measurements, then repeat the fit
 
-    We generate **80 datasets of 18 measurements**, at the same concentrations,
-    with independent Gaussian errors of standard deviation 0.06 in absorbance.
-    Keep the penalty at zero and compare degrees 1, 2, and 9. Then hold degree 9
+    We generate **80 datasets of 18 energy values**, at the same separations,
+    with independent Gaussian errors of standard deviation 0.06 in $U/\epsilon$.
+    Keep the penalty at zero and compare degrees 1, 5, and 9. Then hold degree 9
     fixed and increase the penalty. Predict each change first.
 
-    Bias concerns the average prediction relative to the true mean response.
+    Bias concerns the average prediction relative to the reference energy.
     Variance concerns how predictions differ between training datasets. The
     curves, their average, and the error terms all use the same simulated runs.
+    We use powers of $z=(s-1.4)/0.4$ as features, then standardise each feature
+    within the fit. This fixed change of coordinate improves numerical
+    conditioning. The penalty refers to coefficients in this chosen representation.
     """)
     return
 
 
 @app.cell
 def _(mo):
-    degree_control = mo.ui.slider(1, 9, value=2, step=1, show_value=True, label="Degree")
+    degree_control = mo.ui.slider(1, 9, value=5, step=1, show_value=True, label="Degree")
     penalty_control = mo.ui.slider(
         steps=[0.0, 0.0001, 0.001, 0.01, 0.1, 1.0],
         value=0.0, show_value=True, label="Penalty strength lambda",
@@ -82,18 +98,18 @@ def _(mo):
 
 
 @app.cell
-def _(mean_response, np):
+def _(reference_energy, np):
     noise_sd = 0.06
-    repeated_x = np.linspace(0.05, 0.95, 18)
-    grid = np.linspace(0.05, 0.95, 151)
-    repeated_y = mean_response(repeated_x)[None, :] + np.random.default_rng(2026).normal(
+    repeated_x = np.linspace(1.0, 1.8, 18)
+    grid = np.linspace(1.0, 1.8, 151)
+    repeated_y = reference_energy(repeated_x)[None, :] + np.random.default_rng(2026).normal(
         0, noise_sd, size=(80, len(repeated_x))
     )
     return grid, noise_sd, repeated_x, repeated_y
 
 
 @app.cell
-def _(degree_control, grid, mean_response, new_model, noise_sd, np,
+def _(degree_control, grid, reference_energy, new_model, noise_sd, np,
       penalty_control, repeated_x, repeated_y):
     predictions = []
     training_errors = []
@@ -104,7 +120,7 @@ def _(degree_control, grid, mean_response, new_model, noise_sd, np,
         training_errors.append(np.mean((_model.predict(repeated_x[:, None]) - _responses)**2))
     predictions = np.asarray(predictions)
     average_prediction = predictions.mean(axis=0)
-    bias_squared = np.mean((average_prediction - mean_response(grid))**2)
+    bias_squared = np.mean((average_prediction - reference_energy(grid))**2)
     prediction_variance = np.mean(predictions.var(axis=0, ddof=0))
     expected_error_estimate = bias_squared + prediction_variance + noise_sd**2
     return (average_prediction, bias_squared, expected_error_estimate,
@@ -113,21 +129,21 @@ def _(degree_control, grid, mean_response, new_model, noise_sd, np,
 
 @app.cell
 def _(average_prediction, bias_squared, degree_control, expected_error_estimate,
-      grid, mean_response, mo, noise_sd, np, penalty_control, plt,
+      grid, reference_energy, mo, noise_sd, np, penalty_control, plt,
       prediction_variance, predictions, training_errors):
     _fig, _axes = plt.subplots(1, 2, figsize=(10, 4))
     for _index, _prediction in enumerate(predictions[:12]):
         _axes[0].plot(grid, _prediction, color="#842c43", alpha=0.2,
                       label="Individual fits (12 shown)" if _index == 0 else None)
     _axes[0].plot(grid, average_prediction, color="#842c43", lw=2, label="Mean of 80 fits")
-    _axes[0].plot(grid, mean_response(grid), color="#17252f", ls="--", label="Known mean response")
-    _axes[0].set(xlabel="Concentration / mmol L$^{-1}$", ylabel="Absorbance",
+    _axes[0].plot(grid, reference_energy(grid), color="#17252f", ls="--", label="Lennard–Jones reference")
+    _axes[0].set(xlabel=r"Separation $r/\sigma$", ylabel=r"Energy $U/\epsilon$",
                  title=f"Degree {degree_control.value}; lambda={penalty_control.value:g}")
     _axes[0].legend(fontsize=8)
     _axes[1].bar(["Squared bias", "Variance", "Noise"],
                  [bias_squared, prediction_variance, noise_sd**2],
                  color=["#842c43", "#186d74", "#89979f"])
-    _axes[1].set(ylabel="Squared absorbance", title="Average over the plotted input grid")
+    _axes[1].set(ylabel=r"Squared error in $U/\epsilon$", title="Average over the plotted input grid")
     _fig.tight_layout()
     plt.close(_fig)
     mo.vstack([_fig, mo.md(f"""
@@ -142,10 +158,11 @@ def _(average_prediction, bias_squared, degree_control, expected_error_estimate,
     The first two error terms use 80 fits, so they are Monte Carlo estimates.
     Their sum plus the known noise variance estimates expected squared error
     for a fresh response, averaged uniformly over this input grid, for this
-    fixed design of training concentrations. It is **not an observed test MSE**
+    fixed design of training separations. It is **not an observed test MSE**
     and is not necessarily comparable to a training error averaged at other
-    concentrations. None of these calculations establishes performance outside
-    the stated range or on another instrument.
+    separations. These are errors relative to our chosen potential with added
+    noise. They do not establish accuracy for a real substance, for forces,
+    or outside the fitted interval.
     """)])
     return
 
@@ -155,8 +172,8 @@ def _(mo):
     mo.md(r"""
     ## 2. Choose settings when we have only one dataset
 
-    Now use **60 new, independent development observations** with concentrations
-    sampled uniformly between 0.05 and 0.95. This is a separate dataset from
+    Now use **60 new, independent development observations** with separations
+    $r/\sigma$ sampled uniformly between 1 and 1.8. This is a separate dataset from
     the repeated-measurement exercise. The generating function will not be used
     to score candidates. The observations must provide our comparison.
 
@@ -170,10 +187,10 @@ def _(mo):
 
 
 @app.cell
-def _(mean_response, noise_sd, np):
+def _(reference_energy, noise_sd, np):
     _rng = np.random.default_rng(107)
-    development_x = _rng.uniform(0.05, 0.95, 60)
-    development_y = mean_response(development_x) + _rng.normal(0, noise_sd, 60)
+    development_x = _rng.uniform(1.0, 1.8, 60)
+    development_y = reference_energy(development_x) + _rng.normal(0, noise_sd, 60)
     return development_x, development_y
 
 

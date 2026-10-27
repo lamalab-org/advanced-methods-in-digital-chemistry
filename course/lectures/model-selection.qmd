@@ -4,7 +4,7 @@ title: "How should we choose a model?"
 
 We can now fit a model and calculate its errors. But we still have to choose which model to fit. Should we allow a more flexible curve? Should we discourage large coefficients? And could a different set of measurements have led us to a different choice? These questions belong before the neural network: adding more adjustable parameters does not remove them.
 
-This practical follows the calibration and MOF examples. We return to a small simulated measurement problem so that we can change one thing at a time. The purpose is to justify a modelling choice with evidence beyond the observations used to fit its parameters.
+This practical follows the calibration and MOF examples. I would like to return to an example from my [MolSim teaching: fitting a Lennard–Jones potential](https://www.compchem.nl/wp-content/uploads/molsim2023/L09_Machine-Learning.pdf#page=37). We use it to examine bias, variance, and regularisation, then follow the MolSim sequence into cross-validation. The purpose is to justify a modelling choice with evidence beyond the observations used to fit its parameters.
 
 ## What should you be able to do afterwards? {#lecture-outcomes}
 
@@ -14,19 +14,35 @@ This practical follows the calibration and MOF examples. We return to a small si
 - Distinguish choosing a model from estimating the performance of the chosen procedure. Explain why a cross-validation score, like a test score, is an empirical estimate.
 - Choose a splitting rule that corresponds to the chemical use we have in mind.
 
+## Fitting an interaction energy {#potential-example}
+
+Consider two particles separated by a distance $r$. The Lennard–Jones model describes their interaction with a steep repulsive part at short distances and an attractive well. Its two constants set an energy scale $\epsilon$ and a distance scale $\sigma$. The minimum energy is $-\epsilon$; $\sigma$ is the separation where the energy crosses zero, not the position of that minimum. In reduced units, put $s=r/\sigma$ and write
+
+$$
+u(s)=\frac{U(r)}{\epsilon}=4\left(s^{-12}-s^{-6}\right).
+$$
+
+The [LAMMPS documentation](https://docs.lammps.org/pair_lj.html) gives the equation and the meaning of these constants. We use the expression without a cutoff over $1\leq s\leq1.8$; we are not running a molecular simulation yet.
+
+We can calculate as many values as we like from this equation. For the exercise, however, we will give the fitting procedure only a few values, to which we add artificial noise. Can a polynomial recover the curve? What happens if we supply another noisy dataset? We know the reference energy here, so we can examine a systematic mismatch separately from variation between fits. The noise is part of our teaching experiment; evaluating the Lennard–Jones equation is deterministic.
+
+We fit polynomial coefficients, keeping $\epsilon$ and $\sigma$ fixed as our units. This distinction matters: giving the learner the Lennard–Jones formula and fitting its physical parameters would be a different problem, with much more prior information. Later, when we discuss learned potentials, we will also ask whether fitting energies well gives us useful forces. For now, we assess energy predictions within the stated interval.
+
 ## When does more flexibility help? {#underfitting-and-overfitting}
 
-Imagine that an instrument's mean response bends with concentration. If we insist on fitting a straight line, repeated measurements will not give that line the ability to bend. It may miss a reproducible feature of the relationship. We call this **underfitting**. The restriction in the model prevents it from describing a useful pattern.
+Our reference energy has a well. If we insist on fitting a straight line, more energy values will not give that line the ability to bend. It must miss some of this structure. We call this **underfitting**. The restriction in the model prevents it from describing a useful pattern.
 
-We could allow a high-degree polynomial instead. It may follow the training measurements very closely, including their noise. If that extra agreement comes at the expense of prediction on new measurements, we have **overfitting**. A low training error cannot tell us which of these situations we are in. Nor does a large error by itself establish underfitting: noisy measurements, missing inputs, and a change of instrument are other possibilities.
+We could allow a high-degree polynomial instead. It may follow the training values very closely, including their noise. If that extra agreement comes at the expense of prediction on new values, we have **overfitting**. A low training error cannot tell us which of these situations we are in. Nor does a large error by itself establish underfitting: noisy observations, missing inputs, and a changed system are other possibilities.
 
-The notebook uses a deliberately curved response, unlike the linear simulator in the first calibration exercise. It is an invented instrument response, not a claim about the Beer–Lambert law. We know the generating function here because we wrote it. In a real experiment, it would be one of the things we were trying to learn.
+Even a perfect reconstruction of this curve would establish agreement with the chosen Lennard–Jones model. Whether that model describes a particular substance is another question. This is the same distinction we encountered when the MOF targets came from simulations.
 
 ## Would another dataset give the same curve? {#bias-and-variance}
 
-Keep the concentrations, noise level, model family, and fitting procedure fixed. Generate another set of measurement errors and fit again. Then repeat. We now have several fitted curves, all produced by the same procedure. Their disagreement tells us something that a single training score could not.
+Keep the separations, noise level, model family, and fitting procedure fixed. Generate another set of errors and fit again. Then repeat. We now have several fitted curves, all produced by the same procedure. Their disagreement tells us something that a single training score could not.
 
-At one concentration, ask two questions. Where is the average prediction relative to the true mean response? How much do the predictions vary around their own average? The first concerns **bias**; the second concerns **variance** across training datasets. Bias here has a specific statistical meaning. It is different from a neural network's additive bias parameter, from inductive bias, and from social bias.
+At one separation, ask two questions. Where is the average predicted energy relative to the reference curve? How much do the predictions vary around their own average? The first concerns **bias**; the second concerns **variance** across training datasets. Bias here has a specific statistical meaning. It is different from a neural network's additive bias parameter, from inductive bias, and from social bias.
+
+![Polynomials of degree 5 fitted to 80 generated datasets, without a penalty. Twelve individual fits are shown, alongside their average and the reference potential. The estimated squared bias and variance on the right are averaged over the displayed separation grid; the added noise variance is known.](../assets/model-selection-potential.png)
 
 A more flexible model can reduce a systematic mismatch while becoming more sensitive to which noisy observations it received. This is the **bias–variance tradeoff**. Regularisation can change that balance. We should examine the resulting predictions rather than assume that increasing flexibility must always increase variance or produce a U-shaped error curve. Hardt and Recht's [discussion of model complexity](https://mlstory.org/generalization.html#effects-of-model-complexity) is useful precisely because it questions that familiar picture.
 
@@ -46,7 +62,7 @@ The expectations over $\mathcal D$ refer to repeating the training-data collecti
 
 </details>
 
-In the notebook, hold the penalty at zero and compare degrees 1, 2, and 9. Inspect the individual curves before the average. Which procedure misses the curvature repeatedly? Which changes most when the observations change? The displayed bias and variance are estimated from a finite number of simulated datasets. We can compare them with the known mean response in this simulation; ordinary cross-validation does not reveal the true function or separately identify these terms.
+In the notebook, hold the penalty at zero and compare degrees 1, 5, and 9. Inspect the individual curves before the average. Which procedure misses the well repeatedly? Which changes most when the observations change? The displayed bias and variance are estimated from a finite number of simulated datasets. We can compare them with the reference energy in this simulation; ordinary cross-validation does not reveal the true function or separately identify these terms.
 
 ## What does regularisation add? {#regularisation}
 
@@ -110,9 +126,11 @@ uv sync --locked --group mof
 uv run --locked --group mof marimo edit notebooks/model-selection.py --headless
 ```
 
-The [recorded preview](../notebooks/previews/model-selection.html) shows the default calculation if you cannot run the notebook. Its controls do not recompute results. The notebook has two separate simulations: repeated noisy measurements at fixed concentrations for bias and variance, then 60 independent development observations for cross-validation. It does not report a final test score.
+The [recorded preview](../notebooks/previews/model-selection.html) shows the default calculation if you cannot run the notebook. Its controls do not recompute results. The notebook has two separate simulations: 80 sets of 18 noisy energy values at fixed separations for bias and variance, then 60 independent development observations for cross-validation. Each added error has standard deviation 0.06 in reduced energy units. It does not report a final test score.
 
-1. Compare degrees 1, 2, and 9 without a penalty. Explain the difference between a persistent mismatch and variation between fits.
+For numerical convenience, we express the polynomial in $z=(s-1.4)/0.4$, which maps the stated interval onto $[-1,1]$. This is a fixed coordinate choice. We then standardise the polynomial features using only the training observations of each fit. The penalty acts on the coefficients of these standardised features. Changing the representation can therefore change what a particular penalty strength prefers.
+
+1. Compare degrees 1, 5, and 9 without a penalty. Explain the difference between a persistent mismatch and variation between fits.
 2. Keep degree 9 fixed and change only the penalty. Record a setting that changes the spread and explain what else changed.
 3. Follow one observation through the five folds. Identify which fits may use its target and which must predict it without fitting to it.
 4. Compare the candidate settings. Change the fold assignment once and inspect whether the ranking changes. Both comparisons are development work; do not keep changing the split until a preferred model wins.
@@ -123,5 +141,7 @@ The [recorded preview](../notebooks/previews/model-selection.html) shows the def
 Explain why a lower training error did not settle our choice, what regularisation changed, and what the cross-validation result estimates. Then name one reason that even a low cross-validation error might not justify the chemical use you have in mind.
 
 ## Suggested reading
+
+My [MolSim slides, pp. 36–51](https://www.compchem.nl/wp-content/uploads/molsim2023/L09_Machine-Learning.pdf#page=36), develop the potential-fitting example through bias, variance, regularisation, and model selection. Here we make the repeated fits and the data used in each fold explicit. A drawn tradeoff is a useful starting point for a question; the notebook lets us examine what actually happens in this example.
 
 Prince's [*Understanding Deep Learning*](https://udlbook.github.io/udlbook/), Chapters 8, **Measuring performance**, and 9, **Regularization**, develops the repeated-fit argument and ways to constrain learning. Hardt and Recht's [Chapter 6, **Generalization**](https://mlstory.org/generalization.html), gives a useful counterpoint to treating one schematic complexity curve as a universal law. The linked cross-validation and pipeline documentation supplies implementation details. These are suggestions for another explanation, not prerequisites for the practical.

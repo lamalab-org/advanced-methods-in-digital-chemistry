@@ -182,6 +182,14 @@ For the slope derivative, the additional factor is $c_i$. A sufficiently small s
 
 Keep **optimisation** and **generalisation** separate. Finding parameters with low training loss solves the fitting problem. Whether those parameters give useful predictions elsewhere is an additional question.
 
+### What did we just teach the model? {#fitting-loop}
+
+Let us follow one observation through the calculation. Its concentration enters the line; the line gives a predicted absorbance. We compare that prediction with the observed absorbance and calculate an error. Combining the errors gives us a criterion for changing the parameters. Then we calculate the predictions again.
+
+This is the training loop from my [MolSim lecture, p. 28](https://www.compchem.nl/wp-content/uploads/molsim2023/L09_Machine-Learning.pdf#page=28). The observations enter in two different places: the inputs go into the model, while the targets tell us how its predictions missed. In our calculation, the update was a comparison of three intercepts. In a neural network, the update will involve many more numbers. The distinction between a prediction, a discrepancy, and a parameter update remains.
+
+Once the parameters are fixed, predicting an absorbance needs the concentration but not the observed absorbance. If we already knew the latter, it would be evidence for checking the prediction. Where would that check enter the loop, and why should it not always use the same observations that guided the updates?
+
 ## Why a more flexible curve can mislead
 
 Moving the intercept improved the fit within our chosen family of lines. What if we allow a curve to bend as well? We will use a larger generated dataset for this comparison: twelve observations for fitting and seventeen additional observations for comparing the fitted models. We call the latter **validation observations**, because they help us choose a model. These are different observations from the three used in our hand calculation. Keep the training points fixed as the model changes, then reveal the validation points to see what new evidence adds.
@@ -193,6 +201,10 @@ f_\theta(c)=b+w_1c+w_2c^2+\cdots+w_dc^d.
 $$
 
 The coefficients $b,w_1,\ldots,w_d$ are fitted parameters. The degree $d$ determines which family of curves we fit; it is a **[hyperparameter](../glossary.qmd#hyperparameter)**. We can use validation observations to help choose it.
+
+There is another useful distinction here. A curved function of concentration can still be linear in its fitted coefficients. Write $u=c/(1\,\mathrm{mmol\,L}^{-1})$ and take the three features $1,u,u^2$. At $u=0.5$ they are $1,0.5,0.25$. With coefficients $0.15,0.6,0.4$, their weighted sum is $0.15+0.6(0.5)+0.4(0.25)=0.55$. We have computed nonlinear features and then combined them linearly. These coefficients illustrate the calculation; they were not fitted to our three observations.
+
+The [MolSim regression sequence, pp. 29–35](https://www.compchem.nl/wp-content/uploads/molsim2023/L09_Machine-Learning.pdf#page=29), uses this distinction to move beyond straight lines. It will also help us understand [kernel models](03-mof-uptake.qmd#kernels-as-functions) and, later, neural networks. Ask what is being held fixed: the input descriptions, the functions applied to them, or only the rule for combining their outputs?
 
 For [unregularised least squares](../glossary.qmd#regularisation) on the same data, increasing the polynomial degree enlarges a nested model family. The best possible training error cannot increase, up to numerical effects. Performance on new measurements has no such guarantee. The curve may fit measurement noise or behave unpredictably where there are few observations.
 
