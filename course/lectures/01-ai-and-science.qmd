@@ -11,7 +11,7 @@ Some of our questions will sound almost too basic to need asking. What does it m
 After working through these examples, you should be able to:
 
 - Replace a broad claim such as “AI can do chemistry” with a specific task and say what would count as evidence of success. Use a historical example to explain why AI is broader than today's neural networks.
-- Explain what a model leaves out and why an omission can be harmless for one question and decisive for another.
+- Formulate a prediction as $\hat y=f(x)$. Explain how choosing the target $y$, the input $x$, and the function $f$ shapes the question we can answer, and why an omission can be harmless for one question and decisive for another.
 - Distinguish predicting a yield, explaining the predictor, and establishing what changing the temperature would cause. Explain why none of those alone identifies a reaction mechanism.
 - Say what seven successes in ten attempts tell us directly, and what assumptions enter a prediction about the next attempt. Recognise that statements about uncertainty can have different interpretations.
 
@@ -48,11 +48,39 @@ Suppose we want to walk from the lecture building to the railway station. A stre
 
 The two omissions are both omissions, but they have different consequences for our journey. We can judge them because we have said what we want to do. In chemistry, we have to make the corresponding judgement about the chemical question.
 
-A **[model](../glossary.qmd#model)** is a representation used to answer a question about a system. A molecular drawing, for example, represents atoms and bonds. If we want to discuss their connectivity, we can often leave solvent and temperature outside the picture. Now ask for the molecule's solubility in water at 25 °C and at 50 °C. The drawing stays the same, but the requested measurement conditions have changed.
+A **[model](../glossary.qmd#model)** is a representation used to answer a question about a system. For a predictive model, we can make the calculation explicit:
+
+$$
+x \longmapsto f(x)=\hat y.
+$$
+
+Here, **[mapping](../glossary.qmd#mapping)** has its mathematical meaning: a function assigns an output to an input. We have moved from a geographical map to a calculation. The connection is the choice of what to represent. The input $x$ is our description of a case, $f$ is the rule that uses that description, and $\hat y$ is the prediction. The hat distinguishes it from the target value $y$ recorded for that case. Writing the equation does not make the prediction agree with the observation.
+
+### What do we want $y$ to mean? {#choosing-the-target}
+
+Before deciding what to put into $x$, we need a question. Suppose an experiment requires a dissolved concentration of 1 mmol/L. We could ask for the molecule's equilibrium solubility $S$ in water, under specified conditions. But we could also ask only whether it dissolves sufficiently for that experiment. These choices give us different targets:
+
+| Choice of target $y$ | What we retain |
+|---|---|
+| The solubility $S$, in mmol/L | A concentration that we can compare with different experimental requirements. |
+| $\log_{10}[S/(1\,\mathrm{mmol/L})]$, for positive $S$ | The concentration on a logarithmic scale. Equal differences now correspond to equal concentration ratios. |
+| 1 if $S\geq 1\,\mathrm{mmol/L}$, otherwise 0 | Whether this particular requirement is met. Values of 2 and 20 mmol/L receive the same label. |
+
+If tomorrow's experiment needs 5 mmol/L, the old yes/no label is no longer enough. Choosing the target has determined which question our model will learn to answer. Even a change of scale matters: judging errors on concentrations or on their logarithms gives different importance to absolute and relative discrepancies. The [solubility example](../examples.qmd#choices-within-a-lens) follows these choices through values, labels, and rankings.
+
+### How do we describe the case with $x$? {#choosing-the-input}
+
+For the concentration prediction, one case is a molecule under particular measurement conditions. A molecular drawing represents atoms and bonds. If we want to discuss their connectivity, we can often leave solvent and temperature outside the picture. Now ask for the molecule's solubility in water at 25 °C and at 50 °C. The drawing stays the same, but the requested measurement conditions have changed.
 
 Suppose our predictor receives only that drawing and returns one solubility value. Where have we told it which temperature we mean? We have not supplied that distinction. To make temperature-specific predictions, we need to include the relevant condition in the input. Alternatively, we can restrict the task to measurements at 25 °C, hold the other relevant conditions fixed, and state that scope when using the model. Adding temperature alone would not establish that all the necessary information is present.
 
-Here the drawing is an **input representation**: the information supplied. The **predictive model** is the rule or learned relationship that uses it to calculate an answer. These are separate choices. An increasingly elaborate calculation cannot tell which of our two requested temperatures we intended from a drawing that is identical in both cases.
+We also choose how to encode the molecule. An atom-and-bond graph retains different information from a list containing only molar mass and the number of hydrogen-bond donors. Those numbers are **[molecular descriptors](../glossary.qmd#descriptor)**. Two different structures can have the same values for both. Our description $x$ may therefore make cases indistinguishable even before $f$ begins its calculation.
+
+### Which function should use that description? {#choosing-the-function}
+
+Once we have defined the task and its inputs, we can choose a rule for $f$, or choose a family of functions and fit one using examples. A weighted sum restricts the relationships differently from a more flexible function. We also decide which observations to learn from and what counts as a consequential error. Fitting can adjust the parameters; it does not undo the choices of target, representation, or training examples. Hardt and Recht develop the mathematical formulation in [*Supervised learning*](https://mlstory.org/supervised.html#supervised-learning).
+
+Finally, we compare $\hat y$ with independently obtained target values $y$, using observations that suit the intended use. Those reference values have measurement conditions and uncertainties of their own. A model can predict a carefully defined target well and still be unhelpful if that target does not answer the chemical question.
 
 I think these choices deserve more attention than they usually get. Someone has decided which question matters, which observations to collect, and which differences the model can ignore. The mathematics begins with those decisions already made.
 
@@ -64,9 +92,7 @@ What are we keeping? What are we leaving out? Why is that acceptable for this pu
 
 Of course, we do not always make these decisions consciously. Sometimes someone else assembled the dataset. Sometimes a software package has already chosen a representation for us. Sometimes we simply never thought to record the solvent. The omission still shapes what the model can learn. Making it deliberate means noticing it and being able to explain why it is acceptable.
 
-**Try:** State one solubility question precisely, including its measurement conditions. Decide which conditions you will hold fixed and which the model must receive as inputs. Explain how one omitted condition could change the usefulness of the answer.
-
-Suppose we describe each molecule by its molar mass and the number of hydrogen-bond donors. These numbers are **[molecular descriptors](../glossary.qmd#descriptor)**: numerical descriptions of selected aspects of a molecule. Two different structures can have the same values for both. We have made another choice about which differences to preserve.
+**Try:** State one solubility question precisely. Define $y$ and its units or labels, describe what one $x$ contains, and name a condition you will hold fixed or supply as an input. What should $f(x)$ return? What observation would let you check it? Explain one choice you could change and how that would change the question or the information available.
 
 There is a further complication: supplying information does not guarantee that a model can use it. A representation can contain atomic coordinates without a particular model learning the relationships between them. Our [study of text representations of materials](../reading.qmd#representation-and-model) examines this distinction.
 

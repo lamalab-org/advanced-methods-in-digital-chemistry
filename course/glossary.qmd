@@ -30,6 +30,8 @@ An individual piece of information supplied to a model. In the calibration examp
 
 The quantity a supervised model is asked to predict. Absorbance is the target when concentration is the input in our calibration example. A target can be a number or a category. **Label** often means a category such as “active,” but is also used more broadly for supplied target values.
 
+We write $y$ for a recorded target value and $\hat y$ for the model's prediction. Choosing a target includes deciding what to measure, under which conditions, in which units, and whether to keep a value or turn it into a category. A recorded $y$ can itself have measurement error.
+
 ### Observation, sample, and dataset {#dataset}
 
 In ML, an **observation** or **sample** often means one recorded example; a **dataset** is a collection of them. One row might describe a molecule measured at a particular temperature, so several rows can concern the same molecule. In statistics, “sample” can also mean a whole collection of observations.
@@ -67,6 +69,10 @@ A **potential energy surface** assigns an energy to an atomic configuration. A *
 ### Model {#model}
 
 A representation used to answer a question about a system. The opening lecture uses a street map as a simple example: it preserves connections needed to choose a route. In our computational work, a **predictive model** calculates an output from supplied inputs. For example, $\hat A=mc+b$ relates concentration to predicted absorbance. The input representation specifies the information supplied; the predictive model specifies how it is used. Models can come from physical reasoning, explicit rules, fitting data, or a combination.
+
+### Function or mapping {#mapping}
+
+A rule that assigns an output to each allowed input. In a prediction written as $\hat y=f(x)$, $x$ is the supplied description, $f$ is the prediction rule, and $\hat y$ is its output. The target $y$ states what we want to predict; recorded values let us check the predictions. Defining $x$ and $y$ is part of formulating the scientific question. This mathematical meaning of “map” differs from a geographical map. See the [opening example](lectures/01-ai-and-science.qmd#choosing-the-target).
 
 ### Parameter {#parameter}
 
