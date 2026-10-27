@@ -45,6 +45,12 @@ The [glossary](glossary.qmd) explains technical terms with examples from chemist
 
 Several books have shaped how I think about these questions. I particularly recommend Hardt and Recht's *Patterns, Predictions, and Actions*, Kate Crawford's *Atlas of AI*, Carissa Véliz's *Prophecy*, and Simon J. D. Prince's *Understanding Deep Learning*. For an introduction to machine learning, I also recommend [our review on porous materials and Mehta and colleagues' introduction for physicists](reading.qmd#introductory-reviews). These and the papers discussed in class are collected under [suggested reading](reading.qmd). The reading is optional.
 
+## How these notes were written {#about-these-notes}
+
+These lecture notes were developed through an ongoing, iterative dialogue with OpenAI's Codex. I used it to help structure the course, draft and revise explanations, and develop code and teaching activities, drawing on my earlier teaching material and the sources cited throughout the notes. I guide the course's content and teaching approach and remain responsible for the material, including any errors.
+
+This is also part of what we will discuss in the course: how to use an assistant while retaining judgement about the question, the reasoning, and the evidence. Please point out errors or unclear explanations so that we can improve the notes.
+
 ## Your feedback {#feedback}
 
 This is the first time I am teaching this course here in Jena. It is also a time when many of the methods and tools we will discuss are changing quickly. I have been trying out LLMs in other courses, but I am still working out where they help students learn and where they get in the way. This course will be part of that process.
