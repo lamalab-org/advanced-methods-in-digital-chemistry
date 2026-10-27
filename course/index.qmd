@@ -113,7 +113,7 @@ Another approach treats the success rate as fixed but unknown and asks how our e
 | ANI-1 and AlphaFold2 | Knowing that a model learns from examples does not tell us how it describes uncertainty. For any reported confidence or error measure, we need to inspect how it was constructed and what it is intended to mean. |
 | Lean in chemical physics | Checking a derivation is a logical task. A probability interpretation becomes relevant if we also model uncertainty in measurements or premises; it is not supplied by the proof checker itself. |
 
-We will return to this lens when uncertainty becomes useful for deciding what to measure next. For now, “the model is confident” is an invitation to ask how that confidence was defined.
+We will discuss this distinction in [the opening lecture](lectures/01-ai-and-science.qmd#what-does-a-probability-describe) and return to it when choosing what to measure next. For now, “the model is confident” is an invitation to ask how that confidence was defined.
 
 ### Rules and learned patterns
 
