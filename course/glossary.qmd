@@ -116,6 +116,14 @@ A quantity used to summarise performance. We might evaluate a model with MAE eve
 
 **Optimisation** searches for choices that improve an objective. A **gradient** collects derivatives describing how an objective changes with its parameters. Gradient descent takes steps in the opposite direction. The **learning rate** controls the step size. Our [one-step calculation](lectures/02-learning-from-data.qmd#how-do-the-parameters-change) makes this concrete.
 
+### Inductive bias {#inductive-bias}
+
+A restriction or preference that helps determine what a learning procedure predicts beyond the observations used to fit it. Choosing straight lines rules out curved responses. Requiring the energy of an isolated molecule to stay unchanged when all its coordinates are rotated encodes a physical symmetry. Such choices can help when they suit the task and mislead when they do not. This use of **bias** differs from a systematic prediction error and from the additive parameter called a bias in a neural network.
+
+### Invariance and equivariance {#symmetry}
+
+A quantity is **invariant** under a specified transformation if it stays unchanged. For an isolated molecule without an external field, its energy should be unchanged by translating or rotating the whole molecule. A vector output such as a force should rotate with the molecule: it changes in a corresponding way, called **equivariance**. Always specify the transformation and the output; a property need not be invariant under every change to a structure.
+
 ### Regularisation {#regularisation}
 
 A way of restricting or discouraging certain fitted solutions, for example by penalising large coefficients. It expresses a preference about acceptable models. **Unregularised least squares** minimises squared error without an added regularisation penalty; the choice of model family still imposes restrictions.

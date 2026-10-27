@@ -12,6 +12,14 @@ We can ask a more manageable version of that question. Our table contains uptake
 
 It is tempting to shorten the question to “find a good material for carbon capture.” But that would add questions about mixtures, water, stability, regeneration, synthesis, and the process in which the material will be used. A prediction at one set of conditions can help with that work. It does not specify the whole decision.
 
+### Where does the learned model enter? {#where-ml-enters}
+
+There is more than one place to use learning in this calculation. The diagram in my [MolSim lecture, p. 3](https://www.compchem.nl/wp-content/uploads/molsim2023/L09_Machine-Learning.pdf#page=3), puts those possibilities beside one another.
+
+One route to uptake begins with a model of the interactions between atoms and molecules. A simulation then samples configurations and uses them to estimate the amount adsorbed under the specified conditions. We could learn an approximation to the interaction energies and use it within that simulation. Alternatively, we could collect the uptake values from completed simulations and learn to predict those values directly. This second route is what our practical does. Its predictor is a **surrogate** for a specified simulation result.
+
+There is a further possibility: keep the energy model and learn a way to propose configurations that would otherwise be difficult to sample. We will return to that distinction when discussing molecular simulation. Learning the energy, learning a final property, and helping explore configurations change different parts of the calculation. They therefore require different checks. Agreement with a set of uptake values does not establish that a model can calculate forces or generate a physically meaningful trajectory.
+
 ## What do we keep from a structure?
 
 Imagine replacing a framework drawing with two numbers: its density and its pore volume per gram. We have retained information that might be useful for gas uptake, while discarding the identities and arrangement of many atoms. These numbers are [descriptors](../glossary.qmd#descriptor). In the practical, eight geometric descriptors become the model's [features](../glossary.qmd#feature).
@@ -25,6 +33,16 @@ Imagine replacing a framework drawing with two numbers: its density and its pore
 The [data notes](../data/mof-uptake/README.md) give the exact column names, units, and source. The target is a simulation result. A model that reproduces it accurately approximates that calculation; comparison with experimental uptake is a further step.
 
 **Discuss:** Which two frameworks might look similar through these descriptors while differing in a way that matters for adsorption?
+
+### Which changes should matter? {#which-changes-should-matter}
+
+There are also differences we deliberately want a representation to ignore. Take an isolated molecule, with no external field, and rotate all its atomic coordinates together. We have changed the numbers in the coordinate table without changing its internal geometry. Its energy should stay the same. Stretching one bond is a different operation: now an energy change is possible.
+
+This gives us a concrete requirement before we fit anything. We could supply distances between atoms, which stay unchanged under a rigid rotation, or build that requirement into the model. We could also train on rotated copies, although a finite collection of copies does not by itself guarantee the property for every rotation. These are different ways of using chemical knowledge to constrain learning. The [MolSim lecture, pp. 12–13](https://www.compchem.nl/wp-content/uploads/molsim2023/L09_Machine-Learning.pdf#page=12), compares them; the three-approach slide credits Tess Smidt.
+
+The requirement depends on the output. An unchanged energy is **invariance**. A force arrow must rotate with the molecule, which is **equivariance**. For our uptake model, simply rotating the coordinate system should likewise leave the scalar prediction unchanged. Replacing a linker with another chemical group may change uptake, yet our eight geometric descriptors might not preserve enough information to distinguish that change. Ignoring an arbitrary orientation and discarding chemical information have different consequences.
+
+**Discuss:** Which of these operations changes the physical system, and which changes only its description? What would you want an energy predictor to do in each case?
 
 ## A prediction without descriptors {#first-ask-whether-the-inputs-help}
 
@@ -44,13 +62,35 @@ One model in the practical compares materials through distances between their fe
 
 **Standard scaling** subtracts each feature's training mean and divides by its training standard deviation. The resulting coordinates are dimensionless. This makes the distance insensitive to a consistent change of units, but it still gives each feature a particular weight: one training standard deviation. That is a modelling convention, not evidence that the features are equally informative. The transformation is itself fitted, so we estimate those means and standard deviations from training data and apply the same transformation to validation and test data. A [pipeline](../glossary.qmd#preprocessing) keeps the transformation and model together.
 
+## From a straight line to similarities {#kernels-as-functions}
+
+Our calibration line adds two functions, a constant and a multiple of concentration. A polynomial adds further powers. We choose these building blocks first and then fit their coefficients. A kernel model offers another construction: place a function at each training input and fit the coefficients of their sum. This is the comparison in the [MolSim lecture, pp. 53–57](https://www.compchem.nl/wp-content/uploads/molsim2023/L09_Machine-Learning.pdf#page=53).
+
 The original practical uses **[kernel ridge regression](../glossary.qmd#kernel-ridge)**. Our Gaussian kernel gives a similarity to two scaled feature vectors $x$ and $z$:
 
 $$
 k(x,z)=\exp\left(-\gamma\lVert x-z\rVert^2\right).
 $$
 
-The squared distance $\lVert x-z\rVert^2$ adds the squared differences between corresponding entries. The setting $\gamma$ controls how quickly similarity falls with distance. A prediction combines similarities to the training materials in a weighted sum. The weights are learned from their uptake values; they can be positive or negative. The regularisation setting $\alpha$ controls the strength of the constraint on the fitted function. We will compare an unscaled and a scaled version with the same settings. A scaled linear ridge model provides another useful comparison. [scikit-learn's KRR introduction](https://scikit-learn.org/stable/modules/kernel_ridge.html)
+The squared distance $\lVert x-z\rVert^2$ adds the squared differences between corresponding entries. The setting $\gamma$ controls how quickly similarity falls with distance. For a single input coordinate, each training example becomes the centre of a bell-shaped function. A larger $\gamma$ makes that bell narrower. The prediction is
+
+$$
+\hat y(x)=\sum_{i=1}^{n_{\mathrm{train}}} a_i\,k(x,x_i).
+$$
+
+Here $x_i$ is a training input and $a_i$ is its fitted coefficient. The coefficients can be negative, and the sum is not a normalised average of nearby uptake values. The regularisation setting $\alpha$ controls the penalty used during fitting. We will compare an unscaled and a scaled version with the same settings. A scaled linear ridge model provides another useful comparison. [scikit-learn's KRR introduction](https://scikit-learn.org/stable/modules/kernel_ridge.html)
+
+### Adding three functions
+
+The small demonstration below uses three invented observations and one dimensionless input. The coloured curves show the three weighted contributions; the dark curve is their sum. Moving the query changes where we evaluate the same fitted function. Changing $\gamma$ or $\alpha$ fits a new function to the same observations.
+
+```{=html}
+<iframe class="activity" src="../activities/kernel.html" title="Three Gaussian kernel functions and their fitted sum"></iframe>
+```
+
+[Open the kernel demonstration](../activities/kernel.html). First move the query and add the three displayed contributions. Then predict what will happen when the bells become narrower, before changing $\gamma$. Can you find a region where the curves disagree although there is no observation to decide between them? These three training observations cannot establish which setting predicts future measurements better.
+
+In the MOF practical, each input has eight coordinates rather than one. The construction is the same, but now the distance depends on every descriptor and its scale.
 
 ## Choosing a model with validation data {#which-observations-may-influence-the-choice}
 
@@ -63,6 +103,12 @@ The data-leakage case study in [Jablonka et al. (2023), *An Ecosystem for Digita
 The plot below shows the chosen model's **validation** predictions in the supplied run. In the left panel, the diagonal marks agreement with the reference simulations. The right panel makes the residuals visible. These observations helped us choose the model, so they cannot also supply its untouched final assessment.
 
 ![Validation predictions and residuals from the supplied MOF practical. Both axes on the left refer to computed uptake, in mmol/g.](../assets/mof-validation.png)
+
+### Which materials does an average describe? {#average-for-which-materials}
+
+Suppose our purpose is to find unusually high-uptake materials. A random validation sample can contain many ordinary materials and very few exceptional ones. A low average error over the whole sample may then tell us little about the region we hope to search. The [MolSim lecture, p. 25](https://www.compchem.nl/wp-content/uploads/molsim2023/L09_Machine-Learning.pdf#page=25), raises this problem for material screening.
+
+In our validation plot, inspect the high-uptake region separately. How many points support a claim there, and do the errors look similar to those elsewhere? An observation here can suggest a further evaluation, but it does not turn this region into an untouched test set. If selecting the best candidates is the intended use, we should plan an assessment of that selection before making a discovery claim. Predicting uptake accurately on average and selecting useful candidates are related tasks with different evidence requirements.
 
 ## The uncertainty in a test error {#a-test-score-still-has-a-hat}
 
