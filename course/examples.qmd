@@ -1,0 +1,88 @@
+---
+title: "Examples from chemistry"
+---
+
+## Chemical applications {#examples-through-lenses}
+
+“AI in chemistry” can mean proposing a molecular structure, choosing an experiment, or checking the steps of a theoretical derivation. These involve quite different ways of working with knowledge. A few examples make the breadth of the term apparent.
+
+The examples below are a non-exhaustive collection. After the table, we examine them through the three distinctions developed in [lecture 1](lectures/01-ai-and-science.qmd#choosing-a-lens): prediction and intervention, interpretations of probability, and rules and learned patterns. These distinctions answer different questions about the same system. Some are more relevant to one example than another; checking a mathematical derivation, for instance, need not involve a probability.
+
+| Example | What was the scientific task? |
+|---|---|
+| [DENDRAL — Duffield et al. (1969)](https://doi.org/10.1021/ja01039a026) | Propose molecular structures consistent with a formula and mass spectrum; this study examined ketones. |
+| [Lean in chemical physics — Bobbin et al. (2024)](https://doi.org/10.1039/D3DD00077J) | Formalise derivations in adsorption theory and relationships between gas laws. |
+| [ANI-1 — Smith et al. (2017)](https://doi.org/10.1039/C6SC05720A) | Estimate molecular energies from atomic identities and positions using a learned approximation to reference calculations. |
+| [Retrosynthesis — Segler et al. (2018)](https://doi.org/10.1038/nature25978) | Find possible routes from a target molecule back to available starting materials. |
+| [Antibacterial screening — Stokes et al. (2020)](https://doi.org/10.1016/j.cell.2020.01.021) | Prioritise compounds for experimental testing, leading to the identification of antibacterial activity in halicin. |
+| [Molecular generation — Gómez-Bombarelli et al. (2018)](https://doi.org/10.1021/acscentsci.7b00572) | Generate molecular candidates and search for desirable properties in a learned continuous representation. |
+| [A mobile robotic chemist — Burger et al. (2020)](https://doi.org/10.1038/s41586-020-2442-2) | Choose and perform experiments to improve photocatalytic hydrogen production. |
+| [AlphaFold2 — Jumper et al. (2021)](https://doi.org/10.1038/s41586-021-03819-2) | Predict three-dimensional protein structures from sequence and associated information. |
+| [ChemCrow — Bran et al. (2024)](https://doi.org/10.1038/s42256-024-00832-8) | Coordinate software tools for chemical tasks, including synthesis planning and execution on a connected platform. |
+
+::: {.panel-tabset}
+
+### Predicting and intervening
+
+A pattern in recorded observations can help predict another outcome without identifying what a deliberate change would cause. The [reaction example](lectures/01-ai-and-science.qmd#what-changes-when-the-task-is-science) develops this distinction between **correlative modelling** and **causal inference**. We can ask what evidence each of these studies supplies.
+
+| Example | What becomes visible through this distinction? |
+|---|---|
+| Antibacterial screening | A learned association helps select compounds. Follow-up experiments supply evidence about their activity under the tested conditions. Establishing the biological mechanism asks for further evidence. |
+| AlphaFold2 | Predicting a structure and predicting the effect of a particular intervention are different tasks. Agreement with measured structures alone does not establish a causal account of protein function. |
+| ANI-1 | Agreement with reference energies tests a learned approximation. Using it to study a changed molecule or a trajectory also requires a justified physical model and evidence that the approximation works there. A learned component can sit inside a physically motivated simulation. |
+| A mobile robotic chemist | The robot changes experimental conditions and measures outcomes. An optimisation result shows what worked in the explored space; identifying the effect of an individual component requires an appropriate comparison. |
+| Lean in chemical physics | A proof establishes what follows from specified premises. Whether those premises describe a physical intervention remains a question about the experiment and the theory being formalised. |
+
+A causal model can also make predictions; the question here is what supports an intervention claim.
+
+### What does a probability describe?
+
+In the [seven-successes-in-ten-attempts example](lectures/01-ai-and-science.qmd#what-does-a-probability-describe), we distinguished uncertainty about an unknown success probability from the behaviour of an estimation procedure over repeated datasets. These led to **Bayesian** and **frequentist** interpretations. Neither interpretation follows simply from knowing which algorithm a study used.
+
+| Example | What would we ask about probability and uncertainty? |
+|---|---|
+| A mobile robotic chemist | The study uses predictions and uncertainty to help choose the next experiment. What assumptions shape that uncertainty? How often would the whole procedure succeed over repeated runs? We can ask both questions about the same system. |
+| ANI-1 and AlphaFold2 | Knowing that a model learns from examples does not tell us how it describes uncertainty. For any reported confidence or error measure, we need to inspect how it was constructed and what it is intended to mean. |
+| Lean in chemical physics | Checking a derivation is a logical task. A probability interpretation becomes relevant if we also model uncertainty in measurements or premises; it is not supplied by the proof checker itself. |
+
+“The model is confident” is an invitation to ask how that confidence was defined. We will return to this question when choosing what to measure next.
+
+### Rules and learned patterns
+
+The [spectrum example](lectures/01-ai-and-science.qmd#different-methods-can-pursue-the-same-goal) distinguishes supplying explicit rules from learning relationships through examples. **Symbolic** methods work with explicit symbols and rules; **connectionist** methods learn through networks of adjustable calculations. Learning from examples also includes methods that do not use neural networks. Several of the studies below combine approaches.
+
+| Example | Where does the useful knowledge or capability come from? |
+|---|---|
+| DENDRAL | Explicit chemical rules constrain a search over candidate structures and their compatibility with spectral data. |
+| Lean in chemical physics | Researchers express definitions, assumptions, and proofs formally; Lean checks the derivations using its logical foundations and mathematical library. |
+| ANI-1 | Neural networks learn from calculated energies, using [representations](glossary.qmd#representation) of local atomic environments. |
+| Retrosynthesis | Neural networks guide a tree search over possible reaction steps. Learned preferences and symbolic search work together. |
+| Antibacterial screening | A neural model learns from molecular structures and measured growth inhibition; researchers select and test candidates. |
+| Molecular generation | An [encoder and decoder](glossary.qmd#generative-model) learn a continuous molecular representation; optimisation searches that space for candidates with desired scores. |
+| A mobile robotic chemist | A model uses previous results and uncertainty to help choose the next experiment; robotic equipment executes it. Automating the physical work leaves open how the model represents knowledge. |
+| AlphaFold2 | Neural networks combine learned structural patterns with sequence, evolutionary, and structural information. |
+| ChemCrow | An LLM selects and calls specialised tools, then uses their outputs to continue the task. The tools supply additional capabilities and information. |
+
+:::
+
+## What do we ask the model to learn? {#choices-within-a-lens}
+
+Suppose we want to choose molecules for an experiment that requires a dissolved concentration of 1 mmol/L. We decide to learn from measured solubilities under the conditions of that experiment. The broad approach is correlative modelling. But what, exactly, should the model predict?
+
+For a small example, suppose three molecules, A, B, and C, have measured solubilities of 0.2, 2, and 20 mmol/L under those same conditions. We could keep these values, turn them into labels, or retain only their order. These give us three possible learning tasks:
+
+| What we ask the model to predict | What happens to the information in our example? |
+|---|---|
+| **The solubility value** — [regression](glossary.qmd#regression) | We retain 0.2, 2, and 20 mmol/L. The values let us compare different concentration requirements; we still have to decide which requirement matters. |
+| **Whether it is soluble enough for this experiment** — [classification](glossary.qmd#classification) | We turn the values into “no, yes, yes.” B and C receive the same label even though their solubilities differ tenfold. The 1 mmol/L requirement has become part of what we ask the model to learn. |
+| **The order of the candidates by solubility** — [ranking](glossary.qmd#ranking) | We retain C before B before A. The order would be identical if every solubility were a hundred times lower, although none of the molecules would then meet our requirement. |
+
+Now suppose the next experiment requires 5 mmol/L. If we kept only the old yes/no labels, we cannot tell that B no longer qualifies while C does. The information disappeared when we made the labels. A more elaborate model trained on those labels does not restore the missing measurements. The choice that looked like a matter of format has changed which questions the data can answer.
+
+Even if we keep numerical values, we still have to decide what counts as a large mistake. Predicting 0.1 instead of 0.01 mmol/L and predicting 10 instead of 1 mmol/L are both tenfold overestimates. Their absolute errors are 0.09 and 9 mmol/L. A [loss](glossary.qmd#loss) based on absolute differences makes the second error a hundred times larger; one based on differences between logarithms treats them equally. Which comparison serves our experiment? Choosing a scale has already expressed a preference about the mistakes we care about. In the [calibration example](lectures/02-learning-from-data.qmd#which-model-is-better), we will see two error measures favour different models on the same observations.
+
+This is what I mean by further choices within a lens. We have stayed with the same broad approach, yet changed what is retained, what counts as an answer, and what is rewarded during learning. These decisions deserve to be argued for as carefully as the choice of method.
+
+Consider one of the research examples through two of these lenses. What becomes visible through each? What do we still need to know? The [original studies](reading.qmd#application-examples) describe the choices their authors made.
+

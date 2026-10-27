@@ -8,6 +8,7 @@ project:
     - cli-assistant.qmd
     - glossary.qmd
     - reading.qmd
+    - examples.qmd
     - lectures/*.qmd
   resources:
     - activities/**
@@ -44,6 +45,7 @@ book:
     - lectures/02-learning-from-data.qmd
     - lectures/03-mof-uptake.qmd
   appendices:
+    - examples.qmd
     - cli-assistant.qmd
     - glossary.qmd
     - reading.qmd

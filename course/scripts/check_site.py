@@ -28,7 +28,7 @@ def main():
     errors = []
     forbidden = {"instructor", "_instructor", ".working", ".venv", ".git", ".env"}
     required = (
-        "index.html", "setup.html", "cli-assistant.html", "glossary.html", "reading.html", "search.json",
+        "index.html", "outline.html", "examples.html", "setup.html", "cli-assistant.html", "glossary.html", "reading.html", "search.json",
         "lectures/01-ai-and-science.html", "lectures/02-learning-from-data.html",
         "lectures/03-mof-uptake.html", "activities/calibration.html",
         "downloads/introductory-setup.zip", "downloads/mof-practical.zip",

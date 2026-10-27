@@ -140,7 +140,7 @@ For a laboratory, accuracy might matter alongside cost, turnaround time, or the 
 
 ## The chemistry examples {#application-examples}
 
-These are the original studies behind the [examples on the homepage](index.qmd#examples-through-lenses). The scientific tasks differ considerably, even though all can appear under the heading of AI in chemistry.
+These are the original studies behind the [chemical applications](examples.qmd#examples-through-lenses). The scientific tasks differ considerably, even though all can appear under the heading of AI in chemistry.
 
 | Study | Connection to the course |
 |---|---|
