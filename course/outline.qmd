@@ -6,9 +6,26 @@ Suppose a model predicts that a molecule will be useful. Before deciding what to
 
 We begin by fitting and examining small models. We then ask how models can use molecular structure and enter a simulation. Finally, we use them to propose candidates, choose measurements, and assist a research workflow. Throughout, we return to the human decisions about what to retain, what to leave out, and what evidence is sufficient.
 
-The **first session is on Wednesday, 28 October 2026, 14:00–16:00, at Helmholtzweg 4, SR 6 Physik**. I cannot teach on **Wednesday, 4 November 2026**, or **Tuesday, 17 November 2026**. In the first session, we will [discuss a block week or several longer sessions](lectures/01-ai-and-science.qmd#scheduling), taking account of these dates and students' availability.
-
 The working plan has content for **about ten two-hour teaching slots**, which we may combine into fewer calendar appointments. The numbered sessions below describe the teaching sequence; the detailed notes for sessions 1–3 are available, and the later lessons are being developed.
+
+## What would you most like to learn? {#learning-goals}
+
+What is the main thing you would like to be able to do or understand by the end of this course? It could begin with a chemical question, something you want to calculate, or a claim you would like to be able to examine. Take a moment to formulate your own goal before comparing it with someone else's. We will use these goals to discuss the emphasis and examples in the course.
+
+## How should we schedule the course? {#scheduling}
+
+Our first session is on **Wednesday, 28 October 2026, 14:00–16:00, at Helmholtzweg 4, SR 6 Physik**. I cannot teach on **Wednesday, 4 November 2026**, or **Tuesday, 17 November 2026**. I would therefore like us to use part of this first meeting to discuss how to arrange the remaining teaching. A block week or several longer sessions might work better for us.
+
+The ten entries in the topic sequence below describe the sequence of topics and the approximate teaching allocation. They need not become ten separate calendar appointments. We can combine topics while keeping the time to work through examples, ask questions, and take breaks.
+
+| Format | What we would need to arrange |
+|---|---|
+| **A block week** | Concentrate the main teaching in one week. We need a week in which we can all attend, with breaks and supported practice within the teaching days. There will be less time between sessions to revisit unfamiliar ideas. |
+| **Several longer sessions** | Combine topics into longer meetings spread across the course period. We need several suitable dates, with enough time between them for practice and project work. |
+
+One possible arrangement is to keep this introduction and a later project meeting separate, and group the eight intervening topics into four longer meetings. Those four meetings could fall within one week or be spread out. We will compare that possibility with our actual availability before settling the timetable.
+
+For the discussion, please check which proposed weeks or dates you can attend, any limits on starting or finishing times, and which format you would prefer. Mark uncertain availability as uncertain. You can share individual constraints privately; you do not need to explain their reasons to the class. We will confirm the dates after checking availability and the practical arrangements.
 
 ## Time to work together {#working-together}
 
@@ -41,7 +58,7 @@ The first three sessions establish a modelling workflow we can understand and ch
 
 | Session | Topics | What we will work through |
 |---|---|---|
-| **1. AI, science, and our tools** | AI as an ambition; modelling as deliberate omission; correlation, prediction, explanation, and causality; different meanings of probability; rules and learning. | Classify examples, examine how a changed question needs different evidence, and discuss what seven successes in ten attempts tell us. Use selected historical examples to place LLMs in a broader field, then set up an assistant and a Python notebook. [Lecture notes](lectures/01-ai-and-science.qmd) · [Setup](setup.qmd) |
+| **1. AI, science, and our tools** | Modelling as deliberate omission; AI as an ambition; its history and methods; prediction, explanation, and causality; probability; the human choices behind models. | Classify examples and consider what a model leaves out. Use selected historical examples to place LLMs in a broader field, then examine how a changed question needs different evidence and what seven successes in ten attempts tell us. Set up an assistant and a Python notebook. [Lecture notes](lectures/01-ai-and-science.qmd) · [Setup](setup.qmd) |
 | **2. Fitting a model** | Inputs and targets; functions and parameters; losses; fitting; model flexibility and regularisation; training, validation, and test data. | Calculate a few predictions and errors, change a calibration curve, and compare results on new observations. Establish why **test error is still an empirical estimate**. [Lecture notes](lectures/02-learning-from-data.qmd) |
 | **3. Making a chemical comparison** | Predicting a value, a label, or an ordering; descriptors, baselines, and scaling; linear and kernel models; provenance, leakage, and uncertainty in an error estimate. | Predict computed CO₂ uptake, compare models using validation data, inspect residuals, and state which future cases the evaluation can describe. [Lecture notes](lectures/03-mof-uptake.qmd) |
 

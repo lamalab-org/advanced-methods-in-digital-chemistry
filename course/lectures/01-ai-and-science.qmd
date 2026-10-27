@@ -6,6 +6,12 @@ A calculator, a chess program, and a chatbot all do something that once required
 
 We will begin with questions that sound almost too basic to need asking. What does it mean to model something? If two quantities vary together, what have we learned about changing one of them? What does a probability describe? A small change in the wording can change the question we are answering and the evidence we need. I would like us to notice those changes before a piece of software makes them easy to overlook.
 
+::: {.callout-note title="Our first meeting" collapse="true"}
+
+[What you would like to learn](../outline.qmd#learning-goals){#learning-goals}, [assessment](../outline.qmd#assessment){#assessment}, and [dates and teaching format](../outline.qmd#scheduling){#scheduling} are collected in the course outline. I would also welcome [your feedback](../index.qmd#feedback){#feedback}. The [setup page](../setup.qmd) accompanies our practical work.
+
+:::
+
 ## Which of these would you call AI?
 
 | Example | AI, not AI, or unsure? | Why? |
@@ -65,9 +71,9 @@ This is why I find it more useful to approach **artificial intelligence as a goa
 
 AI also names the research field that grew around that ambition. But the breadth that makes it an inviting research programme makes it awkward as the subject of a precise conversation. “Can AI do science?” could mean interpreting a spectrum, choosing an experiment, explaining a reaction, or writing the report. A system could be useful for one and hopeless at another. We first have to decide which of these questions we want to ask.
 
-## What does the label tell us?
+[]{#what-does-the-label-tell-us}
 
-Return to an example you classified as AI. What does that label tell someone about how it works? What would they still need to know to assess its result?
+Return to one of the examples we classified at the start. What does that label tell someone about how it works? What would they still need to know to assess its result?
 
 Whether a familiar regression is described as AI or machine learning changes little about the calculation itself. The useful description identifies the observations it learns from and the predictions it is expected to make. Likewise, calling a system AI does not specify its capabilities, assumptions, or failure modes.
 
@@ -82,19 +88,104 @@ Whether a familiar regression is described as AI or machine learning changes lit
 
 For example, “AI understands solubility” leaves much unspecified. A more precise claim is that a particular model predicts measured aqueous solubility, under stated conditions, for molecules outside the series used to develop it, with a stated error relative to a [baseline](../glossary.qmd#baseline), a reference method used for comparison. We can examine the data, choose a relevant evaluation, and debate whether the conclusion follows. Someone has chosen the property, conditions, comparison, and acceptable error. Those choices deserve as much attention as the name of the algorithm.
 
-## Prediction and prophecy {#prediction-and-prophecy}
+## A long history {#a-selective-history-six-stops-and-a-coda}
 
-The wish to know what will happen is much older than machine learning. Carissa Véliz's [*Prophecy*](../reading.qmd#prophecy) places today's predictive technologies within that longer history. I find this a useful starting point because it makes us ask why we want a prediction, whose prediction we trust, and what we do once we have it.
+How did this broad ambition become a research programme? A few episodes show people trying to turn it into concrete capabilities. Recognising patterns, reasoning from explicit knowledge, and using observations to guide action were research goals long before the current generation of models. Explicit knowledge and search developed alongside learning from examples. Statistics, optimisation, available data, and hardware shaped what these approaches could achieve.
 
-Suppose a model predicts which materials will be stable. We use its ranking to decide which candidates to make. The prediction has now helped decide where people spend their time and which measurements will exist. The materials we never make remain unknown. If the new measurements enter the next dataset, our earlier decisions also shape the evidence available to the next model.
+As we follow the dates, ask what changed: the question, the method, the resources available, or the result that could be demonstrated. An old question can receive a substantial new answer. The age of the ambition tells us little by itself about the value of that answer.
 
-A numerical answer can seem authoritative. To judge what it establishes, we need to know how it was obtained, which conditions it concerns, and what observations could show that it is wrong. Calling the answer AI does not supply that evidence. Neither does writing it as an equation.
+There is also a statistical thread: predicting an unobserved outcome from regularities in observations, and asking when those regularities remain useful. That thread does not depend on first reproducing human intelligence. Hardt and Recht's history connects pattern recognition with statistics, computing, and the ambitions of AI. It helps explain why the concrete prediction problem is often easier to discuss precisely than the broader label. [*Patterns, Predictions, and Actions*, Introduction](https://mlstory.org/introduction.html)
 
-This brings us back to the human choices. Someone decided that stability was the quantity worth predicting, assembled the observations, chose a model, and turned its output into a decision. We will make those steps visible as we build and use models ourselves. Prediction, the authority we give it, and the consequences of acting on it each deserve attention.
+### Before the name {#before-the-name}
+
+There was no single earlier name for AI, because the work did not yet belong to one field with one agreed name. In 1948, Alan Turing wrote a report titled *Intelligent Machinery*. He considered how machines might exhibit intelligent behaviour, including how they might learn. The question was already being pursued before the name we now use for it. [Turing's report, held by the National Physical Laboratory](https://www.npl.co.uk/getattachment/84156b8e-1b00-45b7-9f5e-3179cfa458c5/80916595-Intelligent-Machinery.pdf?lang=en-US)
+
+Another important term was **cybernetics**. Norbert Wiener's 1948 book, *Cybernetics: Or Control and Communication in the Animal and the Machine*, examined control and communication across living and engineered systems. Feedback was central: a system measures what happens and uses that information to adjust what it does. Think of a temperature controller that adjusts a heater using the measured temperature. Cybernetics addressed a wider set of questions than making machines intelligent; it was an overlapping research tradition, not simply an earlier name for the same field. [Wiener's book, with an open-access edition](https://mitpress.mit.edu/9780262537841/cybernetics-or-control-and-communication-in-the-animal-and-the-machine/)
+
+### 1950: Alan Turing and the question of evaluation
+
+Turing's *Computing Machinery and Intelligence* reframed a difficult question about thinking through an observable test of performance, the imitation game. His paper also considered learning machines. For our course, the useful move is to ask what an evaluation actually establishes. Convincing conversation, correct prediction, and scientific understanding are different possible targets. [Turing's original paper](https://www.cs.toronto.edu/~frank/csc2501/Readings/R1_Turing/Turing-1950.pdf)
+
+**Question:** If a program explains a reaction convincingly, what evidence is still missing?
+
+### 1955–1956: giving the ambition a name {#naming-a-broad-research-programme}
+
+**John McCarthy coined the term “artificial intelligence” in 1955.** It appears in the title of the proposal dated **31 August 1955**, written with Marvin Minsky, Nathaniel Rochester, and Claude Shannon for a summer research project at Dartmouth. The often-cited date **1956** refers to the meeting, which took place the following summer. [Stanford's account of McCarthy's work](https://legacy.cs.stanford.edu/memoriam/professor-john-mccarthy); [the original Dartmouth proposal](https://www-formal.stanford.edu/jmc/history/dartmouth/dartmouth.html)
+
+The proposal brought language, abstraction, learning, and problem solving under that name. It already included several directions, including neural networks. A shared ambition could bring together people pursuing different methods.
+
+McCarthy later recalled that one reason for choosing the name was to distance his programme from cybernetics. He disagreed with its emphasis on analogue feedback. This is his retrospective account of his own motives. [McCarthy's recollection](https://www-formal.stanford.edu/jmc/reviews/bloomfield/bloomfield.html)
+
+I find this useful here because it shows that even naming a field involves choices about which questions and methods belong together. We should distinguish the creation of this research programme from the much older ambition of building machines that can perform tasks we associate with intelligence.
+
+### 1958: Frank Rosenblatt and learning a decision rule
+
+Rosenblatt's 1958 paper made learning from examples central to a model of pattern recognition. A threshold unit combines inputs, compares the result with a threshold, and produces a class prediction. Its weights, the numerical factors that determine how much each input contributes, can change during learning. [Rosenblatt's original paper, university-hosted copy](https://web.stanford.edu/class/psych209a/ReadingsByDate/01_30/Rosenblatt58Perceptron.pdf)
+
+<details>
+<summary>A threshold unit and the limits of its chosen rule</summary>
+
+::: {.concept}
+**A learnable rule**
+
+$$
+\hat y=\mathbf{1}[w_1x_1+w_2x_2+b>0]
+$$
+
+Inputs: $x_1,x_2$. Adjustable parameters: $w_1,w_2,b$. The symbol $\mathbf{1}[\cdot]$ returns 1 when the condition inside the brackets is true and 0 otherwise. The output $\hat y$ is therefore one of two class labels.
+
+Learning changes the parameters using examples. The chosen model family limits the rules that can be represented.
+:::
+
+With two inputs, the threshold gives us a straight boundary. Put four points at the corners of a square and give opposite corners the same label. Try to draw one line that separates the two classes. This pattern, called XOR, exposes a choice we made when we selected the model: a single straight boundary cannot express the rule we need. Changing the weights will move the line around. To solve this problem, we need a richer way of representing the boundary.
+
+</details>
+
+### The 1960s: DENDRAL and chemical knowledge {#s-with-a-1969-publication-dendral-and-chemical-knowledge}
+
+DENDRAL makes chemistry part of the history of AI itself. Work by Joshua Lederberg, Bruce Buchanan, Edward Feigenbaum, Georgia Sutherland, and collaborators used chemical knowledge and search to generate and evaluate structural hypotheses. The 1969 *Heuristic DENDRAL* paper concerns explanatory hypotheses in organic chemistry. [Feigenbaum collection publication record](https://cs.stanford.edu/people/eaf/wordpress/publications/)
+
+::: {.concept}
+**Structure elucidation as constrained search**
+
+Observed composition and spectrum
+
+$\downarrow$
+
+Candidate structures consistent with constraints
+
+$\downarrow$
+
+Predicted consequences and comparison with observations
+
+$\downarrow$
+
+Surviving hypotheses and a possible next measurement
+:::
+
+The chemical problem is familiar: several isomers can share a molecular formula. The formula has narrowed our choices, but we still need to distinguish the candidates. A spectral feature may let us rule some out. Each constraint saves us from considering possibilities that conflict with what we know. The quality of the search therefore depends on the chemical knowledge we put into it, as well as on the observations we supply.
+
+**Question:** If several structures agree with the available measurements, has the system identified a unique structure?
+
+### 1986: learning intermediate representations
+
+A neural network connects calculations like the weighted unit above, so that one calculation supplies inputs to another. David Rumelhart, Geoffrey Hinton, and Ronald Williams described learning representations by propagating errors backwards through a network. Intermediate units could acquire representations useful for the task, with parameter updates informed by their effects on the error. This influential 1986 publication is one milestone in a longer history of differentiation and network training. [Rumelhart, Hinton and Williams, 1986](https://www.nature.com/articles/323533a0)
+
+### 2012: learning to recognise images {#a-convincing-demonstration-at-scale}
+
+Alex Krizhevsky, Ilya Sutskever, and Geoffrey Hinton demonstrated strong image-classification performance using a deep [convolutional network](../glossary.qmd#network-operations). Such networks learn filters applied across parts of an image. Their system brought together a large labelled dataset, [GPU computation](../glossary.qmd#gpu), architecture choices, and techniques that supported training and generalisation. Its success illustrates several developments acting together. [The original ImageNet paper](https://proceedings.neurips.cc/paper/2012/hash/c399862d3b9d6b76c8436e924a68c45b-Abstract.html)
+
+For a chemist, the result opens an appealing possibility: perhaps useful molecular representations can also be learned. It also brings us back to the data. How many examples do we have? How similar are they? What would count as recognising something new in chemistry? We will need to answer those questions when we build our own models.
+
+### 2017–2021: transformers and protein structures {#coda-transformers-and-a-scientific-task}
+
+Two later markers connect this history to the course. Vaswani and colleagues introduced the [Transformer](../glossary.qmd#network-operations) in 2017 for sequence modelling. Jumper and colleagues reported AlphaFold's protein-structure prediction results in 2021, following CASP14 in 2020. These are useful examples of learned representations and of scientific evaluation with a defined target. [Transformer paper](https://arxiv.org/abs/1706.03762); [AlphaFold paper](https://www.nature.com/articles/s41586-021-03819-2)
+
+Agreement between predicted and reference structures supports a particular predictive claim. Before examining how far such a claim reaches, let us put names to the different ways these systems organise knowledge.
 
 ## Rules and learned patterns {#different-methods-can-pursue-the-same-goal}
 
-Take the task of identifying a molecule from a spectrum. We could begin by writing down chemical constraints: the molecular formula, possible bonds, and fragmentation rules. A program could then search for structures compatible with those constraints. Much of the useful knowledge would enter through the rules we gave it.
+DENDRAL gives us one way to identify a molecule from a spectrum. We begin by writing down chemical constraints: the molecular formula, possible bonds, and fragmentation rules. A program could then search for structures compatible with those constraints. Much of the useful knowledge would enter through the rules we gave it.
 
 We could also collect spectra whose structures are already known and use them to fit a model. Now some of the relationship between spectrum and structure would enter through examples. We would still have decisions to make about which spectra to collect, how to represent them, and what the model should learn. Learning moves some of the work; it does not make those decisions disappear.
 
@@ -116,6 +207,8 @@ Working with explicit symbols and rules is called a **symbolic** approach. Devel
 Learning from data is one way of pursuing the broader ambition; explicit reasoning and search offer others.
 
 The traditions overlap. Statistics also studies inference and experimental design, and a search procedure can use probabilities learned from data. We will encounter these combinations repeatedly. Calling a system a neural network tells us something about one part of it; we still have to understand how that part fits into the scientific work.
+
+We can now describe more precisely how a system works. We still need to decide what its result tells us about chemistry. That question leads from methods to evidence.
 
 ## Predicting a reaction and changing it {#what-changes-when-the-task-is-science}
 
@@ -176,9 +269,21 @@ The statements concern prediction, model explanation, a causal effect, and a mec
 
 </details>
 
+### What follows from the result? {#llm-activity-turning-a-claim-into-a-check}
+
+Suppose we have finished our analysis and are writing the conclusion:
+
+> Our model predicts yields accurately, and its explanation ranks temperature as important. We have therefore shown that heating causes the yield to increase through a particular reaction pathway.
+
+The word “therefore” is doing quite a lot of work. Follow the argument with a partner: where do we move from predicting yield to explaining the model, from explaining the model to changing the reaction, and from changing the reaction to knowing its mechanism?
+
+Ask an LLM to suggest another explanation for the observations and an experiment that could distinguish the two. Then inspect its proposal. Which part of our conclusion would the experiment test? Could we obtain the suggested result even if the proposed mechanism were wrong? The assistant can help us generate possibilities; we still have to decide what an observation would tell us.
+
+**Submit:** one revised scientific claim and one observation that would make you less confident in it. The same task can be done entirely on paper.
+
 ## What does a probability describe? {#what-does-a-probability-describe}
 
-Suppose we repeat a synthesis ten times and call it successful when the isolated yield exceeds 60% after two hours. Seven attempts succeed. We use the same substrate and nominal protocol each time. Someone asks: “How likely is the next attempt to succeed?”
+Even after deciding which question to ask, we may have only a few observations with which to answer it. Suppose we repeat a synthesis ten times and call it successful when the isolated yield exceeds 60% after two hours. Seven attempts succeed. We use the same substrate and nominal protocol each time. Someone asks: “How likely is the next attempt to succeed?”
 
 The tempting answer is 70%. We can certainly say that seven of the ten recorded attempts succeeded. That is an observed proportion. Using it to predict the next attempt adds assumptions: that the attempts are comparable, that our records include failures, and that the conditions relevant to success will remain sufficiently similar. Even then, another group of ten attempts need not give the same proportion.
 
@@ -204,19 +309,19 @@ I find it useful to think of these choices as lenses. Each brings some aspects i
 | What do we mean when we say an answer is likely? | We have to say what is uncertain and which assumptions support the probability we report. |
 | Do we supply rules or learn relationships from examples? | The useful knowledge enters in different ways, with different opportunities for omissions and mistakes. |
 
-These questions concern different decisions. A program can combine rules with learned relationships, and either kind of system can be used to make predictions. We need to look at the role of each component rather than place an entire system in one box. The [examples on the course homepage](../index.qmd#examples-through-lenses) develop these distinctions through chemical applications.
+These questions concern different decisions. A program can combine rules with learned relationships, and either kind of system can be used to make predictions. We need to look at the role of each component rather than place an entire system in one box. The [chemical applications](../examples.qmd#examples-through-lenses) develop these distinctions through chemical applications.
 
 The same experiment can be examined through more than one lens. We might use a learned predictor to select candidates, design an intervention to investigate one condition, and use a probability model to describe uncertainty about its effect. The lens is a choice about what we ask and how we justify an answer. It is not a label that settles every question about a system.
 
-Within each lens, further choices follow. Suppose our experiment requires a dissolved concentration of 1 mmol/L. Measurements of 2 and 20 mmol/L can both become the label “soluble enough.” If a later experiment requires 5 mmol/L, that label has discarded the distinction we now need. The [worked example on the homepage](../index.qmd#choices-within-a-lens) compares keeping the values, keeping only labels, and keeping only an ordering. It then asks whether two tenfold errors should receive the same penalty. We can keep the same aim of predicting from observed patterns and still make quite different decisions about what to retain and reward.
+Within each lens, further choices follow. Suppose our experiment requires a dissolved concentration of 1 mmol/L. Measurements of 2 and 20 mmol/L can both become the label “soluble enough.” If a later experiment requires 5 mmol/L, that label has discarded the distinction we now need. The [solubility example](../examples.qmd#choices-within-a-lens) compares keeping the values, keeping only labels, and keeping only an ordering. It then asks whether two tenfold errors should receive the same penalty. We can keep the same aim of predicting from observed patterns and still make quite different decisions about what to retain and reward.
 
-This also helps distinguish improving a method from changing the question it can answer. Fitting an observational association more accurately does not, by itself, identify an intervention effect. We will see why in the reaction example. Explaining a model's calculation and explaining a chemical mechanism raise further questions about what a result establishes.
+This also helps distinguish improving a method from changing the question it can answer. Fitting an observational association more accurately does not, by itself, identify an intervention effect. The reaction records illustrated why: the chemists chose temperatures in response to substrate difficulty. Explaining a model's calculation and explaining a chemical mechanism raise further questions about what a result establishes.
 
 We will return to three questions: **Does the lens fit the question? Do the choices within it serve our purpose? Does the evidence support the conclusion?** These questions apply just as much to our own models as to a result we encounter in a paper or product announcement.
 
 This is why we will spend time on the basics even while using capable coding and language-model assistants. An assistant may help us implement a calculation or suggest an explanation. We still need to recognise which question that calculation answers. LLMs are one part of the broader field we will study; using them well includes knowing when a different method, a measurement, or a better question is needed.
 
-## What do we expect a model to tell us? {#breiman-two-cultures}
+### What do we expect a model to tell us? {#breiman-two-cultures}
 
 Consider a calibration curve. We could assume that mean absorbance depends linearly on concentration and specify how measurements vary around that line. We would fit the unknown quantities and examine whether those assumptions are adequate. We could also choose a flexible function for its ability to predict new absorbance measurements, without claiming that its internal calculation describes what happens in the instrument. Both approaches can be useful. What are we asking the model to tell us?
 
@@ -226,104 +331,19 @@ These cultures do not coincide with the lenses above. A statistical model of obs
 
 For our calibration, a familiar formula needs checking against the experiment. A flexible predictor needs checking on observations relevant to its intended use. Suppose the two predict new measurements equally well: what further evidence would we need if we also wanted to explain why absorbance changes with concentration? The distinction becomes consequential when we decide what to conclude from a good fit. The [suggested reading](../reading.qmd#breiman-two-cultures) gives useful places to begin in Breiman's argument.
 
-## A long history {#a-selective-history-six-stops-and-a-coda}
+## Prediction and prophecy {#prediction-and-prophecy}
 
-The history shows several attempts to turn a broad ambition into concrete capabilities. Recognising patterns, reasoning from explicit knowledge, and using observations to guide action were research goals long before the current generation of models. Explicit knowledge and search developed alongside learning from examples. Statistics, optimisation, available data, and hardware shaped what these approaches could achieve.
+So far, we have asked what a model can tell us. What happens when people act on its answer? The wish to know what will happen is much older than machine learning. Carissa Véliz's [*Prophecy*](../reading.qmd#prophecy) places today's predictive technologies within that longer history. It makes us ask why we want a prediction, whose prediction we trust, and what we do once we have it.
 
-As we follow the dates, ask what changed: the question, the method, the resources available, or the result that could be demonstrated. An old question can receive a substantial new answer. The age of the ambition tells us little by itself about the value of that answer.
+Suppose a model predicts which materials will be stable. We use its ranking to decide which candidates to make. The prediction has now helped decide where people spend their time and which measurements will exist. The materials we never make remain unknown. If the new measurements enter the next dataset, our earlier decisions also shape the evidence available to the next model.
 
-There is also a statistical thread: predicting an unobserved outcome from regularities in observations, and asking when those regularities remain useful. That thread does not depend on first reproducing human intelligence. Hardt and Recht's history connects pattern recognition with statistics, computing, and the ambitions of AI. It helps explain why the concrete prediction problem is often easier to discuss precisely than the broader label. [*Patterns, Predictions, and Actions*, Introduction](https://mlstory.org/introduction.html)
+A numerical answer can seem authoritative. To judge what it establishes, we need to know how it was obtained, which conditions it concerns, and what observations could show that it is wrong. Calling the answer AI does not supply that evidence. Neither does writing it as an equation.
 
-### Before the name {#before-the-name}
+This brings us back to the human choices. Someone decided that stability was the quantity worth predicting, assembled the observations, chose a model, and turned its output into a decision. We will make those steps visible as we build and use models ourselves. Prediction, the authority we give it, and the consequences of acting on it each deserve attention.
 
-There was no single earlier name for AI, because the work did not yet belong to one field with one agreed name. In 1948, Alan Turing wrote a report titled *Intelligent Machinery*. He considered how machines might exhibit intelligent behaviour, including how they might learn. The question was already being pursued before the name we now use for it. [Turing's report, held by the National Physical Laboratory](https://www.npl.co.uk/getattachment/84156b8e-1b00-45b7-9f5e-3179cfa458c5/80916595-Intelligent-Machinery.pdf?lang=en-US)
+### The people and resources behind the model {#what-makes-these-systems-possible}
 
-Another important term was **cybernetics**. Norbert Wiener's 1948 book, *Cybernetics: Or Control and Communication in the Animal and the Machine*, examined control and communication across living and engineered systems. Feedback was central: a system measures what happens and uses that information to adjust what it does. Think of a temperature controller that adjusts a heater using the measured temperature. Cybernetics addressed a wider set of questions than making machines intelligent; it was an overlapping research tradition, not simply an earlier name for the same field. [Wiener's book, with an open-access edition](https://mitpress.mit.edu/9780262537841/cybernetics-or-control-and-communication-in-the-animal-and-the-machine/)
-
-### 1950: Alan Turing and the question of evaluation
-
-Turing's *Computing Machinery and Intelligence* reframed a difficult question about thinking through an observable test of performance, the imitation game. His paper also considered learning machines. For our course, the useful move is to ask what an evaluation actually establishes. Convincing conversation, correct prediction, and scientific understanding are different possible targets. [Turing's original paper](https://www.cs.toronto.edu/~frank/csc2501/Readings/R1_Turing/Turing-1950.pdf)
-
-**Question:** If a program explains a reaction convincingly, what evidence is still missing?
-
-### 1955–1956: giving the ambition a name {#naming-a-broad-research-programme}
-
-**John McCarthy coined the term “artificial intelligence” in 1955.** It appears in the title of the proposal dated **31 August 1955**, written with Marvin Minsky, Nathaniel Rochester, and Claude Shannon for a summer research project at Dartmouth. The often-cited date **1956** refers to the meeting, which took place the following summer. [Stanford's account of McCarthy's work](https://legacy.cs.stanford.edu/memoriam/professor-john-mccarthy); [the original Dartmouth proposal](https://www-formal.stanford.edu/jmc/history/dartmouth/dartmouth.html)
-
-The proposal brought language, abstraction, learning, and problem solving under that name. It already included several directions, including neural networks. A shared ambition could bring together people pursuing different methods.
-
-McCarthy later recalled that one reason for choosing the name was to distance his programme from cybernetics. He disagreed with its emphasis on analogue feedback. This is his retrospective account of his own motives. [McCarthy's recollection](https://www-formal.stanford.edu/jmc/reviews/bloomfield/bloomfield.html)
-
-I find this useful here because it shows that even naming a field involves choices about which questions and methods belong together. We should distinguish the creation of this research programme from the much older ambition of building machines that can perform tasks we associate with intelligence.
-
-### 1958: Frank Rosenblatt and learning a decision rule
-
-Rosenblatt's 1958 paper made learning from examples central to a model of pattern recognition. A threshold unit combines inputs, compares the result with a threshold, and produces a class prediction. Its weights can change during learning. [Rosenblatt's original paper, university-hosted copy](https://web.stanford.edu/class/psych209a/ReadingsByDate/01_30/Rosenblatt58Perceptron.pdf)
-
-<details>
-<summary>A threshold unit and the limits of its chosen rule</summary>
-
-::: {.concept}
-**A learnable rule**
-
-$$
-\hat y=\mathbf{1}[w_1x_1+w_2x_2+b>0]
-$$
-
-Inputs: $x_1,x_2$. Adjustable parameters: $w_1,w_2,b$. The symbol $\mathbf{1}[\cdot]$ returns 1 when the condition inside the brackets is true and 0 otherwise. The output $\hat y$ is therefore one of two class labels.
-
-Learning changes the parameters using examples. The chosen model family limits the rules that can be represented.
-:::
-
-With two inputs, the threshold gives us a straight boundary. Put four points at the corners of a square and give opposite corners the same label. Try to draw one line that separates the two classes. This pattern, called XOR, exposes a choice we made when we selected the model: a single straight boundary cannot express the rule we need. Changing the weights will move the line around. To solve this problem, we need a richer way of representing the boundary.
-
-</details>
-
-### The 1960s: DENDRAL and chemical knowledge {#s-with-a-1969-publication-dendral-and-chemical-knowledge}
-
-DENDRAL makes chemistry part of the history of AI itself. Work by Joshua Lederberg, Bruce Buchanan, Edward Feigenbaum, Georgia Sutherland, and collaborators used chemical knowledge and search to generate and evaluate structural hypotheses. The 1969 *Heuristic DENDRAL* paper concerns explanatory hypotheses in organic chemistry. [Feigenbaum collection publication record](https://cs.stanford.edu/people/eaf/wordpress/publications/)
-
-::: {.concept}
-**Structure elucidation as constrained search**
-
-Observed composition and spectrum
-
-$\downarrow$
-
-Candidate structures consistent with constraints
-
-$\downarrow$
-
-Predicted consequences and comparison with observations
-
-$\downarrow$
-
-Surviving hypotheses and a possible next measurement
-:::
-
-The chemical problem is familiar: several isomers can share a molecular formula. The formula has narrowed our choices, but we still need to distinguish the candidates. A spectral feature may let us rule some out. Each constraint saves us from considering possibilities that conflict with what we know. The quality of the search therefore depends on the chemical knowledge we put into it, as well as on the observations we supply.
-
-**Question:** If several structures agree with the available measurements, has the system identified a unique structure?
-
-### 1986: learning intermediate representations
-
-David Rumelhart, Geoffrey Hinton, and Ronald Williams described learning representations by propagating errors backwards through a network. Intermediate units could acquire representations useful for the task, with parameter updates informed by their effects on the error. This influential 1986 publication is one milestone in a longer history of differentiation and network training. [Rumelhart, Hinton and Williams, 1986](https://www.nature.com/articles/323533a0)
-
-### 2012: learning to recognise images {#a-convincing-demonstration-at-scale}
-
-Alex Krizhevsky, Ilya Sutskever, and Geoffrey Hinton demonstrated strong image-classification performance using a deep [convolutional network](../glossary.qmd#network-operations). Such networks learn filters applied across parts of an image. Their system brought together a large labelled dataset, [GPU computation](../glossary.qmd#gpu), architecture choices, and techniques that supported training and generalisation. Its success illustrates several developments acting together. [The original ImageNet paper](https://proceedings.neurips.cc/paper/2012/hash/c399862d3b9d6b76c8436e924a68c45b-Abstract.html)
-
-For a chemist, the result opens an appealing possibility: perhaps useful molecular representations can also be learned. It also brings us back to the data. How many examples do we have? How similar are they? What would count as recognising something new in chemistry? We will need to answer those questions when we build our own models.
-
-### 2017–2021: transformers and protein structures {#coda-transformers-and-a-scientific-task}
-
-Two later markers connect this history to the course. Vaswani and colleagues introduced the [Transformer](../glossary.qmd#network-operations) in 2017 for sequence modelling. Jumper and colleagues reported AlphaFold's protein-structure prediction results in 2021, following CASP14 in 2020. These are useful examples of learned representations and of scientific evaluation with a defined target. [Transformer paper](https://arxiv.org/abs/1706.03762); [AlphaFold paper](https://www.nature.com/articles/s41586-021-03819-2)
-
-Agreement between predicted and reference structures supports a particular predictive claim. It also gives us a way into the next question: how does predicting an outcome differ from understanding what would change it?
-
-## The people and resources behind the model {#what-makes-these-systems-possible}
-
-Calling AI an ambition also invites a question: whose ambition, and who provides the means to pursue it? Kate Crawford's *Atlas of AI* examines the material and political conditions of AI, including resource extraction, labour, data, and institutional power. I particularly recommend it for exploring these questions further. [Crawford (2021), *Atlas of AI*](https://yalebooks.yale.edu/book/9780300264630/atlas-of-ai/)
+Those decisions also depend on who can build and use a model. Whose ambition does it serve, and who provides the means to pursue it? Kate Crawford's *Atlas of AI* examines the material and political conditions of AI, including resource extraction, labour, data, and institutional power. I particularly recommend it for exploring these questions further. [Crawford (2021), *Atlas of AI*](https://yalebooks.yale.edu/book/9780300264630/atlas-of-ai/)
 
 Consider the chatbot or molecular predictor from the opening examples. Its output depends on more than a fitted function. To investigate the system, we can ask:
 
@@ -350,76 +370,11 @@ A good result can be scientifically valuable and commercially useful at the same
 
 We can ask the same questions of our own work. In [ChemBench, Mirza et al. (2025)](https://doi.org/10.1038/s41557-025-01815-x), we compared models and chemists on a curated collection of chemical questions. The question set and comparison procedure determine what the result says. Which parts of a chemist's work would need a different evaluation?
 
-## Learning from examples {#the-statistical-question-hiding-in-the-history}
+## From a question to a fitted model {#the-statistical-question-hiding-in-the-history}
 
-Both structure elucidation and learned prediction ask us to reason beyond the observations immediately in front of us. For the learning problems we will build, we can make the prediction question precise: which information goes into the model, and which unobserved quantity should come out?
+We have spent this lecture deciding what we want a model to tell us and what would justify believing it. We can now take one of those questions into a calculation. In the [next lecture](02-learning-from-data.qmd), we will use concentration measurements and absorbances to fit a calibration curve. We will choose what counts as an error, adjust a line, and ask whether it predicts another measurement well.
 
-::: {.concept}
-**Observations and predictions**
-
-$$
-\mathcal D=\{(x_i,y_i)\}_{i=1}^{n},\qquad
-\hat y=f_\theta(x).
-$$
-
-- $\mathcal D$: the observations available to us.
-- $x$: the information the model receives, its [input features](../glossary.qmd#feature).
-- $y$: the quantity we want to predict, the [target](../glossary.qmd#target).
-- $f_\theta$: a model with adjustable parameters $\theta$.
-
-**Fitting observations and predicting new observations are different questions.**
-:::
-
-For chemistry, “new” might mean a new measurement of a familiar compound, a new [molecular scaffold](../glossary.qmd#scaffold), a new temperature, or a new laboratory. These are different [generalisation](../glossary.qmd#generalisation) problems. A representative sample, a useful representation, or a physical constraint can help, but the assumption needs to be made explicit and checked where possible.
-
-Even when we reserve observations for a test, we still have a finite sample. The resulting **[test error is an empirical estimate](../glossary.qmd#empirical-error)**. We have to ask how uncertain it is and which future cases those observations can represent.
-
-Today we only introduce this notation. Next time we will use a calibration experiment to define an error, fit a model, and examine what happens on new measurements.
-
-## What follows from the result? {#llm-activity-turning-a-claim-into-a-check}
-
-Suppose we have finished our analysis and are writing the conclusion:
-
-> Our model predicts yields accurately, and its explanation ranks temperature as important. We have therefore shown that heating causes the yield to increase through a particular reaction pathway.
-
-The word “therefore” is doing quite a lot of work. Follow the argument with a partner: where do we move from predicting yield to explaining the model, from explaining the model to changing the reaction, and from changing the reaction to knowing its mechanism?
-
-Ask an LLM to suggest another explanation for the observations and an experiment that could distinguish the two. Then inspect its proposal. Which part of our conclusion would the experiment test? Could we obtain the suggested result even if the proposed mechanism were wrong? The assistant can help us generate possibilities; we still have to decide what an observation would tell us.
-
-**Submit:** one revised scientific claim and one observation that would make you less confident in it. The same task can be done entirely on paper.
-
-## What would you most like to learn? {#learning-goals}
-
-What is the main thing you would like to be able to do or understand by the end of this course? It could begin with a chemical question, something you want to calculate, or a claim you would like to be able to examine. Take a moment to formulate your own goal before comparing it with someone else's. We will use these goals to discuss the emphasis and examples in the course.
-
-## Your feedback {#feedback}
-
-This is my first time teaching this course in Jena. I have been experimenting with LLMs in other courses, and I am still working out how to use them well in teaching. The tools are changing quickly, and having an assistant produce an answer is only one part of learning how to do something ourselves.
-
-I would really appreciate hearing what works for you and what does not as we go along. At the end of our meetings, I will ask **what helped you understand something** and **what got in the way**. A specific moment or example helps me see what needs attention. You can speak to me privately or send a short message too; you do not need to wait until the end of the course. This is optional feedback, separate from the assessment. I will return to your comments at the next meeting so we can see what to change. The [course introduction](../index.qmd#feedback) explains why this matters to me.
-
-## What will the project involve? {#assessment}
-
-The official assessment has two components: **a project with a written report**, and **a final presentation with discussion**. The [course outline](../outline.qmd#assessment) gives their names and examination numbers in Friedolin.
-
-I would like the project to give you time to investigate something you find interesting. The writing and presentation should help you explain that investigation. We will discuss what scope and format would make this manageable, how we can reuse the calculations and figures you produce, and which dates would work. The detailed grading arrangements are still to be confirmed.
-
-## How should we schedule the course? {#scheduling}
-
-Our first session is on **Wednesday, 28 October 2026, 14:00–16:00, at Helmholtzweg 4, SR 6 Physik**. I cannot teach on **Wednesday, 4 November 2026**, or **Tuesday, 17 November 2026**. I would therefore like us to use part of this first meeting to discuss how to arrange the remaining teaching. A block week or several longer sessions might work better for us.
-
-The ten entries in the [course outline](../outline.qmd) describe the sequence of topics and the approximate teaching allocation. They need not become ten separate calendar appointments. We can combine topics while keeping the time to work through examples, ask questions, and take breaks.
-
-I would also like to discuss how we use the time when we meet. My proposal for the later sessions is a short introduction from me, perhaps ten to fifteen minutes, followed by substantial time for you to work through the examples or your own calculations. I will help with debugging and questions as you work. We can pause for a brief explanation when it would help several people, and compare results before leaving. Would that give you the support you need? The [course outline](../outline.qmd#working-together) describes this proposal in more detail.
-
-| Format | What we would need to arrange |
-|---|---|
-| **A block week** | Concentrate the main teaching in one week. We need a week in which we can all attend, with breaks and supported practice within the teaching days. There will be less time between sessions to revisit unfamiliar ideas. |
-| **Several longer sessions** | Combine topics into longer meetings spread across the course period. We need several suitable dates, with enough time between them for practice and project work. |
-
-One possible arrangement is to keep this introduction and a later project meeting separate, and group the eight intervening topics into four longer meetings. Those four meetings could fall within one week or be spread out. We will compare that possibility with our actual availability before settling the timetable.
-
-For the discussion, please check which proposed weeks or dates you can attend, any limits on starting or finishing times, and which format you would prefer. Mark uncertain availability as uncertain. You can share individual constraints privately; you do not need to explain their reasons to the class. We will confirm the dates after checking availability and the practical arrangements.
+Here, too, “another measurement” needs a meaning. A new solution on the same instrument, a higher concentration, and a measurement in another laboratory are different uses. We need observations that let us examine the intended one. Even observations reserved for a final test give us only a finite sample: **test error remains an empirical estimate**, with uncertainty and a scope set by the data. The calibration example will let us work through that distinction explicitly.
 
 ## Questions to consider {#exit-questions}
 
