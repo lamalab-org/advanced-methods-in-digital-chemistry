@@ -348,9 +348,15 @@ Ask an LLM to suggest another explanation for the observations and an experiment
 
 What is the main thing you would like to be able to do or understand by the end of this course? It could begin with a chemical question, something you want to calculate, or a claim you would like to be able to examine. Take a moment to formulate your own goal before comparing it with someone else's. We will use these goals to discuss the emphasis and examples in the course.
 
+## What will the project involve? {#assessment}
+
+The official assessment has two components: **a project with a written report**, and **a final presentation with discussion**. The [course outline](../outline.qmd#assessment) gives their names and examination numbers in Friedolin.
+
+I would like the project to give you time to investigate something you find interesting. The writing and presentation should help you explain that investigation. We will discuss what scope and format would make this manageable, how we can reuse the calculations and figures you produce, and which dates would work. The detailed grading arrangements are still to be confirmed.
+
 ## How should we schedule the course? {#scheduling}
 
-Our first session is on **Wednesday, 28 October 2026**. I cannot teach on **Wednesday, 4 November 2026**, or **Tuesday, 17 November 2026**. I would therefore like us to use part of this first meeting to discuss how to arrange the remaining teaching. A block week or several longer sessions might work better for us.
+Our first session is on **Wednesday, 28 October 2026, 14:00–16:00, at Helmholtzweg 4, SR 6 Physik**. I cannot teach on **Wednesday, 4 November 2026**, or **Tuesday, 17 November 2026**. I would therefore like us to use part of this first meeting to discuss how to arrange the remaining teaching. A block week or several longer sessions might work better for us.
 
 The ten entries in the [course outline](../outline.qmd) describe the sequence of topics and the approximate teaching allocation. They need not become ten separate calendar appointments. We can combine topics while keeping the time to work through examples, ask questions, and take breaks.
 
