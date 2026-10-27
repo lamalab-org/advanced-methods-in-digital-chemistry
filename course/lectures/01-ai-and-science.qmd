@@ -42,6 +42,8 @@ Perhaps you and your neighbour give different answers. Before deciding who is ri
 
 Modelling requires us to ignore things. That can sound like a defect until we ask what a model is for.
 
+Jorge Luis Borges takes the wish for a complete representation to an absurd conclusion in *On Exactitude in Science* (1946). His cartographers make a map as large as the empire it represents. Later generations abandon it. The short story leaves us with a useful question: what would such a map help us do? [Borges's story, in Andrew Hurley's translation, reproduced in Box 2 of *The Human Cell Atlas*](https://elifesciences.org/articles/27041)
+
 Suppose we want to walk from the lecture building to the railway station. A street map showing the connected streets, paths, and station entrance can help us choose a route. It need not record the positions of the atoms in the paving stones. Adding that information would make it more detailed. It would hardly help us catch the train. Now suppose the map also leaves out whether a footbridge is open. If our route relies on a closed bridge, that omission matters.
 
 The two omissions are both omissions, but they have different consequences for our journey. We can judge them because we have said what we want to do. In chemistry, we have to make the corresponding judgement about the chemical question.

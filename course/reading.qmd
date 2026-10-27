@@ -6,6 +6,10 @@ Several books and reviews have shaped how I think about the questions in this co
 
 **What should this page help you do?** Find a fuller explanation of an idea, trace a claim back to the study that made it, and compare the evidence in that study with the conclusion you want to draw. If a result seems surprising, following the reference should let you ask what was actually measured. There is no reading list to finish before you can take part.
 
+## On Exactitude in Science {#borges}
+
+Jorge Luis Borges's *On Exactitude in Science* (1946) is a short story about taking completeness too far. We use it when asking what a model should retain for a particular purpose. Andrew Hurley's English translation is reproduced in [Box 2 of *The Human Cell Atlas*](https://elifesciences.org/articles/27041).
+
 ## Two introductions to machine learning {#introductory-reviews}
 
 For an introduction to machine learning in chemistry, I still recommend our review: Kevin Maik Jablonka, Daniele Ongari, Seyed Mohamad Moosavi, and Berend Smit (2020), [*Big-Data Science in Porous Materials: Materials Genomics and Machine Learning*](https://pubs.acs.org/doi/10.1021/acs.chemrev.0c00004), *Chemical Reviews* 120, 8066–8129. Porous materials give us concrete examples, but many of the questions arise elsewhere in chemistry. Which observations should a model learn from? How do we describe a material to a computer? How do we evaluate what it has learned? The first part develops these ideas; the second examines applications, including gas storage and separation, stability, and synthesis. The review is open access, with another [full-text copy at PubMed Central](https://pmc.ncbi.nlm.nih.gov/articles/PMC7453404/).
