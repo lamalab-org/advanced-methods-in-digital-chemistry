@@ -44,6 +44,14 @@ Hanchen Wang et al. (2023), [*Scientific discovery in the age of artificial inte
 
 For materials chemistry, Seyed Mohamad Moosavi, Kevin Maik Jablonka, and Berend Smit (2020), [*The Role of Machine Learning in the Understanding and Design of Materials*](https://doi.org/10.1021/jacs.0c09105), *JACS* 142, 20273–20287, considers the relationship between prediction, understanding, and design. The Introduction connects these questions to the problems materials researchers want to solve. The paper is open access.
 
+## Two cultures of modelling {#breiman-two-cultures}
+
+Leo Breiman (2001), [*Statistical Modeling: The Two Cultures*](https://doi.org/10.1214/ss/1009213726), *Statistical Science* 16(3), 199–215 for the main article, is a useful companion to the [opening discussion](lectures/01-ai-and-science.qmd#breiman-two-cultures). The [linked PDF](https://www2.math.uu.se/~thulin/mm/breiman.pdf) contains that article; the journal's combined record also includes comments and a rejoinder.
+
+Section **1** introduces the two cultures. Section **3.2, The Chlorine Project**, connects the argument to chemistry: detecting chlorine from mass spectra without determining the entire molecular structure. Section **8, Rashomon and the Multiplicity of Good Models**, examines models with similar predictive performance that suggest different accounts of which inputs matter.
+
+Breiman makes a forceful case for algorithmic modelling. I would read it as an argument to engage with, rather than a permanent division of every model into two camps. In particular, his contrast should not be substituted for the distinction between prediction and causation. The paper remains suggested reading; we will introduce the relevant examples together.
+
 ## What do we mean by probability? {#probability-lenses}
 
 The distinction between Bayesian and frequentist inference becomes easier to discuss when we say what the probability concerns. Is it uncertainty about a parameter, given a model and observations? Or the behaviour of a procedure if we repeatedly collected data?
