@@ -329,6 +329,21 @@ Ask an LLM to suggest another explanation for the observations and an experiment
 
 **Submit:** one revised scientific claim and one observation that would make you less confident in it. The same task can be done entirely on paper.
 
+## How should we schedule the course? {#scheduling}
+
+I cannot teach on some dates during the course period. I would therefore like us to use part of this first meeting to discuss how to arrange the remaining teaching. A block week or several longer sessions might work better for us.
+
+The ten entries in the [course outline](../outline.qmd) describe the sequence of topics and the approximate teaching allocation. They need not become ten separate calendar appointments. We can combine topics while keeping the time to work through examples, ask questions, and take breaks.
+
+| Format | What we would need to arrange |
+|---|---|
+| **A block week** | Concentrate the main teaching in one week. We need a week in which we can all attend, with breaks and supported practice within the teaching days. There will be less time between sessions to revisit unfamiliar ideas. |
+| **Several longer sessions** | Combine topics into longer meetings spread across the course period. We need several suitable dates, with enough time between them for practice and project work. |
+
+One possible arrangement is to keep this introduction and a later project meeting separate, and group the eight intervening topics into four longer meetings. Those four meetings could fall within one week or be spread out. We will compare that possibility with our actual availability before settling the timetable.
+
+For the discussion, please check which proposed weeks or dates you can attend, any limits on starting or finishing times, and which format you would prefer. Mark uncertain availability as uncertain. You can share individual constraints privately; you do not need to explain their reasons to the class. We will confirm the dates after checking availability and the practical arrangements.
+
 ## Questions to consider {#exit-questions}
 
 1. Rewrite “AI can do chemistry” as a specific task, method, and evaluable claim.

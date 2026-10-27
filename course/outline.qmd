@@ -6,15 +6,15 @@ Suppose a model predicts that a molecule will be useful. Before deciding what to
 
 We begin by fitting and examining small models. We then ask how models can use molecular structure and enter a simulation. Finally, we use them to propose candidates, choose measurements, and assist a research workflow. Throughout, we return to the human decisions about what to retain, what to leave out, and what evidence is sufficient.
 
-The working plan has **ten meetings of about two hours**. We will discuss the dates and possible block format after the introductory session. The sequence below describes the intended content; the detailed notes for meetings 1–3 are available, and the later lessons are being developed.
+The working plan has content for **about ten two-hour teaching slots**, which we may combine into fewer calendar appointments. In the first session, we will [discuss a block week or several longer sessions](lectures/01-ai-and-science.qmd#scheduling), taking account of dates on which I cannot teach and students' availability. The numbered sessions below describe the teaching sequence; the detailed notes for sessions 1–3 are available, and the later lessons are being developed.
 
 ## Learning from observations {#learning-from-observations}
 
-The first three meetings establish a modelling workflow we can understand and check. A calibration curve lets us work through the calculations with very little code. A table of porous materials then makes the choices about chemical data and evaluation more apparent.
+The first three sessions establish a modelling workflow we can understand and check. A calibration curve lets us work through the calculations with very little code. A table of porous materials then makes the choices about chemical data and evaluation more apparent.
 
 ::: {.course-outline}
 
-| Meeting | Topics | What we will work through |
+| Session | Topics | What we will work through |
 |---|---|---|
 | **1. AI, science, and our tools** | AI as an ambition; modelling as deliberate omission; rules and learning; selected historical examples; prediction, explanation, and causality. | Classify concrete examples, compare scientific claims, and set up an assistant and a Python notebook. The distinction between an appealing answer and evidence for it begins here. [Lecture notes](lectures/01-ai-and-science.qmd) · [Setup](setup.qmd) |
 | **2. Fitting a model** | Inputs and targets; functions and parameters; losses; fitting; model flexibility and regularisation; training, validation, and test data. | Calculate a few predictions and errors, change a calibration curve, and compare results on new observations. Establish why **test error is still an empirical estimate**. [Lecture notes](lectures/02-learning-from-data.qmd) |
@@ -30,7 +30,7 @@ So far, we have supplied descriptions of the materials and chosen the functions 
 
 ::: {.course-outline}
 
-| Meeting | Topics | What we will work through |
+| Session | Topics | What we will work through |
 |---|---|---|
 | **4. A small neural network** | Weighted sums, nonlinear functions, layers, fitting, and learned intermediate representations. | Calculate a small network's output by hand, modify a supplied model, and compare it with a simpler baseline under the same evaluation. A more elaborate model still has to earn its place. |
 | **5. Molecular representations** | Molecular graphs, local environments, information passed between neighbouring atoms, and properties that should survive atom relabelling or rotation. | Follow one update on a molecular graph and inspect a supplied prediction or attribution. Distinguish explaining the model's calculation from establishing a chemical mechanism. |
@@ -46,7 +46,7 @@ A model that predicts a property does not yet tell us which molecule to make or 
 
 ::: {.course-outline}
 
-| Meeting | Topics | What we will work through |
+| Session | Topics | What we will work through |
 |---|---|---|
 | **7. Proposing molecules** | Searching an existing collection versus generating new candidates; one way to learn a distribution of molecular representations; objectives and chemical constraints. | Examine supplied candidates and compare them with a simple search. Check what validity, novelty, and a favourable predicted score actually establish, and what remains to be tested. |
 | **8. Choosing the next measurement** | Predictions and their uncertainty; updating a probability model with observations; balancing promising and uncertain choices under a budget. This leads to Bayesian optimisation. | Choose the next point before its result is revealed, then compare search procedures over repeated simulated runs. Distinguish finding a good condition from estimating the causal effect of changing it. |
@@ -54,11 +54,11 @@ A model that predicts a property does not yet tell us which molecule to make or 
 
 :::
 
-We will already have used an assistant from the first meeting. Meeting 9 examines that familiar tool using the ideas developed earlier: learned representations, generation, evaluation, and the difference between a proposed answer and an independently checked result.
+We will already have used an assistant from the first meeting. Session 9 examines that familiar tool using the ideas developed earlier: learned representations, generation, evaluation, and the difference between a proposed answer and an independently checked result.
 
 ## A result another chemist can examine {#bringing-the-work-together}
 
-**Meeting 10: reproducibility and project discussion.** We bring together the question, data, model, evaluation, and interpretation in a small piece of work. Another person should be able to run the calculation and understand the conclusion. We will exchange work, inspect one another's evidence, and explain a modelling choice and a limitation.
+**Session 10: reproducibility and project discussion.** We bring together the question, data, model, evaluation, and interpretation in a small piece of work. Another person should be able to run the calculation and understand the conclusion. We will exchange work, inspect one another's evidence, and explain a modelling choice and a limitation.
 
 The project should answer one bounded question. It might compare property predictors, examine the range in which a potential is useful, or evaluate an assisted extraction task. It does not need to use every method in the course. Keeping track of data, units, code, and model settings begins with the first notebook; this final meeting tests whether that record is useful to someone else.
 
