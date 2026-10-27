@@ -61,7 +61,7 @@ I once offered a seminar on critical aspects of AI. I had deliberately put “AI
 
 The problem was that everybody could have an opinion about AI while talking about something different. The word can refer to a chatbot, a recommendation system, or a machine that might one day think like a human. It gives us the same label for different tools, different capabilities, and different ambitions. Agreement becomes difficult to interpret. So does disagreement.
 
-This is why I find it more useful to approach **artificial intelligence as a goal**: building systems that can perform tasks we associate with intelligence. The goal leaves us considerable freedom. We could write down rules, search through possibilities, learn from examples, or combine all three. John McCarthy's account of AI allowed this breadth, including approaches that do not imitate biological processes. [McCarthy, *What is Artificial Intelligence?*](https://www-formal.stanford.edu/jmc/whatisai/node1.html)
+This is why I find it more useful to approach **artificial intelligence as a goal**: building systems that can perform tasks we associate with intelligence. The goal leaves us considerable freedom. We could write down rules, search through possibilities, learn from examples, or combine all three. John McCarthy, who [coined the name in 1955](#naming-a-broad-research-programme), allowed this breadth in his account of AI, including approaches that do not imitate biological processes. [McCarthy, *What is Artificial Intelligence?*](https://www-formal.stanford.edu/jmc/whatisai/node1.html)
 
 AI also names the research field that grew around that ambition. But the breadth that makes it an inviting research programme makes it awkward as the subject of a precise conversation. “Can AI do science?” could mean interpreting a spectrum, choosing an experiment, explaining a reaction, or writing the report. A system could be useful for one and hopeless at another. We first have to decide which of these questions we want to ask.
 
@@ -234,15 +234,27 @@ As we follow the dates, ask what changed: the question, the method, the resource
 
 There is also a statistical thread: predicting an unobserved outcome from regularities in observations, and asking when those regularities remain useful. That thread does not depend on first reproducing human intelligence. Hardt and Recht's history connects pattern recognition with statistics, computing, and the ambitions of AI. It helps explain why the concrete prediction problem is often easier to discuss precisely than the broader label. [*Patterns, Predictions, and Actions*, Introduction](https://mlstory.org/introduction.html)
 
+### Before the name {#before-the-name}
+
+There was no single earlier name for AI, because the work did not yet belong to one field with one agreed name. In 1948, Alan Turing wrote a report titled *Intelligent Machinery*. He considered how machines might exhibit intelligent behaviour, including how they might learn. The question was already being pursued before the name we now use for it. [Turing's report, held by the National Physical Laboratory](https://www.npl.co.uk/getattachment/84156b8e-1b00-45b7-9f5e-3179cfa458c5/80916595-Intelligent-Machinery.pdf?lang=en-US)
+
+Another important term was **cybernetics**. Norbert Wiener's 1948 book, *Cybernetics: Or Control and Communication in the Animal and the Machine*, examined control and communication across living and engineered systems. Feedback was central: a system measures what happens and uses that information to adjust what it does. Think of a temperature controller that adjusts a heater using the measured temperature. Cybernetics addressed a wider set of questions than making machines intelligent; it was an overlapping research tradition, not simply an earlier name for the same field. [Wiener's book, with an open-access edition](https://mitpress.mit.edu/9780262537841/cybernetics-or-control-and-communication-in-the-animal-and-the-machine/)
+
 ### 1950: Alan Turing and the question of evaluation
 
 Turing's *Computing Machinery and Intelligence* reframed a difficult question about thinking through an observable test of performance, the imitation game. His paper also considered learning machines. For our course, the useful move is to ask what an evaluation actually establishes. Convincing conversation, correct prediction, and scientific understanding are different possible targets. [Turing's original paper](https://www.cs.toronto.edu/~frank/csc2501/Readings/R1_Turing/Turing-1950.pdf)
 
 **Question:** If a program explains a reaction convincingly, what evidence is still missing?
 
-### 1955–1956: the Dartmouth proposal {#naming-a-broad-research-programme}
+### 1955–1956: giving the ambition a name {#naming-a-broad-research-programme}
 
-John McCarthy, Marvin Minsky, Nathaniel Rochester, and Claude Shannon proposed the Dartmouth research project in 1955 for the summer of 1956. The proposal brought language, abstraction, learning, and problem solving under the name artificial intelligence. It already included multiple directions, including neural networks. The field did not begin as a single algorithm. [The original Dartmouth proposal](https://www-formal.stanford.edu/jmc/history/dartmouth/dartmouth.html)
+**John McCarthy coined the term “artificial intelligence” in 1955.** It appears in the title of the proposal dated **31 August 1955**, written with Marvin Minsky, Nathaniel Rochester, and Claude Shannon for a summer research project at Dartmouth. The often-cited date **1956** refers to the meeting, which took place the following summer. [Stanford's account of McCarthy's work](https://legacy.cs.stanford.edu/memoriam/professor-john-mccarthy); [the original Dartmouth proposal](https://www-formal.stanford.edu/jmc/history/dartmouth/dartmouth.html)
+
+The proposal brought language, abstraction, learning, and problem solving under that name. It already included several directions, including neural networks. A shared ambition could bring together people pursuing different methods.
+
+McCarthy later recalled that one reason for choosing the name was to distance his programme from cybernetics. He disagreed with its emphasis on analogue feedback. This is his retrospective account of his own motives. [McCarthy's recollection](https://www-formal.stanford.edu/jmc/reviews/bloomfield/bloomfield.html)
+
+I find this useful here because it shows that even naming a field involves choices about which questions and methods belong together. We should distinguish the creation of this research programme from the much older ambition of building machines that can perform tasks we associate with intelligence.
 
 ### 1958: Frank Rosenblatt and learning a decision rule
 
