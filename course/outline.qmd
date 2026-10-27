@@ -38,7 +38,7 @@ This is a proposal for how we could use the listed dates. The three additional p
 | 2 | 4 November | **No teaching: I am unavailable** |
 | 3 | 11 November | Fitting a model |
 | 4 | 18 November | Making a chemical comparison |
-| 5 | 25 November | Supported practical: revisit the model comparison, try a terminal coding assistant, and discuss project questions |
+| 5 | 25 November | Choosing a model: underfitting and overfitting, bias and variance, regularisation, and cross-validation; connect the comparison to project questions |
 | 6 | 2 December | A small neural network |
 | 7 | 9 December | Molecular representations |
 | 8 | 16 December | Energies, forces, and simulation |
@@ -99,14 +99,16 @@ We begin with a calibration curve because we can follow the whole calculation. T
 | Topic group | Topics | What we will work through |
 |---|---|---|
 | **1. AI, science, and our tools** | Modelling as deliberate omission; AI as an ambition; its history and methods; prediction, explanation, and causality; probability; the human choices behind models. | Classify examples and consider what a model leaves out. Use selected historical examples to place LLMs in a broader field, then examine how a changed question needs different evidence and what seven successes in ten attempts tell us. Set up an AI-assistant and a Python notebook. [Lecture notes](lectures/01-ai-and-science.qmd) · [Setup](setup.qmd) |
-| **2. Fitting a model** | Inputs and targets; functions and parameters; losses; fitting; model flexibility and regularisation; training, validation, and test data. | Calculate a few predictions and errors, change a calibration curve, and compare results on new observations. Establish why **test error is still an empirical estimate**. [Lecture notes](lectures/02-learning-from-data.qmd) |
-| **3. Making a chemical comparison** | Predicting a value, a label, or an ordering; descriptors, baselines, and scaling; linear and kernel models; provenance, leakage, and uncertainty in an error estimate. | Predict computed CO₂ uptake, compare models using validation data, inspect residuals, and state which future cases the evaluation can describe. [Lecture notes](lectures/03-mof-uptake.qmd) |
+| **2. Fitting a model** | Inputs and targets; parameters and hyperparameters; losses; fitting; underfitting and overfitting; training, validation, and test data. | Calculate predictions and errors, change a calibration curve, and compare results on new observations. Establish why **test error is still an empirical estimate**. Follow up by examining bias, variance, and regularisation in the model-selection practical below. [Lecture notes](lectures/02-learning-from-data.qmd) |
+| **3. Making a chemical comparison** | Predicting a value, a label, or an ordering; descriptors, baselines, and scaling; linear and kernel models; provenance, leakage, and uncertainty in an error estimate. | Predict computed CO₂ uptake, compare models using validation data, inspect residuals, and state which future cases the evaluation can describe. Use this example to ask which observations belong together in cross-validation. [Lecture notes](lectures/03-mof-uptake.qmd) |
 
 :::
 
-By this point, we should be able to take a supplied data table, identify its target and conditions, fit a simple comparison model, and explain what its reported error does and does not tell us. We need that foundation before adding more elaborate models.
+The first supported practical brings these topics together in [**How should we choose a model?**](lectures/model-selection.qmd). We fit curves to repeated simulated measurements to distinguish **bias from variance**, then investigate **regularisation** by changing a penalty while keeping the degree fixed. Finally, we use **cross-validation** to compare settings when one validation split may give a fragile comparison. We will fit preprocessing inside each fold and distinguish selecting a model from evaluating the selected procedure. For chemical data, we also ask whether folds should separate molecules, families, batches, or times. This is core material before neural networks; the formal bias–variance derivation and nested cross-validation are further depth.
 
-During these early practicals, everyone will also have an opportunity to [try a coding assistant in the terminal](cli-assistant.qmd), on their own or with a partner. We will ask it to inspect and repair a small calculation, examine the changed file, and run checks ourselves. The proposed timetable leaves time for this in the supported practical after the first model comparisons, once the Python setup and the error calculation are familiar.
+By this point, we should be able to take a supplied data table, identify its target and conditions, fit a simple comparison model, justify a model-selection procedure, and explain what its reported error does and does not tell us. We need that foundation before adding more elaborate models.
+
+During these early practicals, everyone will also have an opportunity to [try a coding assistant in the terminal](cli-assistant.qmd), on their own or with a partner. We will ask it to inspect and repair a small calculation, examine the changed file, and run checks ourselves. This uses supported time in the first modelling practicals once the Python setup and the error calculation are familiar. If setup needs longer, we will arrange a further supported opportunity without dropping the model-selection discussion.
 
 ## Representing molecules and their behaviour {#molecular-models}
 
@@ -116,7 +118,7 @@ So far, we have supplied descriptions of the materials and chosen the functions 
 
 | Topic group | Topics | What we will work through |
 |---|---|---|
-| **4. A small neural network** | Weighted sums, nonlinear functions, layers, fitting, and learned intermediate representations. | Calculate a small network's output by hand, modify a supplied model, and compare it with a simpler baseline under the same evaluation. A more elaborate model still has to earn its place. |
+| **4. A small neural network** | Weighted sums, nonlinear functions, layers, fitting, and learned intermediate representations; training and validation curves, weight decay, and early stopping. | Calculate a small network's output by hand, modify a supplied model, and compare it with a simpler baseline under the same evaluation. Revisit overfitting and regularisation; choosing when to stop training is also a model choice. |
 | **5. Molecular representations** | Molecular graphs, local environments, information passed between neighbouring atoms, and properties that should survive atom relabelling or rotation. | Follow one update on a molecular graph and inspect a supplied prediction or attribution. Distinguish explaining the model's calculation from establishing a chemical mechanism. |
 | **6. Energies, forces, and simulation** | Learned potentials; forces as energy derivatives; the configurations a model has seen; numerical integration and sampling. | Draw force arrows on a potential, check a finite difference, and inspect a short supplied trajectory. Separate error in the learned potential from integration error and inadequate sampling. |
 

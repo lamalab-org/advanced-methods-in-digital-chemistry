@@ -164,6 +164,14 @@ Performance on new cases beyond the observations used to develop the model. “N
 
 Fitting details of the available observations that do not help prediction on new cases. A flexible curve can follow noise as well as a useful relationship. Lower training error alone does not show that the extra flexibility helped. See the [polynomial example](lectures/02-learning-from-data.qmd#why-a-more-flexible-curve-can-mislead).
 
+### Underfitting {#underfitting}
+
+A model or fitting procedure fails to capture a useful relationship, for example because a straight-line family cannot describe a reproducibly curved response. A large error alone does not diagnose underfitting; noise, missing information, or a changed setting can also cause it. Compare it with overfitting in the [model-selection practical](lectures/model-selection.qmd#underfitting-and-overfitting).
+
+### Bias, variance, and their tradeoff {#bias-variance}
+
+For squared-error regression at a fixed input, **bias** is the difference between the average prediction over repeated training datasets and the true conditional mean response. **Variance** measures how those fitted predictions vary across datasets. Expected squared prediction error decomposes into squared bias, variance, and conditional noise under the assumptions given in the [worked discussion](lectures/model-selection.qmd#bias-and-variance). Increasing flexibility or regularisation can change their balance. The tradeoff does not imply a universal U-shaped error curve. This bias differs from an additive neural-network parameter and from [inductive bias](#inductive-bias).
+
 ### Interpolation and extrapolation {#extrapolation}
 
 **Interpolation** concerns predictions within a region represented by the data; **extrapolation** extends beyond it. Predicting absorbance at a higher concentration than any training measurement is an extrapolation. With many molecular features, deciding what counts as “inside” the sampled region becomes less straightforward.
@@ -174,7 +182,11 @@ Fitting details of the available observations that do not help prediction on new
 
 ### Cross-validation {#cross-validation}
 
-Repeatedly fitting and evaluating using different training and validation portions of the available data. The splitting rule matters: measurements of the same molecule or closely related compounds can remain dependent across a careless split. Cross-validation does not automatically make an evaluation representative of a future task.
+Repeatedly fitting and evaluating with different training and validation portions of the development data. In **k-fold cross-validation**, each of k parts takes a turn in validation; each fit uses the other parts. This can support model selection without relying on a single validation allocation. Refit learned preprocessing within each training portion. The resulting error is an empirical estimate, and a score used to select settings is not an untouched assessment of the selected procedure. The [worked example](lectures/model-selection.qmd#five-folds) shows why the splitting unit, such as molecule or batch, must match the intended use.
+
+### Nested cross-validation {#nested-cross-validation}
+
+An outer evaluation loop with model selection performed inside each outer training portion, using an inner validation procedure. The outer scores assess the selection procedure, not merely one setting chosen using all observations. The nesting does not repair inappropriate splits or leakage elsewhere. This is an extension to the [selection-versus-assessment discussion](lectures/model-selection.qmd#selection-and-assessment).
 
 ### Data leakage {#leakage}
 

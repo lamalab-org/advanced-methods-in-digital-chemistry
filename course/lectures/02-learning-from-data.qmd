@@ -219,6 +219,8 @@ We need not restrict a model only by removing higher powers. We could keep the p
 
 The penalty expresses a preference; it does not supply new measurements. Its strength is another hyperparameter, chosen using validation data. Also, “large” depends on how we express the inputs: changing concentration units changes the numerical coefficients. We will meet this issue again when [comparing distances between materials](03-mof-uptake.qmd#why-would-changing-units-change-a-prediction).
 
+The follow-up practical, [**How should we choose a model?**](model-selection.qmd), develops this argument through repeated datasets. We distinguish underfitting from overfitting, separate bias from variance, and examine what a regularisation penalty changes. We then ask why one validation split may be insufficient and work through cross-validation. These are part of our foundation for the later neural-network examples.
+
 ## Deciding which data may be used {#a-first-trustworthy-workflow}
 
 Revealing the validation observations changed which curve we preferred. Those observations were not used to fit its coefficients, but they did help us choose the degree. They have become part of development. If we now want an evaluation after that choice, we need further observations that played no part in it. This gives us three distinct jobs for data.

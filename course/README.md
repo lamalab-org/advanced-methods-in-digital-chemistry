@@ -1,6 +1,6 @@
 # Course sources and practicals
 
-This directory contains the student Quarto book for **Advanced Methods in Digital Chemistry**, by Kevin Maik Jablonka. The [course outline](outline.qmd) gives the ten topic groups and a proposed allocation across 14 listed meetings: 13 available after excluding 4 November, including three additional practical and project meetings. Three lecture drafts cover AI and science, learning from data, and MOF gas-uptake modelling, with notebooks and calibration and kernel activities. Additional chapters are in development.
+This directory contains the student Quarto book for **Advanced Methods in Digital Chemistry**, by Kevin Maik Jablonka. The [course outline](outline.qmd) gives the ten topic groups and a proposed allocation across 14 listed meetings: 13 available after excluding 4 November, including three additional practical and project meetings. The current chapters cover AI and science, learning from data, MOF gas-uptake modelling, and a follow-up model-selection practical, with marimo notebooks and calibration and kernel activities. Additional chapters are in development.
 
 Read the [published course](https://lamalab-org.github.io/advanced-methods-in-digital-chemistry/) or use `quarto preview` from this directory. `quarto render` builds `_book/` without executing Python. The repository workflow uses Quarto 1.8.24. Publishing instructions are in the [repository README](../README.md).
 
@@ -27,7 +27,11 @@ uv run --locked --group mof marimo edit notebooks/03-mof-uptake.py --headless
 
 Open `notebooks/03-mof-uptake.py`. The data are simulated CO₂ uptakes, with eight geometric descriptors. Source revision, units, subset hashes, and the original MolSim MIT notice are in `data/mof-uptake/`. The separate `downloads/mof-practical.zip` contains the notebook, data, and locked environment. No Kaggle account or GPU is needed.
 
-The notebooks are Python source files; `notebooks/previews/` holds HTML exports with code and recorded results. The previews cannot recompute results and load marimo display assets from a CDN, so opening them requires an internet connection. Save student edits under a new notebook filename. The locked environment and all three notebooks have been checked on an Apple Silicon Mac. WSL/Ubuntu installation and Jan–Blablador access still need a classroom device pilot.
+The notebooks are Python source files; `notebooks/previews/` holds HTML exports with code and recorded results. The previews cannot recompute results and load marimo display assets from a CDN, so opening them requires an internet connection. Save student edits under a new notebook filename. The locked environment and all four notebooks have been checked on an Apple Silicon Mac. WSL/Ubuntu installation and Jan–Blablador access still need a classroom device pilot.
+
+## Model-selection practical
+
+The [follow-up notes](lectures/model-selection.qmd) and `notebooks/model-selection.py` connect underfitting and overfitting, bias and variance, regularisation, and cross-validation before the neural-network session. Run it with `uv run --locked --group mof marimo edit notebooks/model-selection.py --headless`. It uses the same installed environment as the MOF exercise and simulated data only. Its controls compare repeated fits and penalty strengths, then show five-fold assignments and a candidate comparison with preprocessing fitted inside each fold. The final selected procedure is refitted on development data; no final test score is reported. The MOF kit includes both notebooks and their recorded previews.
 
 ## Terminal coding-assistant practical
 
@@ -39,7 +43,7 @@ The guide includes a named Codex CLI profile for Blablador, based on Jülich's g
 
 - The website's shared visual assets and their sources are documented in [assets/README.md](assets/README.md). Edit the shared styles there; the local instructor book copies them during rendering.
 - Edit student chapters in `lectures/`, with linked technical terms in `glossary.qmd` and suggested references in `reading.qmd`.
-- Edit the three marimo notebooks directly in `notebooks/*.py`. `scripts/build_calibration.py` regenerates only the independent browser activity and its shared data.
+- Edit the marimo notebooks directly in `notebooks/*.py`. `scripts/build_calibration.py` regenerates only the independent browser activity and its shared data.
 - `scripts/build_mof_lab.py` checks the supplied data hash. Its optional `--source PATH_TO_ML_MOLSIM` argument rebuilds the subset from the pinned upstream revision. It does not overwrite the notebook.
 - Check notebook structure with `uv run --locked marimo check notebooks/*.py`. Execute and refresh the recorded HTML previews with `uv run --locked --group mof python scripts/build_notebook_previews.py`. This deliberately includes test results in the MOF preview; the live notebook waits for its test checkbox. Inspect the outputs and try the interactive controls before publishing. Refresh the MOF plot images under `assets/` if their underlying results change.
 - Rebuild the download archives after changing their inputs: `uv run --locked python scripts/build_setup_kit.py` and `uv run --locked --group mof python scripts/build_mof_kit.py`.

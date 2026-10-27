@@ -46,6 +46,7 @@ book:
     - lectures/01-ai-and-science.qmd
     - lectures/02-learning-from-data.qmd
     - lectures/03-mof-uptake.qmd
+    - lectures/model-selection.qmd
   appendices:
     - examples.qmd
     - cli-assistant.qmd

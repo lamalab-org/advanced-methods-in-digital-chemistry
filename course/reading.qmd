@@ -125,6 +125,12 @@ For the optional descriptor-shuffling calculation, scikit-learn's [permutation-i
 
 Prince's [*Understanding Deep Learning*](https://udlbook.github.io/udlbook/) is the book I recommend when we want to see what happens inside a network. The small examples make it possible to follow a calculation before handing it to a library. This fits the way we will work: draw the function, calculate an output, change a parameter, and then examine what changes.
 
+Chapters 8, **Measuring performance**, and 9, **Regularization**, also belong with our [model-selection practical](lectures/model-selection.qmd), before the first network. Repeated fits make bias and variance easier to interpret than an isolated error curve. Read them alongside Hardt and Recht's [discussion of model complexity](https://mlstory.org/generalization.html#effects-of-model-complexity), which challenges treating a particular shape of that curve as a general law.
+
+### Choosing and evaluating a model {#model-selection}
+
+The [scikit-learn cross-validation guide](https://scikit-learn.org/stable/modules/cross_validation.html) explains how folds change the use of limited data and supplies implementations. Ryan Giordano's [Berkeley lecture notes](https://stat154.berkeley.edu/fall-2025/lectures/unit3/unit3_cv.html) connect the estimate to population loss and emphasise repeating the whole fitting procedure. The [nested-validation example](https://scikit-learn.org/stable/auto_examples/model_selection/plot_nested_cross_validation_iris.html) addresses the additional problem of evaluating a procedure whose settings have already been selected. These are suggested explanations to consult when that distinction becomes relevant to your project.
+
 ## Recognising familiar molecules {#chemical-evaluation}
 
 Izhar Wallach and Abraham Heifets (2018), [*Most Ligand-Based Classification Benchmarks Reward Memorization Rather than Generalization*](https://doi.org/10.1021/acs.jcim.7b00403), *Journal of Chemical Information and Modeling* 58, 916–932, examines redundancy in ligand-based benchmarks. A [free author preprint](https://arxiv.org/abs/1706.06619v2) is available; it is a separate version from the journal article.
