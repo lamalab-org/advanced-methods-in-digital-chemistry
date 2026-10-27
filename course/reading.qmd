@@ -2,7 +2,9 @@
 title: "Suggested reading"
 ---
 
-Several books and reviews have shaped how I think about the questions in this course. I have collected them here, together with papers behind the examples and references that may help when a calculation or a piece of code is unfamiliar. All of this reading is suggested. We will develop the ideas we need together in class.
+Several books and reviews have shaped how I think about the questions in this course. I have collected them here, together with the papers behind our examples and references for when a calculation or a piece of code is unfamiliar. This is a collection to return to when a question interests you. All of the reading is suggested; we will develop the ideas we need together in class.
+
+**What should this page help you do?** Find a fuller explanation of an idea, trace a claim back to the study that made it, and compare the evidence in that study with the conclusion you want to draw. If a result seems surprising, following the reference should let you ask what was actually measured. There is no reading list to finish before you can take part.
 
 ## Two introductions to machine learning {#introductory-reviews}
 

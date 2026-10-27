@@ -4,7 +4,18 @@ title: "What do we mean by AI for science?"
 
 A calculator, a chess program, and a chatbot all do something that once required a person. We are much more likely to call some of them intelligent than others. Before discussing what AI might do for chemistry, it is worth asking what we mean by that word.
 
-We will begin with questions that sound almost too basic to need asking. What does it mean to model something? If two quantities vary together, what have we learned about changing one of them? What does a probability describe? A small change in the wording can change the question we are answering and the evidence we need. I would like us to notice those changes before a piece of software makes them easy to overlook. By the end of this meeting, you should be able to take a claim about AI in chemistry, say what task it concerns, identify an important modelling choice, and suggest what evidence would support the claim. We will practise those moves on small examples before using them to judge our own calculations.
+Some of our questions will sound almost too basic to need asking. What does it mean to model something? If two quantities vary together, what have we learned about changing one of them? What does a probability describe? We can make a calculation much more elaborate without getting any closer to an answer, simply because we have been answering a different question. I would like us to notice where that happens.
+
+## What should you be able to do afterwards? {#lecture-outcomes}
+
+After working through these examples, you should be able to:
+
+- Replace a broad claim such as “AI can do chemistry” with a specific task and say what would count as evidence of success. Use a historical example to explain why AI is broader than today's neural networks.
+- Explain what a model leaves out and why an omission can be harmless for one question and decisive for another.
+- Distinguish predicting a yield, explaining the predictor, and establishing what changing the temperature would cause. Explain why none of those alone identifies a reaction mechanism.
+- Say what seven successes in ten attempts tell us directly, and what assumptions enter a prediction about the next attempt. Recognise that statements about uncertainty can have different interpretations.
+
+These distinctions should let you ask a more precise question of a paper, a model, or an assistant. Being able to name the distinction matters less than being able to explain what changes in the example.
 
 These notes give a fuller account than we will work through together in the first meeting. Use them to revisit the examples afterwards.
 
@@ -25,17 +36,17 @@ These notes give a fuller account than we will work through together in the firs
 | AlphaFold predicts a protein's three-dimensional structure. | | |
 | A chatbot writes an explanation of a chemical reaction. | | |
 
-We begin with this comparison because the same word can hide different expectations. The useful outcome is a criterion you can explain and a more specific description of what a system does.
+Perhaps you and your neighbour give different answers. Before deciding who is right, compare the criteria. Is learning from examples essential? Does it matter whether you understand how the program works? The word may be doing different work in your two answers.
 
 **Discuss:** Which examples would you call AI? What criterion are you using? Compare your choices with someone who classified an example differently. What additional information, if any, would change your answer?
 
 ## Modelling means leaving things out {#modelling-as-omission}
 
-Before fitting a model, we have to decide what information it will receive. I want to establish why leaving something out can be sensible, and how to recognise an omission that prevents us from answering our question. A literal street map gives us a small example before we return to chemistry.
+Modelling requires us to ignore things. That can sound like a defect until we ask what a model is for.
 
-Suppose we want to walk from the lecture building to the railway station. A map that shows the connected streets, paths, and station entrance can help us choose a route. It need not record the positions of the atoms in the paving stones. Now suppose it also leaves out whether a footbridge is open. If our route relies on a closed bridge, that omission matters. The task lets us explain why one missing detail is harmless and another changes the decision.
+Suppose we want to walk from the lecture building to the railway station. A street map showing the connected streets, paths, and station entrance can help us choose a route. It need not record the positions of the atoms in the paving stones. Adding that information would make it more detailed. It would hardly help us catch the train. Now suppose the map also leaves out whether a footbridge is open. If our route relies on a closed bridge, that omission matters.
 
-This is the relationship I want to carry over to modelling: **we select information for a stated purpose, and that selection affects what we can conclude**. The map is an illustration of that choice. It does not establish which details a chemical model may safely ignore; we have to examine the chemistry and the intended use.
+The two omissions are both omissions, but they have different consequences for our journey. We can judge them because we have said what we want to do. In chemistry, we have to make the corresponding judgement about the chemical question.
 
 A **[model](../glossary.qmd#model)** is a representation used to answer a question about a system. A molecular drawing, for example, represents atoms and bonds. If we want to discuss their connectivity, we can often leave solvent and temperature outside the picture. Now ask for the molecule's solubility in water at 25 °C and at 50 °C. The drawing stays the same, but the requested measurement conditions have changed.
 
@@ -63,9 +74,9 @@ There is another step between preserving information and making use of it. A rep
 
 ## The problem with the word AI {#ai-names-an-ambition}
 
-I once offered a seminar on critical aspects of AI. I had deliberately put “AI” in the title to attract participants. After a few meetings, I had to tell them that the word was now banned from the seminar.
+I once offered a seminar on critical aspects of AI. I had deliberately put “AI” in the title to attract participants. It is, after all, a word that attracts attention. After a few meetings, I had to tell the participants that the word was now banned from the seminar. I had advertised the seminar with the very word that was making our discussions difficult.
 
-The problem was that everybody could have an opinion about AI while talking about something different. The word can refer to a chatbot, a recommendation system, or a machine that might one day think like a human. It gives us the same label for different tools, different capabilities, and different ambitions. Agreement becomes difficult to interpret. So does disagreement.
+The problem was that everybody could have an opinion about AI while talking about something different. The same word could mean a chatbot, a recommendation system, or a machine that might one day think like a human. A shared word did not necessarily give us a shared subject. Agreement became difficult to interpret. So did disagreement.
 
 This is why I find it more useful to approach **artificial intelligence as a goal**: building systems that can perform tasks we associate with intelligence. The goal leaves us considerable freedom. We could write down rules, search through possibilities, learn from examples, or combine all three. John McCarthy, who [coined the name in 1955](#naming-a-broad-research-programme), allowed this breadth in his account of AI, including approaches that do not imitate biological processes. [McCarthy, *What is Artificial Intelligence?*](https://www-formal.stanford.edu/jmc/whatisai/node1.html)
 
@@ -78,7 +89,7 @@ Return to one of the examples we classified at the start. What does that label t
 Whether a familiar regression is described as AI or machine learning changes little about the calculation itself. The useful description identifies the observations it learns from and the predictions it is expected to make. Likewise, calling a system AI does not specify its capabilities, assumptions, or failure modes.
 
 ::: {.concept}
-**Making the ambition specific**
+**What does the system actually do?**
 
 - **Task:** What capability are we trying to build?
 - **Method:** What operations does the system perform?
@@ -90,9 +101,9 @@ For example, “AI understands solubility” leaves much unspecified. A more pre
 
 ## A long history {#a-selective-history-six-stops-and-a-coda}
 
-How did this broad ambition become a research programme? A few episodes show people trying to turn it into concrete capabilities. Recognising patterns, reasoning from explicit knowledge, and using observations to guide action were research goals long before the current generation of models. Explicit knowledge and search developed alongside learning from examples. Statistics, optimisation, available data, and hardware shaped what these approaches could achieve.
+Recognising patterns, reasoning from explicit knowledge, and learning from observations were research goals long before the current generation of models. Looking at a few earlier attempts helps us distinguish the age of a question from the novelty of an answer. The history also complicates a simple story in which one new algorithm suddenly made everything possible: methods, data, hardware, and the questions people chose developed together.
 
-As we follow the dates, ask what changed: the question, the method, the resources available, or the result that could be demonstrated. An old question can receive a substantial new answer. The age of the ambition tells us little by itself about the value of that answer.
+As we follow the dates, ask what changed. Was it the question, the method, the resources available, or what could actually be demonstrated? An old ambition can receive a substantial new answer. Its age alone tells us little about the value of that answer.
 
 There is also a statistical thread: predicting an unobserved outcome from regularities in observations, and asking when those regularities remain useful. That thread does not depend on first reproducing human intelligence. Hardt and Recht's history connects pattern recognition with statistics, computing, and the ambitions of AI. It helps explain why the concrete prediction problem is often easier to discuss precisely than the broader label. [*Patterns, Predictions, and Actions*, Introduction](https://mlstory.org/introduction.html)
 
@@ -104,7 +115,7 @@ Another important term was **cybernetics**. Norbert Wiener's 1948 book, *Cyberne
 
 ### 1950: Alan Turing and the question of evaluation
 
-Turing's *Computing Machinery and Intelligence* reframed a difficult question about thinking through an observable test of performance, the imitation game. His paper also considered learning machines. For our course, the useful move is to ask what an evaluation actually establishes. Convincing conversation, correct prediction, and scientific understanding are different possible targets. [Turing's original paper](https://www.cs.toronto.edu/~frank/csc2501/Readings/R1_Turing/Turing-1950.pdf)
+Turing's *Computing Machinery and Intelligence* reframed a difficult question about thinking through an observable test of performance, the imitation game. His paper also considered learning machines. Replacing a broad question with a test makes it possible to collect evidence. It also leaves us with a new question: what does passing that test establish? Convincing conversation, correct prediction, and scientific understanding are different possible targets. [Turing's original paper](https://www.cs.toronto.edu/~frank/csc2501/Readings/R1_Turing/Turing-1950.pdf)
 
 **Question:** If a program explains a reaction convincingly, what evidence is still missing?
 
@@ -116,7 +127,7 @@ The proposal brought language, abstraction, learning, and problem solving under 
 
 McCarthy later recalled that one reason for choosing the name was to distance his programme from cybernetics. He disagreed with its emphasis on analogue feedback. This is his retrospective account of his own motives. [McCarthy's recollection](https://www-formal.stanford.edu/jmc/reviews/bloomfield/bloomfield.html)
 
-I find this useful here because it shows that even naming a field involves choices about which questions and methods belong together. We should distinguish the creation of this research programme from the much older ambition of building machines that can perform tasks we associate with intelligence.
+Even naming the field involved a decision about which questions and methods belonged together. The name and the research programme have a history; the ambition of building machines with capabilities we associate with intelligence has a longer one.
 
 ### 1958: Frank Rosenblatt and learning a decision rule
 
@@ -199,16 +210,12 @@ Working with explicit symbols and rules is called a **symbolic** approach. Devel
 | Approach | Where does useful structure come from? | Chemistry example |
 |---|---|---|
 | Symbolic reasoning and search | Explicit representations, constraints, and rules | Generate candidate structures and rule out inconsistent ones |
-| Statistical learning | Fit a mapping or distribution using observations | Fit a property model from descriptors |
+| Statistical learning | Use observations to fit a relationship or a probability distribution | Fit a property model from descriptors |
 | Connectionist learning | Adjust interacting units and their connections | Learn molecular representations in a neural network |
 | Combined system | Couple learned components to rules, search, or tools | Score proposed synthesis steps with a model and search for routes |
 :::
 
-Learning from data is one way of pursuing the broader ambition; explicit reasoning and search offer others.
-
-The traditions overlap. Statistics also studies inference and experimental design, and a search procedure can use probabilities learned from data. We will encounter these combinations repeatedly. Calling a system a neural network tells us something about one part of it; we still have to understand how that part fits into the scientific work.
-
-We can now describe more precisely how a system works. We still need to decide what its result tells us about chemistry. That question leads from methods to evidence.
+The rows are not sealed compartments. A search procedure can use probabilities learned from data; a neural network can supply a score to a system that also enforces explicit rules. Statistics, too, includes inference and experimental design beyond fitting predictors. Calling a system a neural network tells us something about its construction. It leaves open what its result tells us about chemistry.
 
 ## Predicting a reaction and changing it {#what-changes-when-the-task-is-science}
 
@@ -246,7 +253,7 @@ We began with a table of conditions and yields. We have now asked it to support 
 | Aim | Reaction example | Evidence to seek |
 |---|---|---|
 | Description / association | How do recorded yields differ between temperatures? | Measurements, summaries, and a clear account of which reactions were recorded |
-| Predictive modelling | What yield should we expect for another reaction in the intended setting? | Relevant held-out or prospective measurements, a baseline, and an error estimate |
+| Predictive modelling | What yield should we expect for another reaction in the intended setting? | Relevant measurements kept out of model development or collected afterwards, a baseline, and an error estimate |
 | Model interpretability / explainability | How does temperature contribute to this fitted model's output? | Inspection of the model or an explanation method, with checks of what it measures and how faithfully it describes model behaviour |
 | Causal inference | What would happen to yield if we deliberately changed temperature under a specified protocol? | A suitable intervention study, or observational identification supported by explicit causal assumptions |
 | Mechanistic explanation | Through which chemical steps does the change affect yield? | Evidence that distinguishes competing mechanisms, such as kinetic, spectroscopic, or isotope experiments |
@@ -257,7 +264,7 @@ These questions can lead into one another. An explanation of the model might sug
 
 **Paired discussion:** Classify each statement below and name the evidence it would need. Which could be supported by inspecting a fitted model alone?
 
-1. “The model predicts yields accurately for a held-out reaction series.”
+1. “The model predicts yields accurately for a reaction series that was kept out of model development.”
 2. “Temperature contributes strongly to this model's predictions under the chosen attribution method.”
 3. “Raising the temperature under this protocol increases the average yield for these substrates.”
 4. “The yield increases because the intervention favours a particular reaction pathway.”
@@ -283,9 +290,7 @@ Ask an LLM to suggest another explanation for the observations and an experiment
 
 ## What does a probability describe? {#what-does-a-probability-describe}
 
-A reported probability can influence whether we spend time and material on an experiment. We therefore need to distinguish a proportion we have observed from an uncertainty statement about something we do not yet know. For this first discussion, the aim is to explain what a number refers to and which assumptions it needs. We will leave the calculations of uncertainty for later examples.
-
-Even after deciding which question to ask, we may have only a few observations with which to answer it. Suppose we repeat a synthesis ten times and call it successful when the isolated yield exceeds 60% after two hours. Seven attempts succeed. We use the same substrate and nominal protocol each time. Someone asks: “How likely is the next attempt to succeed?”
+Suppose we repeat a synthesis ten times and call it successful when the isolated yield exceeds 60% after two hours. Seven attempts succeed. We use the same substrate and nominal protocol each time. Someone asks: “How likely is the next attempt to succeed?” It sounds like a question we should be able to answer with one number.
 
 The tempting answer is 70%. We can certainly say that seven of the ten recorded attempts succeeded. That is an observed proportion. Using it to predict the next attempt adds assumptions: that the attempts are comparable, that our records include failures, and that the conditions relevant to success will remain sufficiently similar. Even then, another group of ten attempts need not give the same proportion.
 
@@ -301,9 +306,9 @@ Now suppose an assistant writes, “I am 70% confident this synthesis will work.
 
 ## Different questions about the same model {#choosing-a-lens}
 
-The reaction example, the ten synthesis attempts, and the comparison of rules with learned patterns have addressed different questions. We bring them together because a description such as “a neural network for chemistry” answers only some of the questions we need to ask before using its results.
+We have looked at the same reaction records with two questions in mind: what yield should we expect, and what would changing the temperature cause? The table stayed the same. What we needed from it changed.
 
-In my notes I use **[lens](../glossary.qmd#lens)** as a shorthand for a way of approaching a problem: the question we ask, the assumptions we make, and what we regard as an answer. The street-map example concerned which information we retain. Here we ask about the claim, the uncertainty, and the organisation of the calculation. It helps to keep three distinctions in view. They concern different aspects of a model and can be considered together.
+This is what I mean by a **[lens](../glossary.qmd#lens)**: a way of approaching a problem, with a particular question, assumptions, and idea of what would count as an answer. The word is shorthand for a change we have already made in the example. We have encountered two other distinctions as well: what a probability statement means, and how rules or learned connections organise a calculation. Putting them beside one another helps us see which question each answers.
 
 | Question | Distinction we have encountered | What should we check? |
 |---|---|---|
@@ -315,11 +320,11 @@ For example, suppose a neural network predicts yields from the laboratory record
 
 This is why the distinctions matter in practice. If our problem is that temperature was chosen in response to substrate difficulty, fitting the recorded yields more accurately may leave the intervention question unresolved. If an uncertainty estimate rests on treating synthesis attempts as comparable, discovering that all failures came from one reagent batch gives us a reason to revisit that assumption. We need to identify the difficulty before deciding how to improve the model.
 
-**Check your understanding:** Someone says, “Our model is a neural network, so it tells us what would happen if we heated the reaction.” Which part describes the method, and which part makes a claim about the experiment? What additional evidence would you ask for? The point is to recognise the step in the argument, then use the terms to describe it.
+**Check your understanding:** Someone says, “Our model is a neural network, so it tells us what would happen if we heated the reaction.” Which part describes the method, and which part makes a claim about the experiment? What additional evidence would you ask for?
 
 There are further choices within an approach. If our experiment requires a dissolved concentration of 1 mmol/L, measurements of 2 and 20 mmol/L can both become “soluble enough.” If the requirement later changes to 5 mmol/L, those labels no longer preserve the distinction we need. The [solubility example](../examples.qmd#choices-within-a-lens) follows what happens when we keep values, labels, or an ordering. It makes the idea of omission concrete in the data we prepare for learning.
 
-For now, you should be able to explain one of these distinctions through its example and say what mistake it helps avoid. We will use them again when choosing model inputs, interpreting an error estimate, examining an explanation, and deciding on another experiment. An LLM can help write the code for those tasks. We still have to recognise which question the calculation answers and whether that is the question we meant to ask.
+You should now be able to explain one of these distinctions through its example and say what mistake it helps avoid. An LLM may write perfectly executable code for the calculation we request. If we asked for a prediction when we needed an intervention effect, a successful run can leave the central problem untouched. Recognising that mismatch is part of doing the modelling ourselves.
 
 ### What do we expect a model to tell us? {#breiman-two-cultures}
 
@@ -327,7 +332,7 @@ Consider a calibration curve. We could assume that mean absorbance depends linea
 
 Leo Breiman's [*Statistical Modeling: The Two Cultures*](https://www2.math.uu.se/~thulin/mm/breiman.pdf) (2001) develops this contrast. His **data modelling** culture starts with a probabilistic account of how observations arise; his **algorithmic modelling** culture builds a predictor while leaving that process unspecified. Both can pursue prediction and useful information. Breiman argues for a wider range of modelling tools and greater attention to predictive performance.
 
-Breiman adds a historical comparison of modelling practices. It is useful for asking what researchers expect a model to provide; it does not replace the three distinctions above. A statistical model of observations is not automatically a causal or mechanistic account. A predictive algorithm still embodies assumptions through its inputs, construction, and evaluation. Either can be examined using a Bayesian or frequentist approach to uncertainty. The name of the culture does not settle the scientific question.
+Breiman's contrast concerns what researchers expect a model to provide. It adds another question to the ones above. A statistical account of observations still needs justification before we interpret it causally or mechanistically. An algorithm chosen for prediction still has assumptions in its inputs, construction, and evaluation. We can also ask Bayesian or frequentist questions about either. The name of the culture does not settle the scientific question.
 
 For our calibration, a familiar formula needs checking against the experiment. A flexible predictor needs checking on observations relevant to its intended use. Suppose the two predict new measurements equally well: what further evidence would we need if we also wanted to explain why absorbance changes with concentration? The distinction becomes consequential when we decide what to conclude from a good fit. The [suggested reading](../reading.qmd#breiman-two-cultures) gives useful places to begin in Breiman's argument.
 
@@ -339,7 +344,7 @@ Suppose a model predicts which materials will be stable. We use its ranking to d
 
 A numerical answer can seem authoritative. To judge what it establishes, we need to know how it was obtained, which conditions it concerns, and what observations could show that it is wrong. Calling the answer AI does not supply that evidence. Neither does writing it as an equation.
 
-This brings us back to the human choices. Someone decided that stability was the quantity worth predicting, assembled the observations, chose a model, and turned its output into a decision. We will make those steps visible as we build and use models ourselves. Prediction, the authority we give it, and the consequences of acting on it each deserve attention.
+“The model chose the material” would leave much of this story untold. People decided to predict stability, assembled the observations, and gave the resulting ranking a role in the laboratory. That decision can be sensible. We should still be able to explain why we gave the prediction that authority and what happened when we acted on it.
 
 ### The people and resources behind the model {#what-makes-these-systems-possible}
 
@@ -384,7 +389,7 @@ The [suggested reading](../reading.qmd#science-and-commercial-claims) collects t
 
 ## From a question to a fitted model {#the-statistical-question-hiding-in-the-history}
 
-We have spent this lecture deciding what we want a model to tell us and what would justify believing it. We can now take one of those questions into a calculation. In the [next lecture](02-learning-from-data.qmd), we will use concentration measurements and absorbances to fit a calibration curve. We will choose what counts as an error, adjust a line, and ask whether it predicts another measurement well.
+Now let us fit something. In the [next lecture](02-learning-from-data.qmd), a few concentration and absorbance measurements will give us a familiar place to start. Even a straight line leaves decisions to make: which line, fitted according to which error, and useful for which next measurement?
 
 Here, too, “another measurement” needs a meaning. A new solution on the same instrument, a higher concentration, and a measurement in another laboratory are different uses. We need observations that let us examine the intended one. Even observations reserved for a final test give us only a finite sample: **test error remains an empirical estimate**, with uncertainty and a scope set by the data. The calibration example will let us work through that distinction explicitly.
 

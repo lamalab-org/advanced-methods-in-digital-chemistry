@@ -2,13 +2,24 @@
 
 How can we use computational models to learn something reliable about chemistry?
 
-My starting point is that AI is a deeply human endeavour. People decide which questions are worth asking, what a system should learn, and what will count as a good answer. They produce the measurements, build the tools, and decide what to do with the results. When some of that work is automated, the choices have not gone away.
+My starting point is that AI is a deeply human endeavour. Someone decides which question is worth asking. Someone produces the measurements, chooses what the model should learn, and decides what counts as a good answer. Much of this work may have happened before we download a dataset or open a chatbot. It has still happened. Automating part of the calculation does not remove the decisions that made it possible.
 
-Modelling makes these choices concrete. A molecular drawing records atoms and bonds but usually leaves out the solvent and temperature. That may be enough for discussing connectivity; a solubility measurement needs conditions too. Every model leaves something out. We will ask which omissions are acceptable for the question at hand, and what evidence supports using the answer.
+Consider a molecular drawing. It records atoms and bonds but usually leaves out the solvent and temperature. For discussing connectivity, that may be enough. Now ask how much of the molecule dissolves. The drawing has not changed, but what we need to know has. Modelling means leaving things out; the difficult part is deciding which omissions we can afford for the question we want to answer.
 
-We approach AI as an ambition: building systems with capabilities we associate with intelligence. Many of those ambitions have a long history. The name alone tells us little about how a system works or what it can establish. The [opening lecture](lectures/01-ai-and-science.qmd) develops these distinctions, from the methods people have built to the scientific claims and commercial promises surrounding them.
+This is also why I find AI more useful as the name of an ambition than as the subject of a precise conversation. Building systems with capabilities we associate with intelligence leaves room for very different methods. Many of the ambitions are old; some of the ways we can now pursue them are new. The [opening lecture](lectures/01-ai-and-science.qmd) asks what these systems actually do, and how that compares with the scientific claims and commercial promises made about them.
 
-This course follows our opening question through what might seem like a collection of buzzwords: statistical learning, molecular representations, deep learning, molecular simulation, generative models, and experimental design. We will make these terms concrete by building models, inspecting their failures, and asking what their results support scientifically.
+This course follows our opening question through what might seem like a collection of buzzwords: statistical learning, molecular representations, deep learning, molecular simulation, generative models, and experimental design. We will give these words something concrete to refer to: a calculation we can follow, a model we can change, and a chemical question whose answer we can examine.
+
+## What should you be able to do afterwards? {#course-outcomes}
+
+By the end of the course, I would like you to be able to:
+
+- Turn a chemical question into a modelling task, and explain what information you have kept and what you have left out.
+- Build and compare small models in Python, choosing an evaluation that makes sense for the intended use. Explain why even a carefully reserved test set gives an empirical estimate.
+- Distinguish predicting an outcome, explaining a model's calculation, and establishing what an intervention would cause. Say what evidence your own conclusion needs.
+- Use an LLM or coding assistant to help with the work, while being able to check the calculations and defend the choices yourself.
+
+These are also the things I would like your project to let you practise. The list of methods gives us ways to get there.
 
 ## The course sequence
 
@@ -29,7 +40,7 @@ The [course outline](outline.qmd) sets out the topics, the connections between s
 
 These notes are for master's students in chemistry. We develop the Python and machine-learning ideas alongside the chemical problems, starting with small examples. In the first meeting, on **Wednesday, 28 October 2026, 14:00–16:00, at Helmholtzweg 4, SR 6 Physik**, I would like to hear what you most want to learn and discuss a course format that works for us. We will begin with AI, prediction, and the human choices behind models, then see our tools in use and spend about half an hour setting them up together. You can [try the setup beforehand](setup.qmd), but a working installation is not required to join the first session. The [course outline](outline.qmd#scheduling) collects the dates and formats we will discuss.
 
-We will spend time with small examples: a molecular drawing, a few measurements, a line that does not quite fit. They let us follow a decision and check its consequences ourselves, on the board or on paper, before we ask a program to do the calculation. For each example, we will state the question, explain why it matters, and finish by saying what we can now do or judge more carefully. These notes develop the same arguments in more detail, so you can return to them afterwards.
+We will spend time with small examples: a molecular drawing, a few measurements, a line that does not quite fit. With three observations, we can calculate every error ourselves. If an assistant then writes a function that returns a different answer, we have somewhere to start the conversation. The board, paper, and notebooks give us different ways to work through the same argument. Each lecture page states what you should be able to do with it; the fuller explanations are there to return to afterwards.
 
 For the meetings after this introduction, I would like to propose a short introduction from me, perhaps ten to fifteen minutes, followed by plenty of time for you to work through examples and your own calculations. I will work with you as questions arise, help debug code, and discuss what the results mean. If several people run into the same difficulty, we can pause for a short explanation together. We will discuss whether this format would work for you in the first meeting.
 
@@ -54,11 +65,11 @@ Several books have shaped how I think about these questions. I particularly reco
 
 ## Examples from chemistry {#examples-through-lenses}
 
-DENDRAL, learned molecular energies, a robotic chemist, and formal proofs checked with Lean all involve rather different ways of working with knowledge. The [collection of chemical applications](examples.qmd) uses these and other examples to revisit the distinctions from lecture 1: predicting versus intervening, interpreting uncertainty, and organising knowledge through rules or learned connections. It is a place to return to as we encounter the methods in more detail.
+DENDRAL proposes structures from chemical evidence. A learned energy model approximates a calculation. A robotic chemist performs experiments. Lean checks whether a formal derivation follows from its premises. All of these can appear in a discussion of AI in chemistry, yet knowing that label tells us very little about what happened. The [collection of chemical applications](examples.qmd) lets us ask what was done and what the result establishes, using the distinctions introduced in lecture 1.
 
 []{#choices-within-a-lens}
 
-The [solubility example](examples.qmd#choices-within-a-lens) then asks what changes when we retain a value, a label, or an ordering. Even within one approach, the information we keep and the errors we reward need a reason.
+The [solubility example](examples.qmd#choices-within-a-lens) makes a smaller decision consequential. We have measured a value. Should we keep it, replace it with “soluble enough,” or keep only the order of the molecules? The answer changes which questions we can ask of the resulting data.
 
 ## Your feedback {#feedback}
 

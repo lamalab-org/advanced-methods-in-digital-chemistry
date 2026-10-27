@@ -2,11 +2,13 @@
 title: "Course outline"
 ---
 
-Suppose a model predicts that a molecule will be useful. Before deciding what to do with that prediction, we need to know what “useful” meant during training, how the molecule was represented, and what observations support the result. We also need to ask whether the prediction answers our chemical question. These are the reasons for the order of this course.
+Suppose a model predicts that a molecule will be useful. Useful for what? The answer may seem obvious until we have to decide which measurements to collect, which errors matter, and whether we would act on the prediction. I would like us to learn enough about the calculation to make those decisions ourselves.
 
 We begin by fitting and examining small models. We then ask how models can use molecular structure and enter a simulation. Finally, we use them to propose candidates, choose measurements, and assist a research workflow. Throughout, we return to the human decisions about what to retain, what to leave out, and what evidence is sufficient.
 
 The working plan has content for **about ten two-hour teaching slots**, which we may combine into fewer calendar appointments. The numbered sessions below describe the teaching sequence; the detailed notes for sessions 1–3 are available, and the later lessons are being developed.
+
+**What should this outline make clear?** How fitting a small model leads us towards working with molecules, simulations, and experiments; what you should be able to do at each stage; and how a project can grow out of that work. It also separates the arrangements we already know from the dates and assessment details we still need to discuss. Bring a question you would like to investigate and any constraints on when we can meet.
 
 ## What would you most like to learn? {#learning-goals}
 
@@ -76,7 +78,7 @@ Once the timetable and applicable requirements have been checked, I will publish
 
 ## Learning from observations {#learning-from-observations}
 
-The first three sessions establish a modelling workflow we can understand and check. A calibration curve lets us work through the calculations with very little code. A table of porous materials then makes the choices about chemical data and evaluation more apparent.
+We begin with a calibration curve because we can follow the whole calculation. There are only a few observations, and we know something about the experiment. When we move to a table of porous materials, the same questions remain, but even deciding what counts as a new material becomes less straightforward.
 
 ::: {.course-outline}
 
@@ -106,7 +108,7 @@ So far, we have supplied descriptions of the materials and chosen the functions 
 
 :::
 
-The purpose is to follow how a chemical representation becomes a calculation. We will train a small network, but use prepared models and results where training would take the place of understanding. An accurate prediction of a property, a useful energy model, and a reliable simulated observable each need their own evidence.
+By this stage, you should be able to follow how a molecular description becomes a prediction and explain which changes ought to leave that prediction unchanged. You should also be able to distinguish an error in the learned energy from an error introduced by running the simulation. We will train a small network ourselves and use prepared models where training would consume the time we need to examine the calculation.
 
 ## From predictions to decisions {#predictions-and-decisions}
 
