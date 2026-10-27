@@ -264,6 +264,18 @@ A **terminal** is the window for entering commands and viewing output. A **shell
 
 In a terminal, the **prompt** is the text indicating that the shell is ready for input. In a chat, a **prompt** is input given to the language model. These are different uses of the same word; prompt symbols such as `$` should not be copied as part of our shell commands.
 
+### Command-line interface (CLI) and coding agent {#coding-agent}
+
+A **command-line interface** lets us operate a program by entering commands in a terminal. `uv` is one example. A **coding agent** combines a language model with software that can read files, edit code, and run commands. Its actions depend on the tools and permissions available to it. Codex CLI and Claude Code are examples; the model can run remotely while the program works on local files. [Try the coding-assistant practical](cli-assistant.qmd).
+
+### Diff {#diff}
+
+A **diff** shows the differences between two versions of a file. In the output of `diff -u old.py new.py`, lines beginning with `-` were removed and lines beginning with `+` were added; other lines provide context. The initial `---` and `+++` lines name the files. Comparing versions helps us inspect what an assistant actually changed.
+
+### Environment variable {#environment-variable}
+
+A named value passed from a process to programs it starts. In our shell, `export` makes a variable available to programs launched from that shell. A tool may use an environment variable to find a service token without putting the token in a source file. This is different from a Python virtual environment, which organises an interpreter and packages.
+
 ### Directory, path, and working directory {#path}
 
 A **directory** is a folder. A **path** specifies a location. The **working directory** is where a process starts when interpreting relative paths. `pwd` shows it, `ls` lists its contents, and `cd` changes it in the shell. `~` refers to your home directory in that environment.

@@ -299,6 +299,10 @@ Calculate the two residuals and their squared errors yourself. Run the suggested
 
 A fluent answer is a proposal to inspect. Keep the units, data selection, and scientific interpretation in view when the tasks become more complex.
 
+## An assistant that works on files {#cli-assistant}
+
+Once this setup works, we will also try a [coding assistant in the terminal](cli-assistant.qmd). It can read a Python file, change it, and run a calculation. We will use the small error calculation from lecture 2 to examine each of those steps and check the result ourselves. Codex CLI with Blablador is our starting example; an assistant you already use is welcome too. We will make time for this together in a later practical, so it is not another installation to complete before the first meeting.
+
 ## When something does not work
 
 | Symptom | First useful check |

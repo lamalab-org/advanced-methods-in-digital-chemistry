@@ -318,6 +318,8 @@ Before asking an LLM, use residuals $+1$ and $-1$ to predict the returned value.
 
 **Record:** the request, the proposed change, your check, and a sentence explaining why the corrected operation measures a different quantity. A supplied version of the same task appears in the notebook, so no LLM account is needed to participate.
 
+We will also use this example to [try a coding assistant in the terminal](../cli-assistant.qmd). That version works on a small Python file: the assistant reads it, edits it, and runs the checks. We will compare the file before and after and check the calculation ourselves. We can do this in the supported practical here or return to it in the next meeting, once the Python setup is working for everyone.
+
 ## Questions to consider {#exit-questions}
 
 1. Which quantities were learned in the linear calibration model?

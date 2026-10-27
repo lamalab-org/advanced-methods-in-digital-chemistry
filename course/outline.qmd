@@ -49,6 +49,8 @@ The first three sessions establish a modelling workflow we can understand and ch
 
 By this point, we should be able to take a supplied data table, identify its target and conditions, fit a simple comparison model, and explain what its reported error does and does not tell us. We need that foundation before adding more elaborate models.
 
+During these early practicals, everyone will also have an opportunity to [try a coding assistant in the terminal](cli-assistant.qmd), on their own or with a partner. We will ask it to inspect and repair a small calculation, examine the changed file, and run checks ourselves. We will place this in session 2 or 3 once the Python setup and the error calculation are familiar.
+
 ## Representing molecules and their behaviour {#molecular-models}
 
 So far, we have supplied descriptions of the materials and chosen the functions to fit. Next we let parts of those functions be learned, then give the models access to connectivity and geometry. This brings us to a different use of a learned model: calculating energies and forces inside a simulation.
@@ -79,7 +81,7 @@ A model that predicts a property does not yet tell us which molecule to make or 
 
 :::
 
-We will already have used an assistant from the first meeting. Session 9 examines that familiar tool using the ideas developed earlier: learned representations, generation, evaluation, and the difference between a proposed answer and an independently checked result.
+We will already have used an assistant from the first meeting and tried one that can edit files and run commands. Session 9 examines these tools using the ideas developed earlier: learned representations, generation, evaluation, and the difference between a proposed answer and an independently checked result. We can now ask how much of a chemical workflow to hand to an assistant and how to evaluate the complete sequence of actions.
 
 ## A result another chemist can examine {#bringing-the-work-together}
 

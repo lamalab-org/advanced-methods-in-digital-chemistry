@@ -1,0 +1,12 @@
+# Named profile for Codex CLI 0.134.0 and later.
+# Copy to ~/.codex/digital-chemistry.config.toml, not to config.toml.
+# Supply your own token through the environment; never put it in this file.
+model = "alias-code"
+model_provider = "blablador"
+web_search = "disabled"
+
+[model_providers.blablador]
+name = "Blablador"
+base_url = "https://api.blablador.fz-juelich.de/v1"
+env_key = "BLABLADOR_API_KEY"
+wire_api = "responses"
