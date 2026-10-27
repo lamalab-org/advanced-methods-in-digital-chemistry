@@ -8,9 +8,19 @@ In a chat, we usually copy code into a conversation and copy a suggestion back. 
 
 We will try this together once the Python environment works and we have calculated a few errors ourselves. It is a practical for the second or third meeting, rather than another installation to finish before the first. You can work in pairs and take turns making and checking a request.
 
+## What should you be able to do afterwards? {#assistant-outcomes}
+
+After this exercise, you should be able to:
+
+- Ask an assistant to investigate a small calculation and give it a precise scope for a repair.
+- Inspect which file changed, explain the change, and check it against an answer you calculated yourself.
+- Explain what passing the checks establishes, and why it does not prove that the program works for every input.
+
+The assistant may do the editing. You should still be able to account for the result.
+
 ## Choose a connection {#connection}
 
-We will use **Codex CLI with Blablador** as our starting example. Codex supplies the program that reads files and runs commands; Blablador supplies the remote model. Jülich documents this connection in its [Codex guide](https://sdlaml.pages.jsc.fz-juelich.de/ai/guides/blablador_codex_tutorial/). The instructions below adapt it to a terminal session. A successful chat in Jan does not yet check whether a model can complete this sequence of file edits and commands; we will test that connection before using it with the class.
+We will use **Codex CLI with Blablador** as our starting example. Codex supplies the program that reads files and runs commands; Blablador supplies the remote model. Jülich documents this connection in its [Codex guide](https://sdlaml.pages.jsc.fz-juelich.de/ai/guides/blablador_codex_tutorial/). The instructions below adapt it to a terminal session. A reply in Jan tells us that we can exchange messages with a model. Reading a file, editing it, and running a check asks more of the connection. This small exercise lets us see whether those steps work before giving the assistant a larger task.
 
 You can also use an assistant you already have, such as Codex with another provider or [Claude Code](https://code.claude.com/docs/en/quickstart). Access arrangements differ, but you do not need to buy a subscription for this exercise. If your installation or account is unavailable, work with a partner on a configured machine. We use only the small supplied example here; the [discussion of data handling](setup.qmd#assistant-data) also applies to files read by an assistant.
 
@@ -113,4 +123,4 @@ If you used the temporary Bash session for Blablador, finish with `unset BLABLAD
 
 Keep a short record: the tool and model identifier if available, the change you accepted, and one calculation that let you check it. Explain why averaging residuals before squaring gives a different answer. There is no separate report to write for this practical.
 
-The assistant can now do several steps that we previously carried out ourselves. That makes it useful when a task grows. It also means that an incorrect assumption can enter the files and the calculations before we notice it. In later chemistry work, we will use the same habit of examining what changed, choosing checks for the question at hand, and deciding what the result supports.
+The assistant has taken over several steps we previously carried out ourselves. That can save work. It also lets a mistaken assumption become a changed file and a calculated result very quickly. In this example, two numbers were enough to expose the mistake. In later chemistry work, choosing a useful check will often require more thought than asking for the code.

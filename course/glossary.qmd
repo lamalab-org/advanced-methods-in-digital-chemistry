@@ -2,7 +2,9 @@
 title: "Glossary"
 ---
 
-Use this page when a word gets in the way of the argument. You do not need to learn the vocabulary in advance. The examples explain how we use the terms in this course; the lecture notes develop the reasoning behind them.
+Use this page when a word gets in the way of the argument. “Descriptor” can make a molar mass sound more mysterious than it is. Other words, such as “inference,” really do refer to different things in different contexts. The examples explain how we use the terms here; the lecture notes develop the reasoning behind them.
+
+**What should you be able to do after looking up a term?** Explain it through an example from our work and recognise where a nearby term means something different. A descriptor can be a model input; it is not the parameter we fit. A test error is calculated from observations; it is not the unknown error over every future use. There is no need to learn this vocabulary in advance.
 
 Some useful places to start: [descriptors](#descriptor), [features](#feature), [parameters](#parameter), [training and validation data](#data-splits), [kernels](#kernel), and [API keys](#api-key). The book's search also finds individual terms.
 
@@ -194,7 +196,7 @@ In our experimental example, **calibration** relates known concentrations to mea
 
 ### Lens {#lens}
 
-An informal term used in these notes for a way of approaching a problem: the question asked, assumptions made, and kind of answer sought. The three contrasts in lecture 1 concern the claim (correlative or causal), the interpretation of uncertainty (frequentist or Bayesian), and the organisation of a calculation (symbolic or connectionist). They are different distinctions, not three mutually exclusive types of AI. Use the [examples in lecture 1](lectures/01-ai-and-science.qmd#choosing-a-lens) to explain what each distinction changes in practice.
+An informal term for a way of approaching a problem: what we ask, what we assume, and what we would accept as an answer. Predicting a recorded reaction yield and asking what heating would cause bring different questions to the same table. That is the kind of change in perspective I mean by a lens. In [lecture 1](lectures/01-ai-and-science.qmd#choosing-a-lens), we also compare interpretations of probability and ways of organising a calculation through rules or learned connections. These distinctions can be used together; they do not divide AI into three exclusive categories.
 
 ### AI, machine learning, and deep learning {#ai-ml-dl}
 

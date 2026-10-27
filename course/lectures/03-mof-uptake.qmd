@@ -2,7 +2,18 @@
 title: "What can a model tell us about gas uptake?"
 ---
 
-With the calibration curve, one number described the input: concentration. A porous material gives us many more possibilities. Before we can learn anything from a collection of structures, we have to decide how to describe them and what we want to predict. We use this practical to carry the decisions from the small calibration example into a chemical dataset. By the end, you should be able to justify the supplied inputs, compare a model with a simple baseline, and state which materials and conditions its test error might describe. That is what makes the score useful when deciding whether to use a prediction.
+With the calibration curve, one number described the input: concentration. A porous material gives us many more possibilities. We could supply the identities and positions of its atoms, or replace most of that detail with a few measurements of its pores. The choice is already part of the model, before we fit a single parameter. What would we like the prediction to help us do, and which description might be enough for that purpose?
+
+## What should you be able to do afterwards? {#lecture-outcomes}
+
+After working through the uptake practical, you should be able to:
+
+- State exactly which uptake the model predicts, including its conditions and the fact that the reference values come from simulations. Explain one omission in the supplied descriptors.
+- Compare a model with a constant prediction and explain why changing the scale of the inputs can change a model's idea of similarity.
+- Choose a model using validation data, then report its test error with the metric, units, sample size, and scope of the comparison.
+- Use resampling to examine variation in an error estimate, and explain why repeating the recorded errors adds no evidence about a new family of materials or a different experiment.
+
+We will end with a claim about the calculation we actually performed. “A good material for carbon capture” will turn out to ask considerably more of the evidence.
 
 ## A porous material and a prediction
 
@@ -14,7 +25,7 @@ It is tempting to shorten the question to “find a good material for carbon cap
 
 ### Where does the learned model enter? {#where-ml-enters}
 
-There is more than one place to use learning in this calculation. The diagram in my [MolSim lecture, p. 3](https://www.compchem.nl/wp-content/uploads/molsim2023/L09_Machine-Learning.pdf#page=3), puts those possibilities beside one another.
+“Use machine learning to calculate uptake” still leaves an important question open: which part of the calculation should be learned? The diagram in my [MolSim lecture, p. 3](https://www.compchem.nl/wp-content/uploads/molsim2023/L09_Machine-Learning.pdf#page=3), puts several possibilities beside one another.
 
 One route to uptake begins with a model of the interactions between atoms and molecules. A simulation then samples configurations and uses them to estimate the amount adsorbed under the specified conditions. We could learn an approximation to the interaction energies and use it within that simulation. Alternatively, we could collect the uptake values from completed simulations and learn to predict those values directly. This second route is what our practical does. Its predictor is a **surrogate** for a specified simulation result.
 
@@ -118,11 +129,11 @@ Keep the fitted model fixed and draw samples, with replacement, from the recorde
 
 ![Distributions of resampled mean absolute errors for a fixed fitted model. The dashed line marks its observed test MAE; no model is refitted during resampling.](../assets/mof-bootstrap.png)
 
-The calculation treats rows as independent sampling units. It adds no new frameworks, simulations, or experiments. Related frameworks can make that assumption inadequate, and repeating rows from this collection does not tell us how a model will perform under another simulation protocol. This is the distinction between [sampling uncertainty and a change in distribution](02-learning-from-data.qmd#empirical-error-and-population-risk) in a chemical setting.
+We have repeatedly drawn from the same recorded errors. There are still no new frameworks, simulations, or experiments. The calculation treats rows as independent sampling units, an assumption that related frameworks can make inadequate. Nor can repeating these rows tell us how the model will perform under another simulation protocol. We have met this problem with the calibration instrument already: [sampling uncertainty and a change in distribution](02-learning-from-data.qmd#empirical-error-and-population-risk) ask different things of our evidence.
 
 ## Practical
 
-Choose a model using the training and validation data, record the choice, then inspect its test error. Keep track of why each step is there: the baseline asks whether the descriptors help, scaling exposes a choice in how similarity is calculated, and resampling shows variation in an empirical error estimate. Finish with a claim about the simulated uptake under the supplied conditions and the evidence a broader experimental claim would need.
+Choose a model using the training and validation data, record the choice, then inspect its test error. At the end, you should be able to defend the choice: did the descriptors improve on predicting the same uptake for every material, did scaling change the comparison, and how uncertain is the average error? Keep the conditions beside the final score. A reader should be able to tell which simulated uptake we predicted and which experimental questions remain open.
 
 Download and extract the complete [MOF practical kit](../downloads/mof-practical.zip). It contains the [notebook](../notebooks/03-mof-uptake.py), data, source notice, and locked environment. From its folder, use Ubuntu on WSL for Windows, or your macOS/Linux terminal:
 

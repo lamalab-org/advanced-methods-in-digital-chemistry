@@ -2,7 +2,18 @@
 title: "What does it mean to learn from data?"
 ---
 
-Fitting a calibration curve is already an example of learning from data. We choose a family of functions, use measurements to fit one of them, and hope that it will be useful for another measurement. Each of these steps involves a decision. A straight line is enough to make those decisions visible. By the end, you should be able to follow a prediction into an error score, distinguish fitting parameters from choosing a model, and explain why an error measured on a test sample remains an estimate. These are the checks we will need when the calculation becomes too large to follow entirely by hand.
+We have probably all fitted a calibration curve. We choose a line, adjust it to some measurements, and use it to say something about another measurement. This is already learning from data. Calling it machine learning does not change the calculation, but examining it closely lets us see decisions that will matter again in much larger models. Why a line? What makes one fit better than another? And how much do we know about a measurement we have not yet made?
+
+## What should you be able to do afterwards? {#lecture-outcomes}
+
+After working through the calibration example, you should be able to:
+
+- Calculate a prediction and its error by hand, and explain why two error measures can favour different models.
+- Fit and change a small model in Python. Distinguish the parameters we fit from choices such as how flexible a curve we allow.
+- Explain why observations used to choose a model cannot also provide an untouched final test of that choice.
+- Explain why **test error is still an empirical estimate**, and why more test measurements on one instrument do not settle performance on another.
+
+The arithmetic is small enough that we can check every step. That gives us something to compare with the code, including code an assistant writes for us.
 
 ## Before class
 
@@ -267,10 +278,14 @@ R_{\mathrm{use}}(\theta)
 \left[L(f_\theta(x),y)\right].
 $$
 
-The first two quantities average losses over recorded observations. Both are **[empirical errors](../glossary.qmd#empirical-error)**. The third is the **[population risk](../glossary.qmd#population-risk)** for the intended use. Each hat marks an empirical quantity calculated from a sample; the test-set estimate keeps its hat.
+The first two quantities average losses over recorded observations. Both are **[empirical errors](../glossary.qmd#empirical-error)**. The third is the **[population risk](../glossary.qmd#population-risk)** for the intended use. The hats mark quantities calculated from samples. Reserving the test observations changes how we can use their average; it does not turn that average into the unknown population quantity.
 :::
 
-Here $x$ denotes the input and $y$ the measured target; in our calibration these were concentration $c$ and absorbance $A$. We use these general letters because the same distinction applies to other prediction problems. The model parameters are still $\theta$. The function $L$ gives the loss for one prediction: for squared error, $L(\hat y,y)=(\hat y-y)^2$. The expectation $\mathbb E$ describes an average over cases drawn from the intended distribution $P_{\mathrm{use}}$. It asks us to imagine repeating the intended use, rather than averaging only the observations already on the page. We usually cannot calculate that average exactly. For a fixed model, the test average is an unbiased estimate of this risk if the test observations are sampled independently from $P_{\mathrm{use}}$, independently of model development, and the expected loss is finite. “Unbiased” concerns the average over repeated test samples; a particular test score can lie above or below the population risk. [Hardt and Recht: sample versus population and empirical risk](https://mlstory.org/supervised.html#sample-versus-population)
+Here $x$ denotes the input and $y$ the measured target; in our calibration these were concentration $c$ and absorbance $A$. We use these general letters because the same distinction applies to other prediction problems. The model parameters are still $\theta$. The function $L$ gives the loss for one prediction: for squared error, $L(\hat y,y)=(\hat y-y)^2$.
+
+The expectation $\mathbb E$ describes an average over cases drawn from the intended distribution $P_{\mathrm{use}}$. Imagine repeating the use for which we built the model. Which cases would occur, and how often? That is the average we would like to know. The observations on the page give us only one finite sample, and we usually cannot calculate the population average exactly.
+
+For a fixed model, the test average is an unbiased estimate of this risk if the test observations are sampled independently from $P_{\mathrm{use}}$, independently of model development, and the expected loss is finite. “Unbiased” describes what happens over repeated test samples. It does not promise that the particular score in front of us equals the population risk. [Hardt and Recht: sample versus population and empirical risk](https://mlstory.org/supervised.html#sample-versus-population)
 
 ### The same line, two test samples
 
@@ -295,7 +310,7 @@ In $\hat A=mc+b$, changing the concentration input by $\Delta c$ changes the pre
 
 ## Python practical
 
-We now repeat the argument in code: make a prediction about one controlled change, observe its effect, and explain which data support the conclusion. A successful run should leave you able to explain why a better training fit can have a worse validation error.
+The notebook lets us change the curve while keeping the observations fixed. Before moving the degree slider, predict what will happen to the fit. Afterwards, explain why getting closer to the training points can take us further from the validation points. If you can account for that result, the plot has told you something beyond whether the code ran.
 
 Open the [marimo calibration notebook](../notebooks/02-calibration-lab.py) from the supplied project:
 

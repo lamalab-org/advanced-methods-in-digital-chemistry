@@ -2,6 +2,18 @@
 title: "Your AI assistant and Python environment"
 ---
 
+There are quite a few names in this setup. They refer to different jobs: an assistant suggests something to try, Python performs a calculation, and a notebook lets us work on the code beside its explanation. We will install the tools together, but I would also like you to know enough about what each one does to investigate a problem when it appears.
+
+## What should work when we are done? {#setup-outcomes}
+
+After working through this page, you should be able to:
+
+- Open the supplied notebook, change a calculation, check the result, and reopen your saved work.
+- Explain where a shell command belongs, which Python environment runs the code, and which parts of our setup run on your computer or at Jülich.
+- Give an assistant enough information to investigate an error, then check its suggestion. If the assistant is unavailable, make the same checks with a partner or with me.
+
+The first sign that the setup works is a calculation you can change and explain. Installing a list of programs is only part of getting there.
+
 ## Before the first meeting
 
 If you have time before our first meeting on **28 October 2026**, look through this guide and try starting the setup. Begin with an assistant, then prepare the Python environment. Jan with Blablador is our suggested example; you can also use an assistant you already have, such as Claude or Codex. On Windows, setting up Ubuntu through WSL 2 beforehand is particularly helpful because it can require a restart or administrator access.
@@ -12,7 +24,7 @@ Bring your laptop and charger if you can. We will show the tools in use and rese
 
 I will demonstrate **Jan connected to Blablador first**, so that we have an assistant available while installing Python and working through errors. We will then use **uv to manage Python and packages** and **marimo to work in notebooks**. You can follow the same exercises with another assistant. If Jan is difficult to install, Blablador also has a web interface. If service access is unavailable, work with a partner or ask the instructor for help and continue with the Python setup.
 
-These tools have different jobs. Python executes the calculations. uv keeps the course's dependencies together. marimo is the interface for writing and running Python. Jan is a chat interface. Blablador runs the language model on remote infrastructure.
+Python executes the calculations. uv keeps the course's dependencies together. marimo is the interface for writing and running Python. Jan displays our chat, and Blablador runs the language model at Jülich. A browser window can therefore show a calculation running on your own computer or a conversation with a remote service. The window alone does not tell us where the work happens.
 
 The [glossary](glossary.qmd#computing-and-the-course-tools) provides short definitions of the computing terms below. We will also explain them as they become useful.
 
@@ -117,7 +129,7 @@ wsl.exe --list --verbose
 
 The Ubuntu row should show **VERSION 2**. If it does not, ask the instructor to help with the existing installation. From this point, enter course commands in **Ubuntu's Bash shell**. You can also select the Ubuntu profile in Windows Terminal. [WSL commands and version check](https://learn.microsoft.com/en-us/windows/wsl/basic-commands)
 
-If WSL installation is blocked, use pair work or the instructor's supported notebook service while arranging help. You can still follow the examples and use Jan.
+If WSL installation is blocked, work with a partner or ask me for help. You can still follow the examples and use Jan while we resolve the installation.
 
 ## Before typing commands {#computing-basics}
 
@@ -284,7 +296,7 @@ uv run --locked marimo edit notebooks/02-calibration-lab.py --headless
 
 The kit also contains HTML previews in `notebooks/previews/` with code and recorded results. These are for reading: their controls do not rerun Python. They load marimo display assets from the internet; the separate calibration browser activity is the offline fallback. Open the `.py` notebook in marimo to change a calculation.
 
-### Check your bearings
+### Can you explain what happened? {#check-your-bearings}
 
 Before moving on, answer these in your own words:
 
@@ -309,7 +321,7 @@ Once marimo is working, use the calibration example, where a check is easy to ca
 
 Calculate the two residuals and their squared errors yourself. Run the suggested implementation in marimo. Try an exact prediction as a second check. Write down one suggestion you accepted or corrected and the evidence for that decision.
 
-A fluent answer is a proposal to inspect. Keep the units, data selection, and scientific interpretation in view when the tasks become more complex.
+If the function runs, we know that Python accepted the instructions. Our hand calculation asks whether those instructions computed the quantity we wanted. Later, when the calculation becomes too large to follow entirely by hand, we will still need smaller checks whose answers we can explain.
 
 ## An assistant that works on files {#cli-assistant}
 
@@ -319,13 +331,13 @@ Once this setup works, we will also try a [coding assistant in the terminal](cli
 
 | Symptom | First useful check |
 |---|---|
-| Ubuntu is unavailable, or WSL setup needs administrator access or a restart | Ask the instructor or IT for installation support; use pair work or the supported notebook service meanwhile. |
+| Ubuntu is unavailable, or WSL setup needs administrator access or a restart | Ask me or IT for installation support; work with a partner meanwhile. |
 | `uv` is not recognised | Open a new terminal; confirm installation using the official instructions. |
 | On Windows, uv or Python resolves to a Windows installation | Open Ubuntu and use the Linux uv installation and project folder. Check the notebook's interpreter and `sys.platform`. |
 | The project cannot be found | Open a terminal in the extracted folder containing `pyproject.toml`. |
 | The WSL notebook does not open in the browser | Keep its Ubuntu terminal running and copy the printed localhost URL into the Windows browser. If it fails, ask for support with WSL networking. |
 | A package imports in the terminal but not in the notebook | Inspect `sys.executable`; stop the server and launch marimo with `uv run --locked` from the course project. |
-| Package installation is blocked or too slow | Ask for the available browser environment or pair with a neighbour; record the error for follow-up. |
+| Package installation is blocked or too slow | Work with a neighbour and keep the error message so we can investigate it together. |
 | A variable is defined in two cells | Edit its original definition, or give the new quantity a different name. |
 | A changed value does not update a result | Run the edited cell; check whether automatic execution is disabled or a cell has an error. |
 | Jan cannot list models | Check the provider URL, token, and token scope privately; follow the current service guide. |
