@@ -26,7 +26,8 @@ For the follow-up on bias, variance, regularisation and cross-validation:
 
     uv run --locked --group mof marimo edit notebooks/model-selection.py --headless
 
-This separate notebook uses simulated data and does not report a final test score.
+This notebook revisits the MolSim potential-fitting example, using Lennard–Jones
+energies with artificial noise. It does not report a final test score.
 Its recorded default calculation is in notebooks/previews/model-selection.html.
 
 The first package installation requires internet access. The notebook then

@@ -94,6 +94,8 @@ Once the timetable and applicable requirements have been checked, I will publish
 
 We begin with a calibration curve because we can follow the whole calculation. There are only a few observations, and we know something about the experiment. When we move to a table of porous materials, the same questions remain, but even deciding what counts as a new material becomes less straightforward.
 
+For the ML basics, we build on my [MolSim teaching material](https://www.compchem.nl/wp-content/uploads/molsim2023/L09_Machine-Learning.pdf): how to describe a system, choose and fit a function, estimate its error, and decide whether a more elaborate model helps. We work through these steps with a calibration curve, the MolSim adsorption data, and an exercise fitting an interaction energy. This gives us calculations to return to when we introduce neural networks and molecular simulation.
+
 ::: {.course-outline}
 
 | Topic group | Topics | What we will work through |
@@ -104,7 +106,7 @@ We begin with a calibration curve because we can follow the whole calculation. T
 
 :::
 
-The first supported practical brings these topics together in [**How should we choose a model?**](lectures/model-selection.qmd). We fit curves to repeated simulated measurements to distinguish **bias from variance**, then investigate **regularisation** by changing a penalty while keeping the degree fixed. Finally, we use **cross-validation** to compare settings when one validation split may give a fragile comparison. We will fit preprocessing inside each fold and distinguish selecting a model from evaluating the selected procedure. For chemical data, we also ask whether folds should separate molecules, families, batches, or times. This is core material before neural networks; the formal bias–variance derivation and nested cross-validation are further depth.
+The first supported practical brings these topics together in [**How should we choose a model?**](lectures/model-selection.qmd). We reuse the MolSim example of fitting a Lennard–Jones potential: repeated noisy energy values let us distinguish **bias from variance**, then investigate **regularisation** by changing a penalty while keeping the degree fixed. Finally, we use **cross-validation** to compare settings when one validation split may give a fragile comparison. We will fit preprocessing inside each fold and distinguish selecting a model from evaluating the selected procedure. For chemical data, we also ask whether folds should separate molecules, families, batches, or times. This is core material before neural networks; the formal bias–variance derivation and nested cross-validation are further depth.
 
 By this point, we should be able to take a supplied data table, identify its target and conditions, fit a simple comparison model, justify a model-selection procedure, and explain what its reported error does and does not tell us. We need that foundation before adding more elaborate models.
 
