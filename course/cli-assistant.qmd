@@ -1,0 +1,116 @@
+---
+title: "Working with a coding assistant"
+---
+
+Suppose we have written a function to calculate a prediction error. It runs, prints a number, and produces no error message. Unfortunately, it calculates the wrong quantity. We have already met this example in [the second lecture](lectures/02-learning-from-data.qmd#llm-exercise-debug-a-metric). We will now use it to try an assistant that can work directly on our files.
+
+In a chat, we usually copy code into a conversation and copy a suggestion back. A coding assistant with a **command-line interface**, or **CLI**, runs in the terminal. It can read a file, propose an edit, and run a command to check the result. The language model still generates proposed actions; the surrounding software carries them out with the permissions it has been given. This is one concrete use of the term [coding agent](glossary.qmd#coding-agent).
+
+We will try this together once the Python environment works and we have calculated a few errors ourselves. It is a practical for the second or third meeting, rather than another installation to finish before the first. You can work in pairs and take turns making and checking a request.
+
+## Choose a connection {#connection}
+
+We will use **Codex CLI with Blablador** as our starting example. Codex supplies the program that reads files and runs commands; Blablador supplies the remote model. Jülich documents this connection in its [Codex guide](https://sdlaml.pages.jsc.fz-juelich.de/ai/guides/blablador_codex_tutorial/). The instructions below adapt it to a terminal session. A successful chat in Jan does not yet check whether a model can complete this sequence of file edits and commands; we will test that connection before using it with the class.
+
+You can also use an assistant you already have, such as Codex with another provider or [Claude Code](https://code.claude.com/docs/en/quickstart). Access arrangements differ, but you do not need to buy a subscription for this exercise. If your installation or account is unavailable, work with a partner on a configured machine. We use only the small supplied example here; the [discussion of data handling](setup.qmd#assistant-data) also applies to files read by an assistant.
+
+Follow the [official Codex CLI installation instructions](https://learn.chatgpt.com/docs/codex/cli), then check `codex --version` in a new terminal. **On Windows, install and run the Linux CLI inside Ubuntu on WSL 2**, alongside the course Python environment. The named configuration file below uses the profile format introduced in Codex 0.134.0; use a current version if yours is older.
+
+## A calculation we can check {#exercise}
+
+Download and extract the [small exercise folder](downloads/cli-assistant.zip). In Ubuntu on WSL, keep the extracted folder in your Linux home directory, as with the Python setup. Open a terminal there. `pwd` shows where you are; `ls` should list `score.py` and `check_score.py`, as well as the README and connection settings.
+
+The function receives predictions and observations as lists. Throughout this exercise, the lists are non-empty and have the same length. For predictions `[2, 0]` and observations `[1, 1]`, calculate the residuals, their average, and the average of their squares. Then run:
+
+```sh
+uv run --no-project --python 3.12 score.py
+uv run --no-project --python 3.12 check_score.py
+```
+
+The first command runs the calculation; the second compares it with three expected answers. Two checks should report `FAIL`. These failures are the starting point of the exercise. The checks use constructed inputs to examine the code; they do not estimate a model's prediction error on new chemical measurements. `--no-project` runs this small script without loading a surrounding Python project; it needs no additional packages.
+
+Before asking the assistant to change anything, keep a copy of both files:
+
+```sh
+cp score.py score.before.txt
+cp check_score.py check_score.before.txt
+```
+
+<details>
+<summary>Connect Codex CLI to Blablador</summary>
+
+Use your own [Blablador token](setup.qmd#set-up-the-ai-assistant), as for Jan. The supplied configuration names the service and reads the token from an [environment variable](glossary.qmd#environment-variable): a value passed from the shell to a program. It contains no token itself.
+
+From the exercise folder, copy the named profile into Codex's configuration directory:
+
+```sh
+mkdir -p ~/.codex
+cp -i digital-chemistry.config.toml ~/.codex/
+```
+
+If a file with that name already exists, `cp -i` asks before replacing it; answer `n` and ask for help if it is an existing configuration you use. This leaves your main `config.toml` in place. The course profile selects `alias-code` at `https://api.blablador.fz-juelich.de/v1`, using the Responses API described in Jülich's guide. An [alias](glossary.qmd#model-alias) can refer to a different model as the service changes.
+
+Start Bash so that the following input command works the same way on macOS, Linux, and Ubuntu in WSL:
+
+```sh
+bash
+read -r -s -p "Blablador token (hidden): " BLABLADOR_API_KEY
+printf '\n'
+export BLABLADOR_API_KEY
+```
+
+Enter the token only at that hidden prompt and press Enter. The characters will not appear. The token is not part of the typed command or saved in the exercise files. Keep this terminal open for the session; the variable is available to programs launched from it. Do not paste the token into an assistant conversation.
+
+These settings follow [Jülich's connection guide](https://sdlaml.pages.jsc.fz-juelich.de/ai/guides/blablador_codex_tutorial/) and [Codex's named-profile documentation](https://learn.chatgpt.com/docs/config-file/config-advanced).
+
+</details>
+
+## Read the calculation before changing it {#inspect}
+
+For the course's Blablador connection, start in read-only mode:
+
+```sh
+codex --profile digital-chemistry --sandbox read-only --ask-for-approval on-request
+```
+
+If you use your existing Codex connection, omit `--profile digital-chemistry`. For a different assistant, use its corresponding inspection mode. Confirm the selected model and working folder before proceeding; in Codex, `/status` displays session information.
+
+Ask:
+
+> Read score.py and explain which quantity it calculates. Do not edit files. For predictions [2, 0] and observations [1, 1], show the intermediate values and compare them with mean squared error. Stay within this folder.
+
+Compare the explanation with your arithmetic. Which operation needs to move? The word “mean” appears in both calculations, but the order matters.
+
+## Make and examine one change {#edit}
+
+Exit the inspection session with Ctrl+C. Restart with permission to edit in the exercise workspace:
+
+```sh
+codex --profile digital-chemistry --sandbox workspace-write --ask-for-approval on-request
+```
+
+Again, omit the profile flag if using your own connection. **This mode allows ordinary edits and commands within the workspace without asking about every action.** Read any request for additional permission before accepting it. The [CLI reference](https://learn.chatgpt.com/docs/developer-commands?surface=cli) explains the available settings.
+
+Ask:
+
+> Correct mean_squared_error in score.py with the smallest change you can. The inputs are non-empty, equal-length lists. Change only score.py. Keep check_score.py and the before-copies unchanged. Use the Python standard library, install nothing, and do not use the web. Run `uv run --no-project --python 3.12 check_score.py`, then explain what changed and what the checks establish.
+
+Watch which files the assistant reads, what it edits, and which commands it runs. If running Python requires permission that you are unsure about, you can run the check yourself. After the assistant finishes, exit to the shell and examine the actual changes:
+
+```sh
+diff -u score.before.txt score.py
+diff -u check_score.before.txt check_score.py
+uv run --no-project --python 3.12 check_score.py
+```
+
+A [diff](glossary.qmd#diff) compares two files. Lines beginning with `-` were removed; those beginning with `+` were added. The first comparison should show the correction you can explain. The second should print nothing: the supplied checks should be unchanged. A diff command returning status 1 means it found differences, which is expected for the repaired file.
+
+Devise one further pair of lists, calculate the answer yourself, and try it in a new small script or Python session. Passing the three supplied checks tells us about those cases. Your additional example tests another case; neither establishes that the function handles every possible input.
+
+If you used the temporary Bash session for Blablador, finish with `unset BLABLADOR_API_KEY` and then `exit` to leave that shell.
+
+## What did the assistant contribute? {#reflection}
+
+Keep a short record: the tool and model identifier if available, the change you accepted, and one calculation that let you check it. Explain why averaging residuals before squaring gives a different answer. There is no separate report to write for this practical.
+
+The assistant can now do several steps that we previously carried out ourselves. That makes it useful when a task grows. It also means that an incorrect assumption can enter the files and the calculations before we notice it. In later chemistry work, we will use the same habit of examining what changed, choosing checks for the question at hand, and deciding what the result supports.

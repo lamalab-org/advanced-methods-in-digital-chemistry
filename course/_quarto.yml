@@ -5,6 +5,7 @@ project:
     - index.qmd
     - outline.qmd
     - setup.qmd
+    - cli-assistant.qmd
     - glossary.qmd
     - reading.qmd
     - lectures/*.qmd
@@ -42,6 +43,7 @@ book:
     - lectures/02-learning-from-data.qmd
     - lectures/03-mof-uptake.qmd
   appendices:
+    - cli-assistant.qmd
     - glossary.qmd
     - reading.qmd
 

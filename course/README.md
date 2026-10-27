@@ -29,6 +29,12 @@ Open `notebooks/03-mof-uptake.ipynb`. The data are simulated CO₂ uptakes, with
 
 Save student edits under a new notebook filename. The locked environment and all three notebooks have been checked on an Apple Silicon Mac. WSL/Ubuntu installation and Jan–Blablador access still need a classroom device pilot.
 
+## Terminal coding-assistant practical
+
+The [coding-assistant guide](https://lamalab-org.github.io/advanced-methods-in-digital-chemistry/cli-assistant.html) uses a small, deliberately flawed mean squared error function. Its source files are in `practicals/cli-assistant/`, and `downloads/cli-assistant.zip` supplies the student kit. It requires only Python 3.12's standard library. The initial check script should fail on two cases; do not repair the distributed starter.
+
+The guide includes a named Codex CLI profile for Blablador, based on Jülich's guide and current Codex documentation. The profile contains no token. The exercise and its expected correction are checked locally; the authenticated Blablador CLI tool-use sequence still needs a classroom pilot. A successful chat connection alone does not verify that sequence.
+
 ## Updating the material
 
 - The website's shared visual assets and their sources are documented in [assets/README.md](assets/README.md). Edit the shared styles there; the local instructor book copies them during rendering.
@@ -37,6 +43,7 @@ Save student edits under a new notebook filename. The locked environment and all
 - `scripts/build_mof_lab.py` regenerates the MOF notebook. Its optional `--source PATH_TO_ML_MOLSIM` argument also rebuilds the data subset from the pinned upstream revision. Without it, the supplied data are preserved.
 - After regenerating notebooks, execute them from fresh kernels and inspect results. Verification tools are in the `dev` dependency group; combine it with `mof` for the MOF notebook. Refresh the MOF plot images under `assets/` if their underlying results change.
 - Rebuild the download archives after changing their inputs: `uv run --locked python scripts/build_setup_kit.py` and `uv run --locked --group mof python scripts/build_mof_kit.py`.
+- Rebuild the CLI exercise archive with `python3 scripts/build_cli_kit.py`. It packages only the four named source files, excluding student edits, caches, and credentials.
 - After an intentional dependency update, refresh the pinned fallback with `uv export --locked --format requirements-txt --no-hashes --no-dev --no-emit-project --output-file requirements.txt`.
 
 Build and validate from this directory:
