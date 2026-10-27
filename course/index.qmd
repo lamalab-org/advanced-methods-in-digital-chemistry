@@ -26,14 +26,14 @@ These are also the things I would like your project to let you practise.
 
 We first learn to fit a small model and examine the evidence for using it. We then study how models represent molecules and their behaviour. Finally, we ask how predictions can help us propose molecules, choose experiments, and organise a research task. A small project brings the calculation and its scientific interpretation together.
 
-| Sessions | Main topics |
+| Topic groups | Main topics |
 |---|---|
 | **1–3: Learning from observations** | AI and scientific claims; our computing tools; fitting and evaluating models; chemical data. |
 | **4–6: Representing molecules and their behaviour** | Neural networks; molecular graphs and symmetry; learned energies, forces, and simulation. |
 | **7–9: From predictions to decisions** | Molecular generation; choosing experiments under uncertainty; language models and tools. |
 | **10: Bringing the work together** | Reproducing, explaining, and examining a small project. |
 
-The [course outline](outline.qmd) sets out the topics, the connections between sessions, and the background we will develop along the way. It represents about ten two-hour teaching slots, which we can combine into fewer appointments. In the first session, we will [discuss a block week or several longer sessions](outline.qmd#scheduling), working around my unavailable dates and students' commitments.
+Friedolin lists **14 two-hour meetings** from 28 October to 10 February. I cannot teach on 4 November, which leaves **13 meetings, including the introduction**. The [course outline](outline.qmd) distributes the ten topic groups and three further practical and project meetings across that time. In the first session, we will [discuss a block week or several longer sessions](outline.qmd#scheduling), working around my unavailable dates and students' commitments.
 
 ## How we will work {#how-to-use-a-lecture-page}
 
@@ -51,7 +51,7 @@ Several books have shaped how I think about these questions. I particularly reco
 
 ## The course material {#start-here}
 
-- [Course outline](outline.qmd): the ten-meeting sequence, its rationale, and the background developed along the way.
+- [Course outline](outline.qmd): the topics, proposed timetable, and background developed along the way.
 - [AI-assistant and Python setup](setup.qmd): Jan with Blablador as one option for an assistant, then computing basics, uv, and marimo, with a downloadable introductory kit. Windows users work in Ubuntu on WSL 2.
 - [What do we mean by AI for science?](lectures/01-ai-and-science.qmd): AI as an ambition, concrete methods, a selective history, and scientific evidence.
 - [What does it mean to learn from data?](lectures/02-learning-from-data.qmd): a calibration experiment, choosing how to measure an error, fitting curves, and predicting new measurements.
