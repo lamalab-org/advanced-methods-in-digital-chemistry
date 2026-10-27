@@ -122,14 +122,14 @@ The calculation treats rows as independent sampling units. It adds no new framew
 
 ## Practical
 
-Download and extract the complete [MOF practical kit](../downloads/mof-practical.zip). It contains the [notebook](../notebooks/03-mof-uptake.ipynb), data, source notice, and locked environment. From its folder, use Ubuntu on WSL for Windows, or your macOS/Linux terminal:
+Download and extract the complete [MOF practical kit](../downloads/mof-practical.zip). It contains the [notebook](../notebooks/03-mof-uptake.py), data, source notice, and locked environment. From its folder, use Ubuntu on WSL for Windows, or your macOS/Linux terminal:
 
 ```bash
 uv sync --locked --group mof
-uv run --locked --group mof jupyter lab --no-browser
+uv run --locked --group mof marimo edit notebooks/03-mof-uptake.py --headless
 ```
 
-Open `notebooks/03-mof-uptake.ipynb`. The saved outputs and figures above also let you discuss the results if your environment is not ready. They include the test results of the supplied run, whose model was selected using validation data. Once you have viewed those results, changes to your own model are exploratory; those same rows cannot provide a fresh, untouched assessment of the revised procedure.
+The command opens `notebooks/03-mof-uptake.py` in marimo. Leave its test-evaluation checkbox unchecked while choosing the model. The [HTML preview](../notebooks/previews/03-mof-uptake.html) and figures above also let you discuss the results if your environment is not ready. They include the test results of the supplied run, whose model was selected using validation data. Once you have viewed those results, changes to your own model are exploratory; those same rows cannot provide a fresh, untouched assessment of the revised procedure.
 
 1. Read one training row. State the target, its conditions, and one omission in the representation.
 2. Predict whether scaling will help KRR. Run the comparison and explain what changed.

@@ -16,9 +16,7 @@ def main():
     for package, module in [
         ("numpy", "numpy"),
         ("matplotlib", "matplotlib"),
-        ("jupyterlab", "jupyterlab"),
-        ("ipykernel", "ipykernel"),
-        ("nbformat", "nbformat"),
+        ("marimo", "marimo"),
     ]:
         try:
             importlib.import_module(module)
@@ -45,7 +43,7 @@ def main():
         print("OK: fitted a calibration curve and rendered a plot in memory.")
 
     root = Path(__file__).resolve().parents[1]
-    for name in ["00-getting-started.ipynb", "02-calibration-lab.ipynb"]:
+    for name in ["00-getting-started.py", "02-calibration-lab.py"]:
         if not (root / "notebooks" / name).is_file():
             issues.append(f"Missing notebook: {name}. Extract the complete course folder.")
 
@@ -54,7 +52,7 @@ def main():
             print(f"ACTION: {issue}")
         return 1
 
-    print("READY: open JupyterLab, select the course .venv kernel, and run the setup notebook.")
+    print("READY: uv run --locked marimo edit notebooks/00-getting-started.py --headless")
     print("This checks the local Python tools; it does not test Jan or Blablador access.")
     return 0
 

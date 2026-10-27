@@ -26,13 +26,18 @@ class Page(HTMLParser):
 def main():
     root = Path(sys.argv[1] if len(sys.argv) > 1 else "course/_book").resolve()
     errors = []
-    forbidden = {"instructor", "_instructor", ".working", ".venv", ".git", ".env"}
+    forbidden = {"instructor", "_instructor", ".working", ".venv", ".git", ".env", "__marimo__", "__pycache__"}
     required = (
         "index.html", "outline.html", "examples.html", "setup.html", "cli-assistant.html", "glossary.html", "reading.html", "search.json",
         "lectures/01-ai-and-science.html", "lectures/02-learning-from-data.html",
         "lectures/03-mof-uptake.html", "activities/calibration.html",
         "downloads/introductory-setup.zip", "downloads/mof-practical.zip",
         "downloads/cli-assistant.zip",
+        "notebooks/00-getting-started.py", "notebooks/02-calibration-lab.py",
+        "notebooks/03-mof-uptake.py",
+        "notebooks/previews/00-getting-started.html",
+        "notebooks/previews/02-calibration-lab.html",
+        "notebooks/previews/03-mof-uptake.html",
     )
     for name in required:
         if not (root / name).is_file():
@@ -81,7 +86,24 @@ def main():
 
     for archive in (root / "downloads").glob("*.zip"):
         with ZipFile(archive) as bundle:
-            for member in bundle.namelist():
+            names = bundle.namelist()
+            expected = {
+                "introductory-setup.zip": ("digital-chemistry-intro", ("00-getting-started", "02-calibration-lab")),
+                "mof-practical.zip": ("digital-chemistry-mof", ("03-mof-uptake",)),
+            }.get(archive.name)
+            if expected:
+                prefix, stems = expected
+                for stem in stems:
+                    for relative in (f"notebooks/{stem}.py", f"notebooks/previews/{stem}.html"):
+                        name = f"{prefix}/{relative}"
+                        if name not in names:
+                            errors.append(f"Missing notebook resource: {archive.name}: {name}")
+                        elif bundle.read(name) != (root / relative).read_bytes():
+                            errors.append(f"Stale notebook resource: {archive.name}: {name}")
+                for relative in ("pyproject.toml", "uv.lock"):
+                    if bundle.read(f"{prefix}/{relative}") != (Path(__file__).resolve().parents[1] / relative).read_bytes():
+                        errors.append(f"Stale environment: {archive.name}: {relative}")
+            for member in names:
                 path = PurePosixPath(member)
                 if path.is_absolute() or ".." in path.parts or forbidden.intersection(path.parts):
                     errors.append(f"Unexpected download member: {archive.name}: {member}")

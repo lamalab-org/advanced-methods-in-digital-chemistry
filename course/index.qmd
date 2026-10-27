@@ -44,7 +44,7 @@ Several books have shaped how I think about these questions. I particularly reco
 ## The course material {#start-here}
 
 - [Course outline](outline.qmd): the ten-meeting sequence, its rationale, and the background developed along the way.
-- [AI-assistant and Python setup](setup.qmd): Jan with Blablador as one option for an assistant, then computing basics, uv, and JupyterLab, with a downloadable introductory kit. Windows users work in Ubuntu on WSL 2.
+- [AI-assistant and Python setup](setup.qmd): Jan with Blablador as one option for an assistant, then computing basics, uv, and marimo, with a downloadable introductory kit. Windows users work in Ubuntu on WSL 2.
 - [What do we mean by AI for science?](lectures/01-ai-and-science.qmd): AI as an ambition, concrete methods, a selective history, and scientific evidence.
 - [What does it mean to learn from data?](lectures/02-learning-from-data.qmd): a calibration experiment, choosing how to measure an error, fitting curves, and predicting new measurements.
 - [What can a model tell us about gas uptake?](lectures/03-mof-uptake.qmd): describing porous materials to a computer, comparing predictions, and examining the uncertainty in an error estimate.

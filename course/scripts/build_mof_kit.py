@@ -1,9 +1,10 @@
-"""Package the executed MOF notebook, pinned data, notices, and environment."""
+"""Package the marimo MOF notebook and its HTML preview, pinned data, notices, and environment."""
 from pathlib import Path
 from zipfile import ZIP_DEFLATED, ZipFile
 
 root = Path(__file__).resolve().parents[1]
-files = ["pyproject.toml", "uv.lock", ".python-version", "notebooks/03-mof-uptake.ipynb"]
+files = ["pyproject.toml", "uv.lock", ".python-version", "notebooks/03-mof-uptake.py",
+         "notebooks/previews/03-mof-uptake.html"]
 files += [str(path.relative_to(root)) for path in sorted((root / "data/mof-uptake").iterdir()) if path.is_file()]
 instructions = """Advanced Methods in Digital Chemistry: MOF practical
 
@@ -13,16 +14,20 @@ On Windows, keep the project in the Linux home directory, as in the course setup
 From the extracted folder containing pyproject.toml:
 
     uv sync --locked --group mof
-    uv run --locked --group mof jupyter lab --no-browser
+    uv run --locked --group mof marimo edit notebooks/03-mof-uptake.py --headless
 
-Open the full localhost URL printed by Jupyter in your browser.
-Keep its terminal open. Open notebooks/03-mof-uptake.ipynb.
+Open the full localhost URL printed by marimo in your browser.
+Keep its terminal open. The command opens notebooks/03-mof-uptake.py.
 Use the mof group flag each time you launch with uv run.
 Save your edited notebook under a new name.
 
 The first package installation requires internet access. The notebook then
 runs on local supplied data, without Kaggle or chatbot accounts or a GPU.
-Its saved outputs support a read-through if execution is unavailable.
+notebooks/previews/03-mof-uptake.html provides code and recorded results
+for reading if execution is unavailable; its controls do not rerun Python.
+The preview includes test results. Leave the live notebook test checkbox
+unchecked until you record a model choice. After seeing any test results,
+further model changes are exploratory; unchecking does not make them unseen.
 Jan/Blablador remains optional assistance, configured through the course setup.
 
 The targets are simulated CO2 uptakes, not experimental measurements.
@@ -34,5 +39,5 @@ with ZipFile(out, "w", compression=ZIP_DEFLATED) as archive:
     for name in files:
         archive.write(root / name, "digital-chemistry-mof/" + name)
     archive.writestr("digital-chemistry-mof/START-HERE.txt", instructions)
-    archive.writestr("digital-chemistry-mof/.gitignore", ".venv/\n.ipynb_checkpoints/\n.env\n")
+    archive.writestr("digital-chemistry-mof/.gitignore", ".venv/\n__marimo__/\n.env\n")
 print(f"Created {out.name} ({out.stat().st_size:,} bytes)")

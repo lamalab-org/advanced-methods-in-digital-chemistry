@@ -10,9 +10,9 @@ Bring your laptop and charger if you can. We will show the tools in use and rese
 
 ## The course setup
 
-I will demonstrate **Jan connected to Blablador first**, so that we have an assistant available while installing Python and working through errors. We will then use **uv to manage Python and packages** and **JupyterLab to work in notebooks**. You can follow the same exercises with another assistant. If Jan is difficult to install, Blablador also has a web interface. If service access is unavailable, work with a partner or ask the instructor for help and continue with the Python setup.
+I will demonstrate **Jan connected to Blablador first**, so that we have an assistant available while installing Python and working through errors. We will then use **uv to manage Python and packages** and **marimo to work in notebooks**. You can follow the same exercises with another assistant. If Jan is difficult to install, Blablador also has a web interface. If service access is unavailable, work with a partner or ask the instructor for help and continue with the Python setup.
 
-These tools have different jobs. Python executes the calculations. uv keeps the course's dependencies together. JupyterLab is the interface for writing and running Python. Jan is a chat interface. Blablador runs the language model on remote infrastructure.
+These tools have different jobs. Python executes the calculations. uv keeps the course's dependencies together. marimo is the interface for writing and running Python. Jan is a chat interface. Blablador runs the language model on remote infrastructure.
 
 The [glossary](glossary.qmd#computing-and-the-course-tools) provides short definitions of the computing terms below. We will also explain them as they become useful.
 
@@ -78,7 +78,7 @@ The project file may be absent, or we may be looking in the wrong folder. Checki
 Keep the chat available during Python setup. When an actual error appears, give the assistant enough context to investigate it:
 
 ```text
-I am following the course setup using uv and JupyterLab.
+I am following the course setup using uv and marimo.
 Operating system and environment (for example, Windows with Ubuntu in WSL 2):
 Where I entered the command (for example, Ubuntu's Bash shell or a notebook cell):
 Command or code:
@@ -97,7 +97,7 @@ If the assistant connection is still blocked, continue with the computing basics
 
 ## Windows: Ubuntu in WSL 2 {#windows-wsl}
 
-**Windows Subsystem for Linux (WSL)** lets us run a Linux environment on a Windows computer. We will use **Ubuntu in WSL 2** for uv, Python, and the notebooks. Jan stays a Windows application, and the Windows browser will display JupyterLab. macOS and Linux users can continue to the computing basics.
+**Windows Subsystem for Linux (WSL)** lets us run a Linux environment on a Windows computer. We will use **Ubuntu in WSL 2** for uv, Python, and the notebooks. Jan stays a Windows application, and the Windows browser will display marimo. macOS and Linux users can continue to the computing basics.
 
 ### Prepare Ubuntu once
 
@@ -142,7 +142,7 @@ ls
 
 `pwd` displays your working directory; `ls` lists its contents. These commands work in the Bash and zsh shells we use, including Ubuntu inside WSL.
 
-A **path** is an address for a file or folder. An absolute path starts from the filesystem root, such as `/Users/yourname/Downloads` on macOS or `/home/yourname` in Ubuntu. A relative path starts from the working directory. For example, `notebooks/00-getting-started.ipynb` means “look inside the `notebooks` folder here.” The shorthand `~` refers to your home folder in the current environment.
+A **path** is an address for a file or folder. An absolute path starts from the filesystem root, such as `/Users/yourname/Downloads` on macOS or `/home/yourname` in Ubuntu. A relative path starts from the working directory. For example, `notebooks/00-getting-started.py` means “look inside the `notebooks` folder here.” The shorthand `~` refers to your home folder in the current environment.
 
 `cd` changes the working directory. After extracting the setup kit below, if `ls` shows the folder `digital-chemistry-intro`, enter it with:
 
@@ -170,11 +170,13 @@ Different projects can need different versions of the same package. A **virtual 
 
 You may encounter instructions to **activate** an environment. Activation changes which programs your current shell finds by default. We use `uv run` to select the project's environment for each command, so the setup below needs no separate activation step. [uv: working on projects](https://docs.astral.sh/uv/guides/projects/)
 
-### Notebook, cell, and kernel
+### Notebook, cell, and dependencies
 
-A **notebook** is a document, saved as an `.ipynb` file, containing text, code, and saved outputs. JupyterLab displays it in your browser. A **code cell** contains instructions to execute; a **Markdown cell** contains formatted notes. The **kernel** is the running process that executes a notebook's code. Our kernel runs Python and keeps variables in memory between cells. [Jupyter: notebooks and kernels](https://jupyter-notebook.readthedocs.io/en/stable/notebook.html#opening-notebooks)
+A **notebook** brings explanations, code, and results together. We use **marimo**, which saves the text and code in a Python (`.py`) file and displays the notebook in your browser. A **cell** is one block of the document. Code cells calculate; Markdown cells contain formatted explanations.
 
-Restarting the kernel clears that memory. It leaves the notebook file and installed packages in place. This is why “restart and run all” is useful: it checks whether the saved sequence of code can recreate the calculation without relying on earlier, unrecorded actions.
+Suppose one cell defines a concentration and another uses it to predict an absorbance. The second cell **depends on** the first. When you edit and run the concentration cell, marimo's automatic mode reruns the prediction cell too. This is called **reactivity**. The order follows the dependencies in the code, which need not be the order of cells on the page. [How marimo runs cells](https://docs.marimo.io/guides/reactivity/)
+
+A notebook-wide variable name must be defined in one cell. To change `concentration`, edit its existing definition rather than assigning it again elsewhere. Reactivity does not check whether a formula is scientifically appropriate. It also does not track every change made inside an existing object; for now, keep a calculation and its intermediate changes together in one cell.
 
 | What you want to do | Where it belongs |
 |---|---|
@@ -182,7 +184,7 @@ Restarting the kernel clears that memory. It leaves the notebook file and instal
 | Run `print(2 + 2)` as Python | A notebook code cell, executed with Shift+Enter |
 | Write an explanation or a heading | A notebook Markdown cell |
 
-With our local setup, both JupyterLab's server and the Python kernel run on your computer; the browser is their interface. On Windows, the server and kernel run inside Ubuntu in WSL, while the browser can remain a Windows application. The kernel uses the Linux project's files and packages. On a hosted notebook service, it runs on a remote machine. The location of the kernel determines which environment executes the code.
+In our setup, marimo's server and the Python calculations run on your computer. The browser displays their interface. On Windows, they run inside Ubuntu in WSL; the browser remains a Windows application. The `.py` file stores the instructions. The running Python process holds variables and produces outputs. Closing a browser tab is not the same as stopping the server. The setup below shows how to reopen the saved file in a fresh process.
 
 [The Missing Semester of Your CS Education](https://missing.csail.mit.edu/) explains many of the tools that programming courses tend to take for granted. Its [introduction to the shell](https://missing.csail.mit.edu/2026/course-shell/) develops the commands we have just used. Windows users can try its Unix-shell examples in Ubuntu through WSL. I recommend it if you would like to understand more of what happens around your Python code.
 
@@ -245,22 +247,24 @@ Run these commands in **Ubuntu on WSL**, or in your macOS/Linux terminal:
 ```bash
 uv sync --locked
 uv run --locked python scripts/check_environment.py
-uv run --locked jupyter lab --no-browser
+uv run --locked marimo edit notebooks/00-getting-started.py --headless
 ```
 
-The first command installs the supplied package versions into `.venv`. The second checks imports, a small fit, and plot rendering. The third starts JupyterLab without trying to launch a browser. Keep its terminal running while working. No environment-activation command is required. [Using uv with Jupyter](https://docs.astral.sh/uv/guides/integration/jupyter/)
+The first command installs the supplied package versions into `.venv`. The second checks imports, a small fit, and plot rendering. The third opens the getting-started notebook in marimo without trying to launch a browser. Keep its terminal running while working. No environment-activation command is required. [Using uv with marimo](https://docs.astral.sh/uv/guides/integration/marimo/)
 
-Copy the complete `http://localhost:...` URL printed by Jupyter into your browser, including its token. On Windows, use your Windows browser to reach the server running in WSL. Use the port printed in your terminal; it may differ from 8888. Keep this token-bearing URL out of the debugging chat. [JupyterLab: starting the server](https://jupyterlab.readthedocs.io/en/stable/getting_started/starting.html); [WSL: accessing Linux applications from Windows](https://learn.microsoft.com/en-us/windows/wsl/networking#accessing-linux-networking-apps-from-windows-localhost)
+Copy the complete local URL printed by marimo into your browser, including its access token. It begins with `http://localhost:...` or `http://127.0.0.1:...`. On Windows, use your Windows browser to reach the server running in WSL. Use the port printed in your terminal; do not assume a particular port. Keep this token-bearing URL out of the debugging chat. [marimo command reference](https://docs.marimo.io/cli/); [WSL: accessing Linux applications from Windows](https://learn.microsoft.com/en-us/windows/wsl/networking#accessing-linux-networking-apps-from-windows-localhost)
 
 Read the second command as “use uv to run this project's Python interpreter on the file `scripts/check_environment.py`.” Here `run` is uv's subcommand, `--locked` is an option, and the final argument is a relative file path. `--locked` makes uv report an error if the supplied lockfile needs updating, rather than changing the package selection during setup. [uv: locking and syncing](https://docs.astral.sh/uv/concepts/projects/sync/)
 
-The introductory environment uses Python 3.12 and contains NumPy, Matplotlib, JupyterLab, and the notebook/kernel tools needed for our first two notebooks. We will add packages as the chemistry and deep-learning exercises need them.
+The supplied project sets marimo to run on opening and to rerun dependent cells automatically. If you change this setting, the execution controls are in the notebook footer. [marimo runtime settings](https://docs.marimo.io/guides/configuration/runtime_configuration/)
 
-### 4. Run a notebook from the beginning
+The introductory environment uses Python 3.12 and contains marimo, NumPy, and Matplotlib for our first two notebooks. We will add packages as the chemistry and deep-learning exercises need them.
 
-Open `notebooks/00-getting-started.ipynb`. Select the Python kernel supplied by the course environment if prompted. Run every cell, change a concentration, and check the resulting prediction. Then restart the kernel and run everything again.
+### 4. Change a calculation
 
-To check which interpreter a notebook is using:
+The launch command opens `notebooks/00-getting-started.py`. Run the notebook if marimo prompts you to do so. In **1. A prediction**, calculate the expected absorbance before reading the output. Change `concentration` from `0.5` to `1.0` and run the edited cell with Shift+Enter. The prediction cell should update too: 0.55 becomes approximately 0.95. Now change `slope` and follow which other results change.
+
+To check which interpreter a notebook is using, add a code cell:
 
 ```python
 import sys
@@ -268,9 +272,17 @@ print(sys.executable)
 print(sys.platform)
 ```
 
-The interpreter path should refer to this project's `.venv`. In WSL, expect a Linux path ending in `.venv/bin/python` and `sys.platform` equal to `linux`. A notebook that imports a package successfully in one terminal can still fail when connected to another environment's kernel.
+The interpreter path should refer to this project's `.venv`. In WSL, expect a Linux path ending in `.venv/bin/python` and `sys.platform` equal to `linux`. Launching marimo with `uv run --locked` from the supplied project selects that environment; no separate kernel selection is needed.
 
-You are ready when you can change an input, explain the resulting calculation, and run the whole notebook from a restarted kernel. Checking `sys.executable` connects that working notebook to the environment you just installed.
+To keep the supplied starter, make a copy of its `.py` file in the same `notebooks` folder with your file manager and open that copy in marimo. Save your edits. Then stop the server with Ctrl+C in its terminal and reopen your copy with the same launch command, replacing the filename. This checks that the saved instructions can recreate the calculation. You are ready when you can change an input, explain the result, and reopen a working copy.
+
+For lecture 2, stop the first server with Ctrl+C and open the calibration notebook:
+
+```bash
+uv run --locked marimo edit notebooks/02-calibration-lab.py --headless
+```
+
+The kit also contains HTML previews in `notebooks/previews/` with code and recorded results. These are for reading: their controls do not rerun Python. They load marimo display assets from the internet; the separate calibration browser activity is the offline fallback. Open the `.py` notebook in marimo to change a calculation.
 
 ### Check your bearings
 
@@ -278,24 +290,24 @@ Before moving on, answer these in your own words:
 
 1. Why could `uv sync --locked` work in the terminal but give a syntax error in a Python cell?
 2. A notebook cannot import a package that was installed for another project. What would you inspect first?
-3. After restarting the kernel, a previously defined variable is missing. What needs to be rerun, and what remains installed?
+3. One cell defines a concentration; another predicts absorbance from it. What should happen when you edit and run the first cell?
 
 <details>
 <summary>Compare your explanation</summary>
 
 1. It is a shell command that launches uv. An ordinary Python cell expects Python code.
-2. Check the notebook's `sys.executable`: its kernel may use a different environment from the one containing the package.
-3. Rerun the cells that define the variable, ideally the whole notebook from the beginning. Restarting clears the kernel's memory; the project's installed packages remain in `.venv`.
+2. Check the notebook's `sys.executable` and the folder from which you launched marimo. The package may belong to another project's environment.
+3. In automatic mode, marimo reruns the dependent prediction cell. If automatic execution is disabled, it marks dependent cells as needing to run. Either way, the notebook file and installed packages are separate from the running calculation.
 
 </details>
 
 ## Check an assisted calculation {#first-task-with-the-assistant}
 
-Once JupyterLab is working, use the calibration example, where a check is easy to calculate independently:
+Once marimo is working, use the calibration example, where a check is easy to calculate independently:
 
 > I am learning Python. I have predictions [2, 0] and observations [1, 1]. Help me calculate the mean squared error. Ask me to try the calculation first, then help me test a Python implementation. Keep the example small and explain the inputs and outputs.
 
-Calculate the two residuals and their squared errors yourself. Run the suggested implementation in Jupyter. Try an exact prediction as a second check. Write down one suggestion you accepted or corrected and the evidence for that decision.
+Calculate the two residuals and their squared errors yourself. Run the suggested implementation in marimo. Try an exact prediction as a second check. Write down one suggestion you accepted or corrected and the evidence for that decision.
 
 A fluent answer is a proposal to inspect. Keep the units, data selection, and scientific interpretation in view when the tasks become more complex.
 
@@ -312,8 +324,10 @@ Once this setup works, we will also try a [coding assistant in the terminal](cli
 | On Windows, uv or Python resolves to a Windows installation | Open Ubuntu and use the Linux uv installation and project folder. Check the notebook's interpreter and `sys.platform`. |
 | The project cannot be found | Open a terminal in the extracted folder containing `pyproject.toml`. |
 | The WSL notebook does not open in the browser | Keep its Ubuntu terminal running and copy the printed localhost URL into the Windows browser. If it fails, ask for support with WSL networking. |
-| A package imports in the terminal but not in the notebook | Inspect `sys.executable` and choose the course `.venv` kernel. |
+| A package imports in the terminal but not in the notebook | Inspect `sys.executable`; stop the server and launch marimo with `uv run --locked` from the course project. |
 | Package installation is blocked or too slow | Ask for the available browser environment or pair with a neighbour; record the error for follow-up. |
+| A variable is defined in two cells | Edit its original definition, or give the new quantity a different name. |
+| A changed value does not update a result | Run the edited cell; check whether automatic execution is disabled or a cell has an error. |
 | Jan cannot list models | Check the provider URL, token, and token scope privately; follow the current service guide. |
 | A model request is rate-limited | Wait as instructed by the service or use the prepared example; repeated retries do not fix capacity. |
 | Jan will not run on the laptop | Use Blablador's browser interface. |
