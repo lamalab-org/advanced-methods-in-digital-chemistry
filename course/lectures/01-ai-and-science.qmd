@@ -360,6 +360,8 @@ Our first session is on **Wednesday, 28 October 2026, 14:00–16:00, at Helmholt
 
 The ten entries in the [course outline](../outline.qmd) describe the sequence of topics and the approximate teaching allocation. They need not become ten separate calendar appointments. We can combine topics while keeping the time to work through examples, ask questions, and take breaks.
 
+I would also like to discuss how we use the time when we meet. My proposal for the later sessions is a short introduction from me, perhaps ten to fifteen minutes, followed by substantial time for you to work through the examples or your own calculations. I will help with debugging and questions as you work. We can pause for a brief explanation when it would help several people, and compare results before leaving. Would that give you the support you need? The [course outline](../outline.qmd#working-together) describes this proposal in more detail.
+
 | Format | What we would need to arrange |
 |---|---|
 | **A block week** | Concentrate the main teaching in one week. We need a week in which we can all attend, with breaks and supported practice within the teaching days. There will be less time between sessions to revisit unfamiliar ideas. |

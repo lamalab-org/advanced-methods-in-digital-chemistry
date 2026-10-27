@@ -10,6 +10,14 @@ The **first session is on Wednesday, 28 October 2026, 14:00–16:00, at Helmholt
 
 The working plan has content for **about ten two-hour teaching slots**, which we may combine into fewer calendar appointments. The numbered sessions below describe the teaching sequence; the detailed notes for sessions 1–3 are available, and the later lessons are being developed.
 
+## Time to work together {#working-together}
+
+For the meetings after the introduction, my proposal is to begin with a short explanation or demonstration, perhaps **ten to fifteen minutes**, and spend most of our time working through examples and calculations. You can work on your own or with a partner. I will be there to help when code fails, talk through a modelling choice, or examine a result with you. Where a question affects several people, we can bring it back to the board for a few minutes.
+
+We would finish by comparing what we found and identifying what needs another look. In a longer meeting, we can repeat this pattern around a break. The notes provide the fuller explanations to return to afterwards. Short preparation tasks can give us a starting point, but unfinished attempts are welcome and the suggested reading remains optional.
+
+We will discuss this proposal alongside the dates in the first meeting. The topic sequence below sets out what we would work on; it does not imply a full lecture on each topic before you get to try anything.
+
 ## Project and assessment {#assessment}
 
 The Friedolin listing for **MC3.4.c, Advanced Methods in Digital Chemistry** (course 248388, winter semester 2026/27) names two assessment components:
