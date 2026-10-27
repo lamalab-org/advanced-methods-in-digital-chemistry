@@ -34,6 +34,7 @@ book:
     logo-href: https://lamalab.org/
   page-footer:
     left: "[lamalab](https://lamalab.org/) / teaching"
+    center: "[Developed with Codex](/index.qmd#about-these-notes)"
     right: "Kevin Maik Jablonka · Friedrich Schiller University Jena"
   chapters:
     - index.qmd

@@ -6,6 +6,8 @@ An English-language course for master's students in chemistry, by Kevin Maik Jab
 
 The course connects scientific questions and human modelling choices to statistical learning, molecular representations, and practical model building. The current material includes three lecture drafts, a glossary, suggested readings, an interactive calibration activity, and downloadable Python notebooks and data. Further chapters are in development.
 
+The materials were developed in iterative dialogue with OpenAI's Codex. Kevin Maik Jablonka directs the course and remains responsible for its content. The [authorship disclosure](https://lamalab-org.github.io/advanced-methods-in-digital-chemistry/#about-these-notes) describes this collaboration.
+
 ## Build and preview
 
 Install [Quarto](https://quarto.org/docs/get-started/). The deployment uses Quarto 1.8.24. From the repository root:
