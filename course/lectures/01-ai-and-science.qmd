@@ -4,6 +4,8 @@ title: "What do we mean by AI for science?"
 
 A calculator, a chess program, and a chatbot all do something that once required a person. We are much more likely to call some of them intelligent than others. Before discussing what AI might do for chemistry, it is worth asking what we mean by that word.
 
+We will begin with questions that sound almost too basic to need asking. What does it mean to model something? If two quantities vary together, what have we learned about changing one of them? What does a probability describe? A small change in the wording can change the question we are answering and the evidence we need. I would like us to notice those changes before a piece of software makes them easy to overlook.
+
 ## Which of these would you call AI?
 
 | Example | AI, not AI, or unsure? | Why? |
@@ -115,9 +117,84 @@ Learning from data is one way of pursuing the broader ambition; explicit reasoni
 
 The traditions overlap. Statistics also studies inference and experimental design, and a search procedure can use probabilities learned from data. We will encounter these combinations repeatedly. Calling a system a neural network tells us something about one part of it; we still have to understand how that part fits into the scientific work.
 
+## Predicting a reaction and changing it {#what-changes-when-the-task-is-science}
+
+Suppose a laboratory has collected reaction conditions and yields over several years. We would like to use those records to build a model. The obvious task seems to be predicting yield. But what do we want to do with the prediction?
+
+Perhaps we want to estimate how much product to expect from a reaction already planned. Perhaps we want to choose conditions that will give more product. Both sound like a request for a better yield model. Yet the second asks us to change something in the laboratory. That extra step matters.
+
+Suppose the difficult substrates in our records were usually heated more strongly. Despite the extra heating, their yields tended to remain lower. A model could learn that higher recorded temperatures go along with lower yields. That pattern might even help it predict another batch of reactions from the same laboratory. Now we use the pattern to recommend lower temperatures. We have quietly changed the question from what tends to happen to what would happen if we intervened.
+
+The records contain the chemists' decisions as well as the chemistry. They chose to heat those substrates for a reason. To find out what heating does, we need to separate its effect from the reasons it was chosen.
+
+Temperature and yield are **associated** in these records: knowing one gives us information about the other. A correlation can summarise such a pattern of variation. It does not, by itself, tell us what changing the temperature would cause. We can make good use of an association for prediction while still lacking the evidence needed to recommend an intervention.
+
+### Explaining the model and explaining the chemistry
+
+We might try to resolve this by asking the model for an explanation. A feature-attribution method could tell us that temperature contributes strongly to its predictions. That would be useful: we would have learned something about how the fitted model uses its inputs. The same question about the experiment would still be waiting for us.
+
+We can see the difficulty without a complicated neural network. Take the equation $\hat y=aT+b$, where $T$ is temperature and $\hat y$ is predicted yield. Increase the temperature input by $\Delta T$, and the predicted yield changes by $a\Delta T$. Every step is visible. We can explain the calculation completely. To claim that turning up the heater changes the measured yield by that amount, we also need to know how temperature was chosen and which other conditions changed with it.
+
+This is the distinction between explaining the model and explaining the chemistry. **Model interpretability or explainability** concerns the model's behaviour. For a simple equation, we can inspect the calculation directly. For a more complicated model, we may use an approximation or an attribution method. We then also have to understand what that method measures. Different reference comparisons and treatments of related inputs can produce different attributions. The SHAP developers work through this problem in [*Be careful when interpreting predictive models in search of causal insights*](https://shap.readthedocs.io/en/latest/example_notebooks/overviews/Be%20careful%20when%20interpreting%20predictive%20models%20in%20search%20of%20causal%20insights.html).
+
+### Why were these conditions chosen? {#a-reaction-example-why-were-these-conditions-chosen}
+
+Return to the difficult substrates. Substrate identity influenced both the chosen temperature and the yield. The recorded temperature therefore carries information about a decision made before the reaction. We need to account for that decision if we want to use the records to estimate the effect of heating.
+
+One approach would be to repeat reactions of the same substrate at different temperatures, assign the temperatures at random, and control the other conditions through a common protocol. We could then compare the resulting yields. This is a question of **causal inference**: what changes when we intervene? Existing observational records can also support causal inference when we can justify assumptions that let us identify the effect. Those assumptions are part of the argument we owe the reader. [Hardt and Recht, *Causality*](https://mlstory.org/causal.html)
+
+Suppose this experiment shows that heating increases yield. We would then have another question: how? Perhaps it accelerates the desired reaction. Perhaps it changes the balance between competing pathways. The same change in final yield can be compatible with several accounts of what happened along the way. To distinguish them, we might need kinetic measurements, spectroscopy, or isotope experiments. A **mechanistic explanation** makes a claim about that chemical process.
+
+We began with a table of conditions and yields. We have now asked it to support a prediction, an explanation of a calculation, an intervention, and a mechanism. Each is a reasonable ambition. Each asks something different of the evidence.
+
+::: {.concept}
+**What question are we answering?**
+
+| Aim | Reaction example | Evidence to seek |
+|---|---|---|
+| Description / association | How do recorded yields differ between temperatures? | Measurements, summaries, and a clear account of which reactions were recorded |
+| Predictive modelling | What yield should we expect for another reaction in the intended setting? | Relevant held-out or prospective measurements, a baseline, and an error estimate |
+| Model interpretability / explainability | How does temperature contribute to this fitted model's output? | Inspection of the model or an explanation method, with checks of what it measures and how faithfully it describes model behaviour |
+| Causal inference | What would happen to yield if we deliberately changed temperature under a specified protocol? | A suitable intervention study, or observational identification supported by explicit causal assumptions |
+| Mechanistic explanation | Through which chemical steps does the change affect yield? | Evidence that distinguishes competing mechanisms, such as kinetic, spectroscopic, or isotope experiments |
+| Decision-making | Which conditions should we try next? | Expected benefit, uncertainty, cost, constraints, and experimental feedback |
+:::
+
+These questions can lead into one another. An explanation of the model might suggest a hypothesis to test. A mechanistic account might help us make better predictions. Keeping the questions distinct helps us see which step we have actually taken.
+
+**Paired discussion:** Classify each statement below and name the evidence it would need. Which could be supported by inspecting a fitted model alone?
+
+1. “The model predicts yields accurately for a held-out reaction series.”
+2. “Temperature contributes strongly to this model's predictions under the chosen attribution method.”
+3. “Raising the temperature under this protocol increases the average yield for these substrates.”
+4. “The yield increases because the intervention favours a particular reaction pathway.”
+
+<details>
+<summary>Suggested discussion</summary>
+
+The statements concern prediction, model explanation, a causal effect, and a mechanism, respectively. The second can be investigated through the fitted model and the specified attribution calculation; it does not establish the third. The first requires relevant evaluation observations. The third needs an intervention design or justified observational identification. The fourth requires evidence that discriminates between chemical mechanisms. A random train/test split and a plausible verbal account cannot establish all four claims.
+
+</details>
+
+## What does a probability describe? {#what-does-a-probability-describe}
+
+Suppose we repeat a synthesis ten times and call it successful when the isolated yield exceeds 60% after two hours. Seven attempts succeed. We use the same substrate and nominal protocol each time. Someone asks: “How likely is the next attempt to succeed?”
+
+The tempting answer is 70%. We can certainly say that seven of the ten recorded attempts succeeded. That is an observed proportion. Using it to predict the next attempt adds assumptions: that the attempts are comparable, that our records include failures, and that the conditions relevant to success will remain sufficiently similar. Even then, another group of ten attempts need not give the same proportion.
+
+There are also different ways to describe what we do not know. We could treat the success probability under this protocol as fixed but unknown. We then ask how an estimation procedure would behave if we repeatedly collected ten new observations. How much would the estimates vary? If the procedure supplied an interval, how often would such intervals contain the unknown probability? This is a **frequentist** way to assess uncertainty. The probability concerns the behaviour of the procedure across possible datasets. [Stanford, *Confidence intervals*, section 18.1](https://web.stanford.edu/class/stats200/Lecture18.pdf)
+
+We could instead assign probabilities to possible values of the unknown success probability. We state what we consider plausible before these ten observations, then update that distribution using the observations and a model of how they arise. This is **Bayesian inference**; the initial distribution is called a **prior**. The probabilities now express uncertainty about that unknown success probability, conditional on the information and assumptions used. The physical success probability need not change for our uncertainty about it to change. [Stanford, *Bayesian analysis*, section 20.1](https://web.stanford.edu/class/stats200/Lecture20.pdf)
+
+Both approaches can be used to predict another attempt. Both require modelling choices. They need not give different numerical answers in every example, but an uncertainty statement needs an interpretation even when the numbers agree. A label such as “Bayesian” does not tell us whether the assumed experimental conditions are reasonable.
+
+**Discuss:** What is observed, what is unknown, and what could change if we collected ten more results? Would your answer change if all three failures came from the same reagent batch?
+
+Now suppose an assistant writes, “I am 70% confident this synthesis will work.” What does the number refer to? Is it based on repeated experiments, a stated model of uncertainty, or simply part of the generated answer? Before using it to choose an experiment, we need to know how it was obtained and what would let us check it. A percentage does not supply its own interpretation.
+
 ## Choosing a lens {#choosing-a-lens}
 
-Suppose we want to study solubility. We could look for patterns that help predict another measurement, or ask what would happen if we changed the solvent. We would also need to decide how much confidence to place in an answer based on only a few measurements. And, as in the spectrum example, we could supply explicit chemical rules or learn relationships from examples. Saying that we will use AI has settled none of these questions.
+We have now asked several questions about chemical observations. A pattern in reaction records may help predict yield, while the effect of changing the temperature needs a different argument. Seven successes in ten attempts describe our observations, while uncertainty about another attempt requires further assumptions. And, as in the spectrum example, useful knowledge can enter through explicit rules or through learning from examples. Saying that we will use AI has settled none of these choices.
 
 I find it useful to think of these choices as lenses. Each brings some aspects into focus and leaves others in the background. For now, we can express the choices as questions:
 
@@ -129,13 +206,15 @@ I find it useful to think of these choices as lenses. Each brings some aspects i
 
 These questions concern different decisions. A program can combine rules with learned relationships, and either kind of system can be used to make predictions. We need to look at the role of each component rather than place an entire system in one box. The [examples on the course homepage](../index.qmd#examples-through-lenses) develop these distinctions through chemical applications.
 
-The reaction example later in this lecture will develop the difference between predicting and deliberately changing an experiment. The history gives us examples of rules and learning. We will work through the probability question when we study uncertainty and choose experiments; the [homepage example](../index.qmd#examples-through-lenses) gives a first explanation using repeated synthesis attempts.
+The same experiment can be examined through more than one lens. We might use a learned predictor to select candidates, design an intervention to investigate one condition, and use a probability model to describe uncertainty about its effect. The lens is a choice about what we ask and how we justify an answer. It is not a label that settles every question about a system.
 
 Within each lens, further choices follow. Suppose our experiment requires a dissolved concentration of 1 mmol/L. Measurements of 2 and 20 mmol/L can both become the label “soluble enough.” If a later experiment requires 5 mmol/L, that label has discarded the distinction we now need. The [worked example on the homepage](../index.qmd#choices-within-a-lens) compares keeping the values, keeping only labels, and keeping only an ordering. It then asks whether two tenfold errors should receive the same penalty. We can keep the same aim of predicting from observed patterns and still make quite different decisions about what to retain and reward.
 
 This also helps distinguish improving a method from changing the question it can answer. Fitting an observational association more accurately does not, by itself, identify an intervention effect. We will see why in the reaction example. Explaining a model's calculation and explaining a chemical mechanism raise further questions about what a result establishes.
 
 We will return to three questions: **Does the lens fit the question? Do the choices within it serve our purpose? Does the evidence support the conclusion?** These questions apply just as much to our own models as to a result we encounter in a paper or product announcement.
+
+This is why we will spend time on the basics even while using capable coding and language-model assistants. An assistant may help us implement a calculation or suggest an explanation. We still need to recognise which question that calculation answers. LLMs are one part of the broader field we will study; using them well includes knowing when a different method, a measurement, or a better question is needed.
 
 ## A long history {#a-selective-history-six-stops-and-a-coda}
 
@@ -219,63 +298,6 @@ For a chemist, the result opens an appealing possibility: perhaps useful molecul
 Two later markers connect this history to the course. Vaswani and colleagues introduced the [Transformer](../glossary.qmd#network-operations) in 2017 for sequence modelling. Jumper and colleagues reported AlphaFold's protein-structure prediction results in 2021, following CASP14 in 2020. These are useful examples of learned representations and of scientific evaluation with a defined target. [Transformer paper](https://arxiv.org/abs/1706.03762); [AlphaFold paper](https://www.nature.com/articles/s41586-021-03819-2)
 
 Agreement between predicted and reference structures supports a particular predictive claim. It also gives us a way into the next question: how does predicting an outcome differ from understanding what would change it?
-
-## Predicting a reaction and changing it {#what-changes-when-the-task-is-science}
-
-Suppose a laboratory has collected reaction conditions and yields over several years. We would like to use those records to build a model. The obvious task seems to be predicting yield. But what do we want to do with the prediction?
-
-Perhaps we want to estimate how much product to expect from a reaction already planned. Perhaps we want to choose conditions that will give more product. Both sound like a request for a better yield model. Yet the second asks us to change something in the laboratory. That extra step matters.
-
-Suppose the difficult substrates in our records were usually heated more strongly. Despite the extra heating, their yields tended to remain lower. A model could learn that higher recorded temperatures go along with lower yields. That pattern might even help it predict another batch of reactions from the same laboratory. Now we use the pattern to recommend lower temperatures. We have quietly changed the question from what tends to happen to what would happen if we intervened.
-
-The records contain the chemists' decisions as well as the chemistry. They chose to heat those substrates for a reason. To find out what heating does, we need to separate its effect from the reasons it was chosen.
-
-### Explaining the model and explaining the chemistry
-
-We might try to resolve this by asking the model for an explanation. A feature-attribution method could tell us that temperature contributes strongly to its predictions. That would be useful: we would have learned something about how the fitted model uses its inputs. The same question about the experiment would still be waiting for us.
-
-We can see the difficulty without a complicated neural network. Take the equation $\hat y=aT+b$, where $T$ is temperature and $\hat y$ is predicted yield. Increase the temperature input by $\Delta T$, and the predicted yield changes by $a\Delta T$. Every step is visible. We can explain the calculation completely. To claim that turning up the heater changes the measured yield by that amount, we also need to know how temperature was chosen and which other conditions changed with it.
-
-This is the distinction between explaining the model and explaining the chemistry. **Model interpretability or explainability** concerns the model's behaviour. For a simple equation, we can inspect the calculation directly. For a more complicated model, we may use an approximation or an attribution method. We then also have to understand what that method measures. Different reference comparisons and treatments of related inputs can produce different attributions. The SHAP developers work through this problem in [*Be careful when interpreting predictive models in search of causal insights*](https://shap.readthedocs.io/en/latest/example_notebooks/overviews/Be%20careful%20when%20interpreting%20predictive%20models%20in%20search%20of%20causal%20insights.html).
-
-### Why were these conditions chosen? {#a-reaction-example-why-were-these-conditions-chosen}
-
-Return to the difficult substrates. Substrate identity influenced both the chosen temperature and the yield. The recorded temperature therefore carries information about a decision made before the reaction. We need to account for that decision if we want to use the records to estimate the effect of heating.
-
-One approach would be to repeat reactions of the same substrate at different temperatures, assign the temperatures at random, and control the other conditions through a common protocol. We could then compare the resulting yields. This is a question of **causal inference**: what changes when we intervene? Existing observational records can also support causal inference when we can justify assumptions that let us identify the effect. Those assumptions are part of the argument we owe the reader. [Hardt and Recht, *Causality*](https://mlstory.org/causal.html)
-
-Suppose this experiment shows that heating increases yield. We would then have another question: how? Perhaps it accelerates the desired reaction. Perhaps it changes the balance between competing pathways. The same change in final yield can be compatible with several accounts of what happened along the way. To distinguish them, we might need kinetic measurements, spectroscopy, or isotope experiments. A **mechanistic explanation** makes a claim about that chemical process.
-
-We began with a table of conditions and yields. We have now asked it to support a prediction, an explanation of a calculation, an intervention, and a mechanism. Each is a reasonable ambition. Each asks something different of the evidence.
-
-::: {.concept}
-**What question are we answering?**
-
-| Aim | Reaction example | Evidence to seek |
-|---|---|---|
-| Description / association | How do recorded yields differ between temperatures? | Measurements, summaries, and a clear account of which reactions were recorded |
-| Predictive modelling | What yield should we expect for another reaction in the intended setting? | Relevant held-out or prospective measurements, a baseline, and an error estimate |
-| Model interpretability / explainability | How does temperature contribute to this fitted model's output? | Inspection of the model or an explanation method, with checks of what it measures and how faithfully it describes model behaviour |
-| Causal inference | What would happen to yield if we deliberately changed temperature under a specified protocol? | A suitable intervention study, or observational identification supported by explicit causal assumptions |
-| Mechanistic explanation | Through which chemical steps does the change affect yield? | Evidence that distinguishes competing mechanisms, such as kinetic, spectroscopic, or isotope experiments |
-| Decision-making | Which conditions should we try next? | Expected benefit, uncertainty, cost, constraints, and experimental feedback |
-:::
-
-These questions can lead into one another. An explanation of the model might suggest a hypothesis to test. A mechanistic account might help us make better predictions. Keeping the questions distinct helps us see which step we have actually taken.
-
-**Paired discussion:** Classify each statement below and name the evidence it would need. Which could be supported by inspecting a fitted model alone?
-
-1. “The model predicts yields accurately for a held-out reaction series.”
-2. “Temperature contributes strongly to this model's predictions under the chosen attribution method.”
-3. “Raising the temperature under this protocol increases the average yield for these substrates.”
-4. “The yield increases because the intervention favours a particular reaction pathway.”
-
-<details>
-<summary>Suggested discussion</summary>
-
-The statements concern prediction, model explanation, a causal effect, and a mechanism, respectively. The second can be investigated through the fitted model and the specified attribution calculation; it does not establish the third. The first requires relevant evaluation observations. The third needs an intervention design or justified observational identification. The fourth requires evidence that discriminates between chemical mechanisms. A random train/test split and a plausible verbal account cannot establish all four claims.
-
-</details>
 
 ## The people and resources behind the model {#what-makes-these-systems-possible}
 
@@ -380,9 +402,10 @@ For the discussion, please check which proposed weeks or dates you can attend, a
 ## Questions to consider {#exit-questions}
 
 1. Rewrite “AI can do chemistry” as a specific task, method, and evaluable claim.
-2. Name one factor besides network architecture that helped deep learning succeed.
+2. Name one omission that is acceptable for a particular modelling task and one that would prevent the model from answering it.
 3. What would “new data” mean for a chemistry problem you care about?
 4. A model predicts well and highlights temperature as important. What have we learned about the model, and what remains unknown about the effect and mechanism of heating the reaction?
+5. Seven of ten syntheses succeeded. What does 70% describe directly, and what assumptions would you need to predict the next attempt?
 
 ## Suggested reading {#reading-and-references}
 
