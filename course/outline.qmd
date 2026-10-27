@@ -1,0 +1,81 @@
+---
+title: "Course outline"
+---
+
+Suppose a model predicts that a molecule will be useful. Before deciding what to do with that prediction, we need to know what “useful” meant during training, how the molecule was represented, and what observations support the result. We also need to ask whether the prediction answers our chemical question. These are the reasons for the order of this course.
+
+We begin by fitting and examining small models. We then ask how models can use molecular structure and enter a simulation. Finally, we use them to propose candidates, choose measurements, and assist a research workflow. Throughout, we return to the human decisions about what to retain, what to leave out, and what evidence is sufficient.
+
+The working plan has **ten meetings of about two hours**. We will discuss the dates and possible block format after the introductory session. The sequence below describes the intended content; the detailed notes for meetings 1–3 are available, and the later lessons are being developed.
+
+## Learning from observations {#learning-from-observations}
+
+The first three meetings establish a modelling workflow we can understand and check. A calibration curve lets us work through the calculations with very little code. A table of porous materials then makes the choices about chemical data and evaluation more apparent.
+
+::: {.course-outline}
+
+| Meeting | Topics | What we will work through |
+|---|---|---|
+| **1. AI, science, and our tools** | AI as an ambition; modelling as deliberate omission; rules and learning; selected historical examples; prediction, explanation, and causality. | Classify concrete examples, compare scientific claims, and set up an assistant and a Python notebook. The distinction between an appealing answer and evidence for it begins here. [Lecture notes](lectures/01-ai-and-science.qmd) · [Setup](setup.qmd) |
+| **2. Fitting a model** | Inputs and targets; functions and parameters; losses; fitting; model flexibility and regularisation; training, validation, and test data. | Calculate a few predictions and errors, change a calibration curve, and compare results on new observations. Establish why **test error is still an empirical estimate**. [Lecture notes](lectures/02-learning-from-data.qmd) |
+| **3. Making a chemical comparison** | Predicting a value, a label, or an ordering; descriptors, baselines, and scaling; linear and kernel models; provenance, leakage, and uncertainty in an error estimate. | Predict computed CO₂ uptake, compare models using validation data, inspect residuals, and state which future cases the evaluation can describe. [Lecture notes](lectures/03-mof-uptake.qmd) |
+
+:::
+
+By this point, we should be able to take a supplied data table, identify its target and conditions, fit a simple comparison model, and explain what its reported error does and does not tell us. We need that foundation before adding more elaborate models.
+
+## Representing molecules and their behaviour {#molecular-models}
+
+So far, we have supplied descriptions of the materials and chosen the functions to fit. Next we let parts of those functions be learned, then give the models access to connectivity and geometry. This brings us to a different use of a learned model: calculating energies and forces inside a simulation.
+
+::: {.course-outline}
+
+| Meeting | Topics | What we will work through |
+|---|---|---|
+| **4. A small neural network** | Weighted sums, nonlinear functions, layers, fitting, and learned intermediate representations. | Calculate a small network's output by hand, modify a supplied model, and compare it with a simpler baseline under the same evaluation. A more elaborate model still has to earn its place. |
+| **5. Molecular representations** | Molecular graphs, local environments, information passed between neighbouring atoms, and properties that should survive atom relabelling or rotation. | Follow one update on a molecular graph and inspect a supplied prediction or attribution. Distinguish explaining the model's calculation from establishing a chemical mechanism. |
+| **6. Energies, forces, and simulation** | Learned potentials; forces as energy derivatives; the configurations a model has seen; numerical integration and sampling. | Draw force arrows on a potential, check a finite difference, and inspect a short supplied trajectory. Separate error in the learned potential from integration error and inadequate sampling. |
+
+:::
+
+The purpose is to follow how a chemical representation becomes a calculation. We will train a small network, but use prepared models and results where training would take the place of understanding. An accurate prediction of a property, a useful energy model, and a reliable simulated observable each need their own evidence.
+
+## From predictions to decisions {#predictions-and-decisions}
+
+A model that predicts a property does not yet tell us which molecule to make or which experiment to perform. Those decisions introduce objectives, constraints, uncertainty, and costs. Language models give us another way to propose steps in a workflow, with further questions about how those steps are checked.
+
+::: {.course-outline}
+
+| Meeting | Topics | What we will work through |
+|---|---|---|
+| **7. Proposing molecules** | Searching an existing collection versus generating new candidates; one way to learn a distribution of molecular representations; objectives and chemical constraints. | Examine supplied candidates and compare them with a simple search. Check what validity, novelty, and a favourable predicted score actually establish, and what remains to be tested. |
+| **8. Choosing the next measurement** | Predictions and their uncertainty; updating a probability model with observations; balancing promising and uncertain choices under a budget. This leads to Bayesian optimisation. | Choose the next point before its result is revealed, then compare search procedures over repeated simulated runs. Distinguish finding a good condition from estimating the causal effect of changing it. |
+| **9. Language models in a research workflow** | Predicting pieces of text; training and prompting; retrieving sources; calling tools; evaluating a complete assisted task. | Check a bounded literature or chemistry task against supplied sources and executable calculations. Compare a generated explanation, a tool result, and a formally checked derivation: they establish different things. |
+
+:::
+
+We will already have used an assistant from the first meeting. Meeting 9 examines that familiar tool using the ideas developed earlier: learned representations, generation, evaluation, and the difference between a proposed answer and an independently checked result.
+
+## A result another chemist can examine {#bringing-the-work-together}
+
+**Meeting 10: reproducibility and project discussion.** We bring together the question, data, model, evaluation, and interpretation in a small piece of work. Another person should be able to run the calculation and understand the conclusion. We will exchange work, inspect one another's evidence, and explain a modelling choice and a limitation.
+
+The project should answer one bounded question. It might compare property predictors, examine the range in which a potential is useful, or evaluate an assisted extraction task. It does not need to use every method in the course. Keeping track of data, units, code, and model settings begins with the first notebook; this final meeting tests whether that record is useful to someone else.
+
+## The background we will build along the way {#background}
+
+The starting point is master's-level chemistry and limited experience with Python or machine learning. We will introduce the computing and mathematical ideas where they become necessary:
+
+- In the first meeting: terminal, shell, files, environment, notebook, and how to investigate an error message.
+- With calibration: variables, arrays, small functions, plotting, means, and the slope of a function. Derivatives grow out of changing a prediction and observing its effect.
+- With chemical data: tables, feature vectors, fitting and prediction, and separation of data used for different decisions. A vector first means a list of numbers describing one example.
+- With networks and molecules: weighted sums, composition of functions, and aggregation over atoms. We work through small calculations before using compact notation.
+- With evaluation and experimental choice: averages over samples, distributions, and uncertainty. Repeating a sampling procedure and assigning probabilities to unknown quantities answer different questions; we explain that difference before relying on the names of statistical approaches.
+
+There is no expectation that everyone arrives able to build a machine-learning system. Supplied notebooks let us concentrate on a calculation or decision at a time. Short preparation tasks will help us start together; the books and papers remain [suggested reading](reading.qmd), not compulsory preparation.
+
+## Questions that stay with us {#questions-throughout}
+
+The early discussion of AI as a human endeavour continues through the technical work. Which measurements entered the table, whose work produced them, and what did the representation discard? Which scientific question does an error metric reward? What resources and services does a model depend on? When a paper or a company makes a claim, which observations support it?
+
+We also keep distinct the questions of predicting an outcome, explaining a model's calculation, identifying the effect of an intervention, and establishing a mechanism. We encounter them first in ordinary language and return to them when inspecting a model, choosing an experiment, and checking an assistant's answer. The aim is to make a better scientific judgement as well as a working calculation.
