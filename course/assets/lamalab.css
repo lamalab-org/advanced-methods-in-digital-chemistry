@@ -1,0 +1,25 @@
+/* Shared with the local instructor book and the interactive activities. */
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("fonts/JetBrainsMono-Regular.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("fonts/JetBrainsMono-Bold.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 600 900;
+  font-display: swap;
+}
+:root {
+  --course-accent: #a43830;
+  --course-accent-dark: #8a2e27;
+  --course-ink: #333333;
+  --course-muted: #666666;
+  --course-rule: #e0e0e0;
+  --course-paper: #ffffff;
+  --course-tint: #faf7f6;
+  --course-mono: "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
+}

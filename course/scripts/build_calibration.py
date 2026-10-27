@@ -48,7 +48,7 @@ HTML = r'''<!doctype html>
 <title>Calibration: fitting and predicting</title>
 <style>
 *{box-sizing:border-box}body{font:16px/1.5 system-ui,sans-serif;color:#29242a;background:#fff;margin:0;padding:24px;max-width:960px}h1{font-size:25px;line-height:1.2;margin:0 0 8px}p{margin:8px 0 14px}.muted{color:#625963;font-size:14px}label{display:block;margin:12px 0}input[type=range]{width:min(380px,75%);vertical-align:middle;accent-color:#7d243b}input[type=checkbox]{accent-color:#7d243b}output{font-weight:700;color:#7d243b}svg{width:100%;height:auto;display:block;margin:8px 0}#scores{font-variant-numeric:tabular-nums;padding:12px 0;border-top:1px solid #ddd;border-bottom:1px solid #ddd}summary{cursor:pointer}table{border-collapse:collapse;margin-top:10px;font-size:14px}td,th{padding:5px 12px;border-bottom:1px solid #ddd;text-align:right}th:first-child,td:first-child{text-align:left}a{color:#7d243b}@media(max-width:540px){body{padding:16px}h1{font-size:22px}}
-</style></head><body>
+</style><link rel="stylesheet" href="../assets/activities.css"></head><body>
 <h1>Fitting a calibration curve</h1>
 <p>How much flexibility helps on measurements the model did not fit?</p>
 <p class="muted">Synthetic absorbance data. Twelve training observations; seventeen validation observations. No experimental data or final test set.</p>

@@ -13,6 +13,9 @@ project:
     - notebooks/**
     - downloads/**
     - data/**
+    - assets/fonts/**
+    - assets/lamalab.css
+    - assets/activities.css
     - "!instructor/"
     - "!_instructor/"
     - "!.venv/"
@@ -24,6 +27,13 @@ book:
   author: "Kevin Maik Jablonka"
   site-url: https://lamalab-org.github.io/advanced-methods-in-digital-chemistry/
   repo-url: https://github.com/lamalab-org/advanced-methods-in-digital-chemistry
+  sidebar:
+    logo: assets/lamalab-logo.png
+    logo-alt: "LAMALAB — Lab for AI in Materials Science"
+    logo-href: https://lamalab.org/
+  page-footer:
+    left: "[lamalab](https://lamalab.org/) / teaching"
+    right: "Kevin Maik Jablonka · Friedrich Schiller University Jena"
   chapters:
     - index.qmd
     - outline.qmd
@@ -37,7 +47,9 @@ book:
 
 format:
   html:
-    theme: cosmo
+    theme:
+      - default
+      - assets/lamalab.scss
     css: assets/course.css
     toc: true
     toc-depth: 2
