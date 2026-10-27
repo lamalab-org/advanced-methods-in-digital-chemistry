@@ -6,7 +6,9 @@ Suppose a model predicts that a molecule will be useful. Before deciding what to
 
 We begin by fitting and examining small models. We then ask how models can use molecular structure and enter a simulation. Finally, we use them to propose candidates, choose measurements, and assist a research workflow. Throughout, we return to the human decisions about what to retain, what to leave out, and what evidence is sufficient.
 
-The working plan has content for **about ten two-hour teaching slots**, which we may combine into fewer calendar appointments. In the first session, we will [discuss a block week or several longer sessions](lectures/01-ai-and-science.qmd#scheduling), taking account of dates on which I cannot teach and students' availability. The numbered sessions below describe the teaching sequence; the detailed notes for sessions 1–3 are available, and the later lessons are being developed.
+The **first session is on Wednesday, 28 October 2026**. I cannot teach on **Wednesday, 4 November 2026**, or **Tuesday, 17 November 2026**. In the first session, we will [discuss a block week or several longer sessions](lectures/01-ai-and-science.qmd#scheduling), taking account of these dates and students' availability.
+
+The working plan has content for **about ten two-hour teaching slots**, which we may combine into fewer calendar appointments. The numbered sessions below describe the teaching sequence; the detailed notes for sessions 1–3 are available, and the later lessons are being developed.
 
 ## Learning from observations {#learning-from-observations}
 

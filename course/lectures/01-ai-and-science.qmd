@@ -331,7 +331,7 @@ Ask an LLM to suggest another explanation for the observations and an experiment
 
 ## How should we schedule the course? {#scheduling}
 
-I cannot teach on some dates during the course period. I would therefore like us to use part of this first meeting to discuss how to arrange the remaining teaching. A block week or several longer sessions might work better for us.
+Our first session is on **Wednesday, 28 October 2026**. I cannot teach on **Wednesday, 4 November 2026**, or **Tuesday, 17 November 2026**. I would therefore like us to use part of this first meeting to discuss how to arrange the remaining teaching. A block week or several longer sessions might work better for us.
 
 The ten entries in the [course outline](../outline.qmd) describe the sequence of topics and the approximate teaching allocation. They need not become ten separate calendar appointments. We can combine topics while keeping the time to work through examples, ask questions, and take breaks.
 
