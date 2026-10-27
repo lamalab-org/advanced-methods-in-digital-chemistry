@@ -31,6 +31,7 @@ Save student edits under a new notebook filename. The locked environment and all
 
 ## Updating the material
 
+- The website's shared visual assets and their sources are documented in [assets/README.md](assets/README.md). Edit the shared styles there; the local instructor book copies them during rendering.
 - Edit student chapters in `lectures/`, with linked technical terms in `glossary.qmd` and suggested references in `reading.qmd`.
 - `scripts/build_calibration.py` regenerates the calibration activity, shared generated data, and introductory notebooks. This clears notebook outputs and overwrites those files.
 - `scripts/build_mof_lab.py` regenerates the MOF notebook. Its optional `--source PATH_TO_ML_MOLSIM` argument also rebuilds the data subset from the pinned upstream revision. Without it, the supplied data are preserved.

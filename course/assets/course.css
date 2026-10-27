@@ -1,26 +1,92 @@
-:root { --course-accent: #7d243b; }
-body { font-size: 1.05rem; line-height: 1.65; }
-h1, h2, h3 { color: #362b31; }
-a { color: var(--course-accent); }
-.concept { border-left: 4px solid var(--course-accent); padding: .5rem 1.2rem; margin: 1.4rem 0; background: #faf7f8; }
-.concept p:last-child, .concept ul:last-child { margin-bottom: .3rem; }
-.concept-label { font-variant: small-caps; font-weight: 700; letter-spacing: .04em; color: var(--course-accent); }
-details { margin: 1rem 0; }
-summary { cursor: pointer; font-weight: 600; }
-iframe.activity { width: 100%; height: 780px; border: 1px solid #dbd3d6; border-radius: 4px; }
-table { font-size: .93rem; }
+@import url("lamalab.css");
+
+body { font-size: 1.05rem; line-height: 1.72; }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: 3px; background: var(--course-accent); z-index: 1100; }
+::selection { background: #f0d9d5; color: #333; }
+a { color: var(--course-accent); text-underline-offset: .2em; text-decoration-thickness: 1px; }
+a:hover { color: var(--course-accent-dark); }
+a:focus-visible, button:focus-visible, summary:focus-visible, input:focus-visible { outline: 2px solid var(--course-accent); outline-offset: 4px; }
+
+/* The lab's monospaced identity frames the longer, proportional reading text. */
+h1, h2, h3, h4, .sidebar-title, .sidebar-item-text, #TOC, .nav-footer { font-family: var(--course-mono); }
+h1, h2, h3, h4 { color: var(--course-ink); line-height: 1.35; letter-spacing: -.035em; }
+h1.title { color: var(--course-accent); font-size: clamp(1.8rem, 3vw, 2.45rem); line-height: 1.2; letter-spacing: -.055em; }
+main h1:not(.title) { font-size: 1.75rem; }
+main h2 { font-size: 1.45rem; margin-top: 2.5rem; padding-bottom: .55rem; border-bottom: 1px solid var(--course-rule); }
+main h3 { font-size: 1.15rem; margin-top: 1.9rem; }
+main h4 { font-size: 1rem; }
+#title-block-header { border-bottom: 2px solid var(--course-accent); padding-bottom: 1.1rem; margin-bottom: 2rem; }
+#title-block-header::before { content: "lamalab / teaching"; display: block; margin-bottom: 1.15rem; color: var(--course-muted); font-family: var(--course-mono); font-size: .75rem; letter-spacing: .03em; }
+#title-block-header .subtitle { font-size: 1.13rem; line-height: 1.5; color: var(--course-muted); margin-top: .85rem; }
+.quarto-title-meta { margin: 1.3rem 0 0; }
+.quarto-title-meta-heading { font-family: var(--course-mono); font-size: .7rem !important; letter-spacing: .03em; }
+.quarto-title-meta-contents { font-size: .9rem; }
+
+#quarto-sidebar { padding-top: 1.8rem; }
+.sidebar-logo { width: 105px; max-width: 105px; height: auto; margin-bottom: .4rem; }
+.sidebar-title { font-size: .94rem; font-weight: 700; line-height: 1.45; margin-bottom: .6rem !important; }
+.sidebar-title a { color: var(--course-accent); }
+.sidebar-menu-container { margin-top: .9rem; }
+.sidebar-item { margin-bottom: .3rem; }
+.sidebar-item-text { font-size: .77rem; line-height: 1.5; }
+.sidebar-navigation .sidebar-item a.active { color: var(--course-accent); font-weight: 700; border-left: 2px solid var(--course-accent); padding-left: .6rem; }
+.sidebar-navigation .sidebar-item a:hover { color: var(--course-accent); text-decoration: underline; }
+#TOC { font-size: .72rem; line-height: 1.6; }
+#TOC h2 { font-size: .76rem; font-weight: 700; }
+#TOC a { color: var(--course-muted); }
+#TOC a.active, #TOC a:hover { color: var(--course-accent); }
+.nav-footer { font-size: .72rem; border-top: 1px solid var(--course-rule); }
+.nav-page a { color: var(--course-accent); }
+
+.concept { border-left: 3px solid var(--course-accent); padding: .8rem 1.2rem; margin: 1.6rem 0; background: var(--course-tint); }
+.concept p:last-child, .concept ul:last-child { margin-bottom: .25rem; }
+.concept-label { font-family: var(--course-mono); font-size: .85rem; font-weight: 700; color: var(--course-accent); }
+details { margin: 1.3rem 0; padding: .8rem 1rem; border: 1px solid var(--course-rule); border-left: 3px solid var(--course-accent); }
+summary { cursor: pointer; font-weight: 600; color: var(--course-accent-dark); }
+details[open] > summary { margin-bottom: .8rem; }
+blockquote { border-left: 3px solid var(--course-accent); color: var(--course-ink); }
+code, pre, kbd { font-family: var(--course-mono); font-variant-ligatures: none; }
+pre.sourceCode { border-radius: 0; }
+div.sourceCode { border: 1px solid var(--course-rule); border-left: 3px solid var(--course-accent); border-radius: 0; }
+mjx-container[display="true"] { max-width: 100%; overflow-x: auto; overflow-y: hidden; padding: .35rem .1rem; }
+table { font-size: .92rem; line-height: 1.55; }
+table th { font-weight: 600; border-bottom-color: var(--course-accent) !important; }
+table td, table th { padding: .65rem .6rem !important; vertical-align: top; }
 .course-outline th:nth-child(1) { width: 24%; }
 .course-outline th:nth-child(2) { width: 36%; }
 .course-outline th:nth-child(3) { width: 40%; }
-.quarto-title-meta { margin-bottom: 1.4rem; }
-@media (max-width: 650px) { iframe.activity { height: 900px; } }
+iframe.activity { width: 100%; height: 780px; border: 1px solid var(--course-rule); border-top: 3px solid var(--course-accent); border-radius: 0; }
+
+@media (max-width: 991.98px) {
+  .quarto-secondary-nav { border-bottom: 1px solid var(--course-rule); background: white; }
+  .quarto-secondary-nav-title { font-family: var(--course-mono); color: var(--course-accent); font-size: .85rem; }
+  #quarto-sidebar { padding-top: 1rem; }
+}
 @media (max-width: 650px) {
+  body { font-size: 1rem; }
+  h1.title { font-size: 1.75rem; }
+  #title-block-header { margin-bottom: 1.5rem !important; }
+  main h2 { font-size: 1.28rem; }
+  mjx-container[display="true"] { text-align: left !important; }
+  iframe.activity { height: 900px; }
+  main .table { display: block; max-width: 100%; overflow-x: auto; }
   .course-outline table, .course-outline tbody, .course-outline tr, .course-outline td { display: block; width: 100%; }
   .course-outline thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
-  .course-outline tr { margin-bottom: 1.3rem; padding-bottom: .8rem; border-bottom: 1px solid #dbd3d6; }
-  .course-outline td { border: 0; padding: .3rem 0; }
-  .course-outline td:first-child { font-size: 1.08rem; }
+  .course-outline tr { margin-bottom: 1.3rem; padding-bottom: .8rem; border-bottom: 1px solid var(--course-rule); }
+  .course-outline td { border: 0; padding: .3rem 0 !important; }
+  .course-outline td:first-child { font-size: 1.05rem; }
   .course-outline td:nth-child(2)::before { content: "Topics: "; font-weight: 600; }
   .course-outline td:nth-child(3)::before { content: "In class: "; font-weight: 600; }
 }
-@media print { .concept { break-inside: avoid; } iframe.activity { display: none; } }
+@media print {
+  body::before { display: none; }
+  body { font-size: 10.5pt; color: black; }
+  #title-block-header { padding-bottom: .5rem; margin-bottom: 1rem; }
+  #title-block-header::before { margin-bottom: .5rem; }
+  h1.title { font-size: 24pt; }
+  main h2 { font-size: 16pt; }
+  h1, h2, h3, summary { break-after: avoid; }
+  .concept, tr { break-inside: avoid; }
+  details { border-color: #bbb; }
+  iframe.activity { display: none; }
+}

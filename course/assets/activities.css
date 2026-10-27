@@ -1,0 +1,8 @@
+@import url("lamalab.css");
+body { color: var(--course-ink); }
+h1 { font-family: var(--course-mono); color: var(--course-accent); letter-spacing: -.04em; }
+a, output { color: var(--course-accent); }
+input[type="range"], input[type="checkbox"] { accent-color: var(--course-accent); }
+summary { color: var(--course-accent-dark); }
+:focus-visible { outline: 2px solid var(--course-accent); outline-offset: 3px; }
+.controls { background: var(--course-tint); border-radius: 0; border-top: 2px solid var(--course-accent); }
