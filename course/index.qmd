@@ -35,7 +35,9 @@ These notes are for master's students in chemistry. We develop the Python and ma
 
 We will spend time with small examples: a molecular drawing, a few measurements, a line that does not quite fit. They give us something to work out together, on the board or on paper, before we ask a program to do the calculation. These notes develop the same arguments in more detail, so you can return to them afterwards.
 
-Later, more of that work will happen in Python notebooks. Some preparation will help us start the practicals, but we will learn how the methods work together in class. We will also use large language models for help with code and explanations. That gives us another model to question: did its suggestion help, and how do we know?
+For the meetings after this introduction, I would like to propose a short introduction from me, perhaps ten to fifteen minutes, followed by plenty of time for you to work through examples and your own calculations. I will work with you as questions arise, help debug code, and discuss what the results mean. If several people run into the same difficulty, we can pause for a short explanation together. We will discuss whether this format would work for you in the first meeting.
+
+Later, more of that work will happen in Python notebooks. A short preparation task can help us get started; an unfinished attempt gives us something to work on together. We will also use large language models for help with code and explanations. That gives us another model to question: did its suggestion help, and how do we know?
 
 The [assessment](outline.qmd#assessment) consists of a project with a written report and a final presentation with discussion. I would like the writing and presentation to grow out of work you find interesting. We will discuss a manageable scope, format, and timing together in the first meeting.
 
