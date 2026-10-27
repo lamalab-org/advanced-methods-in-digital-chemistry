@@ -31,6 +31,8 @@ def main():
         "index.html", "outline.html", "examples.html", "setup.html", "cli-assistant.html", "glossary.html", "reading.html", "search.json",
         "lectures/01-ai-and-science.html", "lectures/02-learning-from-data.html",
         "lectures/03-mof-uptake.html", "activities/calibration.html",
+        "lectures/model-selection.html", "notebooks/model-selection.py",
+        "notebooks/previews/model-selection.html",
         "downloads/introductory-setup.zip", "downloads/mof-practical.zip",
         "downloads/cli-assistant.zip",
         "notebooks/00-getting-started.py", "notebooks/02-calibration-lab.py",
@@ -89,7 +91,7 @@ def main():
             names = bundle.namelist()
             expected = {
                 "introductory-setup.zip": ("digital-chemistry-intro", ("00-getting-started", "02-calibration-lab")),
-                "mof-practical.zip": ("digital-chemistry-mof", ("03-mof-uptake",)),
+                "mof-practical.zip": ("digital-chemistry-mof", ("03-mof-uptake", "model-selection")),
             }.get(archive.name)
             if expected:
                 prefix, stems = expected

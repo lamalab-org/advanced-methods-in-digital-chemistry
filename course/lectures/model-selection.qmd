@@ -1,0 +1,127 @@
+---
+title: "How should we choose a model?"
+---
+
+We can now fit a model and calculate its errors. But we still have to choose which model to fit. Should we allow a more flexible curve? Should we discourage large coefficients? And could a different set of measurements have led us to a different choice? These questions belong before the neural network: adding more adjustable parameters does not remove them.
+
+This practical follows the calibration and MOF examples. We return to a small simulated measurement problem so that we can change one thing at a time. The purpose is to justify a modelling choice with evidence beyond the observations used to fit its parameters.
+
+## What should you be able to do afterwards? {#lecture-outcomes}
+
+- Distinguish underfitting from overfitting, using more than the training error.
+- Explain bias and variance by comparing fits to repeated datasets, and describe what regularisation changes.
+- Carry out a small cross-validation comparison and explain why each fold needs a newly fitted model and preprocessing.
+- Distinguish choosing a model from estimating the performance of the chosen procedure. Explain why a cross-validation score, like a test score, is an empirical estimate.
+- Choose a splitting rule that corresponds to the chemical use we have in mind.
+
+## When does more flexibility help? {#underfitting-and-overfitting}
+
+Imagine that an instrument's mean response bends with concentration. If we insist on fitting a straight line, repeated measurements will not give that line the ability to bend. It may miss a reproducible feature of the relationship. We call this **underfitting**. The restriction in the model prevents it from describing a useful pattern.
+
+We could allow a high-degree polynomial instead. It may follow the training measurements very closely, including their noise. If that extra agreement comes at the expense of prediction on new measurements, we have **overfitting**. A low training error cannot tell us which of these situations we are in. Nor does a large error by itself establish underfitting: noisy measurements, missing inputs, and a change of instrument are other possibilities.
+
+The notebook uses a deliberately curved response, unlike the linear simulator in the first calibration exercise. It is an invented instrument response, not a claim about the Beer–Lambert law. We know the generating function here because we wrote it. In a real experiment, it would be one of the things we were trying to learn.
+
+## Would another dataset give the same curve? {#bias-and-variance}
+
+Keep the concentrations, noise level, model family, and fitting procedure fixed. Generate another set of measurement errors and fit again. Then repeat. We now have several fitted curves, all produced by the same procedure. Their disagreement tells us something that a single training score could not.
+
+At one concentration, ask two questions. Where is the average prediction relative to the true mean response? How much do the predictions vary around their own average? The first concerns **bias**; the second concerns **variance** across training datasets. Bias here has a specific statistical meaning. It is different from a neural network's additive bias parameter, from inductive bias, and from social bias.
+
+A more flexible model can reduce a systematic mismatch while becoming more sensitive to which noisy observations it received. This is the **bias–variance tradeoff**. Regularisation can change that balance. We should examine the resulting predictions rather than assume that increasing flexibility must always increase variance or produce a U-shaped error curve. Hardt and Recht's [discussion of model complexity](https://mlstory.org/generalization.html#effects-of-model-complexity) is useful precisely because it questions that familiar picture.
+
+<details>
+<summary>What is being decomposed?</summary>
+
+For squared-error regression, let $m(x)=\mathbb E[Y\mid X=x]$ be the mean response at a fixed input $x$. Write $\hat f_{\mathcal D}(x)$ for the prediction after fitting to a training dataset $\mathcal D$. With a fresh response $Y$ independent of training, conditional on $x$, and finite second moments,
+
+$$
+\mathbb E_{\mathcal D,Y\mid x}\big[(\hat f_{\mathcal D}(x)-Y)^2\big]
+=\underbrace{\big(\mathbb E_{\mathcal D}[\hat f_{\mathcal D}(x)]-m(x)\big)^2}_{\text{squared bias}}
++\underbrace{\operatorname{Var}_{\mathcal D}(\hat f_{\mathcal D}(x))}_{\text{variance}}
++\underbrace{\operatorname{Var}(Y\mid X=x)}_{\text{conditional noise}}.
+$$
+
+The expectations over $\mathcal D$ refer to repeating the training-data collection and fitting procedure. We keep the learning algorithm deterministic in this example. The noise term concerns variation in a new response even if we knew its conditional mean. It is irreducible given these inputs and this target; better measurements or an additional informative input could change it. This identity is about expected squared error, not a decomposition we can read directly from one observed test error. The [scikit-learn bias–variance example](https://scikit-learn.org/stable/auto_examples/ensemble/plot_bias_variance.html) illustrates the distinction through repeated fits.
+
+</details>
+
+In the notebook, hold the penalty at zero and compare degrees 1, 2, and 9. Inspect the individual curves before the average. Which procedure misses the curvature repeatedly? Which changes most when the observations change? The displayed bias and variance are estimated from a finite number of simulated datasets. We can compare them with the known mean response in this simulation; ordinary cross-validation does not reveal the true function or separately identify these terms.
+
+## What does regularisation add? {#regularisation}
+
+Instead of removing the higher powers, keep them and express a preference for smaller coefficients. For our polynomial, one possible objective is
+
+$$
+\underbrace{\frac{1}{n}\sum_{i=1}^n (f_\theta(x_i)-y_i)^2}_{\text{agreement with the observations}}
++\lambda\underbrace{\sum_{j=1}^{d}w_j^2}_{\text{penalty on the fitted coefficients}}.
+$$
+
+This squared-coefficient penalty is **ridge regularisation**. The intercept is not penalised here. The parameter $\lambda\geq0$ sets the strength of the preference: zero recovers the unpenalised fit, while a larger value makes large coefficients more costly. We fit the coefficients using training data; we choose $\lambda$ using validation evidence. [scikit-learn's ridge regression documentation](https://scikit-learn.org/stable/modules/linear_model.html#ridge-regression-and-classification)
+
+The penalty supplies no new observations. It may reduce variation between fitted curves while introducing more bias. Too much can suppress a useful relationship. Also, coefficient size depends on the representation and scale of the inputs. The notebook therefore standardises the polynomial features using each training set. Its library minimises a *sum* of squared errors, so we pass `alpha = n_train * lambda` to match the mean-error convention above.
+
+Hold degree 9 fixed and increase $\lambda$. Predict what will happen before moving the control. Do the curves become less sensitive to the noise? Does their average still follow the mean response? Later we will compare this explicit penalty with weight decay and early stopping in neural networks. They require validation choices too; none is a guarantee against overfitting.
+
+## Why not choose using one validation set? {#why-cross-validation}
+
+One validation split can be useful. But if measurements are scarce, setting many aside leaves fewer for fitting; setting few aside gives a noisy comparison. A favourable split may make one setting look better by chance. **Cross-validation** lets each development observation take a turn in validation while being available for training in other fits. It makes our comparison less dependent on one allocation of observations, without creating any new measurements. It is an option for evaluating a learning procedure, not a compulsory ritual when a well-designed independent validation set already answers the question. [scikit-learn's introduction](https://scikit-learn.org/stable/modules/cross_validation.html)
+
+### Five fits for one candidate {#five-folds}
+
+Keep the final test data outside this exercise. Divide the remaining **development data** into five parts, called *folds*. For one fixed degree and penalty, work through this table:
+
+| Fit | Fold 1 | Fold 2 | Fold 3 | Fold 4 | Fold 5 |
+|---|---|---|---|---|---|
+| 1 | Validate | Train | Train | Train | Train |
+| 2 | Train | Validate | Train | Train | Train |
+| 3 | Train | Train | Validate | Train | Train |
+| 4 | Train | Train | Train | Validate | Train |
+| 5 | Train | Train | Train | Train | Validate |
+
+Each row starts a new fit. Estimate the scaling from its training observations, fit the model, and predict its validation observations. Repeat the table for every candidate, using the same folds so that the comparisons concern the same cases. In our example, the folds have equal sizes, so their five MSEs receive equal weight.
+
+Suppose one candidate has fold errors $0.01, 0.02, 0.03, 0.02, 0.02$. Their mean is $0.02$. These are invented numbers for a hand calculation. The mean summarises errors from **five separately fitted models**. It is not the error of one model that has been fitted once on all the observations. Ryan Giordano's [cross-validation notes](https://stat154.berkeley.edu/fall-2025/lectures/unit3/unit3_cv.html) emphasise both repeating the full procedure and choosing the appropriate independent unit.
+
+### What must stay inside each fit? {#inside-the-fold}
+
+If we estimate a scaler from all development observations before dividing them into folds, the validation observations have influenced a learned transformation. The same issue arises with imputation and target-based feature selection. Fit those steps on the training portion of each fold. A pipeline keeps them with the model; its presence does not protect a transformation or selection performed outside it. The [common-pitfalls guide](https://scikit-learn.org/stable/common_pitfalls.html#data-leakage) gives executable examples.
+
+### Have we finished evaluating the model? {#selection-and-assessment}
+
+Use the cross-validation comparison to choose the degree and penalty. Refit that chosen procedure on all development observations. A reserved test set can then assess it after selection. The smallest cross-validation error helped us make the choice, so it is not an untouched final assessment of that choice. Searching many settings gives us more opportunities to select a favourable fluctuation.
+
+If we use **nested cross-validation**, an outer loop evaluates the whole selection procedure, with the tuning performed inside each outer training portion. That is a later extension, not something to add automatically to every exercise. [The scikit-learn nested-validation example](https://scikit-learn.org/stable/auto_examples/model_selection/plot_nested_cross_validation_iris.html) illustrates the distinction.
+
+Both cross-validation and test errors remain **empirical estimates**. The folds share training observations, so their errors are dependent; the standard deviation across five folds is not automatically a confidence interval for future performance. Cross-validation also fits each candidate with fewer observations than the eventual refit uses. State the procedure and its intended use alongside the score.
+
+## What counts as a new chemical case? {#chemical-splits}
+
+A random split answers a question about new rows under particular sampling assumptions. If two rows are replicate measurements of the same molecule, putting them in different folds may be useful for predicting another replicate, but misleading for a claim about unseen molecules. To investigate new molecules, keep a molecule's measurements together. To investigate a new scaffold, batch, or laboratory, define and separate the relevant groups. For future measurements, the order in which data become available may require a chronological split.
+
+These are different prediction tasks. No choice of five or ten folds repairs a mismatch between the evaluation and the intended task. In the MOF practical, we must not invent framework-family labels from row identifiers: a claim about new families needs suitable metadata first. Return to the [chemical benchmark example](../reading.qmd#chemical-evaluation) when deciding what our comparison establishes.
+
+## Practical {#practical}
+
+The [model-selection notebook](../notebooks/model-selection.py) contains the repeated-fit and regularisation controls, a visible five-fold assignment, and a comparison of degrees and penalty strengths. It is included in the [MOF practical kit](../downloads/mof-practical.zip), using the same environment. From the extracted folder:
+
+```bash
+uv sync --locked --group mof
+uv run --locked --group mof marimo edit notebooks/model-selection.py --headless
+```
+
+The [recorded preview](../notebooks/previews/model-selection.html) shows the default calculation if you cannot run the notebook. Its controls do not recompute results. The notebook has two separate simulations: repeated noisy measurements at fixed concentrations for bias and variance, then 60 independent development observations for cross-validation. It does not report a final test score.
+
+1. Compare degrees 1, 2, and 9 without a penalty. Explain the difference between a persistent mismatch and variation between fits.
+2. Keep degree 9 fixed and change only the penalty. Record a setting that changes the spread and explain what else changed.
+3. Follow one observation through the five folds. Identify which fits may use its target and which must predict it without fitting to it.
+4. Compare the candidate settings. Change the fold assignment once and inspect whether the ranking changes. Both comparisons are development work; do not keep changing the split until a preferred model wins.
+5. Propose an evaluation for a chemical question from your project. State what must be kept together and what evidence is still missing.
+
+## What can we conclude? {#exit-question}
+
+Explain why a lower training error did not settle our choice, what regularisation changed, and what the cross-validation result estimates. Then name one reason that even a low cross-validation error might not justify the chemical use you have in mind.
+
+## Suggested reading
+
+Prince's [*Understanding Deep Learning*](https://udlbook.github.io/udlbook/), Chapters 8, **Measuring performance**, and 9, **Regularization**, develops the repeated-fit argument and ways to constrain learning. Hardt and Recht's [Chapter 6, **Generalization**](https://mlstory.org/generalization.html), gives a useful counterpoint to treating one schematic complexity curve as a universal law. The linked cross-validation and pipeline documentation supplies implementation details. These are suggestions for another explanation, not prerequisites for the practical.

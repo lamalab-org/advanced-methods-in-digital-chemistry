@@ -4,7 +4,8 @@ from zipfile import ZIP_DEFLATED, ZipFile
 
 root = Path(__file__).resolve().parents[1]
 files = ["pyproject.toml", "uv.lock", ".python-version", "notebooks/03-mof-uptake.py",
-         "notebooks/previews/03-mof-uptake.html"]
+         "notebooks/previews/03-mof-uptake.html", "notebooks/model-selection.py",
+         "notebooks/previews/model-selection.html"]
 files += [str(path.relative_to(root)) for path in sorted((root / "data/mof-uptake").iterdir()) if path.is_file()]
 instructions = """Advanced Methods in Digital Chemistry: MOF practical
 
@@ -20,6 +21,13 @@ Open the full localhost URL printed by marimo in your browser.
 Keep its terminal open. The command opens notebooks/03-mof-uptake.py.
 Use the mof group flag each time you launch with uv run.
 Save your edited notebook under a new name.
+
+For the follow-up on bias, variance, regularisation and cross-validation:
+
+    uv run --locked --group mof marimo edit notebooks/model-selection.py --headless
+
+This separate notebook uses simulated data and does not report a final test score.
+Its recorded default calculation is in notebooks/previews/model-selection.html.
 
 The first package installation requires internet access. The notebook then
 runs on local supplied data, without Kaggle or chatbot accounts or a GPU.

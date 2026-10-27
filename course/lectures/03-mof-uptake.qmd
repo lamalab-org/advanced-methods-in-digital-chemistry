@@ -107,6 +107,8 @@ Our compact table contains 1,500 rows selected from the workshop data without se
 
 A different identifier does not necessarily mean a chemically independent framework. Two MOFs may share building blocks. This random row split supports a limited question about other entries in this collection; testing a new framework family would require a suitable definition of families and a split that respects it.
 
+The [model-selection practical](model-selection.qmd#why-cross-validation) extends this single-split comparison to cross-validation: repeated fitting with different development observations held aside. We will ask why this can help with limited data, what must be refitted inside each fold, and why the selected setting still needs an assessment after selection. The current MOF notebook deliberately retains its transparent training/validation/test split; the cross-validation exercise uses a separate simulated dataset.
+
 The data-leakage case study in [Jablonka et al. (2023), *An Ecosystem for Digital Reticular Chemistry*](https://doi.org/10.1021/acscentsci.2c01177), examines why data preparation and evaluation belong together. It gives us a research example against which to question our own split.
 
 The plot below shows the chosen model's **validation** predictions in the supplied run. In the left panel, the diagonal marks agreement with the reference simulations. The right panel makes the residuals visible. These observations helped us choose the model, so they cannot also supply its untouched final assessment.
