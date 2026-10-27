@@ -69,7 +69,7 @@ Blablador's [model aliases](glossary.qmd#model-alias) can change which underlyin
 
 ### Try a debugging conversation {#assistant-for-debugging}
 
-Before moving on to Python, send a message using your chosen assistant. In Jan, select a Blablador model. We can start with a problem that needs no working Python environment:
+Before moving on to Python, send a message using your chosen assistant. If you have just connected Jan to Blablador, select one of its models. We can start with a problem that needs no working Python environment:
 
 > I am about to set up a Python course project. Suppose a setup command reports that it cannot find the project's pyproject.toml file. Help me work out what to check before reinstalling anything. Ask which operating system I use, explain one check in plain language, and tell me what its result would help us distinguish.
 
