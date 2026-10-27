@@ -182,6 +182,10 @@ Repeatedly resampling observed data with replacement and recalculating a statist
 
 A defined task and evaluation procedure used for comparison, often with a shared dataset and metric. A benchmark result is evidence about performance under that procedure. We still have to ask how closely it resembles the chemical work we want to do.
 
+### Proxy {#proxy}
+
+Something measured in place of the quantity or ability we want to understand. For example, we might use a chemistry question-answering score as a proxy for being useful in a laboratory. That use needs evidence connecting the score to the intended work. Measuring the score precisely does not, by itself, establish that connection. The [ChemBench discussion](lectures/01-ai-and-science.qmd#science-and-model-claims) examines this distinction.
+
 ### Calibration: two uses {#calibration}
 
 In our experimental example, **calibration** relates known concentrations to measured absorbance. In probabilistic modelling, **calibration** concerns whether stated probabilities agree with observed frequencies in relevant groups of cases. These uses share a word but ask different questions.
