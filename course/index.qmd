@@ -1,14 +1,13 @@
 # About this course {.unnumbered}
 
-How can we use computational models to learn something reliable about chemistry?
+In chemistry, too, "AI" seems to be everywhere. It is in the news, in all the journals, in all the proposals. It is also at the heart of the research my group does. But I think that there is a lot of nuance to it. An my hope is that this course will give you a chance to explore that nuance, and to practise the skills that let you make your own judgements about what a model does and what its results establish.
 
 My starting point is that AI is a deeply human endeavour. Someone decides which question is worth asking. Someone produces the measurements, chooses what the model should learn, and decides what counts as a good answer. Much of this work may have happened before we download a dataset or open a chatbot. It has still happened. Automating part of the calculation does not remove the decisions that made it possible.
 
-Consider a molecular drawing. It records atoms and bonds but usually leaves out the solvent and temperature. For discussing connectivity, that may be enough. Now ask how much of the molecule dissolves. The drawing has not changed, but what we need to know has. Modelling means leaving things out; the difficult part is deciding which omissions we can afford for the question we want to answer.
+Consider a molecular drawing. It records atoms and bonds but usually leaves out the solvent and temperature (and even the concept of a structure itself is a [conventient fiction](https://pubs.acs.org/jacsat/article/100/4/1073/552820/Must-a-molecule-have-a-shape)). For discussing connectivity, that may be enough. Now ask how much of the molecule dissolves. The drawing has not changed, but what we need to know has. Modelling means leaving things out; the difficult part is deciding which omissions we can afford for the question we want to answer.
 
 This is also why I find AI more useful as the name of an ambition than as the subject of a precise conversation. Building systems with capabilities we associate with intelligence leaves room for very different methods. Many of the ambitions are old; some of the ways we can now pursue them are new. The [opening lecture](lectures/01-ai-and-science.qmd) asks what these systems actually do, and how that compares with the scientific claims and commercial promises made about them.
 
-This course follows our opening question through what might seem like a collection of buzzwords: statistical learning, molecular representations, deep learning, molecular simulation, generative models, and experimental design. We will give these words something concrete to refer to: a calculation we can follow, a model we can change, and a chemical question whose answer we can examine.
 
 ## What should you be able to do afterwards? {#course-outcomes}
 
@@ -19,7 +18,7 @@ By the end of the course, I would like you to be able to:
 - Distinguish predicting an outcome, explaining a model's calculation, and establishing what an intervention would cause. Say what evidence your own conclusion needs.
 - Use an LLM or coding assistant to help with the work, while being able to check the calculations and defend the choices yourself.
 
-These are also the things I would like your project to let you practise. The list of methods gives us ways to get there.
+These are also the things I would like your project to let you practise. 
 
 ## The course sequence
 
@@ -39,8 +38,6 @@ The [course outline](outline.qmd) sets out the topics, the connections between s
 ## How we will work {#how-to-use-a-lecture-page}
 
 These notes are for master's students in chemistry. We develop the Python and machine-learning ideas alongside the chemical problems, starting with small examples. In the first meeting, on **Wednesday, 28 October 2026, 14:00–16:00, at Helmholtzweg 4, SR 6 Physik**, I would like to hear what you most want to learn and discuss a course format that works for us. We will begin with AI, prediction, and the human choices behind models, then see our tools in use and spend about half an hour setting them up together. You can [try the setup beforehand](setup.qmd), but a working installation is not required to join the first session. The [course outline](outline.qmd#scheduling) collects the dates and formats we will discuss.
-
-We will spend time with small examples: a molecular drawing, a few measurements, a line that does not quite fit. With three observations, we can calculate every error ourselves. If an assistant then writes a function that returns a different answer, we have somewhere to start the conversation. The board, paper, and notebooks give us different ways to work through the same argument. Each lecture page states what you should be able to do with it; the fuller explanations are there to return to afterwards.
 
 For the meetings after this introduction, I would like to propose a short introduction from me, perhaps ten to fifteen minutes, followed by plenty of time for you to work through examples and your own calculations. I will work with you as questions arise, help debug code, and discuss what the results mean. If several people run into the same difficulty, we can pause for a short explanation together. We will discuss whether this format would work for you in the first meeting.
 
@@ -65,7 +62,7 @@ Several books have shaped how I think about these questions. I particularly reco
 
 ## Examples from chemistry {#examples-through-lenses}
 
-DENDRAL proposes structures from chemical evidence. A learned energy model approximates a calculation. A robotic chemist performs experiments. Lean checks whether a formal derivation follows from its premises. All of these can appear in a discussion of AI in chemistry, yet knowing that label tells us very little about what happened. The [collection of chemical applications](examples.qmd) lets us ask what was done and what the result establishes, using the distinctions introduced in lecture 1.
+The [collection of chemical applications](examples.qmd) lets us ask what was done and what the result establishes, using the distinctions introduced in lecture 1.
 
 []{#choices-within-a-lens}
 
@@ -77,7 +74,7 @@ This is the first time I am teaching this course here in Jena. It is also a time
 
 I would therefore really appreciate your feedback throughout the course. Tell me what works and what does not. Perhaps an explanation assumes something we have not covered, or an assistant helps you finish a calculation without helping you understand it. Knowing where that happens gives me a chance to adjust the teaching while it can still help you.
 
-I will leave a little time at the end of our meetings for two questions: **What helped you understand something? What got in the way?** You can also tell me during class, afterwards, or in a short message. Feedback is optional and is not part of the assessment. At the next meeting, I will come back to your comments and explain what I can change or what we need to discuss further.
+I will leave a little time at the end of our meetings for two questions: **What helped you understand something? What got in the way?** You can also tell me during class, afterwards, or in a short message. Feedback is optional and is not part of the assessment -- but I value your input *a lot*.
 
 ## How these notes were written {#about-these-notes}
 

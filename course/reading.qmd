@@ -46,13 +46,6 @@ Hanchen Wang et al. (2023), [*Scientific discovery in the age of artificial inte
 
 For materials chemistry, Seyed Mohamad Moosavi, Kevin Maik Jablonka, and Berend Smit (2020), [*The Role of Machine Learning in the Understanding and Design of Materials*](https://doi.org/10.1021/jacs.0c09105), *JACS* 142, 20273–20287, considers the relationship between prediction, understanding, and design. The Introduction connects these questions to the problems materials researchers want to solve. The paper is open access.
 
-## Two cultures of modelling {#breiman-two-cultures}
-
-Leo Breiman (2001), [*Statistical Modeling: The Two Cultures*](https://doi.org/10.1214/ss/1009213726), *Statistical Science* 16(3), 199–215 for the main article, is a useful companion to the [opening discussion](lectures/01-ai-and-science.qmd#breiman-two-cultures). The [linked PDF](https://www2.math.uu.se/~thulin/mm/breiman.pdf) contains that article; the journal's combined record also includes comments and a rejoinder.
-
-Section **1** introduces the two cultures. Section **3.2, The Chlorine Project**, connects the argument to chemistry: detecting chlorine from mass spectra without determining the entire molecular structure. Section **8, Rashomon and the Multiplicity of Good Models**, examines models with similar predictive performance that suggest different accounts of which inputs matter.
-
-Breiman makes a forceful case for algorithmic modelling. I would read it as an argument to engage with, rather than a permanent division of every model into two camps. In particular, his contrast should not be substituted for the distinction between prediction and causation. The paper remains suggested reading; we will introduce the relevant examples together.
 
 ## What do we mean by probability? {#probability-lenses}
 
@@ -64,11 +57,10 @@ Both approaches require assumptions. A neural-network architecture alone tells u
 
 ## What does a benchmark score stand for? {#science-and-commercial-claims}
 
-Adrian Mirza et al. (2025), [*A framework for evaluating the chemical knowledge and reasoning abilities of large language models against the expertise of chemists*](https://doi.org/10.1038/s41557-025-01815-x), *Nature Chemistry* 17, 1027–1034, introduces ChemBench. The [open full text](https://pmc.ncbi.nlm.nih.gov/articles/PMC12226332/) describes the question corpus, evaluation, and human comparison. Figures 1–2 are useful starting points for identifying what was measured and how the questions were chosen.
+Adrian Mirza et al. (2025), [*A framework for evaluating the chemical knowledge and reasoning abilities of large language models against the expertise of chemists*](https://doi.org/10.1038/s41557-025-01815-x), *Nature Chemistry* 17, 1027–1034, introduces ChemBench. 
 
 Read it alongside [TakeoverBench's ChemBench page](https://takeoverbench.com/benchmarks/chem_bench), which places the benchmark under “Chemical weapons development” (accessed 27 October 2026). Its **Why this benchmark?** paragraph gives the selection rationale; its [About page](https://takeoverbench.com/about) explains the initiative's purpose. The [lecture discussion](lectures/01-ai-and-science.qmd#science-and-model-claims) asks what evidence would connect the question-answering score to that broader capability. Identifying a gap in that argument does not, on its own, establish the presence or absence of the risk.
 
-For the commercial comparison, David Rein et al. (2023), [*GPQA: A Graduate-Level Google-Proof Q&A Benchmark*](https://arxiv.org/abs/2311.12022), introduces a benchmark of scientific questions. Anthropic's [*Claude Opus 4.1* announcement](https://www.anthropic.com/news/claude-opus-4-1), dated 5 August 2025, reports GPQA Diamond performance in a product presentation. Its **Benchmark reporting** notes describe the evaluation conditions. Compare what was tested with the work for which a reader might buy access.
 
 ## Atlas of AI {#atlas-of-ai}
 
@@ -76,7 +68,6 @@ A model arrives in our notebook as a file or an API call. It is easy to begin th
 
 In chemistry, a table of measurements can make a great deal of human work disappear from view. Someone synthesised the materials, maintained the instrument, decided which results were usable, and recorded them. Someone else may have assembled the table. The chapters **Labor** and **Data** give us reasons to pay attention to that work. **Classification** connects to our question about what happens when a solubility measurement becomes a yes/no label. **Earth** and **Power** extend the discussion to resources and the institutions that control them.
 
-The Introduction is on pp. 1–21; **Earth**, pp. 23–51; **Labor**, pp. 53–87; **Data**, pp. 89–121; **Classification**, pp. 123–149; and **Power**, pp. 211–227, in the [publisher's JSTOR contents](https://www.jstor.org/stable/j.ctv1ghv45t). Pagination may differ between editions. The full book requires a library copy, institutional access, or purchase; the publisher page is not an open edition.
 
 ## Prophecy {#prophecy}
 
@@ -92,7 +83,7 @@ In the reaction example, we can explain exactly how the model uses temperature a
 
 Eleanor Dillon, Jacob LaRiviere, Scott Lundberg, Jonathan Roth, and Vasilis Syrgkanis work through a related problem in the SHAP documentation: [**Be careful when interpreting predictive models in search of causal insights**](https://shap.readthedocs.io/en/latest/example_notebooks/overviews/Be%20careful%20when%20interpreting%20predictive%20models%20in%20search%20of%20causal%20insights.html). Their example shows why a feature-importance plot can describe a fitted predictor without justifying an intervention. The prepared output can be read without installing SHAP.
 
-Galit Shmueli (2010), [*To Explain or to Predict?*](https://doi.org/10.1214/10-STS330), *Statistical Science* 25, 289–310, examines how these different purposes change modelling. Here, “explanatory modelling” concerns causal explanation; it differs from explaining the output of a fitted model. A [free electronic reprint](https://arxiv.org/abs/1101.0891) was posted in 2011 and has different pagination from the journal article.
+Galit Shmueli (2010), [*To Explain or to Predict?*](https://doi.org/10.1214/10-STS330), *Statistical Science* 25, 289–310, examines how these different purposes change modelling. Here, “explanatory modelling” concerns causal explanation; it differs from explaining the output of a fitted model.
 
 ## Learning from a finite dataset {#lecture-2}
 
@@ -102,29 +93,23 @@ The scikit-learn developers' [**Common pitfalls and recommended practices**](htt
 
 The [two introductory reviews](#introductory-reviews) also develop these questions. Mehta et al. explain how fitting the available observations can fail to produce useful predictions for new ones. Section 7 of Jablonka, Ongari, Moosavi, and Smit's *Big-Data Science in Porous Materials* discusses model evaluation and comparison in materials chemistry.
 
-## Learning from a collection of materials {#molsim}
+## Learning from a collection of materials (biased collection) {#molsim}
 
 The [MOF practical](lectures/03-mof-uptake.qmd) adapts my [MolSim 2024 notebook](https://github.com/kjappelbaum/ml_molsim/blob/0ebed176b972c9ba9ddf7b6e3a4d04eaf3f32409/molsim_ml.ipynb). The original contains further exercises on descriptors, hyperparameters, and model inspection, with code left for students to complete. The course kit supplies the working notebook and data for our class.
 
 My [MolSim 2023 lecture slides](https://www.compchem.nl/wp-content/uploads/molsim2023/L09_Machine-Learning.pdf) develop the explanations behind those calculations, with contributions credited to Mohamad Moosavi. They ask where ML enters a molecular calculation (p. 3), how chemical knowledge restricts the functions we consider (pp. 7–13), what an empirical error measures (p. 23), and how a prediction can be built from similarities to training examples (pp. 53–57). We develop these ideas more slowly in our lecture notes. The slides are an additional reference; the later sections on learned potentials and sampling (pp. 86–92) also connect to the simulation part of the course. Numerical performance claims in that 2023 talk refer to the cited studies and their settings.
 
-Seyed Mohamad Moosavi et al. (2020), [*Understanding the diversity of the metal-organic framework ecosystem*](https://doi.org/10.1038/s41467-020-17755-8), *Nature Communications* 11, 4068, asks what makes a new structure informative. That question matters when a database contains many related materials. The [PubMed record](https://pubmed.ncbi.nlm.nih.gov/32792486/) provides the abstract and links to open full text.
+Seyed Mohamad Moosavi et al. (2020), [*Understanding the diversity of the metal-organic framework ecosystem*](https://doi.org/10.1038/s41467-020-17755-8), *Nature Communications* 11, 4068, asks what makes a new structure informative. That question matters when a database contains many related materials.
 
-Kevin Maik Jablonka, Andrew S. Rosen, Aditi S. Krishnapriyan, and Berend Smit (2023), [*An Ecosystem for Digital Reticular Chemistry*](https://doi.org/10.1021/acscentsci.2c01177), *ACS Central Science* 9, 563–581, examines evaluation and the infrastructure around materials models. **Case Study 1: The impact of data leakage**, in the Appendix, shows why distinct rows need not make a genuinely new prediction problem. An [open author-hosted PDF](https://www.epfl.ch/labs/lsmo/wp-content/uploads/2023/08/acscentsci.2c01177.pdf) is available.
+Kevin Maik Jablonka, Andrew S. Rosen, Aditi S. Krishnapriyan, and Berend Smit (2023), [*An Ecosystem for Digital Reticular Chemistry*](https://doi.org/10.1021/acscentsci.2c01177), *ACS Central Science* 9, 563–581, examines evaluation and the infrastructure around materials models. **Case Study 1: The impact of data leakage**, in the Appendix, shows why distinct rows need not make a genuinely new prediction problem. 
 
-The table itself also deserves attention. Kevin Maik Jablonka, Luc Patiny, and Berend Smit (2022), [*Making the collective knowledge of chemistry open and machine actionable*](https://doi.org/10.1038/s41557-022-00910-7), *Nature Chemistry* 14, 365–376, discusses what is needed for chemical information to be reusable. A number without its units, conditions, and provenance leaves another person or program with considerable guesswork. The [abstract is freely available](https://pubmed.ncbi.nlm.nih.gov/35379967/); full text may require library access.
+The table itself also deserves attention. Kevin Maik Jablonka, Luc Patiny, and Berend Smit (2022), [*Making the collective knowledge of chemistry open and machine actionable*](https://doi.org/10.1038/s41557-022-00910-7), *Nature Chemistry* 14, 365–376, discusses what is needed for chemical information to be reusable. A number without its units, conditions, and provenance leaves another person or program with considerable guesswork. 
 
 For the optional descriptor-shuffling calculation, scikit-learn's [permutation-importance documentation](https://scikit-learn.org/stable/modules/permutation_importance.html) explains both the operation and its interpretation. It concerns the fitted model's use of the supplied information.
 
 ## Understanding Deep Learning {#understanding-deep-learning}
 
 Prince's [*Understanding Deep Learning*](https://udlbook.github.io/udlbook/) is the book I recommend when we want to see what happens inside a network. The small examples make it possible to follow a calculation before handing it to a library. This fits the way we will work: draw the function, calculate an output, change a parameter, and then examine what changes.
-
-Sections **2.1–2.2** describe the learning problem that our calibration introduces. **3.1** and **4.1–4.2** develop shallow and deep networks. The fitting calculations appear in **6.1** and **7.2–7.3**; **8.1–8.3**, **8.5**, and **9.1** concern performance and the choices made during learning. Section numbers follow the [MIT Press contents](https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/15055/prince_toc_.pdf).
-
-For later topics, **13.1–13.4** cover graph networks, **12.1–12.2** introduce transformers, and **14.2–14.3** introduce generative modelling, with further treatments in Chapters **17** and **18**. Appendices **B** and **C** explain the mathematical and probability notation. These sections are references for questions as they arise; there is no need to read the book in sequence to take part in the course.
-
-The author also supplies [Python notebooks](https://github.com/udlbook/udlbook/tree/main/Notebooks). They provide additional examples, although they have not been tested in our course environment.
 
 ## Recognising familiar molecules {#chemical-evaluation}
 
