@@ -250,6 +250,12 @@ An **LLM** is a model trained on large amounts of text to model and generate lan
 
 ## Computing and the course tools
 
+### Open models, open weights, and open source {#open-models}
+
+**Weights** are the numbers a model learns during training. An **open-weight model** makes those numbers available to download under specified terms, so others can run the model with suitable software and hardware. The training code and information about the training data may be less accessible. Check what a particular release provides and what its licence permits.
+
+**Open source** concerns the ability to inspect, use, modify, and share a system. For AI, the [Open Source Initiative's definition](https://opensource.org/ai/open-source-ai-definition) includes requirements for code, parameters, and information about training data. Calling a model “open” alone does not tell us which of these are available. It also does not tell us where a hosted service sends or stores our conversations. See [the assistant setup](setup.qmd#why-this-assistant).
+
 ### Terminal, shell, and command {#terminal-shell}
 
 A **terminal** is the window for entering commands and viewing output. A **shell** interprets those commands and launches programs. We use Bash in Ubuntu on WSL for Windows, and a local shell on macOS/Linux. A command such as `ls` asks the shell to run a particular operation. [Try the computing basics](setup.qmd#computing-basics).

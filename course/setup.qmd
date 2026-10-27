@@ -4,25 +4,39 @@ title: "Your AI assistant and Python environment"
 
 ## Before the first meeting
 
-If you have time before our first meeting on **28 October 2026**, look through this guide and try starting the setup. Begin with Jan and Blablador, then prepare the Python environment. On Windows, setting up Ubuntu through WSL 2 beforehand is particularly helpful because it can require a restart or administrator access.
+If you have time before our first meeting on **28 October 2026**, look through this guide and try starting the setup. Begin with an assistant, then prepare the Python environment. Jan with Blablador is our suggested example; you can also use an assistant you already have, such as Claude or Codex. On Windows, setting up Ubuntu through WSL 2 beforehand is particularly helpful because it can require a restart or administrator access.
 
 Bring your laptop and charger if you can. We will show the tools in use and reserve **about 30 minutes to set them up together**. An unfinished installation is fine. Keep any error message and the command that produced it, and bring them along. If your setup already works, use that time to explore the first notebook and check a calculation with a partner.
 
 ## The course setup
 
-We will set up **Jan connected to Blablador first**, so that we have an assistant available while installing Python and working through errors. We will then use **uv to manage Python and packages** and **JupyterLab to work in notebooks**. If Jan is difficult to install, use Blablador's web interface. If service access is unavailable, work with a partner or ask the instructor for help and continue with the Python setup.
+I will demonstrate **Jan connected to Blablador first**, so that we have an assistant available while installing Python and working through errors. We will then use **uv to manage Python and packages** and **JupyterLab to work in notebooks**. You can follow the same exercises with another assistant. If Jan is difficult to install, Blablador also has a web interface. If service access is unavailable, work with a partner or ask the instructor for help and continue with the Python setup.
 
 These tools have different jobs. Python executes the calculations. uv keeps the course's dependencies together. JupyterLab is the interface for writing and running Python. Jan is a chat interface. Blablador runs the language model on remote infrastructure.
 
 The [glossary](glossary.qmd#computing-and-the-course-tools) provides short definitions of the computing terms below. We will also explain them as they become useful.
 
-Start with the [assistant](#set-up-the-ai-assistant) and try a short debugging conversation. Windows users then prepare [Ubuntu in WSL 2](#windows-wsl). We will use its Linux shell for the course. Continue with the [computing basics](#computing-basics) and [Python setup](#set-up-python). Once the notebook runs, we will check an assisted calculation. A separate code editor is optional.
+Start with the [assistant](#set-up-the-ai-assistant) and try a short debugging conversation. If you already have one, you can go straight to the [debugging example](#assistant-for-debugging). Windows users then prepare [Ubuntu in WSL 2](#windows-wsl). We will use its Linux shell for the course. Continue with the [computing basics](#computing-basics) and [Python setup](#set-up-python). Once the notebook runs, we will check an assisted calculation. A separate code editor is optional.
 
 ## Set up the AI assistant {#set-up-the-ai-assistant}
 
+### Why Jan and Blablador? {#why-this-assistant}
+
+Jan is one example of how we can work with open models. You are welcome to use **Claude, Codex, or another assistant** for the course. You do not need to buy a subscription or replace a tool that already works for you. In each case, we will practise explaining the problem, examining the proposed answer, and checking what it does.
+
+We suggest Jan with Blablador because it gives us access to [open models](glossary.qmd#open-models) through research infrastructure in Germany. [Jan is open-source software](https://www.jan.ai/); Blablador supplies the models, running at Forschungszentrum Jülich. The service is free to use, subject to access and usage limits. This gives us an option that does not depend on each student maintaining a paid subscription. [Helmholtz's service introduction](https://www.hifis.net/tips/2025/05/05/tip-llm/); [Jülich's account of the open-model service](https://strube1.pages.jsc.fz-juelich.de/2026-06-12-hdc-rs/); [current access and limits](https://sdlaml.pages.jsc.fz-juelich.de/ai/guides/blablador_api_access/)
+
+### Where does the conversation go? {#assistant-data}
+
+With this connection, Jan sends the conversation to Blablador at Jülich. The model runs there, even though Jan is installed on your laptop. Choosing an open model, choosing where it runs, and choosing how a service handles your data are separate decisions.
+
+Blablador's emphasis on protecting conversation content makes it worth considering for research where confidentiality matters. Before using unpublished or confidential material, check that the particular service and configuration are approved for that data by your institution or project. Hosting in Germany is a useful consideration, but does not by itself settle that question. We use public or synthetic data for the course exercises.
+
+The details depend on how you connect. For example, the operator's March 2026 description says the main web interface does not retain chats or uploaded files, but records IP addresses for operation; the separate staging interface saves conversations and files. Those web-interface statements should not be treated as a description of every client or API configuration. Also consider any history saved by your chosen client. [Blablador's description of its web interfaces](https://lists.fz-juelich.de/hyperkitty/list/blablador-news@lists.fz-juelich.de/thread/LMBPE2FH7I7O6HZA5DX2SIQLI7A2WUIX/)
+
 ### Install Jan
 
-Install [Jan Desktop](https://jan.ai/download) and open it. We will connect it to a model running at Jülich; this step can be completed before setting up Python.
+If you would like to use this setup, install [Jan Desktop](https://jan.ai/download) and open it. We will connect it to a model running at Jülich; this step can be completed before setting up Python.
 
 On Windows, select the installer matching x64 or ARM64. For older Macs, check current support: Jan's documentation describes limitations on Intel Macs. If the app is unsuitable, use the [Blablador web interface](https://blablador.fz-juelich.de/) for the same teaching task. [Jan Windows installation](https://docs.jan.ai/desktop/install/windows); [Jan Mac installation](https://docs.jan.ai/desktop/install/mac)
 
@@ -55,7 +69,7 @@ Blablador's [model aliases](glossary.qmd#model-alias) can change which underlyin
 
 ### Try a debugging conversation {#assistant-for-debugging}
 
-Before installing anything else, select a Blablador model and send a message. We can start with a problem that needs no working Python environment:
+Before moving on to Python, send a message using your chosen assistant. If you have just connected Jan to Blablador, select one of its models. We can start with a problem that needs no working Python environment:
 
 > I am about to set up a Python course project. Suppose a setup command reports that it cannot find the project's pyproject.toml file. Help me work out what to check before reinstalling anything. Ask which operating system I use, explain one check in plain language, and tell me what its result would help us distinguish.
 
