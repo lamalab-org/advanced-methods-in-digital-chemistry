@@ -131,7 +131,20 @@ The **training loss** guides parameter fitting. An **evaluation metric** summari
 
 ## How do the parameters change?
 
-Changing the intercept shifts every prediction by the same amount. Keep the slope at 0.8 and try intercepts of 0.10, 0.15, and 0.20 on our three observations. The corresponding mean squared errors are approximately 0.003467, 0.000633, and 0.002800. Moving upwards from 0.10 helped, but continuing to 0.20 went too far. We have already fitted a little: propose a change, calculate its consequences, and compare.
+Changing the intercept shifts every prediction by the same amount. Keep the slope at 0.8 L mmol$^{-1}$ and try intercepts of 0.10, 0.15, and 0.20 on our three observations. For each candidate, calculate the predictions, subtract the observations, square those differences, and average.
+
+| Intercept $b$ | Residuals: prediction minus observation | Training MSE |
+|---|---|---|
+| 0.10 | $-0.06,\;-0.02,\;-0.08$ | 0.003467 |
+| 0.15 | $-0.01,\;+0.03,\;-0.03$ | 0.000633 |
+| 0.20 | $+0.04,\;+0.08,\;+0.02$ | 0.002800 |
+
+Moving upwards from 0.10 helped, but continuing to 0.20 went too far. Of these three candidates, 0.15 has the lowest score. That does not make it the best of every possible intercept: we have only compared three. We have already fitted a little, though: propose a change, calculate its consequences, and compare.
+
+Which observations justified the improvement? The same three we used to choose the intercept. This is an improvement in training error. We still need to ask how the fitted line will behave on a new measurement.
+
+<details>
+<summary>Choosing a direction with a derivative</summary>
 
 A derivative gives us another way to choose a direction. Start with the intercept alone. In the expression below, $n$ is the number of training observations and the sums run over those observations.
 
@@ -156,44 +169,21 @@ For the intercept, $e_i=mc_i+b-A_i$ changes by one unit for each unit change in 
 
 For the slope derivative, the additional factor is $c_i$. A sufficiently small step against a nonzero gradient reduces this smooth objective locally. Gradient steps are one way to fit a model; linear least squares also has direct numerical methods. The same idea will recur in neural-network training. For now, the numerical comparison above already establishes the distinction between the chosen model family and the fitted parameters.
 
+</details>
+
 Keep **optimisation** and **generalisation** separate. Finding parameters with low training loss solves the fitting problem. Whether those parameters give useful predictions elsewhere is an additional question.
 
-## Why a more flexible curve can mislead
-
-A polynomial model adds terms:
-
-$$
-f_\theta(c)=b+w_1c+w_2c^2+\cdots+w_dc^d.
-$$
-
-The coefficients $b,w_1,\ldots,w_d$ are fitted parameters. The degree $d$ determines which family of curves we fit; it is a **[hyperparameter](../glossary.qmd#hyperparameter)**. We can use validation observations to help choose it.
-
-For [unregularised least squares](../glossary.qmd#regularisation) on the same data, increasing the polynomial degree enlarges a nested model family. The best possible training error cannot increase, up to numerical effects. Performance on new measurements has no such guarantee. The curve may fit measurement noise or behave unpredictably where there are few observations.
-
-The extra flexibility lets the curve follow more of what happened in these particular measurements. Some of that detail may be noise. We call it **overfitting** when fitting such detail improves the fit to the training observations at the expense of prediction on new ones. In our polynomial example, we can watch that happen by changing the degree and comparing two sets of observations.
-
-### Changing the polynomial degree {#predict-then-explore}
-
-1. Start with degree 1. Predict what will happen to training error as degree increases.
-2. Change the degree and inspect the curve. Explain one surprising change.
-3. Reveal the validation observations. Use them to compare model choices.
-4. Show the region outside the observed range. Describe what is known and what is only assumed there.
-
-```{=html}
-<iframe class="activity" src="../activities/calibration.html" title="Interactive synthetic calibration: model complexity and validation"></iframe>
-```
-
-[Open the activity on its own](../activities/calibration.html). It runs in the browser without Python and uses generated observations. Beyond their range, the equation continues to draw a curve. The absence of points there is worth keeping in view: what could we check it against?
-
-The extra points are **[validation observations](../glossary.qmd#data-splits)**, because we use them to guide model choices while exploring. They are not a final test set. A final assessment needs an independently reserved evaluation after the modelling choices are settled. Its error will still be an empirical estimate, with uncertainty and a scope set by the evaluation data.
-
-### Preferring some curves to others {#regularising-a-fit}
-
-We need not restrict a model only by removing higher powers. We could keep the polynomial degree fixed and add a penalty for large fitted coefficients to the training error. The fitting procedure would then balance agreement with the observations against that penalty. This is one form of **regularisation**, illustrated in the [MolSim lecture, p. 41](https://www.compchem.nl/wp-content/uploads/molsim2023/L09_Machine-Learning.pdf#page=41).
-
-The penalty expresses a preference; it does not supply new measurements. Its strength is another hyperparameter, chosen using validation data. Also, “large” depends on how we express the inputs: changing concentration units changes the numerical coefficients. We will meet this issue again when [comparing distances between materials](03-mof-uptake.qmd#why-would-changing-units-change-a-prediction).
-
 ## Deciding which data may be used {#a-first-trustworthy-workflow}
+
+We want the line to work on measurements beyond those used to fit it. But we also want to compare different ways of fitting: perhaps another family of curves, or a different treatment of the inputs. If we use a set of observations to make those choices, their results have become part of development. We therefore give data different jobs.
+
+| Data | What may we use them for? |
+|---|---|
+| Training | Fit the adjustable parameters and transformations learned from data. |
+| Validation | Compare model procedures, such as how flexible a curve we allow. |
+| Final test | Estimate performance after those choices, on independently reserved observations relevant to the intended use. |
+
+The names describe how the observations are used. Calling a file “test” does not keep it independent if we inspect its scores and change our model. And keeping it independent does not turn it into all possible future measurements.
 
 ::: {.concept}
 **Separate the decisions**
@@ -201,14 +191,19 @@ The penalty expresses a preference; it does not supply new measurements. Its str
 1. Specify the target, units, and intended use.
 2. Reserve evaluation data using a split appropriate to that use.
 3. Fit [preprocessing](../glossary.qmd#preprocessing) and model parameters using training data.
-4. Use validation data for model choices, including hyperparameters.
+4. Use validation data for model choices, such as which family of curves to fit.
 5. Estimate the chosen procedure's error using the reserved test data.
 6. Report the metric, sample size, sampling and split procedure, and uncertainty appropriate to that design. Inspect errors and explain which future cases the estimate can describe.
 :::
 
+<details>
+<summary>What does preprocessing mean in this workflow?</summary>
+
 Suppose our inputs include molar mass and a count of particular atoms. We might first rescale their values to comparable numerical ranges. A **scaler** performs that transformation. If some entries are missing, an **imputer** fills them using a specified rule. These are examples of preprocessing: transformations applied before the model receives its inputs.
 
 When a transformation learns from data, fit it on the training observations and apply the same fitted transformation to validation observations. A **pipeline** connects these steps to the model so that they can be fitted and applied together. [Cross-validation](../glossary.qmd#cross-validation) repeats fitting and validation with different portions of the data. It does not automatically prevent [data leakage](../glossary.qmd#leakage), where evaluation information enters model development, or make related observations independent. [scikit-learn's examples of common pitfalls](https://scikit-learn.org/stable/common_pitfalls.html)
+
+</details>
 
 ## Test error is an estimate {#empirical-error-and-population-risk}
 
@@ -254,6 +249,43 @@ The model has not changed between rows. The observations have. We can calculate 
 There is a second question. Suppose both groups were measured on our instrument, but the model will be used in another laboratory. Collecting more solutions on our instrument can make the estimate more precise for that setting while leaving the new laboratory unrepresented. **Sampling uncertainty** and a **[change in distribution](../glossary.qmd#distribution-shift)** are different problems. More test rows do not automatically resolve both, especially when rows share molecules, batches, or instruments.
 
 **Discuss:** What changed between A and B? What would we need to know about the sampling before using either score to describe performance in another laboratory?
+
+## Why a more flexible curve can mislead
+
+We can now ask what happens when we change the family of functions. We will use a larger generated dataset for this comparison: twelve training observations and seventeen validation observations. These are different observations from the three used in our hand calculation. Keep the training points fixed as the model changes, then reveal the validation points to see what new evidence adds.
+
+A polynomial model adds terms:
+
+$$
+f_\theta(c)=b+w_1c+w_2c^2+\cdots+w_dc^d.
+$$
+
+The coefficients $b,w_1,\ldots,w_d$ are fitted parameters. The degree $d$ determines which family of curves we fit; it is a **[hyperparameter](../glossary.qmd#hyperparameter)**. We can use validation observations to help choose it.
+
+For [unregularised least squares](../glossary.qmd#regularisation) on the same data, increasing the polynomial degree enlarges a nested model family. The best possible training error cannot increase, up to numerical effects. Performance on new measurements has no such guarantee. The curve may fit measurement noise or behave unpredictably where there are few observations.
+
+The extra flexibility lets the curve follow more of what happened in these particular measurements. Some of that detail may be noise. We call it **overfitting** when fitting such detail improves the fit to the training observations at the expense of prediction on new ones. In our polynomial example, we can watch that happen by changing the degree and comparing two sets of observations.
+
+### Changing the polynomial degree {#predict-then-explore}
+
+1. Start with degree 1. Predict what will happen to training error as degree increases.
+2. Change the degree and inspect the curve. Explain one surprising change.
+3. Reveal the validation observations. Use them to compare model choices.
+4. Show the region outside the observed range. Describe what is known and what is only assumed there.
+
+```{=html}
+<iframe class="activity" src="../activities/calibration.html" title="Interactive synthetic calibration: model complexity and validation"></iframe>
+```
+
+[Open the activity on its own](../activities/calibration.html). It runs in the browser without Python and uses generated observations. Beyond their range, the equation continues to draw a curve. The absence of points there is worth keeping in view: what could we check it against?
+
+The extra points are **[validation observations](../glossary.qmd#data-splits)**, because we use them to guide model choices while exploring. They are not a final test set. A final assessment needs an independently reserved evaluation after the modelling choices are settled. Its error will still be an empirical estimate, with uncertainty and a scope set by the evaluation data.
+
+### Preferring some curves to others {#regularising-a-fit}
+
+We need not restrict a model only by removing higher powers. We could keep the polynomial degree fixed and add a penalty for large fitted coefficients to the training error. The fitting procedure would then balance agreement with the observations against that penalty. This is one form of **regularisation**, illustrated in the [MolSim lecture, p. 41](https://www.compchem.nl/wp-content/uploads/molsim2023/L09_Machine-Learning.pdf#page=41).
+
+The penalty expresses a preference; it does not supply new measurements. Its strength is another hyperparameter, chosen using validation data. Also, “large” depends on how we express the inputs: changing concentration units changes the numerical coefficients. We will meet this issue again when [comparing distances between materials](03-mof-uptake.qmd#why-would-changing-units-change-a-prediction).
 
 ## Interpreting the slope {#what-does-an-interpretable-slope-establish}
 

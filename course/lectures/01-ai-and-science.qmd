@@ -149,6 +149,9 @@ John McCarthy, Marvin Minsky, Nathaniel Rochester, and Claude Shannon proposed t
 
 Rosenblatt's 1958 paper made learning from examples central to a model of pattern recognition. A threshold unit combines inputs, compares the result with a threshold, and produces a class prediction. Its weights can change during learning. [Rosenblatt's original paper, university-hosted copy](https://web.stanford.edu/class/psych209a/ReadingsByDate/01_30/Rosenblatt58Perceptron.pdf)
 
+<details>
+<summary>A threshold unit and the limits of its chosen rule</summary>
+
 ::: {.concept}
 **A learnable rule**
 
@@ -162,6 +165,8 @@ Learning changes the parameters using examples. The chosen model family limits t
 :::
 
 With two inputs, the threshold gives us a straight boundary. Put four points at the corners of a square and give opposite corners the same label. Try to draw one line that separates the two classes. This pattern, called XOR, exposes a choice we made when we selected the model: a single straight boundary cannot express the rule we need. Changing the weights will move the line around. To solve this problem, we need a richer way of representing the boundary.
+
+</details>
 
 ### The 1960s: DENDRAL and chemical knowledge {#s-with-a-1969-publication-dendral-and-chemical-knowledge}
 
