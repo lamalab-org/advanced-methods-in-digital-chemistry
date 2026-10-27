@@ -50,6 +50,30 @@ The written work should grow out of that investigation: the question, the calcul
 
 In the first meeting, we will discuss a manageable scope, the form and length of the written work, the presentation, and suitable dates. These details are still open. The assessment brief, including grading criteria and any weighting, will follow once the applicable module requirements have been checked.
 
+### Where do project ideas come from? {#project-ideas}
+
+You do not need to arrive with a project idea. I will suggest starting points drawn from the course examples, and you can also bring a question from another course or your own research interests. We will turn the idea into a question that can be investigated with the time, data, and tools available. Extending a supplied notebook is a reasonable starting point.
+
+For example, we could ask:
+
+- **When does a more flexible calibration curve help?** Extend the calibration notebook, change the amount or noise of the training data, and compare predictions on separate observations. Explain the conditions under which your conclusion holds.
+- **Which information helps predict a material's uptake?** Use the supplied MOF data to compare a simple baseline with a model using a small set of descriptors. Keep the evaluation procedure fixed and examine where the predictions fail.
+- **How reliably can an assistant extract chemical information?** Choose a small collection of public texts, define the fields to extract, and compare the output with a manually checked reference. Missing values, units, and unsupported answers are useful things to investigate.
+
+These are possible starting points, not assigned topics. A useful project needs a question and a way to check an answer; it does not need a new architecture or a large dataset. We can adapt the scope to your interests and experience.
+
+### When should we start? {#project-timing}
+
+My proposal is to collect ideas from the first meeting and use the first practical sessions to find out what interests you. After those first practicals, discuss a possible question with me. A short conversation or a few sentences are enough: what would you like to find out, what data could you use, and what would you compare or check first? This is a way to get feedback on the scope, not an additional assessed report.
+
+Start the main investigation once we have agreed a manageable question and a feasible first step. Use the supported practical time to try things and get help. You do not need to wait until we have covered every method, and you do not need to finish the project during a block week. Keep a record of your calculations, choices, and results as you go, so the report and presentation can grow out of that work.
+
+### When is the project due? {#project-dates}
+
+**The written-report deadline and the date of the final presentation have not yet been set.** We will discuss both alongside the course timetable, allowing time to work on the project after the relevant teaching sessions. The end of the listed lecture period is not, by itself, a project deadline.
+
+Once the timetable and applicable requirements have been checked, I will publish the dates and submission instructions here and in the assessment brief. For the first meeting, bring any constraints that would affect a workable schedule; you do not need to submit a project proposal or start a separate investigation beforehand.
+
 ## Learning from observations {#learning-from-observations}
 
 The first three sessions establish a modelling workflow we can understand and check. A calibration curve lets us work through the calculations with very little code. A table of porous materials then makes the choices about chemical data and evaluation more apparent.
