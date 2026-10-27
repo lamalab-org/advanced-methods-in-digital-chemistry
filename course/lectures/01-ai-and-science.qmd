@@ -216,6 +216,16 @@ We will return to three questions: **Does the lens fit the question? Do the choi
 
 This is why we will spend time on the basics even while using capable coding and language-model assistants. An assistant may help us implement a calculation or suggest an explanation. We still need to recognise which question that calculation answers. LLMs are one part of the broader field we will study; using them well includes knowing when a different method, a measurement, or a better question is needed.
 
+## What do we expect a model to tell us? {#breiman-two-cultures}
+
+Consider a calibration curve. We could assume that mean absorbance depends linearly on concentration and specify how measurements vary around that line. We would fit the unknown quantities and examine whether those assumptions are adequate. We could also choose a flexible function for its ability to predict new absorbance measurements, without claiming that its internal calculation describes what happens in the instrument. Both approaches can be useful. What are we asking the model to tell us?
+
+Leo Breiman's [*Statistical Modeling: The Two Cultures*](https://www2.math.uu.se/~thulin/mm/breiman.pdf) (2001) develops this contrast. His **data modelling** culture starts with a probabilistic account of how observations arise; his **algorithmic modelling** culture builds a predictor while leaving that process unspecified. Both can pursue prediction and useful information. Breiman argues for a wider range of modelling tools and greater attention to predictive performance.
+
+These cultures do not coincide with the lenses above. A statistical model of observations is not automatically a causal or mechanistic account. A predictive algorithm still embodies assumptions through its inputs, construction, and evaluation. Either can be examined using a Bayesian or frequentist approach to uncertainty. The name of the culture does not settle the scientific question.
+
+For our calibration, a familiar formula needs checking against the experiment. A flexible predictor needs checking on observations relevant to its intended use. Suppose the two predict new measurements equally well: what further evidence would we need if we also wanted to explain why absorbance changes with concentration? The distinction becomes consequential when we decide what to conclude from a good fit. The [suggested reading](../reading.qmd#breiman-two-cultures) gives useful places to begin in Breiman's argument.
+
 ## A long history {#a-selective-history-six-stops-and-a-coda}
 
 The history shows several attempts to turn a broad ambition into concrete capabilities. Recognising patterns, reasoning from explicit knowledge, and using observations to guide action were research goals long before the current generation of models. Explicit knowledge and search developed alongside learning from examples. Statistics, optimisation, available data, and hardware shaped what these approaches could achieve.
@@ -412,6 +422,8 @@ For the discussion, please check which proposed weeks or dates you can attend, a
 For an introduction to the machine-learning methods we will encounter, I recommend our review [*Big-Data Science in Porous Materials*](../reading.qmd#introductory-reviews) (Jablonka, Ongari, Moosavi, and Smit, 2020) and Mehta et al.'s [*A high-bias, low-variance introduction to Machine Learning for physicists*](https://arxiv.org/abs/1803.08823) (2019). The first develops the ideas through materials chemistry; the second makes connections to statistical physics. Both give us material to return to as we begin building models.
 
 Hardt and Recht's [**Prediction and action**](https://mlstory.org/introduction.html#prediction-and-action), in *Patterns, Predictions, and Actions* (2022), develops a question that runs through this lecture: what changes when we act on a prediction? For the distinction between observation, model explanation, and intervention, I have collected [further references](../reading.qmd#claims-and-evidence), including their chapter on causality.
+
+Breiman's [*Statistical Modeling: The Two Cultures*](../reading.qmd#breiman-two-cultures) places our discussion of what a model should tell us in a debate that predates today's LLMs. Its opening distinction is useful to think with, and to question.
 
 Kate Crawford's [*Atlas of AI*](../reading.qmd#atlas-of-ai) examines the labour, resources, and institutions behind the systems we use. Carissa Véliz's [*Prophecy*](../reading.qmd#prophecy) considers the history and authority of prediction. Both matter to the perspective taken here: AI is made and used by people, and its consequences depend on their decisions.
 
