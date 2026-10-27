@@ -2,9 +2,7 @@
 title: "Glossary"
 ---
 
-Use this page when a word gets in the way of the argument. “Descriptor” can make a molar mass sound more mysterious than it is. Other words, such as “inference,” really do refer to different things in different contexts. The examples explain how we use the terms here; the lecture notes develop the reasoning behind them.
-
-**What should you be able to do after looking up a term?** Explain it through an example from our work and recognise where a nearby term means something different. A descriptor can be a model input; it is not the parameter we fit. A test error is calculated from observations; it is not the unknown error over every future use. There is no need to learn this vocabulary in advance.
+There is quite a lot of vocabulary around these methods. Some words name familiar things; others, such as “inference,” mean different things in different contexts. Use this page when a term gets in the way of the argument. After looking it up, you should be able to explain it through an example and distinguish it from a nearby term. There is no need to learn the glossary in advance.
 
 Some useful places to start: [descriptors](#descriptor), [features](#feature), [parameters](#parameter), [training and validation data](#data-splits), [kernels](#kernel), and [API keys](#api-key). The book's search also finds individual terms.
 

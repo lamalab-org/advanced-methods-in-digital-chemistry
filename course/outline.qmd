@@ -2,13 +2,12 @@
 title: "Course outline"
 ---
 
-Suppose a model predicts that a molecule will be useful. Useful for what? The answer may seem obvious until we have to decide which measurements to collect, which errors matter, and whether we would act on the prediction. I would like us to learn enough about the calculation to make those decisions ourselves.
+Suppose a model predicts that a molecule will be useful. Useful for what? The answer may seem obvious until we have to decide which measurements to collect, which errors matter, and whether we would act on the prediction. 
+After the course, I hope that you will be ask such questions and critically examine claims about machine learning in chemistry. 
 
 We begin by fitting and examining small models. We then ask how models can use molecular structure and enter a simulation. Finally, we use them to propose candidates, choose measurements, and assist a research workflow. Throughout, we return to the human decisions about what to retain, what to leave out, and what evidence is sufficient.
 
-The working plan has content for **about ten two-hour teaching slots**, which we may combine into fewer calendar appointments. The numbered sessions below describe the teaching sequence; the detailed notes for sessions 1–3 are available, and the later lessons are being developed.
-
-**What should this outline make clear?** How fitting a small model leads us towards working with molecules, simulations, and experiments; what you should be able to do at each stage; and how a project can grow out of that work. It also separates the arrangements we already know from the dates and assessment details we still need to discuss. Bring a question you would like to investigate and any constraints on when we can meet.
+The working plan has content for **about ten two-hour teaching slots**, which we may combine into fewer calendar appointments.
 
 ## What would you most like to learn? {#learning-goals}
 
@@ -54,15 +53,7 @@ In the first meeting, we will discuss a manageable scope, the form and length of
 
 ### Where do project ideas come from? {#project-ideas}
 
-You do not need to arrive with a project idea. I will suggest starting points drawn from the course examples, and you can also bring a question from another course or your own research interests. We will turn the idea into a question that can be investigated with the time, data, and tools available. Extending a supplied notebook is a reasonable starting point.
-
-For example, we could ask:
-
-- **When does a more flexible calibration curve help?** Extend the calibration notebook, change the amount or noise of the training data, and compare predictions on separate observations. Explain the conditions under which your conclusion holds.
-- **Which information helps predict a material's uptake?** Use the supplied MOF data to compare a simple baseline with a model using a small set of descriptors. Keep the evaluation procedure fixed and examine where the predictions fail.
-- **How reliably can an assistant extract chemical information?** Choose a small collection of public texts, define the fields to extract, and compare the output with a manually checked reference. Missing values, units, and unsupported answers are useful things to investigate.
-
-These are possible starting points, not assigned topics. A useful project needs a question and a way to check an answer; it does not need a new architecture or a large dataset. We can adapt the scope to your interests and experience.
+You do not need to arrive with a project idea. I will suggest starting points drawn from the course examples, and you can also bring a question from another course or your own research interests. We will turn the idea into a question that can be investigated with the time, data, and tools available. 
 
 ### When should we start? {#project-timing}
 
@@ -84,7 +75,7 @@ We begin with a calibration curve because we can follow the whole calculation. T
 
 | Session | Topics | What we will work through |
 |---|---|---|
-| **1. AI, science, and our tools** | Modelling as deliberate omission; AI as an ambition; its history and methods; prediction, explanation, and causality; probability; the human choices behind models. | Classify examples and consider what a model leaves out. Use selected historical examples to place LLMs in a broader field, then examine how a changed question needs different evidence and what seven successes in ten attempts tell us. Set up an assistant and a Python notebook. [Lecture notes](lectures/01-ai-and-science.qmd) · [Setup](setup.qmd) |
+| **1. AI, science, and our tools** | Modelling as deliberate omission; AI as an ambition; its history and methods; prediction, explanation, and causality; probability; the human choices behind models. | Classify examples and consider what a model leaves out. Use selected historical examples to place LLMs in a broader field, then examine how a changed question needs different evidence and what seven successes in ten attempts tell us. Set up an AI-assistant and a Python notebook. [Lecture notes](lectures/01-ai-and-science.qmd) · [Setup](setup.qmd) |
 | **2. Fitting a model** | Inputs and targets; functions and parameters; losses; fitting; model flexibility and regularisation; training, validation, and test data. | Calculate a few predictions and errors, change a calibration curve, and compare results on new observations. Establish why **test error is still an empirical estimate**. [Lecture notes](lectures/02-learning-from-data.qmd) |
 | **3. Making a chemical comparison** | Predicting a value, a label, or an ordering; descriptors, baselines, and scaling; linear and kernel models; provenance, leakage, and uncertainty in an error estimate. | Predict computed CO₂ uptake, compare models using validation data, inspect residuals, and state which future cases the evaluation can describe. [Lecture notes](lectures/03-mof-uptake.qmd) |
 
@@ -108,7 +99,7 @@ So far, we have supplied descriptions of the materials and chosen the functions 
 
 :::
 
-By this stage, you should be able to follow how a molecular description becomes a prediction and explain which changes ought to leave that prediction unchanged. You should also be able to distinguish an error in the learned energy from an error introduced by running the simulation. We will train a small network ourselves and use prepared models where training would consume the time we need to examine the calculation.
+By this stage, you should be able to follow how a molecular description becomes a prediction and explain which changes ought to leave that prediction unchanged. We will train a small network ourselves and use prepared models where training would consume the time we need to examine the calculation.
 
 ## From predictions to decisions {#predictions-and-decisions}
 
@@ -124,28 +115,8 @@ A model that predicts a property does not yet tell us which molecule to make or 
 
 :::
 
-We will already have used an assistant from the first meeting and tried one that can edit files and run commands. Session 9 examines these tools using the ideas developed earlier: learned representations, generation, evaluation, and the difference between a proposed answer and an independently checked result. We can now ask how much of a chemical workflow to hand to an assistant and how to evaluate the complete sequence of actions.
 
 ## A result another chemist can examine {#bringing-the-work-together}
 
 **Session 10: reproducibility and project discussion.** We bring together the question, data, model, evaluation, and interpretation in a small piece of work. Another person should be able to run the calculation and understand the conclusion. We will exchange work, inspect one another's evidence, and explain a modelling choice and a limitation.
 
-The project should answer one bounded question. It might compare property predictors, examine the range in which a potential is useful, or evaluate an assisted extraction task. It does not need to use every method in the course. Keeping track of data, units, code, and model settings begins with the first notebook; this final meeting tests whether that record is useful to someone else.
-
-## The background we will build along the way {#background}
-
-The starting point is master's-level chemistry and limited experience with Python or machine learning. We will introduce the computing and mathematical ideas where they become necessary:
-
-- In the first meeting: terminal, shell, files, environment, notebook, and how to investigate an error message.
-- With calibration: variables, arrays, small functions, plotting, means, and the slope of a function. Derivatives grow out of changing a prediction and observing its effect.
-- With chemical data: tables, feature vectors, fitting and prediction, and separation of data used for different decisions. A vector first means a list of numbers describing one example.
-- With networks and molecules: weighted sums, composition of functions, and aggregation over atoms. We work through small calculations before using compact notation.
-- With evaluation and experimental choice: averages over samples, distributions, and uncertainty. Repeating a sampling procedure and assigning probabilities to unknown quantities answer different questions; we explain that difference before relying on the names of statistical approaches.
-
-There is no expectation that everyone arrives able to build a machine-learning system. Supplied notebooks let us concentrate on a calculation or decision at a time. Short preparation tasks will help us start together; the books and papers remain [suggested reading](reading.qmd), not compulsory preparation.
-
-## Questions that stay with us {#questions-throughout}
-
-The early discussion of AI as a human endeavour continues through the technical work. Which measurements entered the table, whose work produced them, and what did the representation discard? Which scientific question does an error metric reward? What resources and services does a model depend on? When a paper or a company makes a claim, which observations support it?
-
-We also keep distinct the questions of predicting an outcome, explaining a model's calculation, identifying the effect of an intervention, and establishing a mechanism. We encounter them first in ordinary language and return to them when inspecting a model, choosing an experiment, and checking an assistant's answer. The aim is to make a better scientific judgement as well as a working calculation.

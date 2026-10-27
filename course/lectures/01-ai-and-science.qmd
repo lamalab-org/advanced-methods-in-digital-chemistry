@@ -2,7 +2,7 @@
 title: "What do we mean by AI for science?"
 ---
 
-A calculator, a chess program, and a chatbot all do something that once required a person. We are much more likely to call some of them intelligent than others. Before discussing what AI might do for chemistry, it is worth asking what we mean by that word.
+Before discussing what AI might do for chemistry, I would like us to be clearer about what we mean by it. A calculator, a chess program, and a chatbot all do something that once required a person. Yet we are much more likely to call some of them intelligent than others. What makes the difference?
 
 Some of our questions will sound almost too basic to need asking. What does it mean to model something? If two quantities vary together, what have we learned about changing one of them? What does a probability describe? We can make a calculation much more elaborate without getting any closer to an answer, simply because we have been answering a different question. I would like us to notice where that happens.
 
@@ -14,8 +14,6 @@ After working through these examples, you should be able to:
 - Explain what a model leaves out and why an omission can be harmless for one question and decisive for another.
 - Distinguish predicting a yield, explaining the predictor, and establishing what changing the temperature would cause. Explain why none of those alone identifies a reaction mechanism.
 - Say what seven successes in ten attempts tell us directly, and what assumptions enter a prediction about the next attempt. Recognise that statements about uncertainty can have different interpretations.
-
-These distinctions should let you ask a more precise question of a paper, a model, or an assistant. Being able to name the distinction matters less than being able to explain what changes in the example.
 
 These notes give a fuller account than we will work through together in the first meeting. Use them to revisit the examples afterwards.
 
@@ -54,7 +52,7 @@ Suppose our predictor receives only that drawing and returns one solubility valu
 
 Here the drawing is an **input representation**: the information supplied. The **predictive model** is the rule or learned relationship that uses it to calculate an answer. These are separate choices. An increasingly elaborate calculation cannot tell which of our two requested temperatures we intended from a drawing that is identical in both cases.
 
-This is one reason I see AI as a deeply human endeavour. Someone has decided which question matters, which observations to collect, and which differences the model can ignore. Someone will also decide whether its answer is good enough to use. Those choices shape the mathematics we will do in this course.
+I think these choices deserve more attention than they usually get. Someone has decided which question matters, which observations to collect, and which differences the model can ignore. The mathematics begins with those decisions already made.
 
 ::: {.concept}
 **Every model leaves something out. Good modelling makes those omissions deliberate and justified.**
@@ -64,17 +62,15 @@ What are we keeping? What are we leaving out? Why is that acceptable for this pu
 
 Of course, we do not always make these decisions consciously. Sometimes someone else assembled the dataset. Sometimes a software package has already chosen a representation for us. Sometimes we simply never thought to record the solvent. The omission still shapes what the model can learn. Making it deliberate means noticing it and being able to explain why it is acceptable.
 
-**Try:** State one solubility question precisely, including its measurement conditions. Decide which conditions you will hold fixed and which the model must receive as inputs. Explain how one omitted condition could change the usefulness of the answer. This is the same decision we will make when preparing a chemical dataset.
+**Try:** State one solubility question precisely, including its measurement conditions. Decide which conditions you will hold fixed and which the model must receive as inputs. Explain how one omitted condition could change the usefulness of the answer.
 
 Suppose we describe each molecule by its molar mass and the number of hydrogen-bond donors. These numbers are **[molecular descriptors](../glossary.qmd#descriptor)**: numerical descriptions of selected aspects of a molecule. Two different structures can have the same values for both. We have made another choice about which differences to preserve.
 
-This question will return when we choose descriptors, describe molecules as atoms connected by bonds ([molecular graphs](../glossary.qmd#molecular-graph)), and reduce a collection of prediction errors to one score. At each step, we decide which differences the model or measurement should preserve.
-
-There is another step between preserving information and making use of it. A representation can contain atomic coordinates without a particular model learning the relationships between them. We will return to that question through [Alampara, Miret, and Jablonka's study of text representations of materials](../reading.qmd#representation-and-model).
+There is a further complication: supplying information does not guarantee that a model can use it. A representation can contain atomic coordinates without a particular model learning the relationships between them. Our [study of text representations of materials](../reading.qmd#representation-and-model) examines this distinction.
 
 ## The problem with the word AI {#ai-names-an-ambition}
 
-I once offered a seminar on critical aspects of AI. I had deliberately put “AI” in the title to attract participants. It is, after all, a word that attracts attention. After a few meetings, I had to tell the participants that the word was now banned from the seminar. I had advertised the seminar with the very word that was making our discussions difficult.
+I once offered a seminar on critical aspects of AI. I had deliberately put “AI” in the title to attract participants. After a few meetings, I had to tell the participants that the word was now banned from the seminar.
 
 The problem was that everybody could have an opinion about AI while talking about something different. The same word could mean a chatbot, a recommendation system, or a machine that might one day think like a human. A shared word did not necessarily give us a shared subject. Agreement became difficult to interpret. So did disagreement.
 
@@ -84,9 +80,7 @@ AI also names the research field that grew around that ambition. But the breadth
 
 []{#what-does-the-label-tell-us}
 
-Return to one of the examples we classified at the start. What does that label tell someone about how it works? What would they still need to know to assess its result?
-
-Whether a familiar regression is described as AI or machine learning changes little about the calculation itself. The useful description identifies the observations it learns from and the predictions it is expected to make. Likewise, calling a system AI does not specify its capabilities, assumptions, or failure modes.
+Return to the spreadsheet from our opening examples. Calling its regression AI changes little about the calculation. To judge the result, we need to know which observations it learns from and what it is expected to predict.
 
 ::: {.concept}
 **What does the system actually do?**
@@ -101,11 +95,9 @@ For example, “AI understands solubility” leaves much unspecified. A more pre
 
 ## A long history {#a-selective-history-six-stops-and-a-coda}
 
-Recognising patterns, reasoning from explicit knowledge, and learning from observations were research goals long before the current generation of models. Looking at a few earlier attempts helps us distinguish the age of a question from the novelty of an answer. The history also complicates a simple story in which one new algorithm suddenly made everything possible: methods, data, hardware, and the questions people chose developed together.
+Recognising patterns, reasoning from explicit knowledge, and learning from observations were research goals long before today's models. I find the history helpful for separating the age of an ambition from the novelty of an answer. An old question can receive a substantial new answer; we still need to ask what changed in the methods, resources, or demonstrated results.
 
-As we follow the dates, ask what changed. Was it the question, the method, the resources available, or what could actually be demonstrated? An old ambition can receive a substantial new answer. Its age alone tells us little about the value of that answer.
-
-There is also a statistical thread: predicting an unobserved outcome from regularities in observations, and asking when those regularities remain useful. That thread does not depend on first reproducing human intelligence. Hardt and Recht's history connects pattern recognition with statistics, computing, and the ambitions of AI. It helps explain why the concrete prediction problem is often easier to discuss precisely than the broader label. [*Patterns, Predictions, and Actions*, Introduction](https://mlstory.org/introduction.html)
+Learning from observations also has a history in statistics that does not depend on first reproducing human intelligence. Hardt and Recht connect these traditions in the introduction to [*Patterns, Predictions, and Actions*](https://mlstory.org/introduction.html).
 
 ### Before the name {#before-the-name}
 
@@ -308,7 +300,7 @@ Now suppose an assistant writes, “I am 70% confident this synthesis will work.
 
 We have looked at the same reaction records with two questions in mind: what yield should we expect, and what would changing the temperature cause? The table stayed the same. What we needed from it changed.
 
-This is what I mean by a **[lens](../glossary.qmd#lens)**: a way of approaching a problem, with a particular question, assumptions, and idea of what would count as an answer. The word is shorthand for a change we have already made in the example. We have encountered two other distinctions as well: what a probability statement means, and how rules or learned connections organise a calculation. Putting them beside one another helps us see which question each answers.
+This is what I mean by a **[lens](../glossary.qmd#lens)**: a way of approaching a problem, with a particular question, assumptions, and idea of what would count as an answer. We have encountered two other distinctions as well: what a probability statement means, and how rules or learned connections organise a calculation. They concern different aspects of the same system.
 
 | Question | Distinction we have encountered | What should we check? |
 |---|---|---|
@@ -324,7 +316,7 @@ This is why the distinctions matter in practice. If our problem is that temperat
 
 There are further choices within an approach. If our experiment requires a dissolved concentration of 1 mmol/L, measurements of 2 and 20 mmol/L can both become “soluble enough.” If the requirement later changes to 5 mmol/L, those labels no longer preserve the distinction we need. The [solubility example](../examples.qmd#choices-within-a-lens) follows what happens when we keep values, labels, or an ordering. It makes the idea of omission concrete in the data we prepare for learning.
 
-You should now be able to explain one of these distinctions through its example and say what mistake it helps avoid. An LLM may write perfectly executable code for the calculation we request. If we asked for a prediction when we needed an intervention effect, a successful run can leave the central problem untouched. Recognising that mismatch is part of doing the modelling ourselves.
+An LLM may write perfectly executable code for the calculation we request. If we asked for a prediction when we needed an intervention effect, a successful run can leave the central problem untouched.
 
 ### What do we expect a model to tell us? {#breiman-two-cultures}
 
@@ -332,13 +324,13 @@ Consider a calibration curve. We could assume that mean absorbance depends linea
 
 Leo Breiman's [*Statistical Modeling: The Two Cultures*](https://www2.math.uu.se/~thulin/mm/breiman.pdf) (2001) develops this contrast. His **data modelling** culture starts with a probabilistic account of how observations arise; his **algorithmic modelling** culture builds a predictor while leaving that process unspecified. Both can pursue prediction and useful information. Breiman argues for a wider range of modelling tools and greater attention to predictive performance.
 
-Breiman's contrast concerns what researchers expect a model to provide. It adds another question to the ones above. A statistical account of observations still needs justification before we interpret it causally or mechanistically. An algorithm chosen for prediction still has assumptions in its inputs, construction, and evaluation. We can also ask Bayesian or frequentist questions about either. The name of the culture does not settle the scientific question.
+This contrast does not settle our earlier questions. A statistical account of observations still needs justification before we interpret it causally. An algorithm chosen for prediction still has assumptions in its inputs and construction. Either can be examined using Bayesian or frequentist approaches.
 
-For our calibration, a familiar formula needs checking against the experiment. A flexible predictor needs checking on observations relevant to its intended use. Suppose the two predict new measurements equally well: what further evidence would we need if we also wanted to explain why absorbance changes with concentration? The distinction becomes consequential when we decide what to conclude from a good fit. The [suggested reading](../reading.qmd#breiman-two-cultures) gives useful places to begin in Breiman's argument.
+Suppose our familiar formula and a flexible predictor give equally good predictions for new measurements. What further evidence would we need if we also wanted to explain why absorbance changes with concentration?
 
 ## Prediction and prophecy {#prediction-and-prophecy}
 
-So far, we have asked what a model can tell us. What happens when people act on its answer? The wish to know what will happen is much older than machine learning. Carissa Véliz's [*Prophecy*](../reading.qmd#prophecy) places today's predictive technologies within that longer history. It makes us ask why we want a prediction, whose prediction we trust, and what we do once we have it.
+The wish to know what will happen is much older than machine learning. Carissa Véliz's [*Prophecy*](../reading.qmd#prophecy) places today's predictive technologies within that longer history. I think its question about the authority we give predictions matters in the laboratory too.
 
 Suppose a model predicts which materials will be stable. We use its ranking to decide which candidates to make. The prediction has now helped decide where people spend their time and which measurements will exist. The materials we never make remain unknown. If the new measurements enter the next dataset, our earlier decisions also shape the evidence available to the next model.
 
@@ -350,14 +342,7 @@ A numerical answer can seem authoritative. To judge what it establishes, we need
 
 Those decisions also depend on who can build and use a model. Whose ambition does it serve, and who provides the means to pursue it? Kate Crawford's *Atlas of AI* examines the material and political conditions of AI, including resource extraction, labour, data, and institutional power. I particularly recommend it for exploring these questions further. [Crawford (2021), *Atlas of AI*](https://yalebooks.yale.edu/book/9780300264630/atlas-of-ai/)
 
-Consider the chatbot or molecular predictor from the opening examples. Its output depends on more than a fitted function. To investigate the system, we can ask:
-
-- What equipment and energy support its training and use?
-- Who produced the measurements, prepared the data, and checks the output?
-- Who defined the target and decided which observations belong in the dataset?
-- Who controls access, and who benefits or bears costs when the system is used?
-
-Take the measurements in a chemical dataset. Someone prepared the samples, ran the instrument, decided which results to keep, and recorded the conditions. By the time we download a table, much of that work may have disappeared from view. What can we find out about it? Crawford's [chapters on labour and data](../reading.qmd#atlas-of-ai) give us reasons to ask.
+Take the measurements in a chemical dataset. Someone prepared the samples, maintained the instrument, decided which results to keep, and recorded the conditions. By the time we download a table, much of that work may have disappeared from view. The same is true of the equipment and energy behind a hosted model. Who provides these resources, who controls access, and whose work remains visible? Crawford's [chapters on labour and data](../reading.qmd#atlas-of-ai) give us reasons to ask.
 
 ### What does a benchmark score stand for? {#science-and-model-claims}
 
@@ -385,13 +370,13 @@ We can examine the same step here: what does answering those questions establish
 
 **Discuss:** First describe ChemBench using only what was evaluated. Then examine the TakeoverBench heading. What additional claim does that framing invite? Distinguish what the page explicitly says from what you inferred. What evidence would justify using the score for the broader claim?
 
-The [suggested reading](../reading.qmd#science-and-commercial-claims) collects the paper and these presentations. We will return to the uncertainty in finite benchmark results when discussing [test error](02-learning-from-data.qmd#empirical-error-and-population-risk). Here the first question is whether we measured something that supports the claim at all.
+There is also [uncertainty in a finite benchmark score](02-learning-from-data.qmd#empirical-error-and-population-risk). But even a precisely estimated score would leave the first question open: did we measure something that supports the claim?
 
 ## From a question to a fitted model {#the-statistical-question-hiding-in-the-history}
 
 Now let us fit something. In the [next lecture](02-learning-from-data.qmd), a few concentration and absorbance measurements will give us a familiar place to start. Even a straight line leaves decisions to make: which line, fitted according to which error, and useful for which next measurement?
 
-Here, too, “another measurement” needs a meaning. A new solution on the same instrument, a higher concentration, and a measurement in another laboratory are different uses. We need observations that let us examine the intended one. Even observations reserved for a final test give us only a finite sample: **test error remains an empirical estimate**, with uncertainty and a scope set by the data. The calibration example will let us work through that distinction explicitly.
+“Another measurement” needs a meaning. A new solution on the same instrument, a higher concentration, and a measurement in another laboratory are different uses. Even observations reserved for a final test give us only a finite sample: **test error remains an empirical estimate**, with uncertainty and a scope set by the data.
 
 ## Questions to consider {#exit-questions}
 
@@ -407,10 +392,10 @@ For an introduction to the machine-learning methods we will encounter, I recomme
 
 Hardt and Recht's [**Prediction and action**](https://mlstory.org/introduction.html#prediction-and-action), in *Patterns, Predictions, and Actions* (2022), develops a question that runs through this lecture: what changes when we act on a prediction? For the distinction between observation, model explanation, and intervention, I have collected [further references](../reading.qmd#claims-and-evidence), including their chapter on causality.
 
-Breiman's [*Statistical Modeling: The Two Cultures*](../reading.qmd#breiman-two-cultures) places our discussion of what a model should tell us in a debate that predates today's LLMs. Its opening distinction is useful to think with, and to question.
+Breiman's [*Statistical Modeling: The Two Cultures*](https://www2.math.uu.se/~thulin/mm/breiman.pdf) places our discussion of what a model should tell us in a debate that predates today's LLMs. Its opening distinction is useful to think with, and to question.
 
 Kate Crawford's [*Atlas of AI*](../reading.qmd#atlas-of-ai) examines the labour, resources, and institutions behind the systems we use. Carissa Véliz's [*Prophecy*](../reading.qmd#prophecy) considers the history and authority of prediction. Both matter to the perspective taken here: AI is made and used by people, and its consequences depend on their decisions.
 
 Wang et al. (2023), [*Scientific discovery in the age of artificial intelligence*](https://www.nature.com/articles/s41586-023-06221-2), reviews scientific applications. Messeri and Crockett (2024), [*Artificial intelligence and illusions of understanding in scientific research*](https://www.nature.com/articles/s41586-024-07146-0), considers how adopting these tools might affect scientific understanding. Moosavi, Jablonka, and Smit (2020), [*The Role of Machine Learning in the Understanding and Design of Materials*](https://doi.org/10.1021/jacs.0c09105), brings these questions into materials chemistry.
 
-The [suggested reading](../reading.qmd#lecture-1) gives full references and access information. The [historical sources](../reading.qmd#historical-sources) are also collected there, if you would like to examine the original arguments.
+The [suggested reading](../reading.qmd#lecture-1) and [historical sources](../reading.qmd#historical-sources) collect the references.

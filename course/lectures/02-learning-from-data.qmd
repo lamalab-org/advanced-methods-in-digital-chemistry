@@ -2,7 +2,7 @@
 title: "What does it mean to learn from data?"
 ---
 
-We have probably all fitted a calibration curve. We choose a line, adjust it to some measurements, and use it to say something about another measurement. This is already learning from data. Calling it machine learning does not change the calculation, but examining it closely lets us see decisions that will matter again in much larger models. Why a line? What makes one fit better than another? And how much do we know about a measurement we have not yet made?
+I would like to start with a calculation that is familiar from the chemistry laboratory: fitting a calibration curve. We choose a line, adjust it to some measurements, and use it to say something about another measurement. This is already learning from data. But why a line? What makes one fit better than another? And how much do we know about a measurement we have not yet made?
 
 ## What should you be able to do afterwards? {#lecture-outcomes}
 
@@ -13,8 +13,6 @@ After working through the calibration example, you should be able to:
 - Explain why observations used to choose a model cannot also provide an untouched final test of that choice.
 - Explain why **test error is still an empirical estimate**, and why more test measurements on one instrument do not settle performance on another.
 
-The arithmetic is small enough that we can check every step. That gives us something to compare with the code, including code an assistant writes for us.
-
 ## Before class
 
 Complete the [setup notebook](../notebooks/00-getting-started.py), or bring the first cell that did not work. Spend at most 25 minutes on preparation. Try calculating the three predictions in the opening example below before using Python or an LLM.
@@ -23,7 +21,7 @@ Complete the [setup notebook](../notebooks/00-getting-started.py), or bring the 
 
 We prepare a series of concentrations and measure absorbance. Under suitable conditions in a dilute solution, we expect a roughly linear relationship. Drawing a line seems a reasonable place to start. But where should it go, and how will we decide whether one line is better than another?
 
-We use three generated observations first so that we can check each prediction and error ourselves. That will give us an independent way to check the code later. The concentration is our **input**; the absorbance we want to predict is our **target**. Write concentration as $c$, in mmol L$^{-1}$, and dimensionless absorbance as $A$. Our line has a slope $m$ and an intercept $b$, so we allow both its steepness and its offset to change. These adjustable numbers are the model's **[parameters](../glossary.qmd#parameter)**.
+We use three generated observations so that we can check each prediction and error ourselves. The concentration is our **input**; the absorbance we want to predict is our **target**. Write concentration as $c$, in mmol L$^{-1}$, and dimensionless absorbance as $A$. Our line has a slope $m$ and an intercept $b$, so we allow both its steepness and its offset to change. These adjustable numbers are the model's **[parameters](../glossary.qmd#parameter)**.
 
 We call the observations used to choose these numbers the **training data**. For this first model, we treat the prepared concentrations as known inputs and describe discrepancies on the absorbance side. Uncertainty in preparing the solutions would give us another modelling decision to make.
 
@@ -60,7 +58,7 @@ Before fitting, decide the intended use. Are we predicting another measurement i
 | **Generalisation:** how does it perform on new cases? | Check measurements relevant to the intended use. |
 :::
 
-These questions interact: changing the model family changes both fitting and prediction. We will return to them for [molecular descriptors](../glossary.qmd#descriptor) and neural networks. [Hardt and Recht, *Supervised learning*](https://mlstory.org/supervised.html)
+Changing the model family changes both fitting and prediction. [Hardt and Recht, *Supervised learning*](https://mlstory.org/supervised.html)
 
 ### What have we decided before fitting? {#before-fitting}
 
@@ -83,7 +81,7 @@ At each of our three inputs, one factor in the added term is zero. Whatever valu
 
 </details>
 
-This question develops the sequence about limited data and prior knowledge in my [MolSim lecture, pp. 7–10](https://www.compchem.nl/wp-content/uploads/molsim2023/L09_Machine-Learning.pdf#page=7).
+I used the same argument about limited data and prior knowledge in my [MolSim lecture](https://www.compchem.nl/wp-content/uploads/molsim2023/L09_Machine-Learning.pdf#page=7).
 
 ## Deciding what counts as an error {#turning-a-discrepancy-into-an-objective}
 
@@ -339,9 +337,9 @@ Before asking an LLM, use residuals $+1$ and $-1$ to predict the returned value.
 
 **Record:** the request, the proposed change, your check, and a sentence explaining why the corrected operation measures a different quantity. A supplied version of the same task appears in the notebook, so no LLM account is needed to participate.
 
-We will also use this example to [try a coding assistant in the terminal](../cli-assistant.qmd). That version works on a small Python file: the assistant reads it, edits it, and runs the checks. We will compare the file before and after and check the calculation ourselves. We can do this in the supported practical here or return to it in the next meeting, once the Python setup is working for everyone.
+We will also [try a coding assistant in the terminal](../cli-assistant.qmd) on this example. It will read and edit a Python file and run checks; we will inspect the changes. We can do this here or in the next meeting, once the Python setup is working for everyone.
 
-In the [next lecture](03-mof-uptake.qmd), the same workflow meets a chemical data table. We will ask what constitutes a sample and how closely related materials change the meaning of a split. [Jablonka et al. (2023), *An Ecosystem for Digital Reticular Chemistry*](https://doi.org/10.1021/acscentsci.2c01177), provides a chemical case study of data leakage that makes this question concrete.
+The [next lecture](03-mof-uptake.qmd) uses a collection of porous materials. What counts as a new observation when two materials share the same building blocks? Our [digital reticular chemistry review](https://doi.org/10.1021/acscentsci.2c01177) examines this problem in its case study of data leakage.
 
 ## Questions to consider {#exit-questions}
 
@@ -353,9 +351,9 @@ In the [next lecture](03-mof-uptake.qmd), the same workflow meets a chemical dat
 
 ## Suggested reading {#reading-and-references}
 
-Hardt and Recht's [**Sample versus population**](https://mlstory.org/supervised.html#sample-versus-population), in Chapter 3 of *Patterns, Predictions, and Actions* (2022), develops the distinction behind our two test samples. The following **Supervised learning** section formalises the fitting problem. Chapter 6's discussion of the [generalisation gap and model complexity](https://mlstory.org/generalization.html) places the polynomial example in a broader context.
+Hardt and Recht's [**Sample versus population**](https://mlstory.org/supervised.html#sample-versus-population) develops the distinction behind our two test samples. Their discussion of the [generalisation gap and model complexity](https://mlstory.org/generalization.html) takes up the problem raised by the polynomial curves.
 
-Breiman's [*Statistical Modeling: The Two Cultures*, section 8](../reading.qmd#breiman-two-cultures), asks what we can conclude when different models predict about equally well but tell different stories about their inputs. Our curves agreeing at three observed concentrations are an initial illustration of non-uniqueness; that agreement alone does not show that they predict new observations equally well. We still need an appropriate evaluation, whose finite test error remains an estimate.
+Breiman's [*Statistical Modeling: The Two Cultures*](https://www2.math.uu.se/~thulin/mm/breiman.pdf) asks what we can conclude when models predict about equally well but tell different stories about their inputs. Our two constructed curves raise a related, smaller question: they agree at the three supplied concentrations, but what settles their disagreement elsewhere?
 
 For the code, scikit-learn's [**Common pitfalls and recommended practices**](https://scikit-learn.org/stable/common_pitfalls.html) explains inconsistent preprocessing and data leakage through paired examples. They show how a seemingly minor preparation step can let evaluation data influence the model.
 

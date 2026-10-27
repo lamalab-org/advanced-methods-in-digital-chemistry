@@ -13,8 +13,6 @@ After working through the uptake practical, you should be able to:
 - Choose a model using validation data, then report its test error with the metric, units, sample size, and scope of the comparison.
 - Use resampling to examine variation in an error estimate, and explain why repeating the recorded errors adds no evidence about a new family of materials or a different experiment.
 
-We will end with a claim about the calculation we actually performed. “A good material for carbon capture” will turn out to ask considerably more of the evidence.
-
 ## A porous material and a prediction
 
 Suppose we have a collection of porous materials and would like to decide which deserve a more expensive calculation. A metal–organic framework, or **MOF**, connects metal-containing nodes with organic linkers. Different choices of nodes and linkers give different pore geometries and chemical environments. How much carbon dioxide might a particular framework take up?
@@ -29,7 +27,7 @@ It is tempting to shorten the question to “find a good material for carbon cap
 
 One route to uptake begins with a model of the interactions between atoms and molecules. A simulation then samples configurations and uses them to estimate the amount adsorbed under the specified conditions. We could learn an approximation to the interaction energies and use it within that simulation. Alternatively, we could collect the uptake values from completed simulations and learn to predict those values directly. This second route is what our practical does. Its predictor is a **surrogate** for a specified simulation result.
 
-There is a further possibility: keep the energy model and learn a way to propose configurations that would otherwise be difficult to sample. We will return to that distinction when discussing molecular simulation. Learning the energy, learning a final property, and helping explore configurations change different parts of the calculation. They therefore require different checks. Agreement with a set of uptake values does not establish that a model can calculate forces or generate a physically meaningful trajectory.
+There is a further possibility: keep the energy model and learn a way to propose configurations that would otherwise be difficult to sample. These three uses of learning change different parts of the calculation. Agreement with uptake values, for example, does not establish that the model can calculate forces or generate a physically meaningful trajectory.
 
 ## What do we keep from a structure?
 
@@ -41,7 +39,7 @@ Imagine replacing a framework drawing with two numbers: its density and its pore
 | Surface area and pore volume | Surface area per gram; pore volume per gram | How strongly does CO₂ interact with the surface? |
 | Density | Framework mass per volume | Are two frameworks with similar density chemically similar? |
 
-The [data notes](../data/mof-uptake/README.md) give the exact column names, units, and source. The target is a simulation result. A model that reproduces it accurately approximates that calculation; comparison with experimental uptake is a further step.
+The [data notes](../data/mof-uptake/README.md) give the exact column names, units, and source. Remember that we are approximating a simulation result. Agreement with experimental uptake would be a further comparison.
 
 **Discuss:** Which two frameworks might look similar through these descriptors while differing in a way that matters for adsorption?
 
@@ -77,7 +75,7 @@ One model in the practical compares materials through distances between their fe
 
 Our calibration line adds two functions, a constant and a multiple of concentration. A polynomial adds further powers. We choose these building blocks first and then fit their coefficients. A kernel model offers another construction: place a function at each training input and fit the coefficients of their sum. This is the comparison in the [MolSim lecture, pp. 53–57](https://www.compchem.nl/wp-content/uploads/molsim2023/L09_Machine-Learning.pdf#page=53).
 
-The original practical uses **[kernel ridge regression](../glossary.qmd#kernel-ridge)**. Our Gaussian kernel gives a similarity to two scaled feature vectors $x$ and $z$:
+We use **[kernel ridge regression](../glossary.qmd#kernel-ridge)**. Our Gaussian kernel gives a similarity to two scaled feature vectors $x$ and $z$:
 
 $$
 k(x,z)=\exp\left(-\gamma\lVert x-z\rVert^2\right).
@@ -133,7 +131,7 @@ We have repeatedly drawn from the same recorded errors. There are still no new f
 
 ## Practical
 
-Choose a model using the training and validation data, record the choice, then inspect its test error. At the end, you should be able to defend the choice: did the descriptors improve on predicting the same uptake for every material, did scaling change the comparison, and how uncertain is the average error? Keep the conditions beside the final score. A reader should be able to tell which simulated uptake we predicted and which experimental questions remain open.
+Choose a model using the training and validation data, record the choice, then inspect its test error. I would like you to be able to explain why you chose that model and which future predictions you think the test result tells us something about. Keep the conditions beside the final score.
 
 Download and extract the complete [MOF practical kit](../downloads/mof-practical.zip). It contains the [notebook](../notebooks/03-mof-uptake.py), data, source notice, and locked environment. From its folder, use Ubuntu on WSL for Windows, or your macOS/Linux terminal:
 
@@ -149,8 +147,6 @@ The command opens `notebooks/03-mof-uptake.py` in marimo. Leave its test-evaluat
 3. Change one setting or feature and use validation results to choose what to retain. Record the choice and whether you have already inspected the saved test results.
 4. Trace the supplied run from its validation-based choice to its reserved test evaluation. State the metric, units, number of test rows, split procedure, and intended scope. If you make a new choice after seeing the test results, report it as exploration.
 5. Keep the model fixed during resampling. Explain what the spread shows and what uncertainty it leaves out.
-
-If you change the model after reading test results, the exercise becomes further exploration. A new final assessment would need fresh evaluation data.
 
 ### Which descriptors does the model use? {#an-optional-question-about-the-model}
 
@@ -168,6 +164,6 @@ Complete three sentences: which model you chose and why; what its empirical test
 
 Hardt and Recht's [**Sample versus population**](https://mlstory.org/supervised.html#sample-versus-population) remains relevant here: our test rows are a sample, and we have to decide which future cases they can represent.
 
-Moosavi et al. (2020), [*Understanding the diversity of the metal-organic framework ecosystem*](https://doi.org/10.1038/s41467-020-17755-8), examines what makes a new structure informative. The [PubMed record](https://pubmed.ncbi.nlm.nih.gov/32792486/) provides the abstract and links open full text. **Case Study 1: The impact of data leakage**, in the Appendix of Jablonka, Rosen, Krishnapriyan, and Smit (2023), [*An Ecosystem for Digital Reticular Chemistry*](https://doi.org/10.1021/acscentsci.2c01177), connects related structures to evaluation. An [open copy and further references on chemical data](../reading.qmd#molsim) are linked in the suggested reading.
+Moosavi et al. (2020), [*Understanding the diversity of the metal-organic framework ecosystem*](https://doi.org/10.1038/s41467-020-17755-8), examines what makes a new structure informative. The data-leakage case study in [*An Ecosystem for Digital Reticular Chemistry*](https://doi.org/10.1021/acscentsci.2c01177) connects related structures to evaluation. Both are part of our [collection of references on chemical data](../reading.qmd#molsim).
 
 The [original MolSim 2024 notebook](https://github.com/kjappelbaum/ml_molsim/blob/0ebed176b972c9ba9ddf7b6e3a4d04eaf3f32409/molsim_ml.ipynb) contains further exercises on descriptors, hyperparameter searches, and model inspection. The [data notes](../data/mof-uptake/README.md) explain how its data were adapted for this practical.
