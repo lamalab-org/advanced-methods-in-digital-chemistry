@@ -51,6 +51,29 @@ Before fitting, decide the intended use. Are we predicting another measurement i
 
 These questions interact: changing the model family changes both fitting and prediction. We will return to them for [molecular descriptors](../glossary.qmd#descriptor) and neural networks. [Hardt and Recht, *Supervised learning*](https://mlstory.org/supervised.html)
 
+### What have we decided before fitting? {#before-fitting}
+
+Take our proposed line and draw a second curve that passes through the same three predictions but bends between them. On our three recorded concentrations, the two functions give exactly the same errors. Between those concentrations, they can disagree. The observations alone have not told us which curve to choose.
+
+By allowing only straight lines, we have already ruled out the second curve. Our knowledge of dilute solutions gives us a reason to consider that restriction, within a suitable concentration range. If the measurements extend into a regime where the response bends, the same restriction could become a problem.
+
+Such restrictions and preferences are called **[inductive biases](../glossary.qmd#inductive-bias)**. They help determine what a model predicts where observations do not settle the answer. Choosing a representation, a family of functions, or a penalty during fitting can introduce them. Chemical knowledge can guide those choices, but we still need to check whether its assumptions fit the present experiment.
+
+<details>
+<summary>Two functions with the same predictions at the observed concentrations</summary>
+
+Let $u=c/(1\,\mathrm{mmol\,L}^{-1})$, so the three input values are the dimensionless numbers $0$, $0.5$, and $1$. Compare
+
+$$
+f(u)=0.8u+0.15,\qquad g(u)=f(u)+a\,u(u-0.5)(u-1).
+$$
+
+At each of our three inputs, one factor in the added term is zero. Whatever value we choose for $a$, the three predictions remain unchanged. At $u=0.25$, that term is $0.046875a$. Taking $a=2$ changes the prediction from $0.35$ to $0.44375$. These are constructed functions, not two experimentally established calibration laws.
+
+</details>
+
+This question develops the sequence about limited data and prior knowledge in my [MolSim lecture, pp. 7–10](https://www.compchem.nl/wp-content/uploads/molsim2023/L09_Machine-Learning.pdf#page=7).
+
 ## Deciding what counts as an error {#turning-a-discrepancy-into-an-objective}
 
 The line misses some measurements by predicting too much absorbance and others by predicting too little. We could move it, but we first need to decide what would count as an improvement. Reducing one discrepancy may enlarge another. The observations give us discrepancies; we still have to choose how to combine them.
@@ -163,6 +186,12 @@ The extra flexibility lets the curve follow more of what happened in these parti
 [Open the activity on its own](../activities/calibration.html). It runs in the browser without Python and uses generated observations. Beyond their range, the equation continues to draw a curve. The absence of points there is worth keeping in view: what could we check it against?
 
 The extra points are **[validation observations](../glossary.qmd#data-splits)**, because we use them to guide model choices while exploring. They are not a final test set. A final assessment needs an independently reserved evaluation after the modelling choices are settled. Its error will still be an empirical estimate, with uncertainty and a scope set by the evaluation data.
+
+### Preferring some curves to others {#regularising-a-fit}
+
+We need not restrict a model only by removing higher powers. We could keep the polynomial degree fixed and add a penalty for large fitted coefficients to the training error. The fitting procedure would then balance agreement with the observations against that penalty. This is one form of **regularisation**, illustrated in the [MolSim lecture, p. 41](https://www.compchem.nl/wp-content/uploads/molsim2023/L09_Machine-Learning.pdf#page=41).
+
+The penalty expresses a preference; it does not supply new measurements. Its strength is another hyperparameter, chosen using validation data. Also, “large” depends on how we express the inputs: changing concentration units changes the numerical coefficients. We will meet this issue again when [comparing distances between materials](03-mof-uptake.qmd#why-would-changing-units-change-a-prediction).
 
 ## Deciding which data may be used {#a-first-trustworthy-workflow}
 

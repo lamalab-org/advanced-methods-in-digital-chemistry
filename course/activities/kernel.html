@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Adding three kernel functions</title>
+<style>
+  * { box-sizing:border-box; }
+  body { margin:0; padding:18px; color:#202326; background:#fff; font:16px/1.45 system-ui,sans-serif; }
+  main { max-width:960px; margin:auto; }
+  h1 { font-size:1.35rem; margin:0 0 6px; }
+  p { margin:6px 0 12px; }
+  .controls { display:flex; flex-wrap:wrap; gap:16px; padding:12px; background:#f3f1ed; border-radius:6px; }
+  label { display:flex; flex-direction:column; gap:4px; flex:1 1 175px; }
+  select,button { font:inherit; padding:6px; }
+  input[type=range] { width:100%; accent-color:#842847; }
+  button { border:1px solid #aaa; border-radius:4px; background:white; align-self:end; cursor:pointer; }
+  :focus-visible { outline:3px solid #842847; outline-offset:3px; }
+  svg { width:100%; height:auto; display:block; }
+  table { width:100%; border-collapse:collapse; font-variant-numeric:tabular-nums; }
+  th,td { text-align:right; border-bottom:1px solid #ddd; padding:5px 8px; }
+  th:first-child,td:first-child { text-align:left; }
+  .legend { display:flex; flex-wrap:wrap; gap:6px 16px; font-size:.9rem; }
+  .swatch { display:inline-block; width:24px; vertical-align:middle; border-top:3px solid; margin-right:5px; }
+  .note { color:#4c5358; font-size:.9rem; }
+  #prediction { font-weight:650; }
+  details { margin-top:12px; }
+  summary { cursor:pointer; }
+  @media(max-width:500px) { body { padding:10px; } th,td { padding:5px 4px; font-size:.85rem; } }
+</style>
+</head>
+<body><main>
+<h1>Adding three kernel functions</h1>
+<p>Three invented observations: (−1, 0.2), (0, 1), (1, 0.2). Both coordinates are dimensionless. The dots stay fixed; the coloured contributions add up to the dark prediction curve.</p>
+<div class="controls">
+  <label for="gamma">Kernel setting γ
+    <select id="gamma"><option value="0.5">0.5 — broader</option><option value="1" selected>1</option><option value="4">4 — narrower</option></select>
+  </label>
+  <label for="alpha">Regularisation α
+    <select id="alpha"><option value="0.01">0.01</option><option value="0.1" selected>0.1</option><option value="1">1</option></select>
+  </label>
+  <label for="query">Evaluate at x = <output id="query-value" for="query">0.00</output>
+    <input id="query" type="range" min="-2" max="2" step="0.05" value="0">
+  </label>
+  <button id="reset" type="button">Reset</button>
+</div>
+<p class="note">Changing γ or α refits the coefficients. Moving x only evaluates the current fit. The vertical scale stays fixed across settings.</p>
+<svg id="plot" viewBox="0 0 860 350" role="img" aria-labelledby="plot-title plot-description">
+  <title id="plot-title">Three weighted Gaussian functions and their sum</title>
+  <desc id="plot-description">Dashed coloured curves are the weighted contributions from the training inputs at minus one, zero, and one. Their sum is the solid dark curve. A vertical line marks the query position. The table below gives contributions rounded to five decimal places.</desc>
+  <g id="drawing"></g>
+</svg>
+<div class="legend">
+  <span><i class="swatch" style="color:#236f8a;border-top-style:dashed"></i>Input −1</span>
+  <span><i class="swatch" style="color:#842847;border-top-style:dashed"></i>Input 0</span>
+  <span><i class="swatch" style="color:#9b5d00;border-top-style:dashed"></i>Input +1</span>
+  <span><i class="swatch" style="color:#161b23"></i>Sum</span>
+</div>
+<p id="prediction" aria-live="polite"></p>
+<table aria-label="The three contributions at the query position">
+  <thead><tr><th scope="col">Training input xᵢ</th><th scope="col">Fitted aᵢ</th><th scope="col">Similarity k(x, xᵢ)</th><th scope="col">Contribution aᵢk(x, xᵢ)</th></tr></thead>
+  <tbody id="values"></tbody>
+</table>
+<p>Can a contribution be negative? Where do different settings make different predictions without an observation to check them against?</p>
+<details><summary>The calculation</summary>
+  <p>k(x, z) = exp[−γ(x − z)²]. We fit a = (K + αI)⁻¹y, where Kᵢⱼ = k(xᵢ, xⱼ), then predict f(x) = Σᵢ aᵢk(x, xᵢ). There is no fitted intercept or target centring in this example. The fitting objective is Σᵢ(f(xᵢ) − yᵢ)² + αaᵀKa.</p>
+  <p>These are training observations only. This display supplies no estimate of performance on new observations. For this particular model, the prediction approaches zero far from all three inputs because every kernel contribution approaches zero. That behaviour is a consequence of the construction, not evidence about a chemical system.</p>
+</details>
+<p class="note">Teaching example developed from Kevin Jablonka's <a href="https://www.compchem.nl/wp-content/uploads/molsim2023/L09_Machine-Learning.pdf#page=53" target="_blank" rel="noopener">MolSim 2023 lecture, pp. 53–57</a>. The source deck credits contributions from Mohamad Moosavi. The numbers and plot here were constructed for this course.</p>
+<noscript>This demonstration needs JavaScript. The lecture text gives the formula and explains the comparison without it.</noscript>
+</main>
+<script src="kernel-math.js"></script>
+<script>
+'use strict';
+const byId = id => document.getElementById(id);
+const gammaControl = byId('gamma'), alphaControl = byId('alpha'), queryControl = byId('query');
+const ns = 'http://www.w3.org/2000/svg', drawing = byId('drawing');
+const math = KernelExample, colours = ['#236f8a', '#842847', '#9b5d00'];
+let plotWidth = 860;
+const px = x => 70 + (x + 2.1) / 4.2 * (plotWidth - 100);
+const py = y => 295 - (y + 2) / 5 * 260;
+function element(tag, attrs, text) {
+  const node = document.createElementNS(ns, tag);
+  Object.entries(attrs).forEach(([key,value]) => node.setAttribute(key, value));
+  if (text !== undefined) node.textContent = text;
+  drawing.appendChild(node);
+  return node;
+}
+function line(x1,y1,x2,y2,attrs={}) { return element('line',{x1,y1,x2,y2,...attrs}); }
+function curve(fn, colour, dashed=false) {
+  const path = Array.from({length:301},(_,i) => {
+    const x = -2.1 + 4.2*i/300;
+    return `${i ? 'L' : 'M'}${px(x)},${py(fn(x))}`;
+  }).join(' ');
+  element('path',{d:path,fill:'none',stroke:colour,'stroke-width':dashed ? 2.5 : 3.5,...(dashed ? {'stroke-dasharray':'7 4'} : {})});
+}
+function update() {
+  plotWidth = byId('plot').clientWidth < 600 ? 420 : 860;
+  byId('plot').setAttribute('viewBox',`0 0 ${plotWidth} 350`);
+  const gamma = Number(gammaControl.value), alpha = Number(alphaControl.value), x = Number(queryControl.value);
+  const weights = math.fit(gamma,alpha), parts = math.contributions(x,gamma,weights);
+  const prediction = parts.reduce((a,b)=>a+b,0);
+  drawing.replaceChildren();
+  for (const y of [-2,-1,0,1,2,3]) {
+    line(px(-2.1),py(y),px(2.1),py(y),{stroke:y === 0 ? '#888' : '#ddd'});
+    element('text',{x:55,y:py(y)+5,'text-anchor':'end','font-size':14},String(y));
+  }
+  for (const value of [-2,-1,0,1,2]) {
+    line(px(value),py(-2),px(value),py(-2)+5,{stroke:'#555'});
+    element('text',{x:px(value),y:317,'text-anchor':'middle','font-size':14},String(value));
+  }
+  element('text',{x:70+(plotWidth-100)/2,y:342,'text-anchor':'middle','font-size':15},'Input x (dimensionless)');
+  element('text',{x:20,y:170,transform:'rotate(-90 20 170)','text-anchor':'middle','font-size':15},'Response / contribution (dimensionless)');
+  weights.forEach((a,i) => curve(z=>a*math.kernel(z,math.inputs[i],gamma),colours[i],true));
+  curve(z=>math.predict(z,gamma,weights),'#161b23');
+  line(px(x),py(-2),px(x),py(3),{stroke:'#777','stroke-dasharray':'3 4'});
+  math.inputs.forEach((z,i)=>element('circle',{cx:px(z),cy:py(math.targets[i]),r:5.5,fill:'#fff',stroke:colours[i],'stroke-width':3}));
+  element('circle',{cx:px(x),cy:py(prediction),r:5,fill:'#161b23'});
+  byId('query-value').value=x.toFixed(2);
+  byId('prediction').textContent=`At x = ${x.toFixed(2)}, the three contributions sum to ${prediction.toFixed(5)}.`;
+  byId('values').replaceChildren();
+  math.inputs.forEach((z,i)=>{
+    const row=document.createElement('tr');
+    [String(z),weights[i].toFixed(5),math.kernel(x,z,gamma).toFixed(5),parts[i].toFixed(5)].forEach(value=>{
+      const cell=document.createElement('td');cell.textContent=value;row.appendChild(cell);
+    });
+    byId('values').appendChild(row);
+  });
+}
+[gammaControl,alphaControl,queryControl].forEach(control=>control.addEventListener('input',update));
+window.addEventListener('resize',update);
+byId('reset').addEventListener('click',()=>{gammaControl.value='1';alphaControl.value='0.1';queryControl.value='0';update();});
+update();
+</script>
+</body></html>
