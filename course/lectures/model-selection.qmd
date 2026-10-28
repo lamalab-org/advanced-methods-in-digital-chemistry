@@ -117,6 +117,8 @@ A random split answers a question about new rows under particular sampling assum
 
 These are different prediction tasks. No choice of five or ten folds repairs a mismatch between the evaluation and the intended task. In the MOF practical, we must not invent framework-family labels from row identifiers: a claim about new families needs suitable metadata first. Return to the [chemical benchmark example](../reading.qmd#chemical-evaluation) when deciding what our comparison establishes.
 
+The [Clever Materials discussion](03-mof-uptake.qmd#clever-materials) gives us a reason to make these choices carefully. We can put the two prediction routes beside our fold diagram. If our claim concerns a future publication or an unseen research group, which rows should be held out together? State what that comparison could establish and what would remain open. Changing the split changes the question being evaluated; it is not a general test of chemical understanding.
+
 ## Practical {#practical}
 
 The [model-selection notebook](../notebooks/model-selection.py) contains the repeated-fit and regularisation controls, a visible five-fold assignment, and a comparison of degrees and penalty strengths. It is included in the [MOF practical kit](../downloads/mof-practical.zip), using the same environment. From the extracted folder:

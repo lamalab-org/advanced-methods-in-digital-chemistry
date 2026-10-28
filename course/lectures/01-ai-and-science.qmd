@@ -299,6 +299,8 @@ We began with a table of conditions and yields. We have now asked it to support 
 
 These questions can lead into one another. An explanation of the model might suggest a hypothesis to test. A mechanistic account might help us make better predictions. Keeping the questions distinct helps us see which step we have actually taken.
 
+There is a related question in my preprint [*Clever Materials: When Models Identify Good Materials for the Wrong Reasons*](https://arxiv.org/abs/2602.17730v1): could patterns associated with who reported a material, where, and when help account for a successful prediction? We will [examine this comparison with the materials examples](03-mof-uptake.qmd#clever-materials). For now, the question is what else might produce the result we have just called evidence of chemical understanding.
+
 **Paired discussion:** Classify each statement below and name the evidence it would need. Which could be supported by inspecting a fitted model alone?
 
 1. “The model predicts yields accurately for a reaction series that was kept out of model development.”
