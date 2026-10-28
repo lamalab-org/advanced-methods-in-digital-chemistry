@@ -99,6 +99,10 @@ Eleanor Dillon, Jacob LaRiviere, Scott Lundberg, Jonathan Roth, and Vasilis Syrg
 
 Galit Shmueli (2010), [*To Explain or to Predict?*](https://doi.org/10.1214/10-STS330), *Statistical Science* 25, 289–310, examines how these different purposes change modelling. Here, “explanatory modelling” concerns causal explanation; it differs from explaining the output of a fitted model.
 
+### What could explain a successful prediction? {#clever-materials}
+
+Kevin Maik Jablonka (2026), [*Clever Materials: When Models Identify Good Materials for the Wrong Reasons*](https://arxiv.org/abs/2602.17730v1), arXiv preprint, version 1. Figure 1 introduces the competing prediction routes. Section 2.1 and Figure 9 make a useful pair for discussing the MOF thermal-stability result and its dependence on the metric; Section 5.3 describes the evaluation. Our [discussion in the materials chapter](lectures/03-mof-uptake.qmd#clever-materials) starts with a majority-class calculation. What does a successful prediction leave unexplained, and what further comparison would help? This is suggested reading; the in-class discussion does not require reading the paper beforehand.
+
 ## Learning from a finite dataset {#lecture-2}
 
 Hardt and Recht's [**Sample versus population**](https://mlstory.org/supervised.html#sample-versus-population), in Chapter 3, provides the distinction behind our calibration example. We can calculate an error exactly for a finite set of observations while remaining uncertain about the error on future cases. The following **Supervised learning** section puts the fitting problem into notation. Chapter 6's discussion of the [generalisation gap and model complexity](https://mlstory.org/generalization.html) develops the question raised by our increasingly flexible polynomial curves.

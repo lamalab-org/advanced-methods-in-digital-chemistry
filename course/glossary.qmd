@@ -102,6 +102,10 @@ Predicting a numerical target, such as absorbance or solubility. Linear regressi
 
 Predicting a category, such as whether a compound exceeds a specified activity threshold. A classifier may produce scores or probabilities before a rule assigns a category. Choosing the categories and the decision threshold is part of defining the task.
 
+### Accuracy, precision, and recall {#classification-metrics}
+
+**Accuracy** is the fraction of all evaluated cases classified correctly. For a specified desired class, **precision** asks what fraction of the selected cases actually belong to it, and **recall** asks what fraction of its members were selected. If ten of a hundred materials are desired, selecting none gives 90% accuracy and zero recall. Precision is undefined when nothing is selected, although software may substitute a configured value. For results averaged across classes, check the averaging convention. These measures answer different questions; see the [materials example](lectures/03-mof-uptake.qmd#clever-materials).
+
 ### Ranking {#ranking}
 
 Ordering candidates for a purpose, such as deciding which molecules to test first. A useful ordering does not require accurate absolute property values. Ranking, classification, and regression can therefore lead to different formulations of the same chemical problem.

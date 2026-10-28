@@ -12,6 +12,7 @@ After working through the uptake practical, you should be able to:
 - Compare a model with a constant prediction and explain why changing the scale of the inputs can change a model's idea of similarity.
 - Choose a model using validation data, then report its test error with the metric, units, sample size, and scope of the comparison.
 - Use resampling to examine variation in an error estimate, and explain why repeating the recorded errors adds no evidence about a new family of materials or a different experiment.
+- Propose an alternative explanation for a good prediction and a comparison that could help distinguish it from the chemical explanation we had in mind.
 
 ## A porous material and a prediction
 
@@ -120,6 +121,31 @@ The plot below shows the chosen model's **validation** predictions in the suppli
 Suppose our purpose is to find unusually high-uptake materials. A random validation sample can contain many ordinary materials and very few exceptional ones. A low average error over the whole sample may then tell us little about the region we hope to search. The [MolSim lecture, p. 25](https://www.compchem.nl/wp-content/uploads/molsim2023/L09_Machine-Learning.pdf#page=25), raises this problem for material screening.
 
 In our validation plot, inspect the high-uptake region separately. How many points support a claim there, and do the errors look similar to those elsewhere? An observation here can suggest a further evaluation, but it does not turn this region into an untouched test set. If selecting the best candidates is the intended use, we should plan an assessment of that selection before making a discovery claim. Predicting uptake accurately on average and selecting useful candidates are related tasks with different evidence requirements.
+
+### What else could explain a good prediction? {#clever-materials}
+
+Research groups often specialise in particular materials, methods, and problems. Those choices can leave patterns in a collection of published results. Could a predictor use such patterns to answer our property question?
+
+In my preprint [*Clever Materials: When Models Identify Good Materials for the Wrong Reasons*](https://arxiv.org/abs/2602.17730v1) (2026), I compare a direct property predictor with a second route:
+
+| Route | Calculation |
+|---|---|
+| Direct | Chemical descriptors → predicted property |
+| Through publication information | Chemical descriptors → predicted authors, journal, and year → predicted property |
+
+Here, **metadata** means information about the publication. In the second route, the property model receives predictions of that information. The comparison uses the same held-out folds. Its performance is sometimes close to the direct predictor's, depending on the task and metric. This leaves a competing explanation to investigate; it does not establish which route the direct predictor actually uses. The paper examines different datasets from our computed-uptake practical.
+
+**Discuss:** What information would we need to test performance on materials reported by another group or after a particular date? Would simply deleting author names from the input table remove information about authorship from the chemical descriptors?
+
+#### What does 90% accuracy tell us?
+
+For membership in the top 10% of thermally stable MOFs, Section 2.1 reports accuracy of 0.901 for the predicted-metadata route and 0.923 for the direct route. Before interpreting these numbers, work through a simpler calculation.
+
+Suppose exactly ten of a hundred materials belong to the desired class. A rule that calls every material “not in the top ten” is correct ninety times. It has **90% accuracy and finds none of the ten materials we wanted**. These hundred cases are a constructed example, not a reconstruction of the paper's predictions.
+
+If our aim is to find exceptional materials, we should also ask how many of them we recover and how many of our selections are actually exceptional. These questions define [**recall** and **precision**](../glossary.qmd#classification-metrics) for the desired class. Accuracy alone does not answer them. The paper's classification dummy draws labels according to training-class frequencies; it is a different comparison from always predicting the majority class. Its appendix compares other metrics. Their averaging conventions matter too.
+
+What would make the comparison more informative? Choose a baseline, a metric, and a split for a stated use. Explain which alternative each choice tests. A split by publication date examines a different use from a random split; it does not, by itself, establish a chemical mechanism. Likewise, close accuracy values do not settle whether the two predictors find the same useful materials.
 
 ## The uncertainty in a test error {#a-test-score-still-has-a-hat}
 
