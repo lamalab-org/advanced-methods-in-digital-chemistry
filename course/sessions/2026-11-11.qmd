@@ -23,7 +23,7 @@ Bring a laptop and charger. Try the [setup guide](../setup.qmd) beforehand if yo
 | 12:40–13:50 | ML lecture with handwritten examples and discussion |
 | 13:50–14:10 | Break |
 | 14:10–15:45 | Hands-on: train and compare MOF gas-uptake models |
-| 15:45–16:00 | Compare results, collect project ideas, and identify next steps |
+| 15:45–16:00 | Compare results, collect project ideas, and share feedback |
 
 The timing is a guide; we will adjust to questions and progress. We can continue unfinished practical work on **2 December, 12:00–16:00**.
 
@@ -46,7 +46,7 @@ uv uses `uv.lock` by default. `--locked` stops if it needs updating; without the
 
 We will cover descriptors, training and test splits, overfitting, bias and variance, regularisation, kernels, standardisation, and validation. Worked examples will connect these ideas to the notebook. Our model is closely related to the kernel-ridge models in [Moosavi et al. (2020)](https://www.nature.com/articles/s41467-020-17755-8); see the [paper example](../lectures/03-mof-uptake.qmd#published-example) for the connection.
 
-After the lecture, open `notebooks/03-mof-uptake.py` in the same marimo session:
+Open `notebooks/03-mof-uptake.py` in the same marimo session whenever you are ready:
 
 1. Inspect the descriptors, uptake target, and training/validation/test split.
 2. Fit the baseline and compare the unscaled and scaled models. Predict what scaling will change before running them.
@@ -54,8 +54,14 @@ After the lecture, open `notebooks/03-mof-uptake.py` in the same marimo session:
 
 The [MOF notes and practical instructions](../lectures/03-mof-uptake.qmd#practical) provide the fuller explanation. Stop after the final assessment for today; feature importance and bootstrap uncertainty come later. There is no expectation of finishing everything in class.
 
-## Project ideas
+## Optional help the following week {#optional-help}
+
+An **optional help session with the research group** is planned for the week of **16–20 November**, possibly remotely. Bring your notebook, installation problems, or questions from the practical. The host, day, time, and joining details will be announced. Attendance is optional; we will continue together on 2 December.
+
+## Project ideas and feedback
 
 Keep the shared document open alongside the practical. Add a chemical question, possible data, a simple first comparison, or something you need help with. Rough ideas and comments on each other's suggestions are welcome; this is not an assessed proposal.
 
-Before leaving, save your notebook and add one idea or question. For a recap, see the [recorded summary on Loom](https://www.loom.com/share/2f2f0c13db964d699a33071786904697).
+Before leaving, save your notebook and add one idea or question. **Please also give me feedback:** what was clear, what was confusing, and how did the pace feel? Tell me in class or email me so I can adjust the next session.
+
+For a recap, see the [recorded summary on Loom](https://www.loom.com/share/2f2f0c13db964d699a33071786904697).
