@@ -32,14 +32,16 @@ Open the local URL printed in the terminal. Change a concentration, follow the d
 
 Our question is concrete: **can geometric descriptors predict simulated CO₂ uptake in a porous material?** We will follow one modelling workflow, keeping the kernel discussion visual:
 
-1. **Question and representation · 15 minutes.** Locate ML within the simulation workflow, turn structures into descriptors, and discuss how symmetry and prior knowledge constrain a model.
-2. **Splitting and fitting · 17 minutes.** Separate the data, fit a simple line, compare with a baseline, and introduce regularisation. Keep the error calculation to one short example.
-3. **Validation and cross-validation · 12 minutes.** Distinguish fitted parameters from chosen settings, then walk through five folds while keeping the final test set aside.
-4. **Nonlinear features and kernels · 10 minutes.** Connect polynomial features to kernel intuition. Use the [three-point demonstration](../activities/kernel.html) to see fitted contributions add to a prediction; the derivation can wait.
-5. **Standardisation and leakage · 11 minutes.** Ask what changing units does to a distance. Estimate scaling from training data only, and refit preprocessing inside every cross-validation fold.
-6. **Final assessment, questions, and handover · 5 minutes.** State what the test result establishes and identify where to start the practical.
+1. **The MOF prediction task · 8 minutes.** Connect the eight supplied geometric descriptors to simulated CO₂ uptake at 298 K and 16 bar. Give the training, validation, and test rows distinct jobs.
+2. **Fitting and regularisation · 15 minutes.** Connect a fitted line to several descriptors, compare with a median baseline, and explain overfitting and the regularisation setting `alpha`. Keep the error calculation to one short example.
+3. **Nonlinear models and Gaussian kernels · 17 minutes.** Use the [three-point demonstration](../activities/kernel.html) to see how similarities and fitted coefficients produce a prediction. Explain the width setting `gamma` with a short worked example.
+4. **Standardisation and pipelines · 11 minutes.** Ask what changing units does to a distance. Estimate scaling from training rows and reuse it when predicting validation or test rows.
+5. **Model comparison and cross-validation · 12 minutes.** Compare the notebook's median baseline, scaled ridge, and unscaled/scaled kernel ridge models on the same validation rows. Introduce cross-validation as an extension of its fixed split, fitting preprocessing within each fold.
+6. **Prediction plots, final assessment, and questions · 7 minutes.** Read parity and residual plots, record the model choice before revealing test results, and state which materials the test error might describe.
 
-The [lecture slides for annotation](../downloads/11-november-ml-molsim.pdf) leave space for handwritten diagrams and worked examples. They follow the background and modelling workflow in the [original MolSim lecture](https://www.compchem.nl/wp-content/uploads/molsim2023/L09_Machine-Learning.pdf), with shorter error calculations. The timings are a guide; we can continue unfinished discussion during the supported practical. The [MOF notes](../lectures/03-mof-uptake.qmd) contain the fuller explanation. We will leave kernel derivations, advanced model selection, feature importance, and bootstrap uncertainty for later lectures.
+The [lecture slides for annotation](../downloads/11-november-ml-molsim.pdf) leave space for handwritten diagrams and worked examples. They follow the background and modelling workflow in the [original MolSim lecture](https://www.compchem.nl/wp-content/uploads/molsim2023/L09_Machine-Learning.pdf), with shorter error calculations.
+
+The slides focus on the background needed to understand `03-mof-uptake.py`, with space to work through examples on the iPad. The geometric descriptors are already supplied, so their atomistic construction is outside this session. Use the 70-minute timetable as a guide and continue unfinished discussion in the supported practical. The [MOF notes](../lectures/03-mof-uptake.qmd) contain the fuller explanation. Detailed kernel derivations, feature importance, and bootstrap uncertainty remain for later lectures.
 
 ## Hands-on work: start when ready, continue on 2 December
 
