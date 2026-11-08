@@ -13,6 +13,8 @@ We will start with basic Python in our first marimo notebook, then use the ML Mo
 | 14:45–15:55 | ML MolSim lecture, including questions and a short kernel demonstration |
 | 15:55–16:00 | Record project ideas and the next practical steps |
 
+For a recap, see the [recorded summary on Loom](https://www.loom.com/share/2f2f0c13db964d699a33071786904697).
+
 ## Start with the first marimo notebook
 
 Bring a laptop and charger. Try the [setup guide](../setup.qmd) beforehand if you can; an unfinished installation is fine. Download and extract the [introductory kit](../downloads/introductory-setup.zip). From its folder:
@@ -30,14 +32,14 @@ Open the local URL printed in the terminal. Change a concentration, follow the d
 
 Our question is concrete: **can geometric descriptors predict simulated CO₂ uptake in a porous material?** We will follow one modelling workflow, keeping the kernel discussion visual:
 
-1. **Question, data, and splitting · 11 minutes.** Identify the target and its conditions, then separate training, validation, and test observations.
-2. **Fitting, a baseline, and validation · 17 minutes.** Connect inputs and predictions, work through one short error calculation, and discuss why training error alone cannot choose a model.
-3. **Cross-validation · 10 minutes.** Walk through five folds by hand and compare candidate settings while keeping the final test set aside.
-4. **Similarity and kernels · 10 minutes.** Use the [three-point demonstration](../activities/kernel.html) to see how fitted contributions add to a prediction. Change the kernel width once; the derivation can wait.
-5. **Standardisation and leakage · 14 minutes.** Ask what changing units does to a distance. Estimate scaling from training data only, and refit preprocessing inside every cross-validation fold.
-6. **Final assessment, questions, and handover · 8 minutes.** State what the test result establishes and identify where to start the practical.
+1. **Question and representation · 15 minutes.** Locate ML within the simulation workflow, turn structures into descriptors, and discuss how symmetry and prior knowledge constrain a model.
+2. **Splitting and fitting · 17 minutes.** Separate the data, fit a simple line, compare with a baseline, and introduce regularisation. Keep the error calculation to one short example.
+3. **Validation and cross-validation · 12 minutes.** Distinguish fitted parameters from chosen settings, then walk through five folds while keeping the final test set aside.
+4. **Nonlinear features and kernels · 10 minutes.** Connect polynomial features to kernel intuition. Use the [three-point demonstration](../activities/kernel.html) to see fitted contributions add to a prediction; the derivation can wait.
+5. **Standardisation and leakage · 11 minutes.** Ask what changing units does to a distance. Estimate scaling from training data only, and refit preprocessing inside every cross-validation fold.
+6. **Final assessment, questions, and handover · 5 minutes.** State what the test result establishes and identify where to start the practical.
 
-The [lecture slides for annotation](../downloads/11-november-ml-molsim.pdf) leave space for handwritten diagrams and worked examples. They follow the core ideas in the MolSim lecture. The [MOF notes](../lectures/03-mof-uptake.qmd) contain the fuller explanation. We will leave kernel derivations, advanced model selection, feature importance, and bootstrap uncertainty for later lectures.
+The [lecture slides for annotation](../downloads/11-november-ml-molsim.pdf) leave space for handwritten diagrams and worked examples. They follow the background and modelling workflow in the [original MolSim lecture](https://www.compchem.nl/wp-content/uploads/molsim2023/L09_Machine-Learning.pdf), with shorter error calculations. The timings are a guide; we can continue unfinished discussion during the supported practical. The [MOF notes](../lectures/03-mof-uptake.qmd) contain the fuller explanation. We will leave kernel derivations, advanced model selection, feature importance, and bootstrap uncertainty for later lectures.
 
 ## Hands-on work: start when ready, continue on 2 December
 

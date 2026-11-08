@@ -11,6 +11,8 @@ Scientific questions, small models, and the evidence behind predictions. A pract
 
 **[Open the class page](sessions/2026-11-11.qmd)** · [Prepare your environment](setup.qmd)
 
+[Recorded summary on Loom](https://www.loom.com/share/2f2f0c13db964d699a33071786904697)
+
 ## Remaining teaching in 2026
 
 {{< include _includes/2026-schedule.qmd >}}
