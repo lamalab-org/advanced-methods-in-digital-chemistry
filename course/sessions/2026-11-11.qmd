@@ -3,7 +3,9 @@ title: "11 November: Python and MOF prediction"
 toc: false
 ---
 
-**Wednesday, 11 November 2026 · 12:10–16:00 · Helmholtzweg 4, SR 6 Physik**
+**Wednesday, 11 November 2026 · 12:10–16:00**
+
+{{< include ../_includes/2026-11-11-room.qmd >}}
 
 We will explore basic Python in a marimo notebook, learn how to train and assess a model, and then use those ideas to predict simulated CO₂ uptake in metal–organic frameworks (MOFs).
 
