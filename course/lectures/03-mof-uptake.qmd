@@ -32,6 +32,14 @@ One route to uptake begins with a model of the interactions between atoms and mo
 
 There is a further possibility: keep the energy model and learn a way to propose configurations that would otherwise be difficult to sample. These three uses of learning change different parts of the calculation. Agreement with uptake values, for example, does not establish that the model can calculate forces or generate a physically meaningful trajectory.
 
+### A published example {#published-example}
+
+![Moosavi et al., *Understanding the diversity of the metal-organic framework ecosystem*, Nature Communications 11, 4068 (2020). Cropped article-header screenshot, [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).](../assets/mof-paper-header.jpg){fig-alt="Article title, authors and journal details for Moosavi et al. (2020), Understanding the diversity of the metal-organic framework ecosystem." width=794}
+
+The [paper](https://www.nature.com/articles/s41467-020-17755-8#Sec5) uses **kernel ridge regression with an RBF kernel** to predict simulated MOF adsorption properties. Its workflow includes structural descriptors, standardisation, cross-validation and held-out assessment. These are the same kinds of modelling ingredients we will use in the practical.
+
+Our notebook makes the problem small enough to explore in class: 1,500 rows, eight geometric descriptors, one CO₂ uptake target at 298 K and 16 bar, and a few candidate models. The paper considers additional chemical RAC descriptors, multiple adsorption tasks and databases, and more extensive feature selection, tuning and evaluation. We are learning the method through a compact example; reproducing the paper's numerical results would require its full protocol.
+
 ## What do we keep from a structure?
 
 Imagine replacing a framework drawing with two numbers: its density and its pore volume per gram. We have retained information that might be useful for gas uptake, while discarding the identities and arrangement of many atoms. These numbers are [descriptors](../glossary.qmd#descriptor). In the practical, eight geometric descriptors become the model's [features](../glossary.qmd#feature).

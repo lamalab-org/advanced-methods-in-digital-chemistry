@@ -41,6 +41,8 @@ Our question is concrete: **can geometric descriptors predict simulated CO₂ up
 
 The [lecture slides for annotation](../downloads/11-november-ml-molsim.pdf) leave space for handwritten diagrams and worked examples. They follow the background and modelling workflow in the [original MolSim lecture](https://www.compchem.nl/wp-content/uploads/molsim2023/L09_Machine-Learning.pdf), with shorter error calculations.
 
+An early slide connects our practical to [Moosavi et al. (2020)](https://www.nature.com/articles/s41467-020-17755-8), which also uses RBF kernel ridge regression for MOF adsorption prediction. The [paper example in the notes](../lectures/03-mof-uptake.qmd#published-example) explains the shared ingredients and the simplified scope of our notebook.
+
 The slides focus on the background needed to understand `03-mof-uptake.py`, with space to work through examples on the iPad. RACs provide brief context for the original MolSim representation; our compact notebook uses eight supplied geometric descriptors. Use the 70-minute timetable as a guide and continue unfinished discussion in the supported practical. The [MOF notes](../lectures/03-mof-uptake.qmd) contain the fuller explanation. Detailed kernel derivations, feature importance, and bootstrap uncertainty remain for later lectures.
 
 ## Hands-on work: start when ready, continue on 2 December
