@@ -46,15 +46,11 @@ The [data notes](../data/mof-uptake/README.md) give the exact column names, unit
 
 **Discuss:** Which two frameworks might look similar through these descriptors while differing in a way that matters for adsorption?
 
-### Which changes should matter? {#which-changes-should-matter}
+### Adding chemistry with RACs {#rac-features}
 
-There are also differences we deliberately want a representation to ignore. Take an isolated molecule, with no external field, and rotate all its atomic coordinates together. We have changed the numbers in the coordinate table without changing its internal geometry. Its energy should stay the same. Stretching one bond is a different operation: now an energy change is possible.
+The original MolSim notebook also uses **revised autocorrelation functions (RACs)**. These combine products or differences of atomic properties over pairs separated by a chosen number of bonds, with selected starting atoms and environments such as metal centres or linkers. Properties include electronegativity, nuclear charge, connectivity, covalent radius, and identity. This adds information about local chemistry to the geometric description. See the [RAC documentation](https://mofdscribe.readthedocs.io/en/latest/featurizers/atom_centered/racs.html).
 
-This gives us a concrete requirement before we fit anything. We could supply distances between atoms, which stay unchanged under a rigid rotation, or build that requirement into the model. We could also train on rotated copies, although a finite collection of copies does not by itself guarantee the property for every rotation. These are different ways of using chemical knowledge to constrain learning. The [MolSim lecture, pp. 12–13](https://www.compchem.nl/wp-content/uploads/molsim2023/L09_Machine-Learning.pdf#page=12), compares them; the three-approach slide credits Tess Smidt.
-
-The requirement depends on the output. An unchanged energy is **invariance**. A force arrow must rotate with the molecule, which is **equivariance**. For our uptake model, simply rotating the coordinate system should likewise leave the scalar prediction unchanged. Replacing a linker with another chemical group may change uptake, yet our eight geometric descriptors might not preserve enough information to distinguish that change. Ignoring an arbitrary orientation and discarding chemical information have different consequences.
-
-**Discuss:** Which of these operations changes the physical system, and which changes only its description? What would you want an energy predictor to do in each case?
+Our compact class notebook retains **only eight geometric features**. We mention RACs to identify what that simplification leaves out; calculating them is outside this practical.
 
 ## A prediction without descriptors {#first-ask-whether-the-inputs-help}
 
@@ -68,11 +64,45 @@ $$
 
 For residuals $-2,0,+1$ mmol/g, the MAE is $1$ mmol/g. The median minimises the sum of absolute deviations for a constant prediction. Choosing squared error would instead lead us to the mean. We have already made a modelling choice before selecting a learning algorithm.
 
+## Why fitting can go wrong
+
+A model can reduce training error by following details specific to those observations. This is **overfitting** when those details do not generalise. Imagine repeatedly drawing a training sample and fitting the same procedure. **Bias** is the systematic difference between the average prediction and the underlying mean relationship; **variance** describes how much predictions change across these refits. A simple model can consistently miss a relationship, while a flexible one can be sensitive to which observations it sees.
+
+Regularisation constrains the fit. For ridge regression, one common convention writes the objective as
+
+$$
+\sum_{i=1}^{n_{\mathrm{train}}}(y_i-\widehat y_i)^2 + \alpha\sum_{j=1}^{p}w_j^2.
+$$
+
+The first term rewards agreement with training targets; the second penalises large coefficients, leaving the intercept unpenalised. Increasing $\alpha$ can reduce sensitivity to the sample at the cost of more systematic mismatch. We use validation data to choose the strength rather than assuming the strongest penalty is best.
+
 ## From a straight line to similarities {#kernels-as-functions}
 
 Our calibration line adds two functions, a constant and a multiple of concentration. A polynomial adds further powers. We choose these building blocks first and then fit their coefficients. A kernel model offers another construction: place a function at each training input and fit the coefficients of their sum. This is the comparison in the [MolSim lecture, pp. 53–57](https://www.compchem.nl/wp-content/uploads/molsim2023/L09_Machine-Learning.pdf#page=53).
 
-For the first lecture, the key idea is to fit a sum of local contributions. A Gaussian kernel supplies bell-shaped functions centred on the training inputs; its width changes which inputs look similar. The fitted coefficients can be negative, so the prediction is not simply an average of nearby values. We use **[kernel ridge regression](../glossary.qmd#kernel-ridge)**, which also uses a penalty to constrain the fit. The short visual example is enough to start the practical; the equations below are optional.
+For the first lecture, the key idea is to fit a sum of local contributions. A Gaussian kernel supplies bell-shaped functions centred on the training inputs; its width changes which inputs look similar. The fitted coefficients can be negative, so the prediction is not simply an average of nearby values. We use **[kernel ridge regression](../glossary.qmd#kernel-ridge)**, which also uses a penalty to constrain the fit. First work through a small kernel-trick calculation, then connect it to the Gaussian model used in the practical.
+
+### The kernel trick, calculated by hand
+
+Use the feature map
+
+$$
+\phi(x)=(x_1^2,\sqrt{2}\,x_1x_2,x_2^2).
+$$
+
+For $x=(1,2)$ and $z=(3,4)$, this gives $\phi(x)=(1,2\sqrt{2},4)$ and $\phi(z)=(9,12\sqrt{2},16)$. Their inner product is
+
+$$
+\phi(x)^\mathsf{T}\phi(z)=9+48+64=121.
+$$
+
+We obtain the same number directly from the original inputs:
+
+$$
+k(x,z)=(x^\mathsf{T}z)^2=(1\cdot3+2\cdot4)^2=11^2=121.
+$$
+
+Expanding the square shows why this works for any two input vectors in this example. The **kernel trick** evaluates a feature-space inner product without constructing all the feature coordinates. This tiny example demonstrates the equality; the advantage becomes clearer for much larger feature spaces. Our notebook uses a different kernel, the Gaussian kernel, which also corresponds to a feature-space inner product, with infinitely many feature coordinates.
 
 ### Adding three functions
 
@@ -113,7 +143,9 @@ One model in the practical compares materials through distances between their fe
 
 ## Choosing a model with validation data {#which-observations-may-influence-the-choice}
 
-Our compact table contains 1,500 rows selected from the workshop data without selecting on uptake. The notebook assigns 900 rows to training, 300 to validation, and 300 to the final test. We inspect training observations, fit the candidate models, and compare their validation errors. We then freeze the choice and calculate its test error.
+Fitting uses the training answers to reduce their error. Assessing the model on those same answers can therefore be optimistic: memorising them could look perfect while failing on new cases. Held-out data lets us assess predictions on answers unused in fitting. Validation answers guide model selection, so we reserve a separate test set for assessment after selection.
+
+Our compact table contains 1,500 rows selected from the workshop data without selecting on uptake. The notebook assigns 900 rows to training, 300 to validation, and 300 to the final test. We inspect training observations, fit the candidate models, and compare their validation errors. We then freeze the choice and calculate its test error. Picking the lowest validation error also uses those answers: some candidates can look unusually good on that particular finite sample. The winning validation score can therefore be optimistic. The separate test evaluates the selected model without having participated in that choice.
 
 A different identifier does not necessarily mean a chemically independent framework. Two MOFs may share building blocks. This random row split supports a limited question about other entries in this collection; testing a new framework family would require a suitable definition of families and a split that respects it.
 
@@ -158,7 +190,21 @@ What would make the comparison more informative? Choose a baseline, a metric, an
 
 ## The uncertainty in a test error {#a-test-score-still-has-a-hat}
 
-The chosen model gives one error for each of the 300 reserved test rows. Averaging them gives an empirical test MAE. The calculation can be exact for those rows while the expected error on future cases remains uncertain.
+There are two different quantities here. For a fixed fitted model $\widehat f$, we want the average error on future cases from the intended population $P$:
+
+$$
+R(\widehat f)=\mathbb{E}_{(X,Y)\sim P}\left[\left|\widehat f(X)-Y\right|\right].
+$$
+
+We cannot average over every future MOF. Instead, we calculate an average over our finite reserved sample:
+
+$$
+\widehat R_{\mathrm{test}}(\widehat f)=\frac{1}{n_{\mathrm{test}}}\sum_{i\in\mathrm{test}}\left|\widehat f(x_i)-y_i\right|.
+$$
+
+The model stays fixed during this assessment; changing the model after seeing the test results changes the status of those observations.
+
+The chosen model gives one error for each of the 300 reserved test rows. Averaging them gives an empirical test MAE. The calculation is exact for those rows, up to numerical precision, while the expected error on future cases remains uncertain. Another finite test sample can give a different average. For example, invented absolute errors $(1,1,4)$ have mean $2$, while $(1,2,0)$ have mean $1$. These toy samples illustrate sampling variation, not two runs of the MOF notebook. More representative, independent rows can improve precision; more rows from the wrong population do not establish performance on the intended materials.
 
 Keep the fitted model fixed and draw samples, with replacement, from the recorded test errors. This [bootstrap](../glossary.qmd#bootstrap) creates a distribution of average errors under a particular sampling assumption. The notebook compares averages of 30 sampled rows with averages of 300. The larger averages fluctuate less in this illustration.
 
@@ -170,11 +216,11 @@ We have repeatedly drawn from the same recorded errors. There are still no new f
 
 Choose a model using the training and validation data, record the choice, then inspect its test error. I would like you to be able to explain why you chose that model and which future predictions you think the test result tells us something about. Keep the conditions beside the final score.
 
-Download and extract the complete [MOF practical kit](../downloads/mof-practical.zip). It contains the [notebook](../notebooks/03-mof-uptake.py), data, source notice, and locked environment. From its folder, use Ubuntu on WSL for Windows, or your macOS/Linux terminal:
+Download and extract the complete [course kit](../downloads/course-kit.zip). It contains the [notebook](../notebooks/03-mof-uptake.py), data, source notice, and locked environment. From its folder, use Ubuntu on WSL for Windows, or your macOS/Linux terminal:
 
 ```bash
-uv sync --locked --group mof
-uv run --locked --group mof marimo edit notebooks/03-mof-uptake.py --headless
+uv sync --locked
+uv run --locked marimo edit notebooks/03-mof-uptake.py --headless
 ```
 
 The command opens `notebooks/03-mof-uptake.py` in marimo. Leave its test-evaluation checkbox unchecked while choosing the model. The [HTML preview](../notebooks/previews/03-mof-uptake.html) and figures above also let you discuss the results if your environment is not ready. They include the test results of the supplied run, whose model was selected using validation data. Once you have viewed those results, changes to your own model are exploratory; those same rows cannot provide a fresh, untouched assessment of the revised procedure.
@@ -198,6 +244,8 @@ Ask for a small MAE function. Predict its output for residuals $-2,0,+1$, then r
 Complete three sentences: which model you chose and why; what its empirical test score estimates; and what further evidence you would need before using it for an experimental adsorption decision.
 
 ## Suggested reading
+
+Abu-Mostafa, Magdon-Ismail, and Lin, *Learning From Data* (2012): §2.2.3, pp. 59–61, distinguishes test error from future error; §2.3.1, pp. 62–66, develops bias and variance through repeated training samples; and §4.3.2, pp. 141–144, explains why selecting the lowest validation score changes its interpretation. These are useful companions to this lecture. The formal VC bounds are outside our current scope.
 
 Hardt and Recht's [**Sample versus population**](https://mlstory.org/supervised.html#sample-versus-population) remains relevant here: our test rows are a sample, and we have to decide which future cases they can represent.
 

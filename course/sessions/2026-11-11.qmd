@@ -17,35 +17,35 @@ For a recap, see the [recorded summary on Loom](https://www.loom.com/share/2f2f0
 
 ## Start with the first marimo notebook
 
-Bring a laptop and charger. Try the [setup guide](../setup.qmd) beforehand if you can; an unfinished installation is fine. Download and extract the [introductory kit](../downloads/introductory-setup.zip). From its folder:
+Bring a laptop and charger. Try the [setup guide](../setup.qmd) beforehand if you can; an unfinished installation is fine. Download and extract the [course kit](../downloads/course-kit.zip). Use this same extracted folder throughout the course. The [uv command reference](../downloads/11-november-ml-molsim.pdf#page=2) is on slide 2. From the folder:
 
 ```bash
 uv sync --locked
 uv run --locked marimo edit notebooks/00-getting-started.py --headless
 ```
 
-Open the local URL printed in the terminal. Change a concentration, follow the dependent cells, and check a prediction by hand. We will meet variables, lists, and a small function, and save our own notebook copy. The deliberately flawed error calculation is something to investigate as we go, not a prerequisite for following the lecture.
+uv already uses `uv.lock` by default. Without `--locked`, it can update the lockfile when the dependency declarations change; `--locked` stops instead. Both commands behave the same for the unchanged course kit. `--headless` leaves opening the browser to you. On Windows, run the commands in Ubuntu/WSL 2 and open the printed local URL in your Windows browser. On macOS/Linux, use your usual browser. Change a concentration, follow the dependent cells, and check a prediction by hand. We will meet variables, lists, and a small function, and save our own notebook copy. The deliberately flawed error calculation is something to investigate as we go, not a prerequisite for following the lecture.
 
 [First notebook](../notebooks/00-getting-started.py) · [Recorded preview](../notebooks/previews/00-getting-started.html)
 
 ## ML MolSim: a concise lecture
 
-Our question is concrete: **can geometric descriptors predict simulated CO₂ uptake in a porous material?** We will follow one modelling workflow, keeping the kernel discussion visual:
+Our question is concrete: **can geometric descriptors predict simulated CO₂ uptake in a porous material?** We will follow one modelling workflow, working through the kernel arithmetic together:
 
-1. **The MOF prediction task · 8 minutes.** Connect the eight supplied geometric descriptors to simulated CO₂ uptake at 298 K and 16 bar. Give the training, validation, and test rows distinct jobs.
-2. **Fitting and regularisation · 15 minutes.** Connect a fitted line to several descriptors, compare with a median baseline, and explain overfitting and the regularisation setting `alpha`. Keep the error calculation to one short example.
-3. **Nonlinear models and Gaussian kernels · 17 minutes.** Use the [three-point demonstration](../activities/kernel.html) to see how similarities and fitted coefficients produce a prediction. Explain the width setting `gamma` with a short worked example.
-4. **Standardisation and pipelines · 11 minutes.** Ask what changing units does to a distance. Estimate scaling from training rows and reuse it when predicting validation or test rows.
-5. **Model comparison and cross-validation · 12 minutes.** Compare the notebook's median baseline, scaled ridge, and unscaled/scaled kernel ridge models on the same validation rows. Introduce cross-validation as an extension of its fixed split, fitting preprocessing within each fold.
-6. **Prediction plots, final assessment, and questions · 7 minutes.** Read parity and residual plots, record the model choice before revealing test results, and state which materials the test error might describe.
+1. **The MOF prediction task and why we split · 10 minutes.** Connect the eight geometric descriptors to simulated CO₂ uptake. Briefly introduce RACs as a way to add chemistry, then explain why training answers cannot provide an independent assessment.
+2. **Fitting, bias, variance, and regularisation · 15 minutes.** Connect a fitted line to several descriptors, compare with a median baseline, and distinguish systematic mismatch from sensitivity to the training sample. Introduce regularisation after overfitting. Keep the error calculation to one short example.
+3. **The kernel trick and Gaussian kernels · 18 minutes.** Calculate a feature-space inner product and its polynomial-kernel shortcut by hand: both give $121$. Then use the [three-point demonstration](../activities/kernel.html) to connect Gaussian similarities, fitted coefficients, and predictions.
+4. **Standardisation and pipelines · 10 minutes.** Ask what changing units does to a distance. Estimate scaling from training rows and reuse it for validation and test predictions.
+5. **Model comparison and cross-validation · 10 minutes.** Compare the notebook's four candidates on the same validation rows. Introduce cross-validation as an extension, fitting preprocessing within each fold.
+6. **Prediction plots and an empirical test estimate · 7 minutes.** Record the choice before revealing test results. Explain why a mean over 300 observed errors estimates performance on future similar MOFs, and why another finite sample can give a different mean.
 
 The [lecture slides for annotation](../downloads/11-november-ml-molsim.pdf) leave space for handwritten diagrams and worked examples. They follow the background and modelling workflow in the [original MolSim lecture](https://www.compchem.nl/wp-content/uploads/molsim2023/L09_Machine-Learning.pdf), with shorter error calculations.
 
-The slides focus on the background needed to understand `03-mof-uptake.py`, with space to work through examples on the iPad. The geometric descriptors are already supplied, so their atomistic construction is outside this session. Use the 70-minute timetable as a guide and continue unfinished discussion in the supported practical. The [MOF notes](../lectures/03-mof-uptake.qmd) contain the fuller explanation. Detailed kernel derivations, feature importance, and bootstrap uncertainty remain for later lectures.
+The slides focus on the background needed to understand `03-mof-uptake.py`, with space to work through examples on the iPad. RACs provide brief context for the original MolSim representation; our compact notebook uses eight supplied geometric descriptors. Use the 70-minute timetable as a guide and continue unfinished discussion in the supported practical. The [MOF notes](../lectures/03-mof-uptake.qmd) contain the fuller explanation. Detailed kernel derivations, feature importance, and bootstrap uncertainty remain for later lectures.
 
 ## Hands-on work: start when ready, continue on 2 December
 
-Use the [MOF practical kit](../downloads/mof-practical.zip), extracted separately from the introductory kit. The [practical instructions](../lectures/03-mof-uptake.qmd#practical) explain how to open `03-mof-uptake.py`.
+Use the same [course kit](../downloads/course-kit.zip) and extracted folder as the introductory notebook. The [practical instructions](../lectures/03-mof-uptake.qmd#practical) explain how to open `03-mof-uptake.py`.
 
 Start with the data, then the baseline, then the unscaled/scaled model comparison. Write down what you expect before running a comparison. Keep the test checkbox unchecked until you have recorded your model choice. Stop after the selected model's final assessment; the feature-importance and bootstrap sections are for later. Bring unfinished work and errors to the supported session on **2 December**; there is no expectation of completing the practical on 11 November.
 

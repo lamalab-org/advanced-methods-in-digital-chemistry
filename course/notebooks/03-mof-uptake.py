@@ -53,8 +53,16 @@ def _(mo):
     surface areas, pore volumes, and density are **descriptors**: numerical
     descriptions that we choose to supply to the model.
 
-    These eight geometric quantities omit much of the chemistry. Keep that
-    omission in mind when asking what a useful prediction would establish.
+    These eight geometric quantities omit much of the chemistry. The original
+    MolSim notebook also uses **revised autocorrelations (RACs)**: products or
+    differences of atomic properties (such as electronegativity) aggregated
+    over chosen bond distances and graph environments. They describe metal,
+    linker, and functional-group chemistry. This compact notebook uses only
+    the eight supplied geometric features; it does not calculate or use RACs.
+
+    Keep that omission in mind when asking what a useful prediction would
+    establish. See the [RAC description](https://mofdscribe.readthedocs.io/en/latest/featurizers/atom_centered/racs.html).
+    All plots in this notebook use Matplotlib.
     """)
     return
 
@@ -118,9 +126,14 @@ def _(mo):
     mo.md(r"""
     ## 2. Give each set of observations a job
 
+    **Why split at all?** Fitting uses the training answers to reduce their
+    error. Reusing those answers for assessment can give an optimistic score:
+    even memorising them could look successful. Held-out rows ask whether the
+    model predicts answers it did not use for fitting.
+
     We use a fixed random split: 900 training, 300 validation, and 300 test rows.
-    Inspect and compare models with training and validation data. Leave the
-    final test evaluation until the procedure is chosen.
+    Fit on training rows, compare choices on validation rows, and leave the
+    final test answers untouched until the procedure is chosen.
 
     This is an exercise in predicting other rows from this collection. Different
     MOF names can share building blocks. A random row split does not establish
@@ -170,6 +183,18 @@ def _(mo):
 
     The baseline predicts the median training uptake for every MOF. Why is the
     median a sensible constant when we compare mean absolute errors (MAE)?
+
+    **Overfitting** means following details of the training sample that do not
+    generalise. Imagine refitting on several training samples: **bias** is a
+    systematic mismatch of the average fit, while **variance** is how much the
+    fitted predictions change between samples. Regularisation can reduce this
+    sensitivity, at the cost of a more constrained fit. We choose its strength
+    using held-out evidence.
+
+    Choosing the lowest validation error also uses the validation answers.
+    A candidate can partly win because it was lucky on this finite sample,
+    so the winning validation score can be optimistic. That is why we assess
+    the frozen choice on a separate test set.
 
     Ridge regression fits a linear relationship with a penalty on coefficients.
     Kernel ridge regression (KRR) can describe a nonlinear relationship using
@@ -314,6 +339,12 @@ def _(mo):
     test observations. Compare it with the predeclared median baseline. Which
     population can these test rows represent? What would be different if we
     wanted to predict uptake in an experimental sample?
+
+    The test MAE is exact for these 300 rows, but it is an **empirical estimate**
+    of the unknown average error on future similar cases. Keep the fitted model
+    fixed: another finite test sample can give
+    another mean error. More test rows do not repair a mismatch between this
+    collection and the materials or experiments we intend to predict.
 
     Once revealed, these results cannot be made unseen by unchecking the box.
     If you edit a model while the box remains checked, its test result updates

@@ -34,8 +34,7 @@ def main():
         "lectures/03-mof-uptake.html", "activities/calibration.html",
         "lectures/model-selection.html", "notebooks/model-selection.py",
         "notebooks/previews/model-selection.html",
-        "downloads/introductory-setup.zip", "downloads/mof-practical.zip",
-        "downloads/cli-assistant.zip",
+        "downloads/course-kit.zip",
         "notebooks/00-getting-started.py", "notebooks/02-calibration-lab.py",
         "notebooks/03-mof-uptake.py",
         "notebooks/previews/00-getting-started.html",
@@ -91,8 +90,7 @@ def main():
         with ZipFile(archive) as bundle:
             names = bundle.namelist()
             expected = {
-                "introductory-setup.zip": ("digital-chemistry-intro", ("00-getting-started", "02-calibration-lab")),
-                "mof-practical.zip": ("digital-chemistry-mof", ("03-mof-uptake", "model-selection")),
+                "course-kit.zip": ("digital-chemistry-course", ("00-getting-started", "02-calibration-lab", "03-mof-uptake", "model-selection")),
             }.get(archive.name)
             if expected:
                 prefix, stems = expected
@@ -103,9 +101,28 @@ def main():
                             errors.append(f"Missing notebook resource: {archive.name}: {name}")
                         elif bundle.read(name) != (root / relative).read_bytes():
                             errors.append(f"Stale notebook resource: {archive.name}: {name}")
-                for relative in ("pyproject.toml", "uv.lock"):
-                    if bundle.read(f"{prefix}/{relative}") != (Path(__file__).resolve().parents[1] / relative).read_bytes():
-                        errors.append(f"Stale environment: {archive.name}: {relative}")
+                source = Path(__file__).resolve().parents[1]
+                for relative in ("pyproject.toml", ".python-version", "uv.lock", "requirements.txt", "scripts/check_environment.py",
+                                 "practicals/cli-assistant/README.md", "practicals/cli-assistant/score.py",
+                                 "practicals/cli-assistant/check_score.py", "practicals/cli-assistant/digital-chemistry.config.toml"):
+                    name = f"{prefix}/{relative}"
+                    if name not in names:
+                        errors.append(f"Missing kit resource: {archive.name}: {relative}")
+                    elif bundle.read(name) != (source / relative).read_bytes():
+                        errors.append(f"Stale kit resource: {archive.name}: {relative}")
+                data_prefix = f"{prefix}/data/mof-uptake/"
+                source_data = {
+                    f"{data_prefix}{path.name}": path
+                    for path in (source / "data/mof-uptake").iterdir() if path.is_file()
+                }
+                bundled_data = {name for name in names if name.startswith(data_prefix) and not name.endswith("/")}
+                for name in sorted(source_data.keys() - bundled_data):
+                    errors.append(f"Missing kit data: {archive.name}: {name}")
+                for name in sorted(bundled_data - source_data.keys()):
+                    errors.append(f"Unexpected kit data: {archive.name}: {name}")
+                for name in sorted(source_data.keys() & bundled_data):
+                    if bundle.read(name) != source_data[name].read_bytes():
+                        errors.append(f"Stale kit data: {archive.name}: {name}")
             for member in names:
                 path = PurePosixPath(member)
                 if path.is_absolute() or ".." in path.parts or forbidden.intersection(path.parts):

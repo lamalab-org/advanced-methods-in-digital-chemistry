@@ -8,6 +8,8 @@ click==8.5.0 ; sys_platform != 'emscripten'
     # via
     #   marimo
     #   uvicorn
+cloudpickle==3.1.2
+    # via joblib
 contourpy==1.4.0
     # via matplotlib
 cycler==0.12.1
@@ -24,6 +26,8 @@ itsdangerous==2.2.0
     # via marimo
 jedi==0.20.1
     # via marimo
+joblib==1.6.0
+    # via scikit-learn
 kiwisolver==1.5.1
     # via matplotlib
 loro==1.17.1 ; sys_platform != 'android' and sys_platform != 'emscripten'
@@ -39,16 +43,22 @@ matplotlib==3.11.2
 msgspec==0.22.0
     # via marimo
 narwhals==2.27.1
-    # via marimo
+    # via
+    #   marimo
+    #   scikit-learn
 numpy==2.5.4
     # via
     #   contourpy
     #   digital-chemistry-course
     #   matplotlib
+    #   pandas
+    #   scikit-learn
+    #   scipy
 packaging==26.3
     # via
     #   marimo
     #   matplotlib
+pandas==2.3.3
 parso==0.8.7
     # via jedi
 pillow==13.0.0
@@ -64,9 +74,13 @@ pymdown-extensions==11.0.2
 pyparsing==3.3.3
     # via matplotlib
 python-dateutil==3.0.0
-    # via matplotlib
+    # via
+    #   matplotlib
+    #   pandas
 python-multipart==0.0.32
     # via marimo
+pytz==2026.5
+    # via pandas
 pyyaml==6.0.3
     # via
     #   marimo
@@ -75,10 +89,15 @@ pyzmq==27.2.0 ; sys_platform != 'emscripten'
     # via marimo
 ruff==0.17.3
     # via digital-chemistry-course
+scikit-learn==1.9.1
+scipy==1.18.1
+    # via scikit-learn
 six==1.17.0
     # via python-dateutil
 starlette==1.10.0 ; sys_platform != 'emscripten'
     # via marimo
+threadpoolctl==3.7.0
+    # via scikit-learn
 tomlkit==0.15.2
     # via marimo
 typing-extensions==4.16.0 ; sys_platform != 'emscripten'
@@ -86,7 +105,9 @@ typing-extensions==4.16.0 ; sys_platform != 'emscripten'
     #   anyio
     #   starlette
 tzdata==2026.5
-    # via python-dateutil
+    # via
+    #   pandas
+    #   python-dateutil
 uvicorn==0.54.0 ; sys_platform != 'emscripten'
     # via marimo
 websockets==17.3 ; sys_platform != 'emscripten'
