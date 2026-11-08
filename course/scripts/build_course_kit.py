@@ -41,6 +41,12 @@ To open a particular notebook directly, for example:
 
 Use this same folder and these commands for later classes. uv installs all
 course dependencies by default; uv run selects the environment automatically.
+uv uses uv.lock by default. If dependency declarations change, normal uv run
+can update the lockfile; --locked stops instead. Omitting --locked is valid
+and behaves the same for this unchanged kit.
+--headless stops marimo from automatically launching a browser; you still
+use the notebook in a browser. In WSL, open the printed localhost URL in
+your Windows browser while the server and Python run inside Ubuntu.
 Keep the terminal open while working. Save edited notebooks under a new name.
 Stop marimo with Ctrl+C in the terminal. Reopen with the same command.
 

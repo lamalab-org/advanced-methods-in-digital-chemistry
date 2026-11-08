@@ -24,7 +24,7 @@ uv sync --locked
 uv run --locked marimo edit notebooks/00-getting-started.py --headless
 ```
 
-Open the local URL printed in the terminal. Change a concentration, follow the dependent cells, and check a prediction by hand. We will meet variables, lists, and a small function, and save our own notebook copy. The deliberately flawed error calculation is something to investigate as we go, not a prerequisite for following the lecture.
+uv already uses `uv.lock` by default. Without `--locked`, it can update the lockfile when the dependency declarations change; `--locked` stops instead. Both commands behave the same for the unchanged course kit. `--headless` leaves opening the browser to you. On Windows, run the commands in Ubuntu/WSL 2 and open the printed local URL in your Windows browser. On macOS/Linux, use your usual browser. Change a concentration, follow the dependent cells, and check a prediction by hand. We will meet variables, lists, and a small function, and save our own notebook copy. The deliberately flawed error calculation is something to investigate as we go, not a prerequisite for following the lecture.
 
 [First notebook](../notebooks/00-getting-started.py) · [Recorded preview](../notebooks/previews/00-getting-started.html)
 

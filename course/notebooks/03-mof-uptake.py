@@ -191,6 +191,11 @@ def _(mo):
     sensitivity, at the cost of a more constrained fit. We choose its strength
     using held-out evidence.
 
+    Choosing the lowest validation error also uses the validation answers.
+    A candidate can partly win because it was lucky on this finite sample,
+    so the winning validation score can be optimistic. That is why we assess
+    the frozen choice on a separate test set.
+
     Ridge regression fits a linear relationship with a penalty on coefficients.
     Kernel ridge regression (KRR) can describe a nonlinear relationship using
     similarities between feature vectors. Here the Gaussian kernel uses
@@ -336,7 +341,8 @@ def _(mo):
     wanted to predict uptake in an experimental sample?
 
     The test MAE is exact for these 300 rows, but it is an **empirical estimate**
-    of error on future similar cases. Another finite test sample can give
+    of the unknown average error on future similar cases. Keep the fitted model
+    fixed: another finite test sample can give
     another mean error. More test rows do not repair a mismatch between this
     collection and the materials or experiments we intend to predict.
 

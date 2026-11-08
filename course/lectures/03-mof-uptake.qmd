@@ -145,7 +145,7 @@ One model in the practical compares materials through distances between their fe
 
 Fitting uses the training answers to reduce their error. Assessing the model on those same answers can therefore be optimistic: memorising them could look perfect while failing on new cases. Held-out data lets us assess predictions on answers unused in fitting. Validation answers guide model selection, so we reserve a separate test set for assessment after selection.
 
-Our compact table contains 1,500 rows selected from the workshop data without selecting on uptake. The notebook assigns 900 rows to training, 300 to validation, and 300 to the final test. We inspect training observations, fit the candidate models, and compare their validation errors. We then freeze the choice and calculate its test error.
+Our compact table contains 1,500 rows selected from the workshop data without selecting on uptake. The notebook assigns 900 rows to training, 300 to validation, and 300 to the final test. We inspect training observations, fit the candidate models, and compare their validation errors. We then freeze the choice and calculate its test error. Picking the lowest validation error also uses those answers: some candidates can look unusually good on that particular finite sample. The winning validation score can therefore be optimistic. The separate test evaluates the selected model without having participated in that choice.
 
 A different identifier does not necessarily mean a chemically independent framework. Two MOFs may share building blocks. This random row split supports a limited question about other entries in this collection; testing a new framework family would require a suitable definition of families and a split that respects it.
 
@@ -190,6 +190,20 @@ What would make the comparison more informative? Choose a baseline, a metric, an
 
 ## The uncertainty in a test error {#a-test-score-still-has-a-hat}
 
+There are two different quantities here. For a fixed fitted model $\widehat f$, we want the average error on future cases from the intended population $P$:
+
+$$
+R(\widehat f)=\mathbb{E}_{(X,Y)\sim P}\left[\left|\widehat f(X)-Y\right|\right].
+$$
+
+We cannot average over every future MOF. Instead, we calculate an average over our finite reserved sample:
+
+$$
+\widehat R_{\mathrm{test}}(\widehat f)=\frac{1}{n_{\mathrm{test}}}\sum_{i\in\mathrm{test}}\left|\widehat f(x_i)-y_i\right|.
+$$
+
+The model stays fixed during this assessment; changing the model after seeing the test results changes the status of those observations.
+
 The chosen model gives one error for each of the 300 reserved test rows. Averaging them gives an empirical test MAE. The calculation is exact for those rows, up to numerical precision, while the expected error on future cases remains uncertain. Another finite test sample can give a different average. For example, invented absolute errors $(1,1,4)$ have mean $2$, while $(1,2,0)$ have mean $1$. These toy samples illustrate sampling variation, not two runs of the MOF notebook. More representative, independent rows can improve precision; more rows from the wrong population do not establish performance on the intended materials.
 
 Keep the fitted model fixed and draw samples, with replacement, from the recorded test errors. This [bootstrap](../glossary.qmd#bootstrap) creates a distribution of average errors under a particular sampling assumption. The notebook compares averages of 30 sampled rows with averages of 300. The larger averages fluctuate less in this illustration.
@@ -230,6 +244,8 @@ Ask for a small MAE function. Predict its output for residuals $-2,0,+1$, then r
 Complete three sentences: which model you chose and why; what its empirical test score estimates; and what further evidence you would need before using it for an experimental adsorption decision.
 
 ## Suggested reading
+
+Abu-Mostafa, Magdon-Ismail, and Lin, *Learning From Data* (2012): §2.2.3, pp. 59–61, distinguishes test error from future error; §2.3.1, pp. 62–66, develops bias and variance through repeated training samples; and §4.3.2, pp. 141–144, explains why selecting the lowest validation score changes its interpretation. These are useful companions to this lecture. The formal VC bounds are outside our current scope.
 
 Hardt and Recht's [**Sample versus population**](https://mlstory.org/supervised.html#sample-versus-population) remains relevant here: our test rows are a sample, and we have to decide which future cases they can represent.
 
