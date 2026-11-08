@@ -1,60 +1,61 @@
 ---
-title: "11 November: class plan"
+title: "11 November: Python and MOF prediction"
 toc: false
 ---
 
-**Wednesday, 11 November 2026 · 14:30–16:00 · Helmholtzweg 4, SR 6 Physik**
+**Wednesday, 11 November 2026 · 12:10–16:00 · Helmholtzweg 4, SR 6 Physik**
 
-We will start with basic Python in our first marimo notebook, then use the ML MolSim example to understand how a model is trained and evaluated. This shorter meeting is mainly a lecture with discussion. **The main supported hands-on session is on 2 December, 12:00–16:00.**
+We will explore basic Python in a marimo notebook, learn how to train and assess a model, and then use those ideas to predict simulated CO₂ uptake in metal–organic frameworks (MOFs).
+
+## Before class
+
+Bring a laptop and charger. Try the [setup guide](../setup.qmd) beforehand if you can; bring any installation errors with you.
+
+- Download and extract the [course kit](../downloads/course-kit.zip) once. It contains all notebooks and data.
+- Keep the [lecture slides](../downloads/11-november-ml-molsim.pdf) handy. Slide 2 has the uv command reference.
+- Open the shared project-ideas document linked in the course email.
+
+## Plan for the day
 
 | Time | What we will do |
 |---|---|
-| 14:30–14:45 | Open, change, and save the first Python notebook |
-| 14:45–15:55 | ML MolSim lecture, including questions and a short kernel demonstration |
-| 15:55–16:00 | Record project ideas and the next practical steps |
+| 12:10–12:40 | Basic Python: open, change, and save our first notebook |
+| 12:40–13:50 | ML lecture with handwritten examples and discussion |
+| 13:50–14:10 | Break |
+| 14:10–15:45 | Hands-on: train and compare MOF gas-uptake models |
+| 15:45–16:00 | Compare results, collect project ideas, and identify next steps |
 
-For a recap, see the [recorded summary on Loom](https://www.loom.com/share/2f2f0c13db964d699a33071786904697).
+The timing is a guide; we will adjust to questions and progress. We can continue unfinished practical work on **2 December, 12:00–16:00**.
 
-## Start with the first marimo notebook
+## First Python notebook
 
-Bring a laptop and charger. Try the [setup guide](../setup.qmd) beforehand if you can; an unfinished installation is fine. Download and extract the [course kit](../downloads/course-kit.zip). Use this same extracted folder throughout the course. The [uv command reference](../downloads/11-november-ml-molsim.pdf#page=2) is on slide 2. From the folder:
+From the extracted `digital-chemistry-course` folder:
 
 ```bash
 uv sync --locked
-uv run --locked marimo edit notebooks/00-getting-started.py --headless
+uv run --locked marimo edit --headless
 ```
 
-uv already uses `uv.lock` by default. Without `--locked`, it can update the lockfile when the dependency declarations change; `--locked` stops instead. Both commands behave the same for the unchanged course kit. `--headless` leaves opening the browser to you. On Windows, run the commands in Ubuntu/WSL 2 and open the printed local URL in your Windows browser. On macOS/Linux, use your usual browser. Change a concentration, follow the dependent cells, and check a prediction by hand. We will meet variables, lists, and a small function, and save our own notebook copy. The deliberately flawed error calculation is something to investigate as we go, not a prerequisite for following the lecture.
+Open the complete local URL printed in the terminal, then choose `notebooks/00-getting-started.py`. Change an input, follow the dependent cells, and save your own copy.
 
-[First notebook](../notebooks/00-getting-started.py) · [Recorded preview](../notebooks/previews/00-getting-started.html)
+uv uses `uv.lock` by default. `--locked` stops if it needs updating; without the flag, uv can update it. `--headless` leaves opening the browser to you. In Windows, run the commands in Ubuntu/WSL 2 and use your Windows browser.
 
-## ML MolSim: a concise lecture
+[Notebook preview](../notebooks/previews/00-getting-started.html)
 
-Our question is concrete: **can geometric descriptors predict simulated CO₂ uptake in a porous material?** We will follow one modelling workflow, working through the kernel arithmetic together:
+## Lecture and MOF practical
 
-1. **The MOF prediction task and why we split · 10 minutes.** Connect the eight geometric descriptors to simulated CO₂ uptake. Briefly introduce RACs as a way to add chemistry, then explain why training answers cannot provide an independent assessment.
-2. **Fitting, bias, variance, and regularisation · 15 minutes.** Connect a fitted line to several descriptors, compare with a median baseline, and distinguish systematic mismatch from sensitivity to the training sample. Introduce regularisation after overfitting. Keep the error calculation to one short example.
-3. **The kernel trick and Gaussian kernels · 18 minutes.** Calculate a feature-space inner product and its polynomial-kernel shortcut by hand: both give $121$. Then use the [three-point demonstration](../activities/kernel.html) to connect Gaussian similarities, fitted coefficients, and predictions.
-4. **Standardisation and pipelines · 10 minutes.** Ask what changing units does to a distance. Estimate scaling from training rows and reuse it for validation and test predictions.
-5. **Model comparison and cross-validation · 10 minutes.** Compare the notebook's four candidates on the same validation rows. Introduce cross-validation as an extension, fitting preprocessing within each fold.
-6. **Prediction plots and an empirical test estimate · 7 minutes.** Record the choice before revealing test results. Explain why a mean over 300 observed errors estimates performance on future similar MOFs, and why another finite sample can give a different mean.
+We will cover descriptors, training and test splits, overfitting, bias and variance, regularisation, kernels, standardisation, and validation. Worked examples will connect these ideas to the notebook. Our model is closely related to the kernel-ridge models in [Moosavi et al. (2020)](https://www.nature.com/articles/s41467-020-17755-8); see the [paper example](../lectures/03-mof-uptake.qmd#published-example) for the connection.
 
-The [lecture slides for annotation](../downloads/11-november-ml-molsim.pdf) leave space for handwritten diagrams and worked examples. They follow the background and modelling workflow in the [original MolSim lecture](https://www.compchem.nl/wp-content/uploads/molsim2023/L09_Machine-Learning.pdf), with shorter error calculations.
+After the lecture, open `notebooks/03-mof-uptake.py` in the same marimo session:
 
-An early slide connects our practical to [Moosavi et al. (2020)](https://www.nature.com/articles/s41467-020-17755-8), which also uses RBF kernel ridge regression for MOF adsorption prediction. The [paper example in the notes](../lectures/03-mof-uptake.qmd#published-example) explains the shared ingredients and the simplified scope of our notebook.
+1. Inspect the descriptors, uptake target, and training/validation/test split.
+2. Fit the baseline and compare the unscaled and scaled models. Predict what scaling will change before running them.
+3. Record your model choice using validation results, then reveal its test score. Explain what that score tells us about future MOFs.
 
-The slides focus on the background needed to understand `03-mof-uptake.py`, with space to work through examples on the iPad. RACs provide brief context for the original MolSim representation; our compact notebook uses eight supplied geometric descriptors. Use the 70-minute timetable as a guide and continue unfinished discussion in the supported practical. The [MOF notes](../lectures/03-mof-uptake.qmd) contain the fuller explanation. Detailed kernel derivations, feature importance, and bootstrap uncertainty remain for later lectures.
+The [MOF notes and practical instructions](../lectures/03-mof-uptake.qmd#practical) provide the fuller explanation. Stop after the final assessment for today; feature importance and bootstrap uncertainty come later. There is no expectation of finishing everything in class.
 
-## Hands-on work: start when ready, continue on 2 December
+## Project ideas
 
-Use the same [course kit](../downloads/course-kit.zip) and extracted folder as the introductory notebook. The [practical instructions](../lectures/03-mof-uptake.qmd#practical) explain how to open `03-mof-uptake.py`.
+Keep the shared document open alongside the practical. Add a chemical question, possible data, a simple first comparison, or something you need help with. Rough ideas and comments on each other's suggestions are welcome; this is not an assessed proposal.
 
-Start with the data, then the baseline, then the unscaled/scaled model comparison. Write down what you expect before running a comparison. Keep the test checkbox unchecked until you have recorded your model choice. Stop after the selected model's final assessment; the feature-importance and bootstrap sections are for later. Bring unfinished work and errors to the supported session on **2 December**; there is no expectation of completing the practical on 11 November.
-
-The MOF notebook uses a fixed training/validation/test split. The [separate model-selection practical](../lectures/model-selection.qmd#why-cross-validation) provides a cross-validation exercise with a simulated dataset.
-
-## Collect project ideas in parallel
-
-Keep the **shared project-ideas document from the course email** open during the lecture and practicals. Add a chemical question, possible data, a simple first comparison, and what help you need. Rough ideas are welcome; this is not an assessed proposal. Comment on related ideas if you would like to collaborate.
-
-Before leaving, save your notebook and leave one project idea or question. Any additional group support between classes will be announced separately once a helper and time are confirmed.
+Before leaving, save your notebook and add one idea or question. For a recap, see the [recorded summary on Loom](https://www.loom.com/share/2f2f0c13db964d699a33071786904697).
