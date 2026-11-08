@@ -3,3 +3,5 @@
 | **11 November 2026** | **12:10–16:00** | [Python starter, ML lecture and MOF practical](sessions/2026-11-11.qmd) |
 | **2 December 2026** | **12:00–16:00** | Supported ML MolSim hands-on work |
 | **9 December 2026** | **12:00–16:00** | Extended teaching and practical work |
+
+An [optional help session with the research group](sessions/2026-11-11.qmd#optional-help) is planned for the week of **16–20 November**, possibly remotely. The host, time, and joining details will be announced.

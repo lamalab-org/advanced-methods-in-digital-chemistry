@@ -7,7 +7,7 @@ Scientific questions, small models, and the evidence behind predictions. A pract
 
 ## Next class: 11 November
 
-**12:10–16:00 · Helmholtzweg 4, SR 6 Physik.** We start with our first Python notebook, then work through an ML MolSim lecture on training, kernels, standardisation, and testing. We will work on the MOF notebook after the lecture and continue on 2 December. Bring your laptop, charger, and any setup questions.
+**12:10–16:00 · Helmholtzweg 4, SR 6 Physik.** We start with our first Python notebook, then work through an ML MolSim lecture on training, kernels, standardisation, and testing. The MOF notebook is available throughout, with time to work together in class and continue on 2 December. Bring your laptop, charger, and any setup questions.
 
 **[Open the class page](sessions/2026-11-11.qmd)** · [Prepare your environment](setup.qmd)
 
@@ -17,7 +17,7 @@ Scientific questions, small models, and the evidence behind predictions. A pract
 
 {{< include _includes/2026-schedule.qmd >}}
 
-No class on **18 or 25 November**, or **16, 23 or 30 December**. All times are local to Jena. [Full schedule and course outline](outline.qmd#scheduling).
+No regular class on **18 or 25 November**, or **16, 23 or 30 December**. All times are local to Jena. [Full schedule and course outline](outline.qmd#scheduling).
 
 ## Materials {#start-here}
 
