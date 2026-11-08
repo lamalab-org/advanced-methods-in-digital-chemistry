@@ -10,7 +10,9 @@ Teaching and optional support for the rest of **2026**:
 
 {{< include _includes/2026-schedule.qmd >}}
 
-All times are **Europe/Berlin (CET)**. On 11 November we meet from **12:10 to 16:00**, in **Helmholtzweg 4, SR 6 Physik**. The December sessions run **12:00–16:00**; room arrangements for those extended hours will be confirmed. Please flag clashes with other classes.
+All times are **Europe/Berlin (CET)**. On 11 November we meet from **12:10 to 16:00**. The December sessions run **12:00–16:00**; room arrangements for those extended hours will be confirmed. Please flag clashes with other classes.
+
+{{< include _includes/2026-11-11-room.qmd >}}
 
 ### After the winter break {#weekly-plan}
 

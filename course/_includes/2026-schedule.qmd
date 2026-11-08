@@ -1,6 +1,6 @@
 | Date | Time | Session |
 |---|---|---|
-| **11 November 2026** | **12:10–16:00** | [Python starter, ML lecture and MOF practical](sessions/2026-11-11.qmd) |
+| **11 November 2026** | **12:10–16:00** | [Python starter, ML lecture and MOF practical](sessions/2026-11-11.qmd); **room for the first part to be confirmed** |
 | Week of **16–20 November 2026** | To be announced | [Optional help with the research group](sessions/2026-11-11.qmd#optional-help); may be remote |
 | 18 November 2026 | — | No regular class |
 | 25 November 2026 | — | No regular class |
@@ -9,3 +9,7 @@
 | 16 December 2026 | — | No class |
 | 23 December 2026 | — | No class |
 | 30 December 2026 | — | No class |
+
+[]{#additional-sessions}
+
+**Please suggest dates for additional sessions this year.** I would really like us to have more time together before the end of 2026. Please email me **all dates and time windows** that could work for a **full-day or half-day meeting** around your usual classes and other obligations. Please consider days beyond our usual Wednesday slot. Every possible date helps, even if you can suggest only one.
