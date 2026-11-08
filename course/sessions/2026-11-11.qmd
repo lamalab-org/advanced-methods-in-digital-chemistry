@@ -1,0 +1,61 @@
+---
+title: "11 November: class plan"
+toc: false
+---
+
+**Wednesday, 11 November 2026 · 14:30–16:00 · Helmholtzweg 4, SR 6 Physik**
+
+We will start with the first marimo notebook, have a short lecture on training and testing, then spend most of the remaining time working with the ML MolSim material. We will see how far we get; finishing the whole practical is not the goal for this shorter session.
+
+## Bring and prepare
+
+Bring a laptop and charger. Follow the [setup guide](../setup.qmd) as far as you can; bring any error message rather than spending hours on installation. Download the [introductory kit](../downloads/introductory-setup.zip) and the [MOF practical kit](../downloads/mof-practical.zip), and extract them into separate folders.
+
+## 1. Basic Python in marimo · about 20 minutes
+
+Open **`00-getting-started.py`**, our first notebook. From the extracted introductory-kit folder:
+
+```bash
+uv sync --locked
+uv run --locked marimo edit notebooks/00-getting-started.py --headless
+```
+
+Open the local URL printed in the terminal. Work through variables, arithmetic, lists, and a small function. Change a concentration, follow which cells update, and check a prediction by hand. Investigate the deliberately flawed error calculation, then save and reopen your own copy. Ask a partner to explain one line back to you.
+
+[Notebook source](../notebooks/00-getting-started.py) · [Recorded preview](../notebooks/previews/00-getting-started.html)
+
+## 2. Short lecture: training and testing · about 10–15 minutes
+
+We will connect the calculation to the basic modelling workflow:
+
+- **Inputs, target, and parameters:** what the model receives, predicts, and fits.
+- **Training and a loss:** use observations to fit parameters; a small training error alone does not establish useful predictions.
+- **Validation and testing:** use validation data to compare choices, then assess the chosen procedure on reserved test data. Decide what a new chemical case should mean before interpreting a score.
+
+The [learning-from-data notes](../lectures/02-learning-from-data.qmd) provide the fuller explanation. We will use the remaining time to put these ideas into practice.
+
+## 3. Hands-on ML MolSim · the remaining time
+
+From the separately extracted MOF-kit folder:
+
+```bash
+uv sync --locked --group mof
+uv run --locked --group mof marimo edit notebooks/03-mof-uptake.py --headless
+```
+
+This is our adaptation of the ML MolSim gas-uptake practical. It predicts **simulated CO₂ uptake** from geometric descriptions of porous materials. Start with the data and work at your own pace, alone or with a partner:
+
+1. Identify a row, the input features, and the target with its units and conditions.
+2. Inspect the training, validation, and test split. Establish a simple baseline.
+3. Fit and compare models using validation results. Record one change and what it did.
+4. **If we reach this step:** write down the model choice before revealing the final test results. Explain what that test can and cannot establish.
+
+Keep the test checkbox unchecked while choosing a model. We can continue unfinished comparisons in the next class.
+
+[MOF practical notes](../lectures/03-mof-uptake.qmd) · [Notebook source](../notebooks/03-mof-uptake.py) · [Recorded preview](../notebooks/previews/03-mof-uptake.html)
+
+## Alongside the practical: collect project ideas
+
+Keep the **shared project-ideas document from the course email** open. Whenever a question occurs to you, add a few lines: the chemical question, possible data, a first comparison, and what help you need. Rough ideas are welcome; this is not an assessed proposal. Comment on related ideas if you would like to collaborate.
+
+Before leaving, save your notebook, record where you stopped, and leave one project idea or question. We will use these notes to plan the next steps together.

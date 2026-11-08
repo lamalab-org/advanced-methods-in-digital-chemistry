@@ -2,54 +2,25 @@
 title: "Course outline"
 ---
 
-Suppose a model predicts that a molecule will be useful. Useful for what? The answer may seem obvious until we have to decide which measurements to collect, which errors matter, and whether we would act on the prediction. 
-After the course, I hope that you will be ask such questions and critically examine claims about machine learning in chemistry. 
+We begin with small models we can inspect, then connect molecular representations to prediction, simulation, and experimental decisions. The topic sequence below is a guide to the material; it is not one topic per meeting.
 
-We begin by fitting and examining small models. We then ask how models can use molecular structure and enter a simulation. Finally, we use them to propose candidates, choose measurements, and assist a research workflow. Throughout, we return to the human decisions about what to retain, what to leave out, and what evidence is sufficient.
+## Teaching dates {#scheduling}
 
-Friedolin lists **14 two-hour meetings**, of which **13 are available after excluding 4 November**. I would like to use that time for the ten topic groups below and three further meetings devoted to practical work and projects.
+The remaining teaching dates in **2026** are:
 
-## What would you most like to learn? {#learning-goals}
+{{< include _includes/2026-schedule.qmd >}}
 
-What is the main thing you would like to be able to do or understand by the end of this course? It could begin with a chemical question, something you want to calculate, or a claim you would like to be able to examine. Take a moment to formulate your own goal before comparing it with someone else's. We will use these goals to discuss the emphasis and examples in the course.
+All times are **Europe/Berlin (CET)**. On 11 November we start later and have a shorter session, in **Helmholtzweg 4, SR 6 Physik**. The December sessions use the longer 12:00–16:00 window; room arrangements for the extended hours will be confirmed. Please flag clashes with other classes.
 
-## How should we schedule the course? {#scheduling}
+There is **no teaching on 18 or 25 November, or 16, 23 or 30 December**. The introduction took place on 28 October; there was no class on 4 November. This replaces the earlier provisional weekly timetable.
 
-Our first session is on **Wednesday, 28 October 2026, 14:00–16:00, at Helmholtzweg 4, SR 6 Physik**. I cannot teach on **Wednesday, 4 November 2026**, or **Tuesday, 17 November 2026**. I would therefore like us to use part of this first meeting to discuss how to arrange the remaining teaching. A block week or several longer sessions might work better for us.
+### After the winter break {#weekly-plan}
 
-The listed Wednesdays run from 28 October 2026 to 10 February 2027. There are no meetings on 23 or 30 December. With 4 November unavailable, we have seven meetings before Christmas and six afterwards. My other unavailable date, 17 November, is a Tuesday; it does not remove the Wednesday meeting on 18 November.
+The listed 2027 Wednesdays are **6, 13, 20 and 27 January**, and **3 and 10 February**, with the usual **14:00–16:00** slot. These dates have not been checked in the current availability review; teaching arrangements and the allocation of topics will be confirmed separately. They do not set a project deadline or an assessed presentation date.
 
-| Format | What we would need to arrange |
-|---|---|
-| **A block week** | Concentrate the main teaching in one week. We need a week in which we can all attend, with breaks and supported practice within the teaching days. There will be less time between sessions to revisit unfamiliar ideas. |
-| **Several longer sessions** | Combine topics into longer meetings spread across the course period. We need several suitable dates, with enough time between them for practice and project work. |
+## What would you like to investigate? {#learning-goals}
 
-We can combine some of the remaining meetings into longer appointments while keeping time for practical work, questions, and breaks. I would like us to have time between the first practicals and the later project discussions to try things independently. We will compare possible arrangements with our actual availability before settling the timetable.
-
-For the discussion, please check which proposed weeks or dates you can attend, any limits on starting or finishing times, and which format you would prefer. Mark uncertain availability as uncertain. You can share individual constraints privately; you do not need to explain their reasons to the class. We will confirm the dates after checking availability and the practical arrangements.
-
-### If we keep the Wednesday timetable {#weekly-plan}
-
-This is a proposal for how we could use the listed dates. The three additional practical meetings give us time to revisit difficult calculations, debug code, and develop projects. We can adjust their emphasis as we find out where more time would help.
-
-| Listed meeting | Date | Proposed work |
-|---|---|---|
-| 1 | 28 October 2026 | AI, science, our tools, and course organisation |
-| 2 | 4 November | **No teaching: I am unavailable** |
-| 3 | 11 November | Fitting a model |
-| 4 | 18 November | Making a chemical comparison |
-| 5 | 25 November | Choosing a model: underfitting and overfitting, bias and variance, regularisation, and cross-validation; connect the comparison to project questions |
-| 6 | 2 December | A small neural network |
-| 7 | 9 December | Molecular representations |
-| 8 | 16 December | Energies, forces, and simulation |
-| 9 | 6 January 2027 | Supported practical: examine a trajectory or continue a model comparison; discuss a first project result |
-| 10 | 13 January | Proposing molecules |
-| 11 | 20 January | Choosing the next measurement |
-| 12 | 27 January | Language models in a research workflow |
-| 13 | 3 February | Supported project work: check calculations, discuss conclusions, and address unresolved problems |
-| 14 | 10 February | Reproducibility and project discussion |
-
-The topic numbers below follow the order of the material; the table above counts calendar appointments. The final project discussion is an opportunity to exchange work and receive feedback. It does not set the assessed presentation date or the report deadline.
+Keep a running collection of project ideas alongside the practicals. Add a chemical question, possible data, a first comparison, and anything you need help with to the **shared document linked in the course email**. A rough idea is enough. We will use these notes to shape manageable projects and help people with related interests find one another.
 
 ## Time to work together {#working-together}
 
@@ -57,7 +28,7 @@ For the meetings after the introduction, my proposal is to begin with a short ex
 
 We would finish by comparing what we found and identifying what needs another look. In a longer meeting, we can repeat this pattern around a break. The notes provide the fuller explanations to return to afterwards. Short preparation tasks can give us a starting point, but unfinished attempts are welcome and the suggested reading remains optional.
 
-We will discuss this proposal alongside the dates in the first meeting. The topic sequence below sets out what we would work on; it does not imply a full lecture on each topic before you get to try anything.
+We will adjust the pace to what helps the class. The topic sequence below does not imply a full lecture on each topic before you get to try anything.
 
 ## Project and assessment {#assessment}
 
@@ -72,7 +43,7 @@ I would like you to spend most of your project time working on a question you fi
 
 The written work should grow out of that investigation: the question, the calculations and figures, the choices you made, and what the evidence supports. We will discuss whether a commented notebook with a short accompanying explanation would be a useful format. The presentation can draw on the same work. The aim is to make your reasoning understandable without creating unnecessary extra work in packaging it.
 
-In the first meeting, we will discuss a manageable scope, the form and length of the written work, the presentation, and suitable dates. These details are still open. The assessment brief, including grading criteria and any weighting, will follow once the applicable module requirements have been checked.
+We will agree a manageable scope, the form and length of the written work, the presentation, and suitable dates. These details are still open. The assessment brief, including grading criteria and any weighting, will follow once the applicable module requirements have been checked.
 
 ### Where do project ideas come from? {#project-ideas}
 
@@ -80,7 +51,7 @@ You do not need to arrive with a project idea. I will suggest starting points dr
 
 ### When should we start? {#project-timing}
 
-My proposal is to collect ideas from the first meeting and use the first practical sessions to find out what interests you. After those first practicals, discuss a possible question with me. A short conversation or a few sentences are enough: what would you like to find out, what data could you use, and what would you compare or check first? This is a way to get feedback on the scope, not an additional assessed report.
+Collect ideas in the shared document during the practical sessions and use the calculations to find out what interests you. After those first practicals, discuss a possible question with me. A short conversation or a few sentences are enough: what would you like to find out, what data could you use, and what would you compare or check first? This is a way to get feedback on the scope, not an additional assessed report.
 
 Start the main investigation once we have agreed a manageable question and a feasible first step. Use the supported practical time to try things and get help. You do not need to wait until we have covered every method, and you do not need to finish the project during a block week. Keep a record of your calculations, choices, and results as you go, so the report and presentation can grow out of that work.
 
@@ -88,7 +59,7 @@ Start the main investigation once we have agreed a manageable question and a fea
 
 **The written-report deadline and the date of the final presentation have not yet been set.** We will discuss both alongside the course timetable, allowing time to work on the project after the relevant teaching sessions. The end of the listed lecture period is not, by itself, a project deadline.
 
-Once the timetable and applicable requirements have been checked, I will publish the dates and submission instructions here and in the assessment brief. For the first meeting, bring any constraints that would affect a workable schedule; you do not need to submit a project proposal or start a separate investigation beforehand.
+Once the timetable and applicable requirements have been checked, I will publish the dates and submission instructions here and in the assessment brief. Please share any constraints that would affect a workable schedule. The idea collection is a starting point for discussion, not an assessed proposal.
 
 ## Learning from observations {#learning-from-observations}
 

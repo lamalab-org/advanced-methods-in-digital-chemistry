@@ -1,0 +1,5 @@
+| Wednesday | Time | Session |
+|---|---|---|
+| **11 November 2026** | **14:30–16:00** | [Python, training and testing, and the ML MolSim practical](sessions/2026-11-11.qmd) |
+| **2 December 2026** | **12:00–16:00** | Extended teaching and practical work |
+| **9 December 2026** | **12:00–16:00** | Extended teaching and practical work |

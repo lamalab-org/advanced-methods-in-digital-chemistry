@@ -12,7 +12,7 @@ h1, h2, h3, h4, .sidebar-title, .sidebar-item-text, #TOC, .nav-footer { font-fam
 h1, h2, h3, h4 { color: var(--course-ink); line-height: 1.35; letter-spacing: -.035em; }
 h1.title { color: var(--course-accent); font-size: clamp(1.8rem, 3vw, 2.45rem); line-height: 1.2; letter-spacing: -.055em; }
 main h1:not(.title) { font-size: 1.75rem; }
-main h2 { font-size: 1.45rem; margin-top: 2.5rem; padding-bottom: .55rem; border-bottom: 1px solid var(--course-rule); }
+main h2 { font-size: 1.45rem; margin-top: 1.8rem; padding-bottom: .55rem; border-bottom: 1px solid var(--course-rule); }
 main h3 { font-size: 1.15rem; margin-top: 1.9rem; }
 main h4 { font-size: 1rem; }
 #title-block-header { border-bottom: 2px solid var(--course-accent); padding-bottom: 1.1rem; margin-bottom: 2rem; }
@@ -51,7 +51,7 @@ div.sourceCode { border: 1px solid var(--course-rule); border-left: 3px solid va
 mjx-container[display="true"] { max-width: 100%; overflow-x: auto; overflow-y: hidden; padding: .35rem .1rem; }
 table { font-size: .92rem; line-height: 1.55; }
 table th { font-weight: 600; border-bottom-color: var(--course-accent) !important; }
-table td, table th { padding: .65rem .6rem !important; vertical-align: top; }
+table td, table th { padding: .45rem .6rem !important; vertical-align: top; }
 .course-outline th:nth-child(1) { width: 24%; }
 .course-outline th:nth-child(2) { width: 36%; }
 .course-outline th:nth-child(3) { width: 40%; }
