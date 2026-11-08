@@ -154,15 +154,15 @@ ls
 
 A **path** is an address for a file or folder. An absolute path starts from the filesystem root, such as `/Users/yourname/Downloads` on macOS or `/home/yourname` in Ubuntu. A relative path starts from the working directory. For example, `notebooks/00-getting-started.py` means “look inside the `notebooks` folder here.” The shorthand `~` refers to your home folder in the current environment.
 
-`cd` changes the working directory. After extracting the setup kit below, if `ls` shows the folder `digital-chemistry-intro`, enter it with:
+`cd` changes the working directory. After extracting the setup kit below, if `ls` shows the folder `digital-chemistry-course`, enter it with:
 
 ```bash
-cd "digital-chemistry-intro"
+cd "digital-chemistry-course"
 ```
 
 If it is elsewhere, use `cd` followed by its path in this environment, enclosed in quotes. Quotes keep a path containing spaces together. Run `pwd` and `ls` again: you should now see `pyproject.toml`. `cd ..` moves to the parent folder, and `cd ~` returns to your home folder. Changing directory changes where the shell looks; it does not move your files.
 
-In WSL, keep the course project under your Linux home folder, for example `/home/yourname/digital-chemistry-intro`. A Windows Downloads folder and an Ubuntu home folder are different locations. The [project download step](#get-the-supplied-project) shows how to move the kit between them. [Microsoft: working across file systems](https://learn.microsoft.com/en-us/windows/wsl/filesystems)
+In WSL, keep the course project under your Linux home folder, for example `/home/yourname/digital-chemistry-course`. A Windows Downloads folder and an Ubuntu home folder are different locations. The [project download step](#get-the-supplied-project) shows how to move the kit between them. [Microsoft: working across file systems](https://learn.microsoft.com/en-us/windows/wsl/filesystems)
 
 ### Python, packages, and a virtual environment
 
@@ -228,7 +228,7 @@ uv --version
 
 ### 2. Get the supplied project {#get-the-supplied-project}
 
-Download and extract the [introductory setup kit](downloads/introductory-setup.zip). The `digital-chemistry-intro` folder contains `pyproject.toml`, `uv.lock`, the notebooks, and a short check script.
+Download and extract the [course kit](downloads/course-kit.zip). The `digital-chemistry-course` folder contains `pyproject.toml`, `uv.lock`, all four notebooks, their recorded previews, the MOF data, and a short check script. Use this same folder for later classes.
 
 **Windows with WSL:** extract the ZIP using Windows File Explorer. Then, in Ubuntu, open your Linux home folder in File Explorer:
 
@@ -237,16 +237,16 @@ cd ~
 explorer.exe .
 ```
 
-Copy the extracted `digital-chemistry-intro` folder into that window. Back in Ubuntu, enter the copied project:
+Copy the extracted `digital-chemistry-course` folder into that window. Back in Ubuntu, enter the copied project:
 
 ```bash
-cd ~/digital-chemistry-intro
+cd ~/digital-chemistry-course
 ls
 ```
 
 You should see `pyproject.toml`. Keep the project and the `.venv` we will create inside this Linux folder. [Opening WSL folders in File Explorer](https://learn.microsoft.com/en-us/windows/wsl/filesystems#view-your-current-directory-in-windows-file-explorer)
 
-**macOS or Linux:** open a terminal and [navigate](#folders-paths-and-where-am-i) to the extracted `digital-chemistry-intro` folder.
+**macOS or Linux:** open a terminal and [navigate](#folders-paths-and-where-am-i) to the extracted `digital-chemistry-course` folder.
 
 If you already have the full teaching project, use its `course` directory instead. You should see `pyproject.toml` in the folder from which you run the following commands.
 

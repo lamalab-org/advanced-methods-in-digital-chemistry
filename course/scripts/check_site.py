@@ -34,8 +34,7 @@ def main():
         "lectures/03-mof-uptake.html", "activities/calibration.html",
         "lectures/model-selection.html", "notebooks/model-selection.py",
         "notebooks/previews/model-selection.html",
-        "downloads/introductory-setup.zip", "downloads/mof-practical.zip",
-        "downloads/cli-assistant.zip",
+        "downloads/course-kit.zip",
         "notebooks/00-getting-started.py", "notebooks/02-calibration-lab.py",
         "notebooks/03-mof-uptake.py",
         "notebooks/previews/00-getting-started.html",
@@ -91,8 +90,7 @@ def main():
         with ZipFile(archive) as bundle:
             names = bundle.namelist()
             expected = {
-                "introductory-setup.zip": ("digital-chemistry-intro", ("00-getting-started", "02-calibration-lab")),
-                "mof-practical.zip": ("digital-chemistry-mof", ("03-mof-uptake", "model-selection")),
+                "course-kit.zip": ("digital-chemistry-course", ("00-getting-started", "02-calibration-lab", "03-mof-uptake", "model-selection")),
             }.get(archive.name)
             if expected:
                 prefix, stems = expected
@@ -103,9 +101,11 @@ def main():
                             errors.append(f"Missing notebook resource: {archive.name}: {name}")
                         elif bundle.read(name) != (root / relative).read_bytes():
                             errors.append(f"Stale notebook resource: {archive.name}: {name}")
-                for relative in ("pyproject.toml", "uv.lock"):
+                for relative in ("pyproject.toml", "uv.lock", "scripts/check_environment.py",
+                                 "practicals/cli-assistant/README.md", "practicals/cli-assistant/score.py",
+                                 "practicals/cli-assistant/check_score.py", "practicals/cli-assistant/digital-chemistry.config.toml"):
                     if bundle.read(f"{prefix}/{relative}") != (Path(__file__).resolve().parents[1] / relative).read_bytes():
-                        errors.append(f"Stale environment: {archive.name}: {relative}")
+                        errors.append(f"Stale kit resource: {archive.name}: {relative}")
             for member in names:
                 path = PurePosixPath(member)
                 if path.is_absolute() or ".." in path.parts or forbidden.intersection(path.parts):

@@ -1,7 +1,7 @@
 [project]
 name = "digital-chemistry-course"
 version = "0.1.0"
-description = "Small marimo environment for the introductory digital chemistry sessions"
+description = "Shared marimo environment for the digital chemistry course"
 requires-python = ">=3.12,<3.13"
 dependencies = [
   "marimo>=0.25.2,<0.26",
@@ -15,7 +15,7 @@ mof = ["pandas>=2.2,<3", "scikit-learn>=1.5,<2"]
 
 [tool.uv]
 package = false
-default-groups = []
+default-groups = ["mof"]
 
 [tool.marimo.runtime]
 auto_instantiate = true

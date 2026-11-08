@@ -121,11 +121,11 @@ The [Clever Materials discussion](03-mof-uptake.qmd#clever-materials) gives us a
 
 ## Practical {#practical}
 
-The [model-selection notebook](../notebooks/model-selection.py) contains the repeated-fit and regularisation controls, a visible five-fold assignment, and a comparison of degrees and penalty strengths. It is included in the [MOF practical kit](../downloads/mof-practical.zip), using the same environment. From the extracted folder:
+The [model-selection notebook](../notebooks/model-selection.py) contains the repeated-fit and regularisation controls, a visible five-fold assignment, and a comparison of degrees and penalty strengths. It is included in the [course kit](../downloads/course-kit.zip), using the same environment. From the extracted folder:
 
 ```bash
-uv sync --locked --group mof
-uv run --locked --group mof marimo edit notebooks/model-selection.py --headless
+uv sync --locked
+uv run --locked marimo edit notebooks/model-selection.py --headless
 ```
 
 The [recorded preview](../notebooks/previews/model-selection.html) shows the default calculation if you cannot run the notebook. Its controls do not recompute results. The notebook has two separate simulations: 80 sets of 18 noisy energy values at fixed separations for bias and variance, then 60 independent development observations for cross-validation. Each added error has standard deviation 0.06 in reduced energy units. It does not report a final test score.

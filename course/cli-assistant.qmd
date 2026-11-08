@@ -26,7 +26,7 @@ Follow the [official Codex CLI installation instructions](https://learn.chatgpt.
 
 ## A calculation we can check {#exercise}
 
-Download and extract the [small exercise folder](downloads/cli-assistant.zip). In Ubuntu on WSL, keep the extracted folder in your Linux home directory, as with the Python setup. Open a terminal there. `pwd` shows where you are; `ls` should list `score.py` and `check_score.py`, as well as the README and connection settings.
+The [course kit](downloads/course-kit.zip) includes this exercise in `practicals/cli-assistant/`. Reuse your extracted course folder and open a terminal in that subfolder. In Ubuntu on WSL, keep the course folder in your Linux home directory, as with the Python setup. `pwd` shows where you are; `ls` should list `score.py` and `check_score.py`, as well as the README and connection settings.
 
 The function receives predictions and observations as lists. Throughout this exercise, the lists are non-empty and have the same length. For predictions `[2, 0]` and observations `[1, 1]`, calculate the residuals, their average, and the average of their squares. Then run:
 
