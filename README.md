@@ -4,7 +4,7 @@ An English-language course for master's students in chemistry, by Kevin Maik Jab
 
 **[Read the course](https://lamalab-org.github.io/advanced-methods-in-digital-chemistry/)** · **[Getting set up](https://lamalab-org.github.io/advanced-methods-in-digital-chemistry/setup.html)**
 
-The course connects scientific questions and human modelling choices to statistical learning, molecular representations, and practical model building. The home page lists the updated 2026 teaching dates, and a dedicated 11 November session guide starts with basic Python, introduces training and testing, and leads into the ML MolSim practical. The material also includes lecture notes, a glossary, suggested readings, interactive activities, and downloadable marimo notebooks, HTML previews, and data. Further chapters are in development.
+The course connects scientific questions and human modelling choices to statistical learning, molecular representations, and practical model building. The home page lists the updated 2026 teaching dates, and a dedicated 11 November session guide starts with basic Python and a focused ML MolSim lecture, with the main supported practical on 2 December. The material also includes lecture notes, a glossary, suggested readings, interactive activities, and downloadable marimo notebooks, HTML previews, and data. Further chapters are in development.
 
 The materials were developed in iterative dialogue with OpenAI's Codex. Kevin Maik Jablonka directs the course and remains responsible for its content. The [authorship disclosure](https://lamalab-org.github.io/advanced-methods-in-digital-chemistry/#about-these-notes) describes this collaboration.
 

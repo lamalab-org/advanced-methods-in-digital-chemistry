@@ -7,7 +7,7 @@ Scientific questions, small models, and the evidence behind predictions. A pract
 
 ## Next class: 11 November
 
-**14:30–16:00 · Helmholtzweg 4, SR 6 Physik.** We start with basic Python in our first marimo notebook, briefly discuss model training and testing, then spend the remaining time on the ML MolSim practical. Bring your laptop, charger, and any setup questions.
+**14:30–16:00 · Helmholtzweg 4, SR 6 Physik.** We start with our first Python notebook, then work through an ML MolSim lecture on training, kernels, standardisation, and testing. The main hands-on session follows on 2 December. Bring your laptop, charger, and any setup questions.
 
 **[Open the class page](sessions/2026-11-11.qmd)** · [Prepare your environment](setup.qmd)
 

@@ -4,6 +4,8 @@ title: "What can a model tell us about gas uptake?"
 
 With the calibration curve, one number described the input: concentration. A porous material gives us many more possibilities. We could supply the identities and positions of its atoms, or replace most of that detail with a few measurements of its pores. The choice is already part of the model, before we fit a single parameter. What would we like the prediction to help us do, and which description might be enough for that purpose?
 
+For the [11 November lecture](../sessions/2026-11-11.qmd), follow the target and descriptors, training/validation/test splitting, the baseline, cross-validation, the visual kernel example, and standardisation. The [annotation slides](../downloads/11-november-ml-molsim.pdf) provide the concise route. Kernel derivations, feature-importance analysis, and bootstrap uncertainty are reference material for later lectures. The main supported hands-on session is **2 December**.
+
 ## What should you be able to do afterwards? {#lecture-outcomes}
 
 After working through the uptake practical, you should be able to:
@@ -66,15 +68,26 @@ $$
 
 For residuals $-2,0,+1$ mmol/g, the MAE is $1$ mmol/g. The median minimises the sum of absolute deviations for a constant prediction. Choosing squared error would instead lead us to the mean. We have already made a modelling choice before selecting a learning algorithm.
 
-## Why would changing units change a prediction?
-
-One model in the practical compares materials through distances between their feature vectors. Suppose two rows differ by 0.1 g/cm³ in density and by 100 m²/g in specific surface area. If we take the numerical values as coordinates, their squared differences contribute 0.01 and 10,000. Expressing the same surface area in m²/kg multiplies that coordinate difference by 1,000. The materials have not changed, but their numerical distance has. Before using distance as a measure of similarity, we need to decide what a step along each coordinate should mean.
-
-**Standard scaling** subtracts each feature's training mean and divides by its training standard deviation. The resulting coordinates are dimensionless. This makes the distance insensitive to a consistent change of units, but it still gives each feature a particular weight: one training standard deviation. That is a modelling convention, not evidence that the features are equally informative. The transformation is itself fitted, so we estimate those means and standard deviations from training data and apply the same transformation to validation and test data. A [pipeline](../glossary.qmd#preprocessing) keeps the transformation and model together.
-
 ## From a straight line to similarities {#kernels-as-functions}
 
 Our calibration line adds two functions, a constant and a multiple of concentration. A polynomial adds further powers. We choose these building blocks first and then fit their coefficients. A kernel model offers another construction: place a function at each training input and fit the coefficients of their sum. This is the comparison in the [MolSim lecture, pp. 53–57](https://www.compchem.nl/wp-content/uploads/molsim2023/L09_Machine-Learning.pdf#page=53).
+
+For the first lecture, the key idea is to fit a sum of local contributions. A Gaussian kernel supplies bell-shaped functions centred on the training inputs; its width changes which inputs look similar. The fitted coefficients can be negative, so the prediction is not simply an average of nearby values. We use **[kernel ridge regression](../glossary.qmd#kernel-ridge)**, which also uses a penalty to constrain the fit. The short visual example is enough to start the practical; the equations below are optional.
+
+### Adding three functions
+
+The small demonstration below uses three invented observations and one dimensionless input. The coloured curves show the three weighted contributions; the dark curve is their sum. Moving the query changes where we evaluate the same fitted function. Changing $\gamma$ or $\alpha$ fits a new function to the same observations.
+
+```{=html}
+<iframe class="activity" src="../activities/kernel.html" title="Three Gaussian kernel functions and their fitted sum"></iframe>
+```
+
+[Open the kernel demonstration](../activities/kernel.html). First move the query and add the three displayed contributions. Then predict what will happen when the bells become narrower, before changing $\gamma$. Can you find a region where the curves disagree although there is no observation to decide between them? These three training observations cannot establish which setting predicts future measurements better.
+
+In the MOF practical, each input has eight coordinates rather than one. The construction is the same, but now the distance depends on every descriptor and its scale.
+
+<details>
+<summary>Optional: the kernel ridge equations</summary>
 
 We use **[kernel ridge regression](../glossary.qmd#kernel-ridge)**. Our Gaussian kernel gives a similarity to two scaled feature vectors $x$ and $z$:
 
@@ -90,17 +103,13 @@ $$
 
 Here $x_i$ is a training input and $a_i$ is its fitted coefficient. The coefficients can be negative, and the sum is not a normalised average of nearby uptake values. The regularisation setting $\alpha$ controls the penalty used during fitting. We will compare an unscaled and a scaled version with the same settings. A scaled linear ridge model provides another useful comparison. [scikit-learn's KRR introduction](https://scikit-learn.org/stable/modules/kernel_ridge.html)
 
-### Adding three functions
+</details>
 
-The small demonstration below uses three invented observations and one dimensionless input. The coloured curves show the three weighted contributions; the dark curve is their sum. Moving the query changes where we evaluate the same fitted function. Changing $\gamma$ or $\alpha$ fits a new function to the same observations.
+## Why would changing units change a prediction?
 
-```{=html}
-<iframe class="activity" src="../activities/kernel.html" title="Three Gaussian kernel functions and their fitted sum"></iframe>
-```
+One model in the practical compares materials through distances between their feature vectors. Suppose two rows differ by 0.1 g/cm³ in density and by 100 m²/g in specific surface area. If we take the numerical values as coordinates, their squared differences contribute 0.01 and 10,000. Expressing the same surface area in m²/kg multiplies that coordinate difference by 1,000. The materials have not changed, but their numerical distance has. Before using distance as a measure of similarity, we need to decide what a step along each coordinate should mean.
 
-[Open the kernel demonstration](../activities/kernel.html). First move the query and add the three displayed contributions. Then predict what will happen when the bells become narrower, before changing $\gamma$. Can you find a region where the curves disagree although there is no observation to decide between them? These three training observations cannot establish which setting predicts future measurements better.
-
-In the MOF practical, each input has eight coordinates rather than one. The construction is the same, but now the distance depends on every descriptor and its scale.
+**Standard scaling** subtracts each feature's training mean and divides by its training standard deviation. The resulting coordinates are dimensionless. This makes the distance insensitive to a consistent change of units, but it still gives each feature a particular weight: one training standard deviation. That is a modelling convention, not evidence that the features are equally informative. The transformation is itself fitted, so we estimate those means and standard deviations from training data and apply the same transformation to validation and test data. A [pipeline](../glossary.qmd#preprocessing) keeps the transformation and model together.
 
 ## Choosing a model with validation data {#which-observations-may-influence-the-choice}
 

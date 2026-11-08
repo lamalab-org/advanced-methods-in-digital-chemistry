@@ -5,57 +5,50 @@ toc: false
 
 **Wednesday, 11 November 2026 · 14:30–16:00 · Helmholtzweg 4, SR 6 Physik**
 
-We will start with the first marimo notebook, have a short lecture on training and testing, then spend most of the remaining time working with the ML MolSim material. We will see how far we get; finishing the whole practical is not the goal for this shorter session.
+We will start with basic Python in our first marimo notebook, then use the ML MolSim example to understand how a model is trained and evaluated. This shorter meeting is mainly a lecture with discussion. **The main supported hands-on session is on 2 December, 12:00–16:00.**
 
-## Bring and prepare
+| Time | What we will do |
+|---|---|
+| 14:30–14:45 | Open, change, and save the first Python notebook |
+| 14:45–15:55 | ML MolSim lecture, including questions and a short kernel demonstration |
+| 15:55–16:00 | Record project ideas and the next practical steps |
 
-Bring a laptop and charger. Follow the [setup guide](../setup.qmd) as far as you can; bring any error message rather than spending hours on installation. Download the [introductory kit](../downloads/introductory-setup.zip) and the [MOF practical kit](../downloads/mof-practical.zip), and extract them into separate folders.
+## Start with the first marimo notebook
 
-## 1. Basic Python in marimo · about 20 minutes
-
-Open **`00-getting-started.py`**, our first notebook. From the extracted introductory-kit folder:
+Bring a laptop and charger. Try the [setup guide](../setup.qmd) beforehand if you can; an unfinished installation is fine. Download and extract the [introductory kit](../downloads/introductory-setup.zip). From its folder:
 
 ```bash
 uv sync --locked
 uv run --locked marimo edit notebooks/00-getting-started.py --headless
 ```
 
-Open the local URL printed in the terminal. Work through variables, arithmetic, lists, and a small function. Change a concentration, follow which cells update, and check a prediction by hand. Investigate the deliberately flawed error calculation, then save and reopen your own copy. Ask a partner to explain one line back to you.
+Open the local URL printed in the terminal. Change a concentration, follow the dependent cells, and check a prediction by hand. We will meet variables, lists, and a small function, and save our own notebook copy. The deliberately flawed error calculation is something to investigate as we go, not a prerequisite for following the lecture.
 
-[Notebook source](../notebooks/00-getting-started.py) · [Recorded preview](../notebooks/previews/00-getting-started.html)
+[First notebook](../notebooks/00-getting-started.py) · [Recorded preview](../notebooks/previews/00-getting-started.html)
 
-## 2. Short lecture: training and testing · about 10–15 minutes
+## ML MolSim: a concise lecture
 
-We will connect the calculation to the basic modelling workflow:
+Our question is concrete: **can geometric descriptors predict simulated CO₂ uptake in a porous material?** We will follow one modelling workflow, keeping the kernel discussion visual:
 
-- **Inputs, target, and parameters:** what the model receives, predicts, and fits.
-- **Training and a loss:** use observations to fit parameters; a small training error alone does not establish useful predictions.
-- **Validation and testing:** use validation data to compare choices, then assess the chosen procedure on reserved test data. Decide what a new chemical case should mean before interpreting a score.
+1. **Question, data, and splitting · 11 minutes.** Identify the target and its conditions, then separate training, validation, and test observations.
+2. **Fitting, a baseline, and validation · 17 minutes.** Connect inputs and predictions, work through one short error calculation, and discuss why training error alone cannot choose a model.
+3. **Cross-validation · 10 minutes.** Walk through five folds by hand and compare candidate settings while keeping the final test set aside.
+4. **Similarity and kernels · 10 minutes.** Use the [three-point demonstration](../activities/kernel.html) to see how fitted contributions add to a prediction. Change the kernel width once; the derivation can wait.
+5. **Standardisation and leakage · 14 minutes.** Ask what changing units does to a distance. Estimate scaling from training data only, and refit preprocessing inside every cross-validation fold.
+6. **Final assessment, questions, and handover · 8 minutes.** State what the test result establishes and identify where to start the practical.
 
-The [learning-from-data notes](../lectures/02-learning-from-data.qmd) provide the fuller explanation. We will use the remaining time to put these ideas into practice.
+The [lecture slides for annotation](../downloads/11-november-ml-molsim.pdf) leave space for handwritten diagrams and worked examples. They follow the core ideas in the MolSim lecture. The [MOF notes](../lectures/03-mof-uptake.qmd) contain the fuller explanation. We will leave kernel derivations, advanced model selection, feature importance, and bootstrap uncertainty for later lectures.
 
-## 3. Hands-on ML MolSim · the remaining time
+## Hands-on work: start when ready, continue on 2 December
 
-From the separately extracted MOF-kit folder:
+Use the [MOF practical kit](../downloads/mof-practical.zip), extracted separately from the introductory kit. The [practical instructions](../lectures/03-mof-uptake.qmd#practical) explain how to open `03-mof-uptake.py`.
 
-```bash
-uv sync --locked --group mof
-uv run --locked --group mof marimo edit notebooks/03-mof-uptake.py --headless
-```
+Start with the data, then the baseline, then the unscaled/scaled model comparison. Write down what you expect before running a comparison. Keep the test checkbox unchecked until you have recorded your model choice. Stop after the selected model's final assessment; the feature-importance and bootstrap sections are for later. Bring unfinished work and errors to the supported session on **2 December**; there is no expectation of completing the practical on 11 November.
 
-This is our adaptation of the ML MolSim gas-uptake practical. It predicts **simulated CO₂ uptake** from geometric descriptions of porous materials. Start with the data and work at your own pace, alone or with a partner:
+The MOF notebook uses a fixed training/validation/test split. The [separate model-selection practical](../lectures/model-selection.qmd#why-cross-validation) provides a cross-validation exercise with a simulated dataset.
 
-1. Identify a row, the input features, and the target with its units and conditions.
-2. Inspect the training, validation, and test split. Establish a simple baseline.
-3. Fit and compare models using validation results. Record one change and what it did.
-4. **If we reach this step:** write down the model choice before revealing the final test results. Explain what that test can and cannot establish.
+## Collect project ideas in parallel
 
-Keep the test checkbox unchecked while choosing a model. We can continue unfinished comparisons in the next class.
+Keep the **shared project-ideas document from the course email** open during the lecture and practicals. Add a chemical question, possible data, a simple first comparison, and what help you need. Rough ideas are welcome; this is not an assessed proposal. Comment on related ideas if you would like to collaborate.
 
-[MOF practical notes](../lectures/03-mof-uptake.qmd) · [Notebook source](../notebooks/03-mof-uptake.py) · [Recorded preview](../notebooks/previews/03-mof-uptake.html)
-
-## Alongside the practical: collect project ideas
-
-Keep the **shared project-ideas document from the course email** open. Whenever a question occurs to you, add a few lines: the chemical question, possible data, a first comparison, and what help you need. Rough ideas are welcome; this is not an assessed proposal. Comment on related ideas if you would like to collaborate.
-
-Before leaving, save your notebook, record where you stopped, and leave one project idea or question. We will use these notes to plan the next steps together.
+Before leaving, save your notebook and leave one project idea or question. Any additional group support between classes will be announced separately once a helper and time are confirmed.
