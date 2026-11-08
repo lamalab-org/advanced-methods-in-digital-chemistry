@@ -4,7 +4,7 @@ title: "What can a model tell us about gas uptake?"
 
 With the calibration curve, one number described the input: concentration. A porous material gives us many more possibilities. We could supply the identities and positions of its atoms, or replace most of that detail with a few measurements of its pores. The choice is already part of the model, before we fit a single parameter. What would we like the prediction to help us do, and which description might be enough for that purpose?
 
-For the [11 November lecture](../sessions/2026-11-11.qmd), follow the target and descriptors, training/validation/test splitting, the baseline, cross-validation, the visual kernel example, and standardisation. The [annotation slides](../downloads/11-november-ml-molsim.pdf) provide the concise route. Kernel derivations, feature-importance analysis, and bootstrap uncertainty are reference material for later lectures. The main supported hands-on session is **2 December**.
+For the [11 November lecture](../sessions/2026-11-11.qmd), follow the target and descriptors, training/validation/test splitting, the baseline, cross-validation, the visual kernel example, and standardisation. The [annotation slides](../downloads/11-november-ml-molsim.pdf) provide the concise route. Kernel derivations, feature-importance analysis, and bootstrap uncertainty are reference material for later lectures. Hands-on work begins after the lecture on **11 November** and continues on **2 December**.
 
 ## What should you be able to do afterwards? {#lecture-outcomes}
 

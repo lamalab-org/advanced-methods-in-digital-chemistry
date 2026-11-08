@@ -10,7 +10,7 @@ The remaining teaching dates in **2026** are:
 
 {{< include _includes/2026-schedule.qmd >}}
 
-All times are **Europe/Berlin (CET)**. On 11 November we start later and have a shorter session, in **Helmholtzweg 4, SR 6 Physik**. The December sessions use the longer 12:00–16:00 window; room arrangements for the extended hours will be confirmed. Please flag clashes with other classes.
+All times are **Europe/Berlin (CET)**. On 11 November we meet from **12:10 to 16:00**, in **Helmholtzweg 4, SR 6 Physik**. The December sessions run **12:00–16:00**; room arrangements for those extended hours will be confirmed. Please flag clashes with other classes.
 
 There is **no teaching on 18 or 25 November, or 16, 23 or 30 December**. The introduction took place on 28 October; there was no class on 4 November. This replaces the earlier provisional weekly timetable.
 
