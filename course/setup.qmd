@@ -32,7 +32,7 @@ Start with the [assistant](#set-up-the-ai-assistant), or go straight to the [deb
 
 ### Why Jan and Blablador? {#why-this-assistant}
 
-Jan is one example of how we can work with open models. You are welcome to use **Claude, Codex, or another assistant**. You do not need to buy a subscription or replace a tool that already works for you.
+Jan is one example of how we can work with open models. You are welcome to use **ChatGPT, Claude, Codex, or another assistant**. The [TU Ilmenau AI chat](https://ai-chatbot.tu-ilmenau.de/chat) is another option if you have access. You do not need to buy a subscription or replace a tool that already works for you.
 
 We suggest Jan with Blablador because it gives us access to [open models](glossary.qmd#open-models) through research infrastructure in Germany. [Jan is open-source software](https://www.jan.ai/); Blablador supplies the models, running at Forschungszentrum Jülich. The service is free to use, subject to access and usage limits. This gives us an option that does not depend on each student maintaining a paid subscription. [Helmholtz's service introduction](https://www.hifis.net/tips/2025/05/05/tip-llm/); [Jülich's account of the open-model service](https://strube1.pages.jsc.fz-juelich.de/2026-06-12-hdc-rs/); [current access and limits](https://sdlaml.pages.jsc.fz-juelich.de/ai/guides/blablador_api_access/)
 
@@ -78,6 +78,8 @@ Use the remote provider directly. This exercise does not require downloading a l
 Blablador's [model aliases](glossary.qmd#model-alias) can change which underlying model they serve. Record the date, alias, and actual model identifier when available for an assessed comparison. [Blablador API guide](https://sdlaml.pages.jsc.fz-juelich.de/ai/guides/blablador_api_access/)
 
 ### Try a debugging conversation {#assistant-for-debugging}
+
+For simple errors, please first try working through them yourself with your chosen assistant. Read the error, ask for an explanation and a small fix, then check the result. If you are still stuck, ask for help and show us the error message and what you tried.
 
 Before moving on to Python, send a message using your chosen assistant. If you have just connected Jan to Blablador, select one of its models. We can start with a problem that needs no working Python environment:
 

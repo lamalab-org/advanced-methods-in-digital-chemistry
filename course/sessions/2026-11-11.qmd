@@ -56,6 +56,8 @@ The [MOF notes and practical instructions](../lectures/03-mof-uptake.qmd#practic
 
 ## Optional help the following week {#optional-help}
 
+For simple errors, **first try working through them yourself with Jan/Blablador or ChatGPT**. The [TU Ilmenau AI chat](https://ai-chatbot.tu-ilmenau.de/chat) is another option if you have access. Read the error, ask the assistant to explain it and suggest a small fix, then rerun the code to check the result. The [setup guide has an example debugging prompt](../setup.qmd#assistant-for-debugging). If you are still stuck, ask for help and bring the error message and what you tried.
+
 An **optional help session with the research group** is planned for the week of **16–20 November**, possibly remotely. Bring your notebook, installation problems, or questions from the practical. The host, day, time, and joining details will be announced. Attendance is optional; we will continue together on 2 December.
 
 ## Project ideas and feedback
