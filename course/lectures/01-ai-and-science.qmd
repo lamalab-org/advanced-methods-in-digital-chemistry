@@ -15,9 +15,9 @@ After working through these examples, you should be able to:
 - Distinguish predicting a yield, explaining the predictor, and establishing what changing the temperature would cause. Explain why none of those alone identifies a reaction mechanism.
 - Say what seven successes in ten attempts tell us directly, and what assumptions enter a prediction about the next attempt. Recognise that statements about uncertainty can have different interpretations.
 
-These notes give a fuller account than we will work through together in the first meeting. Use them to revisit the examples afterwards.
+These notes expand on the introductory lecture. Use them to revisit the examples and explore the sources.
 
-::: {.callout-note title="Our first meeting" collapse="true"}
+::: {.callout-note title="Course information" collapse="true"}
 
 [What you would like to learn](../outline.qmd#learning-goals){#learning-goals}, [assessment](../outline.qmd#assessment){#assessment}, and [dates and teaching format](../outline.qmd#scheduling){#scheduling} are collected in the course outline. I would also welcome [your feedback](../index.qmd#feedback){#feedback}. The [setup page](../setup.qmd) accompanies our practical work.
 

@@ -9,20 +9,20 @@ I would like us to get a small calculation running and understand enough of the 
 After working through this page, you should be able to:
 
 - Open the supplied notebook, change a calculation, check the result, and reopen your saved work.
-- Explain where a shell command belongs, which Python environment runs the code, and which parts of our setup run on your computer or at Jülich.
+- Explain where a shell command belongs, which Python environment runs the code, and which parts of our setup run on your computer or use a remote service.
 - Give an assistant enough information to investigate an error, then check its suggestion. If the assistant is unavailable, make the same checks with a partner or with me.
 
 ## Before a practical session
 
-Before a practical session, look through this guide and try starting the setup. The [11 November class page](sessions/2026-11-11.qmd) links to the notebooks we will use. Begin with an assistant, then prepare the Python environment. Jan with Blablador is our suggested example; you can also use an assistant you already have, such as Claude or Codex. On Windows, setting up Ubuntu through WSL 2 beforehand is particularly helpful because it can require a restart or administrator access.
+Before a practical session, look through this guide and try starting the setup. The [11 November class page](sessions/2026-11-11.qmd) links to the notebooks we will use. Begin with an assistant, then prepare the Python environment. You can use the [university AI chat](#university-ai-chat), Jan with Blablador, or an assistant you already have. On Windows, setting up Ubuntu through WSL 2 beforehand is particularly helpful because it can require a restart or administrator access.
 
 Bring your laptop and charger if you can. We will help with setup during the practical; you can also work with a partner while an installation is being resolved. An unfinished installation is fine. Keep any error message and the command that produced it, and bring them along. If your setup already works, use that time to explore the first notebook and check a calculation with a partner.
 
 ## The course setup
 
-I will demonstrate **Jan connected to Blablador first**, so that we have an assistant available while installing Python and working through errors. We will then use **uv to manage Python and packages** and **marimo to work in notebooks**. You can follow the same exercises with another assistant. If Jan is difficult to install, Blablador also has a web interface. If service access is unavailable, work with a partner or ask the instructor for help and continue with the Python setup.
+We use an **AI assistant to help investigate errors**, **uv to manage Python and packages**, and **marimo to work in notebooks**. The [university AI chat](#university-ai-chat) works in your browser. The Jan–Blablador instructions below show an alternative using open models. Choose the assistant that works for you, then continue with the Python setup.
 
-Python executes the calculations. uv keeps the course's dependencies together. marimo is the interface for writing and running Python. Jan displays our chat, and Blablador runs the language model at Jülich. A browser window can therefore show a calculation running on your own computer or a conversation with a remote service. The window alone does not tell us where the work happens.
+Python executes the calculations. uv keeps the course's dependencies together. marimo is the interface for writing and running Python. If you use Jan with Blablador, Jan displays the chat and Blablador runs the model at Jülich. The university AI chat gives access to remotely hosted OpenAI models. A browser window can therefore show a calculation running on your own computer or a conversation with a remote service. The window alone does not tell us where the work happens.
 
 The [glossary](glossary.qmd#computing-and-the-course-tools) explains the computing terms used below.
 
@@ -30,9 +30,13 @@ Start with the [assistant](#set-up-the-ai-assistant), or go straight to the [deb
 
 ## Set up the AI assistant {#set-up-the-ai-assistant}
 
+### University AI chat {#university-ai-chat}
+
+**Everyone in this course has access to OpenAI models through the [TU Ilmenau AI chat](https://ai-chatbot.tu-ilmenau.de/chat).** Open it in your browser and use it to explain errors, discuss code, or check your understanding. No chat application needs to be installed for this option. Continue with the [debugging example](#assistant-for-debugging) or the [Python setup](#set-up-python).
+
 ### Why Jan and Blablador? {#why-this-assistant}
 
-Jan is one example of how we can work with open models. You are welcome to use **ChatGPT, Claude, Codex, or another assistant**. The [TU Ilmenau AI chat](https://ai-chatbot.tu-ilmenau.de/chat) is another option if you have access. You do not need to buy a subscription or replace a tool that already works for you.
+Jan connected to Blablador is an alternative for working with open models. You are also welcome to use **ChatGPT, Claude, Codex, or another assistant**. You do not need to buy a subscription or replace a tool that already works for you.
 
 We suggest Jan with Blablador because it gives us access to [open models](glossary.qmd#open-models) through research infrastructure in Germany. [Jan is open-source software](https://www.jan.ai/); Blablador supplies the models, running at Forschungszentrum Jülich. The service is free to use, subject to access and usage limits. This gives us an option that does not depend on each student maintaining a paid subscription. [Helmholtz's service introduction](https://www.hifis.net/tips/2025/05/05/tip-llm/); [Jülich's account of the open-model service](https://strube1.pages.jsc.fz-juelich.de/2026-06-12-hdc-rs/); [current access and limits](https://sdlaml.pages.jsc.fz-juelich.de/ai/guides/blablador_api_access/)
 
