@@ -7,17 +7,17 @@ Scientific questions, small models, and the evidence behind predictions. A pract
 
 ## Next class: 11 November
 
-**12:10–16:00 · Helmholtzweg 4, SR 6 Physik.** We start with our first Python notebook, then work through an ML MolSim lecture on training, kernels, standardisation, and testing. The MOF notebook is available throughout, with time to work together in class and continue on 2 December. Bring your laptop, charger, and any setup questions.
+**12:10–16:00 · Helmholtzweg 4, SR 6 Physik.** We start with our first Python notebook, then work through a machine-learning lecture on training, kernels, standardisation, and testing. The MOF notebook is available throughout, with time to work together in class and continue on 2 December. Bring your laptop, charger, and any setup questions.
 
 **[Open the class page](sessions/2026-11-11.qmd)** · [Prepare your environment](setup.qmd)
 
 [Recorded summary on Loom](https://www.loom.com/share/2f2f0c13db964d699a33071786904697)
 
-## Remaining teaching in 2026
+## Teaching and support in 2026
 
 {{< include _includes/2026-schedule.qmd >}}
 
-No regular class on **18 or 25 November**, or **16, 23 or 30 December**. All times are local to Jena. [Full schedule and course outline](outline.qmd#scheduling).
+All times are local to Jena. [Course outline and assessment information](outline.qmd#scheduling).
 
 ## Materials {#start-here}
 
@@ -27,7 +27,7 @@ No regular class on **18 or 25 November**, or **16, 23 or 30 December**. All tim
 
 ## How we work {#how-to-use-a-lecture-page}
 
-Short explanations lead into calculations you can inspect, change, and discuss. Unfinished attempts are welcome. We will collect project ideas in a shared document; its link will be sent to the class by email. The [assessment](outline.qmd#assessment) combines a project report and a presentation with discussion; deadlines are still to be agreed.
+Explanations and handwritten examples lead into calculations you can inspect, change, and discuss. Unfinished attempts are welcome. Collect project ideas in the shared document linked in the course email. The [assessment](outline.qmd#assessment) combines a project report and a presentation with discussion; submission dates will be announced on the course outline page and by email.
 
 []{#feedback}
 
@@ -35,4 +35,4 @@ Tell me what helped you understand something and what got in the way. Your feedb
 
 ## About these notes {#about-these-notes}
 
-I develop these materials in iterative dialogue with OpenAI's Codex, drawing on earlier teaching and the sources cited in the notes. I direct the course and remain responsible for its content, including errors. Our aim is to use assistants while retaining judgement about the question, calculation, and evidence.
+These materials draw on earlier teaching and the cited sources, with assistance from OpenAI's Codex. I remain responsible for the course content, including errors.

@@ -2,11 +2,11 @@
 title: "Working with a coding assistant"
 ---
 
-Our [error function from the second lecture](lectures/02-learning-from-data.qmd#llm-exercise-debug-a-metric) runs and prints a number. Unfortunately, it calculates the wrong quantity. I would like you to try a coding assistant on this problem: can it find the mistake, and can you check its repair?
+The [error function in the calibration exercise](lectures/02-learning-from-data.qmd#llm-exercise-debug-a-metric) runs and prints a number. Unfortunately, it calculates the wrong quantity. Try a coding assistant on this problem: can it find the mistake, and can you check its repair?
 
 In a chat, we usually copy code into a conversation and copy a suggestion back. A coding assistant with a **command-line interface**, or **CLI**, runs in the terminal. It can read a file, propose an edit, and run a command to check the result. The language model still generates proposed actions; the surrounding software carries them out with the permissions it has been given. This is one concrete use of the term [coding agent](glossary.qmd#coding-agent).
 
-We will try this together once the Python environment works and we have calculated a few errors ourselves. It is a practical for the second or third meeting, rather than another installation to finish before the first. You can work in pairs and take turns making and checking a request.
+Use this follow-up exercise once your Python environment works and you have calculated a few errors by hand. It is not preparation required for 11 November. You can work in pairs and take turns making and checking a request.
 
 ## What should you be able to do afterwards? {#assistant-outcomes}
 

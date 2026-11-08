@@ -88,7 +88,7 @@ The first term rewards agreement with training targets; the second penalises lar
 
 Our calibration line adds two functions, a constant and a multiple of concentration. A polynomial adds further powers. We choose these building blocks first and then fit their coefficients. A kernel model offers another construction: place a function at each training input and fit the coefficients of their sum. This is the comparison in the [MolSim lecture, pp. 53–57](https://www.compchem.nl/wp-content/uploads/molsim2023/L09_Machine-Learning.pdf#page=53).
 
-For the first lecture, the key idea is to fit a sum of local contributions. A Gaussian kernel supplies bell-shaped functions centred on the training inputs; its width changes which inputs look similar. The fitted coefficients can be negative, so the prediction is not simply an average of nearby values. We use **[kernel ridge regression](../glossary.qmd#kernel-ridge)**, which also uses a penalty to constrain the fit. First work through a small kernel-trick calculation, then connect it to the Gaussian model used in the practical.
+In the MOF practical, the key idea is to fit a sum of local contributions. A Gaussian kernel supplies bell-shaped functions centred on the training inputs; its width changes which inputs look similar. The fitted coefficients can be negative, so the prediction is not simply an average of nearby values. We use **[kernel ridge regression](../glossary.qmd#kernel-ridge)**, which also uses a penalty to constrain the fit. First work through a small kernel-trick calculation, then connect it to the Gaussian model used in the practical.
 
 ### The kernel trick, calculated by hand
 

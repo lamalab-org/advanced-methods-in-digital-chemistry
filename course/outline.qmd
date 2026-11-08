@@ -6,17 +6,15 @@ We begin with small models we can inspect, then connect molecular representation
 
 ## Teaching dates {#scheduling}
 
-The remaining teaching dates in **2026** are:
+Teaching and optional support for the rest of **2026**:
 
 {{< include _includes/2026-schedule.qmd >}}
 
 All times are **Europe/Berlin (CET)**. On 11 November we meet from **12:10 to 16:00**, in **Helmholtzweg 4, SR 6 Physik**. The December sessions run **12:00–16:00**; room arrangements for those extended hours will be confirmed. Please flag clashes with other classes.
 
-There is **no regular teaching on 18 or 25 November, or 16, 23 or 30 December**. The introduction took place on 28 October; there was no class on 4 November. This replaces the earlier provisional weekly timetable.
-
 ### After the winter break {#weekly-plan}
 
-The listed 2027 Wednesdays are **6, 13, 20 and 27 January**, and **3 and 10 February**, with the usual **14:00–16:00** slot. These dates have not been checked in the current availability review; teaching arrangements and the allocation of topics will be confirmed separately. They do not set a project deadline or an assessed presentation date.
+Teaching dates for **January and February 2027** will be announced here and in the course email.
 
 ## What would you like to investigate? {#learning-goals}
 
@@ -24,9 +22,9 @@ Keep a running collection of project ideas alongside the practicals. Add a chemi
 
 ## Time to work together {#working-together}
 
-For the meetings after the introduction, my proposal is to begin with a short explanation or demonstration, perhaps **ten to fifteen minutes**, and spend most of our time working through examples and calculations. You can work on your own or with a partner. I will be there to help when code fails, talk through a modelling choice, or examine a result with you. Where a question affects several people, we can bring it back to the board for a few minutes.
+Sessions combine explanations and handwritten examples with supported practical work. On [11 November](sessions/2026-11-11.qmd), we begin with basic Python, spend about **70 minutes** on the machine-learning foundations, and work on the MOF prediction notebook. You can work on your own or with a partner. I will help when code fails, talk through a modelling choice, or examine a result with you.
 
-We would finish by comparing what we found and identifying what needs another look. In a longer meeting, we can repeat this pattern around a break. The notes provide the fuller explanations to return to afterwards. Short preparation tasks can give us a starting point, but unfinished attempts are welcome and the suggested reading remains optional.
+We compare results and questions during the practicals and at the end of each session. The notes provide fuller explanations to return to afterwards. Unfinished attempts are welcome, and the suggested reading is optional. Use the [optional research-group help session](sessions/2026-11-11.qmd#optional-help) for questions between classes; we continue the MOF practical together on **2 December**.
 
 We will adjust the pace to what helps the class. The topic sequence below does not imply a full lecture on each topic before you get to try anything.
 
@@ -41,9 +39,9 @@ The Friedolin listing for **MC3.4.c, Advanced Methods in Digital Chemistry** (co
 
 I would like you to spend most of your project time working on a question you find interesting. We will choose a scope that lets you try something, inspect the result, and explain what you learned. A careful comparison or an informative failure can give us plenty to discuss.
 
-The written work should grow out of that investigation: the question, the calculations and figures, the choices you made, and what the evidence supports. We will discuss whether a commented notebook with a short accompanying explanation would be a useful format. The presentation can draw on the same work. The aim is to make your reasoning understandable without creating unnecessary extra work in packaging it.
+The written report should explain the question, calculations and figures, choices you made, and what the evidence supports. Keep your notebook and results organised as you work. The presentation draws on the same investigation and should make your reasoning understandable.
 
-We will agree a manageable scope, the form and length of the written work, the presentation, and suitable dates. These details are still open. The assessment brief, including grading criteria and any weighting, will follow once the applicable module requirements have been checked.
+The assessment brief will specify the report format, presentation length, grading criteria, and any weighting. Discuss your project's scope with me before starting the main investigation.
 
 ### Where do project ideas come from? {#project-ideas}
 
@@ -53,13 +51,11 @@ You do not need to arrive with a project idea. I will suggest starting points dr
 
 Collect ideas in the shared document during the practical sessions and use the calculations to find out what interests you. After those first practicals, discuss a possible question with me. A short conversation or a few sentences are enough: what would you like to find out, what data could you use, and what would you compare or check first? This is a way to get feedback on the scope, not an additional assessed report.
 
-Start the main investigation once we have agreed a manageable question and a feasible first step. Use the supported practical time to try things and get help. You do not need to wait until we have covered every method, and you do not need to finish the project during a block week. Keep a record of your calculations, choices, and results as you go, so the report and presentation can grow out of that work.
+Start the main investigation once we have agreed a manageable question and a feasible first step. Use the supported practical time to try things and get help. You do not need to wait until we have covered every method. Keep a record of your calculations, choices, and results as you go, so the report and presentation can grow out of that work.
 
 ### When is the project due? {#project-dates}
 
-**The written-report deadline and the date of the final presentation have not yet been set.** We will discuss both alongside the course timetable, allowing time to work on the project after the relevant teaching sessions. The end of the listed lecture period is not, by itself, a project deadline.
-
-Once the timetable and applicable requirements have been checked, I will publish the dates and submission instructions here and in the assessment brief. Please share any constraints that would affect a workable schedule. The idea collection is a starting point for discussion, not an assessed proposal.
+**The report deadline, presentation date, and submission instructions will be announced here and by email.** Keep collecting ideas and discuss a manageable project with me during the practical sessions. Please let me know about any scheduling constraints.
 
 ## Learning from observations {#learning-from-observations}
 
@@ -77,11 +73,11 @@ For the ML basics, we build on my [MolSim teaching material](https://www.compche
 
 :::
 
-The first supported practical brings these topics together in [**How should we choose a model?**](lectures/model-selection.qmd). We reuse the MolSim example of fitting a Lennard–Jones potential: repeated noisy energy values let us distinguish **bias from variance**, then investigate **regularisation** by changing a penalty while keeping the degree fixed. Finally, we use **cross-validation** to compare settings when one validation split may give a fragile comparison. We will fit preprocessing inside each fold and distinguish selecting a model from evaluating the selected procedure. For chemical data, we also ask whether folds should separate molecules, families, batches, or times. This is core material before neural networks; the formal bias–variance derivation and nested cross-validation are further depth.
+On [11 November](sessions/2026-11-11.qmd), the Python starter and MOF practical bring these topics together. For further practice, [**How should we choose a model?**](lectures/model-selection.qmd) uses a Lennard–Jones potential: repeated noisy energy values let us distinguish **bias from variance**, investigate **regularisation** by changing a penalty while keeping the degree fixed, and compare settings with **cross-validation**. We fit preprocessing inside each fold and distinguish selecting a model from evaluating the selected procedure. For chemical data, we also ask whether folds should separate molecules, families, batches, or times. The formal bias–variance derivation and nested cross-validation provide further depth.
 
 By this point, we should be able to take a supplied data table, identify its target and conditions, fit a simple comparison model, justify a model-selection procedure, and explain what its reported error does and does not tell us. We need that foundation before adding more elaborate models.
 
-During these early practicals, everyone will also have an opportunity to [try a coding assistant in the terminal](cli-assistant.qmd), on their own or with a partner. We will ask it to inspect and repair a small calculation, examine the changed file, and run checks ourselves. This uses supported time in the first modelling practicals once the Python setup and the error calculation are familiar. If setup needs longer, we will arrange a further supported opportunity without dropping the model-selection discussion.
+Once the Python setup and error calculations are familiar, [try a coding assistant in the terminal](cli-assistant.qmd), on your own or with a partner. Ask it to inspect and repair a small calculation, examine the changed file, and run checks yourself. The guide is a follow-up exercise; it is not preparation required for 11 November.
 
 ## Representing molecules and their behaviour {#molecular-models}
 

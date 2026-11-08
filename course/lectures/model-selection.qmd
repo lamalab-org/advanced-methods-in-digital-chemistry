@@ -4,7 +4,7 @@ title: "How should we choose a model?"
 
 We can now fit a model and calculate its errors. But we still have to choose which model to fit. Should we allow a more flexible curve? Should we discourage large coefficients? And could a different set of measurements have led us to a different choice? These questions belong before the neural network: adding more adjustable parameters does not remove them.
 
-This practical follows the calibration and MOF examples. I would like to return to an example from my [MolSim teaching: fitting a Lennard–Jones potential](https://www.compchem.nl/wp-content/uploads/molsim2023/L09_Machine-Learning.pdf#page=37). We use it to examine bias, variance, and regularisation, then follow the MolSim sequence into cross-validation. The purpose is to justify a modelling choice with evidence beyond the observations used to fit its parameters.
+This follow-up to the calibration and MOF examples uses [a Lennard–Jones potential from the MolSim teaching material](https://www.compchem.nl/wp-content/uploads/molsim2023/L09_Machine-Learning.pdf#page=37). Repeated noisy energy values let us examine bias, variance, and regularisation before comparing models with cross-validation. The purpose is to justify a modelling choice with evidence beyond the observations used to fit its parameters.
 
 ## What should you be able to do afterwards? {#lecture-outcomes}
 
