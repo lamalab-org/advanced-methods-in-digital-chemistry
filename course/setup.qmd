@@ -12,11 +12,11 @@ After working through this page, you should be able to:
 - Explain where a shell command belongs, which Python environment runs the code, and which parts of our setup run on your computer or at Jülich.
 - Give an assistant enough information to investigate an error, then check its suggestion. If the assistant is unavailable, make the same checks with a partner or with me.
 
-## Before the first meeting
+## Before a practical session
 
-If you have time before our first meeting on **28 October 2026**, look through this guide and try starting the setup. Begin with an assistant, then prepare the Python environment. Jan with Blablador is our suggested example; you can also use an assistant you already have, such as Claude or Codex. On Windows, setting up Ubuntu through WSL 2 beforehand is particularly helpful because it can require a restart or administrator access.
+Before a practical session, look through this guide and try starting the setup. The [11 November class page](sessions/2026-11-11.qmd) links to the notebooks we will use. Begin with an assistant, then prepare the Python environment. Jan with Blablador is our suggested example; you can also use an assistant you already have, such as Claude or Codex. On Windows, setting up Ubuntu through WSL 2 beforehand is particularly helpful because it can require a restart or administrator access.
 
-Bring your laptop and charger if you can. We will show the tools in use and reserve **about 30 minutes to set them up together**. An unfinished installation is fine. Keep any error message and the command that produced it, and bring them along. If your setup already works, use that time to explore the first notebook and check a calculation with a partner.
+Bring your laptop and charger if you can. We will help with setup during the practical; you can also work with a partner while an installation is being resolved. An unfinished installation is fine. Keep any error message and the command that produced it, and bring them along. If your setup already works, use that time to explore the first notebook and check a calculation with a partner.
 
 ## The course setup
 
@@ -323,7 +323,7 @@ If the function runs, we know that Python accepted the instructions. Our hand ca
 
 ## An assistant that works on files {#cli-assistant}
 
-Once this setup works, we will also try a [coding assistant in the terminal](cli-assistant.qmd). It can read a Python file, change it, and run a calculation. We will use the small error calculation from lecture 2 to examine each of those steps and check the result ourselves. Codex CLI with Blablador is our starting example; an assistant you already use is welcome too. We will make time for this together in a later practical, so it is not another installation to complete before the first meeting.
+Once this setup works, we will also try a [coding assistant in the terminal](cli-assistant.qmd). It can read a Python file, change it, and run a calculation. We will use the small error calculation from lecture 2 to examine each of those steps and check the result ourselves. Codex CLI with Blablador is our starting example; an assistant you already use is welcome too. We will make time for this together in a later practical, so it is not another installation to complete in advance.
 
 ## When something does not work
 

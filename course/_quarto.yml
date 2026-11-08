@@ -10,6 +10,7 @@ project:
     - reading.qmd
     - examples.qmd
     - lectures/*.qmd
+    - sessions/*.qmd
   resources:
     - activities/**
     - notebooks/**
@@ -42,6 +43,7 @@ book:
   chapters:
     - index.qmd
     - outline.qmd
+    - sessions/2026-11-11.qmd
     - setup.qmd
     - lectures/01-ai-and-science.qmd
     - lectures/02-learning-from-data.qmd

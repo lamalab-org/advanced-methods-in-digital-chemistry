@@ -1,6 +1,6 @@
 # Course sources and practicals
 
-This directory contains the student Quarto book for **Advanced Methods in Digital Chemistry**, by Kevin Maik Jablonka. The [course outline](outline.qmd) gives the ten topic groups and a proposed allocation across 14 listed meetings: 13 available after excluding 4 November, including three additional practical and project meetings. The current chapters cover AI and science, learning from data, MOF gas-uptake modelling, and a follow-up model-selection practical, with marimo notebooks and calibration and kernel activities. Additional chapters are in development.
+This directory contains the student Quarto book for **Advanced Methods in Digital Chemistry**, by Kevin Maik Jablonka. The [course outline](outline.qmd) gives the ten topic groups and the updated timetable: 11 November (14:30–16:00), 2 December and 9 December (12:00–16:00). There is no teaching on 18 or 25 November, or 16, 23 or 30 December; the listed 2027 dates still need confirmation. The current chapters cover AI and science, learning from data, MOF gas-uptake modelling, and a follow-up model-selection practical, with marimo notebooks and calibration and kernel activities. Additional chapters are in development.
 
 Read the [published course](https://lamalab-org.github.io/advanced-methods-in-digital-chemistry/) or use `quarto preview` from this directory. `quarto render` builds `_book/` without executing Python. The repository workflow uses Quarto 1.8.24. Publishing instructions are in the [repository README](../README.md).
 
@@ -42,6 +42,7 @@ The guide includes a named Codex CLI profile for Blablador, based on Jülich's g
 ## Updating the material
 
 - The website's shared visual assets and their sources are documented in [assets/README.md](assets/README.md). Edit the shared styles there; the local instructor book copies them during rendering.
+- Keep the remaining 2026 teaching dates in `_includes/2026-schedule.qmd`, shared by the home page and outline. Session guides live in `sessions/`; the 11 November guide links to existing notebooks without embedding them. Share the project-ideas document privately with enrolled students, not through the public repository.
 - Edit student chapters in `lectures/`, with linked technical terms in `glossary.qmd` and suggested references in `reading.qmd`.
 - Edit the marimo notebooks directly in `notebooks/*.py`. `scripts/build_calibration.py` regenerates only the independent browser activity and its shared data.
 - `scripts/build_mof_lab.py` checks the supplied data hash. Its optional `--source PATH_TO_ML_MOLSIM` argument rebuilds the subset from the pinned upstream revision. It does not overwrite the notebook.

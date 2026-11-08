@@ -30,6 +30,7 @@ def main():
     required = (
         "index.html", "outline.html", "examples.html", "setup.html", "cli-assistant.html", "glossary.html", "reading.html", "search.json",
         "lectures/01-ai-and-science.html", "lectures/02-learning-from-data.html",
+        "sessions/2026-11-11.html",
         "lectures/03-mof-uptake.html", "activities/calibration.html",
         "lectures/model-selection.html", "notebooks/model-selection.py",
         "notebooks/previews/model-selection.html",
